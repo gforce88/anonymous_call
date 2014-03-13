@@ -9,17 +9,52 @@ class Widget_InvitationController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-		$this->view->assign("token", "31415926");
-		$this->view->assign("language", "JP");
+		$token = $_REQUEST["token"];
+		
+		$language = "JP";
+		
+		$this->view->assign("token", $token);
+		$this->view->assign("language", $language);
+		$this->view->assign("msgInviterNumberStyle", "none");
+		$this->view->assign("msgInviterEmailStyle", "none");
 		$this->renderScript("/invitation.phtml");
 	}
 
 	public function validateAction() {
 		$token = $_POST["token"];
-		$name = $_POST["name"];
-		$phoneNumber = $_POST["phoneNumber"];
-		$email = $_POST["email"];
+		$inviterName = $_POST["inviterName"];
+		$inviterNumber = $_POST["inviterNumber"];
+		$inviterEmail = $_POST["inviterEmail"];
 		
+		$language = "JP";
+		
+		$isValidate = true;
+		if (Validator::isValidPhoneNumber($inviterNumber)) {
+			$msgInviterNumberStyle = "none";
+		} else {
+			$isValidate = false;
+			$msgInviterNumberStyle = "block";
+		}
+		if (Validator::isValidEmail($inviterEmail)) {
+			$msgInviterEmailStyle = "none";
+		} else {
+			$isValidate = false;
+			$msgInviterEmailStyle = "block";
+		}
+		
+		if ($isValidate) {
+			// TODO: save values and redirect to Thank you Page
+		} else {
+			$this->dispatchInvitation($token, $language, $msgInviterNumberStyle, $msgInviterEmailStyle);
+		}
 	}
 
+	private function dispatchInvitation($token, $language, $msgInviterNumberStyle, $msgInviterEmailStyle) {
+		$this->view->assign("token", $token);
+		$this->view->assign("language", $language);
+		$this->view->assign("msgInviterNumberStyle", $msgInviterNumberStyle);
+		$this->view->assign("msgInviterEmailStyle", $msgInviterEmailStyle);
+		$this->renderScript("/invitation.phtml");
+		
+	}
 }

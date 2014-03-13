@@ -21,7 +21,7 @@ class Validator {
 		return false;
 	}
 
-	private static function isValidEmail($email) {
+	public static function isValidEmail($email) {
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
