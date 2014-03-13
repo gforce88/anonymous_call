@@ -18,13 +18,12 @@ class TestController extends WedgitBaseController {
 	}
 
 	public function retrieveInvitationAction() {
-		echo "test";
-		$this->partner = array("language" => "EN");
+		$this->partner = array (
+			"language" => "JA" 
+		);
 		echo $this->getLanguage("HelloWorld");
 		$this->renderScript("/empty.phtml");
 	}
-
-
 
 }
 

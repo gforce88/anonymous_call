@@ -11,7 +11,7 @@ class WedgitBaseController extends BaseController {
 	}
 
 	protected function getLanguage($key) {
-		MultiLanguage::getLanguage($key, $this->partner["language"]);
+		return MultiLanguage::getLanguage($key, $this->partner["language"]);
 	}
 }
 
