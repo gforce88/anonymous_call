@@ -1,7 +1,7 @@
 <?php
 require_once 'base/WedgitBaseController.php';
 
-class TestController extends WedgitBaseController {
+class Widget_InvitationController extends WedgitBaseController {
 	
 	public function init() {
 		parent::init();
