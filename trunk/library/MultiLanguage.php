@@ -2,23 +2,23 @@
 
 class MultiLanguage {
 
-	public static function getLanguage($key, $language) {
+	public static function getText($key, $language) {
 		$language = strtoupper($language);
 		switch ($language) {
 			case "EN" :
-				return MultiLanguage::getEnglish($key);
+				return MultiLanguage::getEnglishText($key);
 			case "JP" :
 			case "JA" :
-				return MultiLanguage::getJapanese($key);
+				return MultiLanguage::getJapaneseText($key);
 		}
 	}
 
-	private static function getEnglish($key) {
+	private static function getEnglishText($key) {
 		$englishTexts = Zend_Registry::get('ENGLISH_TEXTS');
 		return $englishTexts[$key];
 	}
 
-	private static function getJapanese($key) {
+	private static function getJapaneseText($key) {
 		$englishTexts = Zend_Registry::get('JAPANESE_TEXTS');
 		if ($englishTexts[$key] == null) {
 			return getEnglish($key);

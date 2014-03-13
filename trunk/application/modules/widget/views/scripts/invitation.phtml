@@ -1,4 +1,4 @@
-<?php $language = $this->language ?>
+<?php $language = $this->language?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,42 +6,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="keywords" content="insert keywords" />
 <title>Version 1</title>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic,400italic,600italic,700italic,300,600,800,800italic" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/styleWidget.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/fontsWidget.css" media="screen" />
-<script type="text/JavaScript" src="<?php echo APP_CTX ?>/script/utils.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/styleWidget.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/fontsWidget.css" media="screen" />
 </head>
 <body>
 	<div class="content">
 		<article>
-			<h1><?php echo MultiLanguage::getLanguage("Invite_Someone_to_a_Tokumei_Call", $language)?></h1>
+			<h1><?php echo MultiLanguage::getText("Invite_Someone_to_a_Tokumei_Call", $language)?></h1>
 			<br>
-			<form action="<?php echo APP_CTX ?>/widget/invitation/validate" method="post" class="label-top">
-				<h3><?php echo MultiLanguage::getLanguage("Enter_your_name", $language)?></h3>
+			<form name="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" class="label-top">
+				<h3><?php echo MultiLanguage::getText("Enter_your_name", $language)?></h3>
 				<div>
 					<p>
-						<input type="text" name="inviterName" id="inviterName" placeholder="<?php echo MultiLanguage::getLanguage("Name", $language)?>" tabindex="1" />
+						<input type="text" name="inviterName" id="inviterName" placeholder="<?php echo MultiLanguage::getText("Name", $language)?>" tabindex="1" />
 					</p>
 				</div>
 				<br>
-				<h3><?php echo MultiLanguage::getLanguage("Enter_your_phone_number", $language)?></h3>
-				<br>
-				<h4><?php echo MultiLanguage::getLanguage("This_number_will_be_kept_private", $language)?></h4>
-				<br>
+
+				<h3><?php echo MultiLanguage::getText("Enter_your_phone_number", $language)?></h3>
+				<h4><?php echo MultiLanguage::getText("This_number_will_be_kept_private", $language)?></h4>
 				<div>
 					<p>
-						<input type="text" name="userNumber" id="userNumber" placeholder="<?php echo MultiLanguage::getLanguage("Phone_number", $language)?>" tabindex="1" />
-					</p>
-				</div>
-				<h3><?php echo MultiLanguage::getLanguage("Enter_their_email_address", $language)?></h3>
-				<div>
-					<p>
-						<input type="text" name="inviteEmail" id="inviteEmail" placeholder="<?php echo MultiLanguage::getLanguage("Email_address", $language)?>" tabindex="1" />
+						<input type="text" name="inviterNumber" id="inviterNumber" placeholder="<?php echo MultiLanguage::getText("Phone_number", $language)?>" tabindex="1" />
+						<small style="display:<?php echo $this->msgInviterNumberStyle?>">
+							<?php echo MultiLanguage::getText("Phone_number", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
+						</small>
 					</p>
 				</div>
 				<br>
+
+				<h3><?php echo MultiLanguage::getText("Enter_their_email_address", $language)?></h3>
 				<div>
-					<input type="submit" value="<?php echo MultiLanguage::getLanguage("Send_inviation", $language)?>" />
+					<p>
+						<input type="text" name="inviteeEmail" id="inviteeEmail" placeholder="<?php echo MultiLanguage::getText("Email_address", $language)?>" tabindex="1" />
+						<small style="display:<?php echo $this->msgInviterEmailStyle?>">
+							<?php echo MultiLanguage::getText("Email_address", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
+						</small>
+					</p>
+				</div>
+				<br>
+
+				<div>
+					<input type="submit" value="<?php echo MultiLanguage::getText("Send_inviation", $language)?>" />
 				</div>
 				<input type="hidden" name="token" value="<?php echo $this->token?>" />
 			</form>

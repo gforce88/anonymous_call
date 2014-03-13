@@ -10,10 +10,7 @@ class TestController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-		$this->partner = array (
-			"language" => "JA" 
-		);
-		echo $this->getLanguage("HelloWorld");
+		echo MultiLanguage::getText("Name", "JP");
 		
 		$this->logInfo("TestController", "indexAction", "info");
 		$this->logInfo("TestController", "indexAction", "warn");

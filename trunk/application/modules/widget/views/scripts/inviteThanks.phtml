@@ -1,0 +1,28 @@
+<?php $language = $this->language?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="keywords" content="insert keywords" />
+<title>Version 1</title>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/styleWidget.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/fontsWidget.css" media="screen" />
+</head>
+<body>
+	<div class="content">
+		<article>
+			<h1>Thank You</h1>
+			<br>
+			<h3>An invitation has been sent to</h3>
+			<br>
+			<h3><?php echo $this->inviteeEmail?></h3>
+			<br>
+			<h3>to call you anonymous</h3>
+			<br>
+			<h3><?php echo $this->inviterNumber?></h3>
+			<br>
+		</article>
+	</div>
+</body>
+</html>
