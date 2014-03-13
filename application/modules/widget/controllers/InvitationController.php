@@ -14,6 +14,12 @@ class Widget_InvitationController extends WedgitBaseController {
 		$this->renderScript("/invitation.phtml");
 	}
 
-	public function validateAction() {}
+	public function validateAction() {
+		$token = $_POST["token"];
+		$name = $_POST["name"];
+		$phoneNumber = $_POST["phoneNumber"];
+		$email = $_POST["email"];
+		
+	}
 
 }
