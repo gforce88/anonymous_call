@@ -7,8 +7,8 @@
 <meta name="keywords" content="insert keywords" />
 <title>Version 1</title>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic,400italic,600italic,700italic,300,600,800,800italic" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/stylePrtnrWidget.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/styles/fontsWidget.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/styleWidget.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX ?>/css/fontsWidget.css" media="screen" />
 <script type="text/JavaScript" src="<?php echo APP_CTX ?>/script/utils.js"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
 		<article>
 			<h1><?php echo MultiLanguage::getLanguage("Invite_Someone_to_a_Tokumei_Call", $language)?></h1>
 			<br>
-			<form action="inviteThanks.php" method="post" class="label-top">
+			<form action="<?php echo APP_CTX ?>/widget/invitation/validate" method="post" class="label-top">
 				<h3><?php echo MultiLanguage::getLanguage("Enter_your_name", $language)?></h3>
 				<div>
 					<p>
