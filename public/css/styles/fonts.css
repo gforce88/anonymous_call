@@ -1,15 +1,19 @@
-body {font:13px/18px "Open Sans", Helvetica, sans-serif;}
-
-input, textarea {
-	font:16px/18px "Open Sans", Arial, Helvetica, sans-serif;
+body {
+	font: 13px/18px "Open Sans", Helvetica, sans-serif;
 }
 
-code {font:13px/18px "Open Sans", Arial, Helvetica, sans-serif;}
+input,textarea {
+	font: 16px/18px "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+code {
+	font: 13px/18px "Open Sans", Arial, Helvetica, sans-serif;
+}
 
 h1 {
 	/* font:48px/54px "Open Sans", Helvetica, sans-serif; */
 	/* font:36px/42px "Open Sans", Helvetica, sans-serif; */
-	font:32px/38px "Open Sans", Helvetica, sans-serif;
+	font: 32px/38px "Open Sans", Helvetica, sans-serif;
 	text-transform: none;
 	color: #C00;
 }
@@ -18,32 +22,36 @@ h2 {
 	/* font:32px/36px "Open Sans", Helvetica, sans-serif; */
 	/* font:24px/28px "Open Sans", Helvetica, sans-serif; */
 	/* font:20px/24px "Open Sans", Helvetica, sans-serif; */
-	font:18px/22px "Open Sans", Helvetica, sans-serif;
+	font: 18px/22px "Open Sans", Helvetica, sans-serif;
 	text-transform: none;
 }
 
-h3, .sitemap > li > a {
-	font:26px/36px "Open Sans", Helvetica, sans-serif;
+h3,.sitemap>li>a {
+	font: 26px/36px "Open Sans", Helvetica, sans-serif;
 	text-align: center;
 }
 
 /* h4, #sidebar .widgettitle {font:20px/36px "Open Sans", Helvetica, sans-serif;} */
-h4, #sidebar .widgettitle {font:18px/24px "Open Sans", Helvetica, sans-serif;}
+h4,#sidebar .widgettitle {
+	font: 18px/24px "Open Sans", Helvetica, sans-serif;
+}
 
+h5 {
+	font: 16px/18px "Open Sans", Helvetica, sans-serif;
+}
 
-h5 {font:16px/18px "Open Sans", Helvetica, sans-serif;}
+h6,.table th,.sitemap>li>ul>li>a,.cms_archive li {
+	font: bold 13px/18px "Open Sans", Arial, Helvetica, sans-serif;
+}
 
-h6, .table th, .sitemap > li > ul > li > a, .cms_archive li {font:bold 13px/18px "Open Sans", Arial, Helvetica, sans-serif;}
+small,abbr {
+	font: 11px/18px "Open Sans", Arial, Helvetica, sans-serif;
+}
 
-small, abbr {font:11px/18px "Open Sans", Arial, Helvetica, sans-serif;}
+blockquote {
+	font: 26px/36px "Open Sans", Helvetica, sans-serif;
+}
 
-blockquote {font:26px/36px "Open Sans", Helvetica, sans-serif;}
-
-em, 
-.link_arrow, 
-.widget_links li, 
-.comments_number, 
-.cmsms_info .category_name, 
-.cmsms_info .user_name, 
-.post_category a, 
-.commentlist .published {font-family:Georgia, Times, "Century Schoolbook L", serif;}
+em,.link_arrow,.widget_links li,.comments_number,.cmsms_info .category_name,.cmsms_info .user_name,.post_category a,.commentlist .published {
+	font-family: Georgia, Times, "Century Schoolbook L", serif;
+}
