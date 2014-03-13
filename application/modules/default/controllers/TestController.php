@@ -14,10 +14,13 @@ class TestController extends WedgitBaseController {
 			"language" => "JA" 
 		);
 		echo $this->getLanguage("HelloWorld");
+		
 		$this->logInfo("TestController", "indexAction", "info");
 		$this->logInfo("TestController", "indexAction", "warn");
 		$this->logInfo("TestController", "indexAction", "error");
-		$this->renderScript("/info.phtml");
+		
+		phpinfo();
+		$this->renderScript("/empty.phtml");
 	}
 
 }
