@@ -2,6 +2,7 @@
 
 abstract class BaseManager {
 
+	protected $db;
 	protected $logger;
 
 	public function __construct() {
