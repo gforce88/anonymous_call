@@ -15,15 +15,17 @@ set_include_path(implode(PATH_SEPARATOR, array (
 	get_include_path() 
 )));
 
-
 echo "index.php";
-
 
 // Zend_Application
 require_once 'Zend/Application.php';
 
+echo "before Zend";
+
 // Create application
 $application = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+
+echo "after Zend";
 
 // Bootstrap, and Run
 $application->bootstrap()->run();
