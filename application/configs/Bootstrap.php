@@ -40,13 +40,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		Zend_Registry::set('SYS_LOGGER', $sysLogger);
 	}
 	
-	// Init Mail
-	protected function _initMail() {
-		$config = $this->getOption('smtp');
-		$smtp = new Zend_Mail_Transport_Smtp($config['server'], $config);
-		Zend_Registry::set('SMPT_ADAPTER', $smtp);
-	}
-	
 	// Init Language
 	protected function _initLanguage() {
 		$englishTexts = parse_ini_file(APPLICATION_PATH . '/configs/multiLanguage/English.ini');
