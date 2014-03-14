@@ -30,6 +30,7 @@ class Widget_InvitationController extends WedgitBaseController {
 		$inviterNumber = $_POST["inviterNumber"];
 		$inviteeEmail = $_POST["inviteeEmail"];
 		
+		$this->logInfo("", "", "before validation");
 		$isValidate = true;
 		if (Validator::isValidPhoneNumber($inviterNumber)) {
 			$msgInviterNumberStyle = "none";
@@ -45,8 +46,11 @@ class Widget_InvitationController extends WedgitBaseController {
 		}
 		
 		if ($isValidate) {
+			$this->logInfo("", "", "before sending email");
 			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviteeEmail, $inviterName, "XXXXXXXXXX");
+			$this->logInfo("", "", "after sending email");
 			$this->dispatchResponse($language, $inviterNumber, $inviteeEmail);
+			$this->logInfo("", "", "after dispatch page");
 		} else {
 			$this->dispatchInvitation($token, $language, $inviterName, $inviterNumber, $inviteeEmail, $msgInviterNumberStyle, $msgInviterEmailStyle);
 		}
