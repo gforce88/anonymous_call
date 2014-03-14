@@ -6,6 +6,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = Zend_Controller_Front::getInstance();
 		// force the dispatcher to dispatch camelCased action names
 		// $front->setParam("useCaseSensitiveActions", true);
+		echo "initRouter";
 	}
 	
 	// Init DB
