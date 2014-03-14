@@ -11,7 +11,7 @@ class Widget_InvitationController extends WedgitBaseController {
 	public function indexAction() {
 		$token = $_REQUEST["token"];
 		
-		$language = "JP";
+		$language = "EN";
 		
 		$this->dispatchInvitation($token, $language);
 	}
