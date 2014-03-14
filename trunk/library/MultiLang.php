@@ -1,15 +1,15 @@
 <?php
 
-class MultiLanguage {
+class MultiLang {
 
 	public static function getText($key, $language, $params = null) {
 		$language = strtoupper($language);
 		switch ($language) {
 			case "JP" :
-				$msg = MultiLanguage::getJapaneseText($key);
+				$msg = MultiLang::getJapaneseText($key);
 				break;
 			default :
-				$msg = MultiLanguage::getEnglishText($key);
+				$msg = MultiLang::getEnglishText($key);
 		}
 		
 		if ($params != null) {
