@@ -2,14 +2,20 @@
 
 class MultiLanguage {
 
-	public static function getText($key, $language) {
+	public static function getText($key, $language, $params) {
 		$language = strtoupper($language);
 		switch ($language) {
-			case "EN" :
-				return MultiLanguage::getEnglishText($key);
 			case "JP" :
-			case "JA" :
-				return MultiLanguage::getJapaneseText($key);
+				$msg = MultiLanguage::getJapaneseText($key);
+				break;
+			default :
+				$msg = MultiLanguage::getEnglishText($key);
+		}
+		
+		$i = 1;
+		foreach ($params as $param) {
+			str_replace("%$is", $param, $msg);
+			$i++;
 		}
 	}
 
