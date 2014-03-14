@@ -8,20 +8,18 @@ class EmailSender {
 		$this->smtp = Zend_Registry::get('SMPT_ADAPTER');
 	}
 
-	public function sendPlainMail($fromName, $fromMail, $toName, $toMail, $subject, $bodyText) {
-		return sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $bodyText, "test/plain");
+	public function sendPlainMail($fromName, $fromMail, $toName, $toMail, $subject, $content) {
+		return $this->sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/plain");
 	}
 
-	public function sendHtmlEmail($fromName, $fromMail, $toName, $toMail, $subject, $bodyText) {
-		return sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $bodyText, "test/html");
+	public function sendHtmlEmail($fromName, $fromMail, $toName, $toMail, $subject, $content) {
+		return $this->sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/html");
 	}
 
-	private function sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $bodyText, $type) {
+	private function sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, $type) {
 		$headers = "From: $fromName<$fromMail> \n";
 		$headers .= "Content-type: $type; charset=utf-8 \n";
-		$headers .= "X-Sender: Speak2leads \n";
-		$headers .= "X-Mailer: PHP5 \n";
-		return mail("$toName<$toMail>", $subject, $bodyText, $headers);
+		return mail("$toName<$toMail>", $subject, $content, $headers);
 	}
 
 }

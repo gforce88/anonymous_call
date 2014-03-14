@@ -1,28 +1,34 @@
 <?php
 require_once 'base/WedgitBaseController.php';
 require_once 'Validator.php';
+require_once 'EmailSender.php';
+require_once 'models/PartnerManager.php';
 
 class Widget_InvitationController extends WedgitBaseController {
 
+	private $partnerManager;
+
 	public function init() {
 		parent::init();
+		$this->partnerManager = new PartnerManager();
 	}
 
 	public function indexAction() {
 		$token = $_REQUEST["token"];
-		
-		$language = "EN";
+		$partner = $this->partnerManager->findPartnerByToken($token);
+		$language = $partner["language"];
 		
 		$this->dispatchInvitation($token, $language);
 	}
 
 	public function validateAction() {
 		$token = $_POST["token"];
+		$partner = $this->partnerManager->findPartnerByToken($token);
+		$language = $partner["language"];
+		
 		$inviterName = $_POST["inviterName"];
 		$inviterNumber = $_POST["inviterNumber"];
 		$inviteeEmail = $_POST["inviteeEmail"];
-		
-		$language = "JP";
 		
 		$isValidate = true;
 		if (Validator::isValidPhoneNumber($inviterNumber)) {
@@ -39,6 +45,7 @@ class Widget_InvitationController extends WedgitBaseController {
 		}
 		
 		if ($isValidate) {
+			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviterName, $inviteeEmail);
 			$this->dispatchResponse($language, $inviterNumber, $inviteeEmail);
 		} else {
 			$this->dispatchInvitation($token, $language, $inviterName, $inviterNumber, $inviteeEmail, $msgInviterNumberStyle, $msgInviterEmailStyle);
@@ -61,6 +68,13 @@ class Widget_InvitationController extends WedgitBaseController {
 		$this->view->assign("inviterNumber", $inviterNumber);
 		$this->view->assign("inviteeEmail", $inviteeEmail);
 		$this->renderScript("/inviteThanks.phtml");
+	}
+
+	private function sendInviteeNotifyEmail($language, $fromName, $fromMail, $inviterName, $inviteeEmail) {
+		$sender = new EmailSender();
+		$subject = MultiLanguage::getText("email.inviteeNotify.title", $language);
+		$content = MultiLanguage::getText("email.inviteeNotify.content", $language);
+		$sender->sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
 	}
 
 }
