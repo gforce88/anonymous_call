@@ -1,8 +1,8 @@
 <?php
 require_once 'base/WedgitBaseController.php';
-require_once 'utils/Validator.php';
 require_once 'utils/EmailSender.php';
 require_once 'utils/MultiLang.php';
+require_once 'utils/Validator.php';
 require_once 'models/PartnerManager.php';
 
 class Widget_InvitationController extends WedgitBaseController {
@@ -87,8 +87,7 @@ class Widget_InvitationController extends WedgitBaseController {
 		$subject = MultiLang::getText("email.inviteeNotify.title", $language, $titleParam);
 		$content = MultiLang::getText("email.inviteeNotify.content", $language, $contentParam);
 		
-		$sender = new EmailSender();
-		return $sender->sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
+		return EmailSender::sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
 	}
 
 }
