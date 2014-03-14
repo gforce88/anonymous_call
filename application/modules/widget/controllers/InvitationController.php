@@ -1,7 +1,7 @@
 <?php
 require_once 'base/WedgitBaseController.php';
-require_once 'Validator.php';
-require_once 'EmailSender.php';
+require_once 'utils/Validator.php';
+require_once 'utils/EmailSender.php';
 require_once 'models/PartnerManager.php';
 
 class Widget_InvitationController extends WedgitBaseController {
@@ -44,7 +44,7 @@ class Widget_InvitationController extends WedgitBaseController {
 		}
 		
 		if ($isValidate) {
-			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviterName, $inviteeEmail);
+			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviteeEmail, $inviterName, "XXXXXXXXXX");
 			$this->dispatchResponse($language, $inviterNumber, $inviteeEmail);
 		} else {
 			$this->dispatchInvitation($token, $language, $inviterName, $inviterNumber, $inviteeEmail, $msgInviterNumberStyle, $msgInviterEmailStyle);
@@ -69,13 +69,13 @@ class Widget_InvitationController extends WedgitBaseController {
 		$this->renderScript("/inviteThanks.phtml");
 	}
 
-	private function sendInviteeNotifyEmail($language, $fromName, $fromMail, $inviterName, $inviteeEmail) {
+	private function sendInviteeNotifyEmail($language, $fromName, $fromMail, $inviteeEmail, $inviterName, $inviterMessage) {
 		$titleParam = array (
 			$inviterName 
 		);
 		$contentParam = array (
 			$inviterName,
-			"XXXXXXXXXX",
+			$inviterMessage,
 			"URL" 
 		);
 		
