@@ -17,6 +17,8 @@ class MultiLanguage {
 			str_replace("%$is", $param, $msg);
 			$i++;
 		}
+		
+		return $msg;
 	}
 
 	private static function getEnglishText($key) {
