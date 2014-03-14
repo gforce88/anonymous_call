@@ -14,11 +14,10 @@ class Widget_InvitationController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-// 		$token = $_REQUEST["token"];
-// 		$partner = $this->partnerManager->findPartnerByToken($token);
-// 		$language = $partner["language"];
+		$token = $_REQUEST["token"];
+		$partner = $this->partnerManager->findPartnerByToken($token);
 		
-		$this->dispatchInvitation("11", "JP");
+		$this->dispatchInvitation($token, $partner["language"]);
 	}
 
 	public function validateAction() {
