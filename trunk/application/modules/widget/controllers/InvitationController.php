@@ -80,11 +80,11 @@ class Widget_InvitationController extends WedgitBaseController {
 			"URL" 
 		);
 		
-		$subject = MultiLang::getText("email.inviteeNotify.title", $language);
-		$content = MultiLang::getText("email.inviteeNotify.content", $language);
+		$subject = MultiLang::getText("email.inviteeNotify.title", $language, $titleParam);
+		$content = MultiLang::getText("email.inviteeNotify.content", $language, $contentParam);
 		
 		$sender = new EmailSender();
-		$sender->sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
+		return $sender->sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
 	}
 
 }
