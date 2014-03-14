@@ -2,7 +2,7 @@
 require_once 'base/WedgitBaseController.php';
 require_once 'Validator.php';
 //require_once 'EmailSender.php';
-require_once 'models/PartnerManager.php';
+//require_once 'models/PartnerManager.php';
 
 class Widget_InvitationController extends WedgitBaseController {
 
@@ -14,11 +14,11 @@ class Widget_InvitationController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-		$token = $_REQUEST["token"];
-		$partner = $this->partnerManager->findPartnerByToken($token);
-		$language = $partner["language"];
+// 		$token = $_REQUEST["token"];
+// 		$partner = $this->partnerManager->findPartnerByToken($token);
+// 		$language = $partner["language"];
 		
-		$this->dispatchInvitation($token, $language);
+		$this->dispatchInvitation("11", "JP");
 	}
 
 	public function validateAction() {
