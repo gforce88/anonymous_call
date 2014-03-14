@@ -18,7 +18,7 @@
 				<h3><?php echo MultiLanguage::getText("Enter_your_name", $language)?></h3>
 				<div>
 					<p>
-						<input type="text" name="inviterName" id="inviterName" placeholder="<?php echo MultiLanguage::getText("Name", $language)?>" tabindex="1" />
+						<input type="text" name="inviterName" placeholder="<?php echo MultiLanguage::getText("Name", $language)?>" value="<?php echo $this->inviterName?>" tabindex="1" />
 					</p>
 				</div>
 				<br>
@@ -27,7 +27,7 @@
 				<h4><?php echo MultiLanguage::getText("This_number_will_be_kept_private", $language)?></h4>
 				<div>
 					<p>
-						<input type="text" name="inviterNumber" id="inviterNumber" placeholder="<?php echo MultiLanguage::getText("Phone_number", $language)?>" tabindex="1" />
+						<input type="text" name="inviterNumber" placeholder="<?php echo MultiLanguage::getText("Phone_number", $language)?>" value="<?php echo $this->inviterNumber?>" tabindex="1" />
 						<small style="display:<?php echo $this->msgInviterNumberStyle?>">
 							<?php echo MultiLanguage::getText("Phone_number", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
 						</small>
@@ -38,7 +38,7 @@
 				<h3><?php echo MultiLanguage::getText("Enter_their_email_address", $language)?></h3>
 				<div>
 					<p>
-						<input type="text" name="inviteeEmail" id="inviteeEmail" placeholder="<?php echo MultiLanguage::getText("Email_address", $language)?>" tabindex="1" />
+						<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLanguage::getText("Email_address", $language)?>" value="<?php echo $this->inviteeEmail?>" tabindex="1" />
 						<small style="display:<?php echo $this->msgInviterEmailStyle?>">
 							<?php echo MultiLanguage::getText("Email_address", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
 						</small>
