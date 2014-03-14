@@ -16,36 +16,24 @@
 			<br>
 			<form name="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" class="label-top">
 				<h3><?php echo MultiLanguage::getText("Enter_your_name", $language)?></h3>
-				<div>
-					<p>
-						<input type="text" name="inviterName" placeholder="<?php echo MultiLanguage::getText("Name", $language)?>" value="<?php echo $this->inviterName?>" tabindex="1" />
-					</p>
-				</div>
-				<br>
-
+				<div><p>
+					<input type="text" name="inviterName" placeholder="<?php echo MultiLanguage::getText("Name", $language)?>" value="<?php echo $this->inviterName?>" tabindex="1" />
+				</p></div><br>
 				<h3><?php echo MultiLanguage::getText("Enter_your_phone_number", $language)?></h3>
 				<h4><?php echo MultiLanguage::getText("This_number_will_be_kept_private", $language)?></h4>
-				<div>
-					<p>
-						<input type="text" name="inviterNumber" placeholder="<?php echo MultiLanguage::getText("Phone_number", $language)?>" value="<?php echo $this->inviterNumber?>" tabindex="1" />
-						<small style="display:<?php echo $this->msgInviterNumberStyle?>">
-							<?php echo MultiLanguage::getText("Phone_number", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
-						</small>
-					</p>
-				</div>
-				<br>
-
+				<div><p>
+					<input type="text" name="inviterNumber" placeholder="<?php echo MultiLanguage::getText("Phone_number", $language)?>" value="<?php echo $this->inviterNumber?>" tabindex="1" />
+					<small style="display:<?php echo $this->msgInviterNumberStyle?>">
+						<?php echo MultiLanguage::getText("Phone_number", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
+					</small>
+				</p></div><br>
 				<h3><?php echo MultiLanguage::getText("Enter_their_email_address", $language)?></h3>
-				<div>
-					<p>
-						<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLanguage::getText("Email_address", $language)?>" value="<?php echo $this->inviteeEmail?>" tabindex="1" />
-						<small style="display:<?php echo $this->msgInviterEmailStyle?>">
-							<?php echo MultiLanguage::getText("Email_address", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
-						</small>
-					</p>
-				</div>
-				<br>
-
+				<div><p>
+					<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLanguage::getText("Email_address", $language)?>" value="<?php echo $this->inviteeEmail?>" tabindex="1" />
+					<small style="display:<?php echo $this->msgInviterEmailStyle?>">
+						<?php echo MultiLanguage::getText("Email_address", $language)?><?php echo MultiLanguage::getText("is_invalid", $language)?>
+					</small>
+				</p></div><br>
 				<div>
 					<input type="submit" value="<?php echo MultiLanguage::getText("Send_inviation", $language)?>" />
 				</div>
