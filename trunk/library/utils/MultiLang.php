@@ -15,7 +15,7 @@ class MultiLang {
 		if ($params != null) {
 			$i = 1;
 			foreach ($params as $param) {
-				str_replace("%$is", $param, $msg);
+				$msg = str_replace("%" . $i . "s", $param, $msg);
 				$i++;
 			}
 		}

@@ -1,5 +1,6 @@
 <?php
 require_once 'base/WedgitBaseController.php';
+require_once 'utils/MultiLang.php';
 
 class TestController extends WedgitBaseController {
 
@@ -10,12 +11,11 @@ class TestController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-		echo MultiLang::getText("Name", "JP");
-		
-		$this->logInfo("TestController", "indexAction", "info");
-		$this->logInfo("TestController", "indexAction", "warn");
-		$this->logInfo("TestController", "indexAction", "error");
-		
+		$titleParam = array (
+			"Name" 
+		);
+		$subject = MultiLang::getText("email.inviteeNotify.title", "JP", $titleParam);
+		echo $subject;
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
