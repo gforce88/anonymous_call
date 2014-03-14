@@ -2,6 +2,7 @@
 require_once 'base/WedgitBaseController.php';
 require_once 'utils/Validator.php';
 require_once 'utils/EmailSender.php';
+require_once 'utils/MultiLang.php';
 require_once 'models/PartnerManager.php';
 
 class Widget_InvitationController extends WedgitBaseController {
