@@ -60,6 +60,7 @@ class Widget_InvitationController extends WedgitBaseController {
 		$this->view->assign("inviteeEmail", $inviteeEmail);
 		$this->view->assign("msgInviterNumberStyle", $msgInviterNumberStyle);
 		$this->view->assign("msgInviterEmailStyle", $msgInviterEmailStyle);
+		echo "here";
 		$this->renderScript("/invitation.phtml");
 	}
 
