@@ -14,11 +14,11 @@ class Widget_InvitationController extends WedgitBaseController {
 	}
 
 	public function indexAction() {
-		$token = $_REQUEST["token"];
+//		$token = $_REQUEST["token"];
 // 		$partner = $this->partnerManager->findPartnerByToken($token);
 // 		$language = $partner["language"];
-		
-		$this->dispatchInvitation($token, "JP");
+		$this->renderScript("/invitation.phtml");
+//		$this->dispatchInvitation($token, "JP");
 	}
 
 	public function validateAction() {
@@ -60,7 +60,6 @@ class Widget_InvitationController extends WedgitBaseController {
 		$this->view->assign("inviteeEmail", $inviteeEmail);
 		$this->view->assign("msgInviterNumberStyle", $msgInviterNumberStyle);
 		$this->view->assign("msgInviterEmailStyle", $msgInviterEmailStyle);
-		echo "here";
 		$this->renderScript("/invitation.phtml");
 	}
 
