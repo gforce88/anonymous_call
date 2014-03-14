@@ -1,3 +1,4 @@
+#!/bin/bash
 rm -rf /root/workspace/Anonym/public
 rm -rf /root/workspace/Anonym/application
 rm -rf /root/workspace/Anonym/library
