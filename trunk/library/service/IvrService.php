@@ -1,6 +1,6 @@
 <?php
 
-class IVRConfigTropoService implements IVRConfigServiceInterface {
+class IvrService implements IVRConfigServiceInterface {
 
 	const IVR_DEFAULT = "ivr.";
 
@@ -14,7 +14,7 @@ class IVRConfigTropoService implements IVRConfigServiceInterface {
 
 	private $ivrLocation;
 
-	function IVRConfigTropoService($accountId, $language) {
+	public function IvrService($accountId, $language) {
 		$this->accountId = $accountId;
 		$this->language = $language;
 		$this->config = Zend_Registry::get("IVR_SETTING");
