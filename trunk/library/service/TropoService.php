@@ -1,8 +1,7 @@
 <?php
 require_once 'util/HttpUtil.php';
-require_once 'service/IVRServiceInterface.php';
 // require_once 'models/TempQuerystringManager.php';
-class TropoService implements IVRServiceInterface {
+class TropoService {
 
 	private $httpUtil;
 
