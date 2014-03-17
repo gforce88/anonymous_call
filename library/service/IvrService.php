@@ -1,6 +1,6 @@
 <?php
 
-class IvrService implements IVRConfigServiceInterface {
+class IvrService {
 
 	const IVR_DEFAULT = "ivr.";
 
