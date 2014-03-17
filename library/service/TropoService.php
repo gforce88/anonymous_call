@@ -3,7 +3,7 @@ require_once 'util/HttpUtil.php';
 require_once 'service/IVRServiceInterface.php';
 //require_once 'models/TempQuerystringManager.php';
 
-class IVRServiceTropo implements IVRServiceInterface {
+class TropoService implements IVRServiceInterface {
 
 	private $httpUtil;
 
@@ -12,7 +12,6 @@ class IVRServiceTropo implements IVRServiceInterface {
 	public function __construct() {
 		$this->httpUtil = new HttpUtil();
 		//$this->querystringManager = new TempQuerystringManager();
-		$this->logger = Zend_Registry::get('LOGGER');
 		$this->setting = Zend_Registry::get('TROPO_SETTING');
 	}
 
@@ -31,7 +30,6 @@ class IVRServiceTropo implements IVRServiceInterface {
 		$querystringId = $this->querystringManager->insert(http_build_query($parameters));
 		$params = "action=create&token=$hackToken&numberToCall=$numberToCall&callerID=$callerID&initialMessage=$sentences&s2lSipNum=$s2lSipNum&querystringId=$querystringId";
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
-		$this->logger->info("[INQUIRY TRACKING FOR " . $parameters["inquiryId"] . "]" . " Request URL [$url?$params] ");
 	}
 
 }
