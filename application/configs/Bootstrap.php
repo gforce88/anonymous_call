@@ -13,7 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$resources = $this->getPluginResource('db');
 		$db = $resources->getDbAdapter();
 		Zend_Db_Table::setDefaultAdapter($db);
-		Zend_Registry::set('dbAdapter', $db);
+		Zend_Registry::set('DB_ADAPTER', $db);
 	}
 	
 	// Init Application
@@ -46,6 +46,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		Zend_Registry::set('ENGLISH_TEXTS', $englishTexts);
 		$japaneseTexts = parse_ini_file(APPLICATION_PATH . '/configs/multiLanguage/Japanese.ini');
 		Zend_Registry::set('JAPANESE_TEXTS', $japaneseTexts);
+	}
+	
+	// Init IVR
+	protected function _initIVRSetting() {
+		$ivr_setting = parse_ini_file(APPLICATION_PATH . '/configs/ivr.ini');
+		Zend_Registry::set('IVR_SETTING', $ivr_setting);
+		$tropo_setting = $this->getOption('tropo');
+		Zend_Registry::set('TROPO_SETTING', $tropo_setting);
 	}
 
 }
