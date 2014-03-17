@@ -1,0 +1,1 @@
+CREATE DATABASE `anoncall` CHARACTER SET utf16 COLLATE utf16_general_ci;
