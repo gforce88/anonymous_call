@@ -1,9 +1,8 @@
 <?php
-require_once 'base/WedgitBaseController.php';
 require_once 'util/MultiLang.php';
 require_once 'service/TropoService.php';
 
-class TestController extends WedgitBaseController {
+class TestController extends Zend_Controller_Action {
 
 	public function init() {
 		parent::init();

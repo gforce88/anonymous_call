@@ -1,11 +1,13 @@
 <?php
-require_once 'base/TropoBaseController.php';
 require_once 'tropo/tropo.class.php';
+require_once 'log/LoggerFactory.php';
 
-class TropoController extends TropoBaseController {
+class TropoController extends Zend_Controller_Action {
+
+	private $logger;
 
 	public function init() {
-		parent::init();
+		$this->logger = LoggerFactory::getIvrLogger();
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 	}
@@ -13,16 +15,23 @@ class TropoController extends TropoBaseController {
 	public function indexAction() {
 		$hasJson = file_get_contents("php://input");
 		if (empty($hasJson)) {
-			$this->logInfo("TropoController", "indexAction", "Tropo check via HTTP Header request.");
+			$this->logger->logInfo("TropoController", "indexAction", "Tropo check via HTTP Header request.");
 			$tropo = new Tropo();
 			$tropo->renderJson();
 		} else {
-			$this->logInfo("TropoController", "indexAction", "New Tropo session.");
+			$this->logger->logInfo("TropoController", "New Tropo session", $hasJson);
 			$session = new Session($hasJson);
 			$paramarray = $this->initSessionParameters($session);
 			$parameters = $this->generateInteractiveParameters($paramarray);
+			
+			$_GET = array_merge($_GET, $paramarray);
+			$this->callInviter();
 		}
 	}
+
+	private function callInviter() {}
+
+	private function callInvitee() {}
 
 	private function initSessionParameters($session) {
 		// Parameters for call flow control
@@ -38,7 +47,7 @@ class TropoController extends TropoBaseController {
 		$paramarray["inviteInx"] = $session->getParameters("inviteInx");
 		
 		// log
-		$this->logInfo($paramarray["partnerInx"], $paramarray["inviteInx"], $session);
+		$this->logger->logInfo($paramarray["partnerInx"], $paramarray["inviteInx"], $session);
 	}
 
 	private function generateInteractiveParameters($paramarray) {
@@ -51,6 +60,32 @@ class TropoController extends TropoBaseController {
 			$i++;
 		}
 		return $parameters;
+	}
+
+	private function initTropo($paramarray, $appendHangup = true) {
+		$tropo = new Tropo();
+		
+		if ($appendHangup) {
+			$this->setEvent($tropo, $paramarray, "hangup");
+			$this->setEvent($tropo, $paramarray, "error");
+			$this->setEvent($tropo, $paramarray, "incomplete");
+		}
+		return $tropo;
+	}
+
+	private function setEvent($tropo, $paramArray, $event, $handler = null) {
+		if ($handler == null) {
+			$handler = $event;
+		}
+		$parameters = $this->generateInteractiveParameters($paramArray);
+		$tropo->on(array (
+			"event" => $event,
+			"next" => APP_CTX . "/default/tropo/$event?$parameters" 
+		));
+	}
+
+	private function log($infomations) {
+		$this->logger->logInfo($_GET["partnerInx"], $_GET["inviteInx"], $infomations);
 	}
 
 }

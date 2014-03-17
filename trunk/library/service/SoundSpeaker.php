@@ -10,8 +10,12 @@ class SoundSpeaker {
 		$this->ivrService = new IvrService($accountId, $language);
 	}
 
-	public function promptWelcome() {
-		return $this->ivrService->getValue("we_are_now_connecting_you");
+	public function promptInviteeGrerting() {
+		return $this->ivrService->getIvrAudio("inviter_greeting");
+	}
+
+	public function promptInviteeGreeting() {
+		return $this->ivrService->getIvrAudio("invitee_greeting");
 	}
 
 }
