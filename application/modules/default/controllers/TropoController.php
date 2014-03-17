@@ -1,7 +1,7 @@
 <?php
 require_once 'base/TropoBaseController.php';
 
-class Tropo_TestController extends TropoBaseController {
+class TropoController extends TropoBaseController {
 
 	public function init() {
 		parent::init();
