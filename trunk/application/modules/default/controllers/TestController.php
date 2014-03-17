@@ -1,6 +1,6 @@
 <?php
 require_once 'base/WedgitBaseController.php';
-require_once 'utils/MultiLang.php';
+require_once 'util/MultiLang.php';
 require_once 'service/TropoService.php';
 
 class TestController extends WedgitBaseController {
