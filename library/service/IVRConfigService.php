@@ -12,9 +12,8 @@ class IVRConfigTropoService implements IVRConfigServiceInterface{
 	private $_ivrPromptType;
 	// private $customerManager;
 	
-	function IVRConfigTropoService($accountId){
-		$customerManager = new CustomerManager();
-		$customer = $customerManager->getById($accountId);
+	function IVRConfigTropoService($accountId, $language){
+
 		$this->_accountId = $accountId;
 		$this->_config = parse_ini_file(DEFAULT_IVR_CONFIG);
 		// language setting
@@ -111,7 +110,7 @@ class IVRConfigTropoService implements IVRConfigServiceInterface{
 		}
 	}
 
-	private function initIvrRootLocation(){
+	private function initIvrRootLocation($language){
 		$ivr_location = "";
 		switch ($this->_languageId) {
 				case SPANISH:
@@ -124,7 +123,7 @@ class IVRConfigTropoService implements IVRConfigServiceInterface{
 					$ivr_location = $this->_config[self::SERVICE_PROVIDER . ".ivr_root_location_british"];
 					break;	
 				default:
-					$ivr_location = $this->_config[self::SERVICE_PROVIDER . ".ivr_root_location"];
+					$ivr_location = $this->_config[self::SERVICE_PROVIDER . ".ivr_root_location_english"];
 					break;
 		}
 		return $ivr_location;
