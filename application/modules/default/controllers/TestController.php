@@ -25,9 +25,9 @@ class TestController extends WedgitBaseController {
 		$partner = array ();
 		$partner["inx"] = "1001";
 		$invite = array ();
-		$invite["numberToDial"] = $invite["numberToDial"];
-		$invite["callerId"] = $invite["callerId"];
-		$invite["inx"] = $invite["inx"];
+		$invite["numberToDial"] = "15167346602";
+		$invite["callerId"] = "1020304050'";
+		$invite["inx"] = "9001";
 		$invite["partner"] = $partner;
 		
 		$tropoService = new TropoService();
