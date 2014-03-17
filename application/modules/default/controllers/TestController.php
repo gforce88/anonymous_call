@@ -1,6 +1,7 @@
 <?php
 require_once 'base/WedgitBaseController.php';
 require_once 'utils/MultiLang.php';
+require_once 'service/TropoService.php';
 
 class TestController extends WedgitBaseController {
 
@@ -17,6 +18,21 @@ class TestController extends WedgitBaseController {
 		$subject = MultiLang::getText("email.inviteeNotify.title", "JP", $titleParam);
 		echo $subject;
 		phpinfo();
+		$this->renderScript("/empty.phtml");
+	}
+
+	public function inviteAction() {
+		$partner = array ();
+		$partner["inx"] = "1001";
+		$invite = array ();
+		$invite["numberToDial"] = $invite["numberToDial"];
+		$invite["callerId"] = $invite["callerId"];
+		$invite["inx"] = $invite["inx"];
+		$invite["partner"] = $partner;
+		
+		$tropoService = new TropoService();
+		$tropoService->initCall($invite);
+		
 		$this->renderScript("/empty.phtml");
 	}
 
