@@ -7,7 +7,7 @@ abstract class BaseManager {
 
 	public function __construct() {
 		$this->db = Zend_Registry::get('DB_ADAPTER');
-		$this->logger = Zend_Registry::get('SYS_LOGGER');
+		$this->logger = LoggerFactory::getSysLogger();
 	}
 
 }

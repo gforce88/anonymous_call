@@ -1,16 +1,19 @@
 <?php
 require_once 'base/WedgitBaseController.php';
+require_once 'log/LoggerFactory.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'util/Validator.php';
 require_once 'models/PartnerManager.php';
 
-class Widget_InvitationController extends WedgitBaseController {
+class Widget_InvitationController extends Zend_Controller_Action {
+
+	private $logger;
 
 	private $partnerManager;
 
 	public function init() {
-		parent::init();
+		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
 	}
 
@@ -30,7 +33,6 @@ class Widget_InvitationController extends WedgitBaseController {
 		$inviterNumber = $_POST["inviterNumber"];
 		$inviteeEmail = $_POST["inviteeEmail"];
 		
-		$this->logInfo("", "", "before validation");
 		$isValidate = true;
 		if (Validator::isValidPhoneNumber($inviterNumber)) {
 			$msgInviterNumberStyle = "none";
@@ -46,11 +48,8 @@ class Widget_InvitationController extends WedgitBaseController {
 		}
 		
 		if ($isValidate) {
-			$this->logInfo("", "", "before sending email");
 			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviteeEmail, $inviterName, "XXXXXXXXXX");
-			$this->logInfo("", "", "after sending email");
 			$this->dispatchResponse($language, $inviterNumber, $inviteeEmail);
-			$this->logInfo("", "", "after dispatch page");
 		} else {
 			$this->dispatchInvitation($token, $language, $inviterName, $inviterNumber, $inviteeEmail, $msgInviterNumberStyle, $msgInviterEmailStyle);
 		}

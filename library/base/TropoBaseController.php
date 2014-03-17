@@ -7,5 +7,9 @@ class TropoBaseController extends BaseController {
 		$this->logger = Zend_Registry::get('IVR_LOGGER');
 	}
 
+	public function log($infomations) {
+		$this->logInfo($_GET["partnerInx"], $_GET["inviteInx"], $infomations);
+	}
+
 }
 
