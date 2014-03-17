@@ -1,5 +1,6 @@
 <?php
 require_once 'base/TropoBaseController.php';
+require_once 'tropo/tropo.class.php';
 
 class TropoController extends TropoBaseController {
 
