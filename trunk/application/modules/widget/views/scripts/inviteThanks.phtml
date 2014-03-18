@@ -1,4 +1,4 @@
-<?php $language = $this->language?>
+<?php $country = $this->country?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +12,15 @@
 <body>
 	<div class="content">
 		<article>
-			<h1><?php echo MultiLang::getText("Thank_You", $language)?></h1>
+			<h1><?php echo MultiLang::getText("Thank_You", $country)?></h1>
 			<br>
-			<h3><?php echo MultiLang::getText("An_invitation_has_been_sent_to", $language)?></h3>
+			<h3><?php echo MultiLang::getText("An_invitation_has_been_sent_to", $country)?></h3>
 			<br>
-			<h3><?php echo $this->inviteeEmail?></h3>
+			<h3><?php echo $this->email?></h3>
 			<br>
-			<h3><?php echo MultiLang::getText("to_call_you_anonymous", $language)?></h3>
+			<h3><?php echo MultiLang::getText("to_call_you_anonymous", $country)?></h3>
 			<br>
-			<h3><?php echo $this->inviterNumber?></h3>
+			<h3><?php echo $this->phoneNum?></h3>
 			<br>
 		</article>
 	</div>

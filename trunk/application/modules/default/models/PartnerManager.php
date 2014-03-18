@@ -3,16 +3,12 @@ require_once 'base/BaseManager.php';
 
 class PartnerManager extends BaseManager {
 
-	public function findPartnerByToken($token) {
-		$partner = array (
-			"id" => "1001",
-			"token" => $token,
-			"language" => "JP",
-			"name" => "Japanese Partner",
-			"email" => "JpPartner@email.com" 
-		);
-		
-		return $partner;
+	const SQL_FIND_BY_INX = "select * from partners where inx=:inx";
+
+	public function findPartnerByInx($inx) {
+		return $this->db->fetchRow(self::SQL_FIND_BY_INX, array (
+			"inx" => $inx 
+		));
 	}
 
 }

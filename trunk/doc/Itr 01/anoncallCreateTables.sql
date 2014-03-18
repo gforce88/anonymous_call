@@ -33,7 +33,7 @@ CREATE TABLE `partners` (
   `inviteExpireTimeDur`	int(11)			NOT NULL,
   `maxNumRings`			int(11)			NOT NULL	DEFAULT '5',
   `resourcePath`		varchar(1024)	NOT NULL,
-  `sendingEmailAddr`	varchar(256)	NOT NULL,
+  `emailAddr`			varchar(256)	NOT NULL,
   `inviteEmailSubject`	varchar(256)	NOT NULL,
   `inviteEmailBody`		varchar(2048)	NOT NULL,
   `confirmEmailSubject`	varchar(256)	NOT NULL,
@@ -142,9 +142,9 @@ INSERT `countries` (`isoCode`, `desc`)
 -- ----------------------------
 INSERT `admins` (`inx`, `partnerInx`, `userName`, `pw`)
 		VALUES (1, 0, 'admin', 'admin');
-INSERT`partners` (`name`, `revShare`, `minCallBlkDur`, `inviteExpireTimeDur`, `maxNumRings`, `resourcePath`, `sendingEmailAddr`, `inviteEmailSubject`, `inviteEmailBody`, `confirmEmailSubject`, `confirmEmailBody`, `thanksEmailSubject`, `thanksEmailBody`, `address1`, `address2`, `postalcode`, `phoneNum`, `country`)
+INSERT `partners` (`name`, `revShare`, `minCallBlkDur`, `inviteExpireTimeDur`, `maxNumRings`, `resourcePath`, `emailAddr`, `inviteEmailSubject`, `inviteEmailBody`, `confirmEmailSubject`, `confirmEmailBody`, `thanksEmailSubject`, `thanksEmailBody`, `address1`, `address2`, `postalcode`, `phoneNum`, `country`)
 		VALUES ('EnTest', 12.34, 5, 8, 5, 'OutOfScopt', 'EnTest@email.com', 'You have been invited to a call %1s', 'You have been invited to call %1s using Tokumei number.<br>He / she leaves a message to you: %2s<br>please click this link to call %3s', 'confirmEmailSubject', 'confirmEmailBody', 'thankEmailSubject', 'thankEmailBody', 'address1', 'address2', '123456', '11234567890', 'US');
-INSERT`partners`(`name`, `revShare`, `minCallBlkDur`, `inviteExpireTimeDur`, `maxNumRings`, `resourcePath`, `sendingEmailAddr`, `inviteEmailSubject`, `inviteEmailBody`, `confirmEmailSubject`, `confirmEmailBody`, `thanksEmailSubject`, `thanksEmailBody`, `address1`, `address2`, `postalcode`, `phoneNum`, `country`)
+INSERT `partners` (`name`, `revShare`, `minCallBlkDur`, `inviteExpireTimeDur`, `maxNumRings`, `resourcePath`, `emailAddr`, `inviteEmailSubject`, `inviteEmailBody`, `confirmEmailSubject`, `confirmEmailBody`, `thanksEmailSubject`, `thanksEmailBody`, `address1`, `address2`, `postalcode`, `phoneNum`, `country`)
 		VALUES ('JpTest', 12.34, 5, 8, 5, 'OutOfScopt', 'JpTest@email.com', '%1s邀请你拨打电话', '%1s邀请你拨打匿名电话。<br>这是对方的留言：  %2s<br>请点此链接拨打电话%3s', 'confirmEmailSubject', 'confirmEmailBody', 'thankEmailSubject', 'thankEmailBody', 'address1', 'address2', '123456', '811234567890', 'JP');
 
 
