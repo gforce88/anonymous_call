@@ -124,6 +124,18 @@ CREATE TABLE `countries` (
 -- ----------------------------
 -- Records
 -- ----------------------------
+INSERT `callresult` (`inx`, `desc`)
+		VALUES (1, 'Init');
+INSERT `callresult` (`inx`, `desc`)
+		VALUES (2, 'Pickup');
+INSERT `callresult` (`inx`, `desc`)
+		VALUES (3, 'Conference');
+INSERT `callresult` (`inx`, `desc`)
+		VALUES (4, 'Answer');
+INSERT `countries` (`isoCode`, `desc`)
+		VALUES (1, 'United States');
+INSERT `countries` (`isoCode`, `desc`)
+		VALUES (81, 'Japan');
 
 -- ----------------------------
 -- Test data
