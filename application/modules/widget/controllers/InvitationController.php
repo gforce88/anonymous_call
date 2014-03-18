@@ -5,6 +5,8 @@ require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'util/Validator.php';
 require_once 'models/PartnerManager.php';
+require_once 'models/UserManager.php';
+require_once 'models/InviteManager.php';
 
 class Widget_InvitationController extends Zend_Controller_Action {
 
@@ -12,81 +14,97 @@ class Widget_InvitationController extends Zend_Controller_Action {
 
 	private $partnerManager;
 
+	private $userManager;
+
+	private $inviteManager;
+
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
+		$this->userManager = new UserManager();
+		$this->inviteManager = new InviteManager();
 	}
 
 	public function indexAction() {
-		$token = $_REQUEST["token"];
-		$partner = $this->partnerManager->findPartnerByToken($token);
+		$partnerInx = $_REQUEST["inx"];
+		$partner = $this->partnerManager->findPartnerByInx($partnerInx);
 		
-		$this->dispatchInvitation($token, $partner["language"]);
+		$this->dispatchInvitation($partnerInx, $partner["country"]);
 	}
 
 	public function validateAction() {
-		$token = $_POST["token"];
-		$partner = $this->partnerManager->findPartnerByToken($token);
-		$language = $partner["language"];
+		$partnerInx = $_POST["partnerInx"];
+		$partner = $this->partnerManager->findPartnerByInx($partnerInx);
+		$country = $partner["country"];
 		
-		$inviterName = $_POST["inviterName"];
-		$inviterNumber = $_POST["inviterNumber"];
-		$inviteeEmail = $_POST["inviteeEmail"];
+		$user = array (
+			"userAlias" => $_POST["userAlias"],
+			"phoneNum" => $_POST["phoneNum"],
+			"email" => $_POST["email"] 
+		);
 		
 		$isValidate = true;
-		if (Validator::isValidPhoneNumber($inviterNumber)) {
-			$msgInviterNumberStyle = "none";
+		if (Validator::isValidPhoneNumber($user["phoneNum"])) {
+			$msgPhoneNumStyle = "none";
 		} else {
 			$isValidate = false;
-			$msgInviterNumberStyle = "block";
+			$msgPhoneNumStyle = "block";
 		}
-		if (Validator::isValidEmail($inviteeEmail)) {
-			$msgInviterEmailStyle = "none";
+		if (Validator::isValidEmail($user["email"])) {
+			$msgEmailStyle = "none";
 		} else {
 			$isValidate = false;
-			$msgInviterEmailStyle = "block";
+			$msgEmailStyle = "block";
 		}
 		
 		if ($isValidate) {
-			$this->sendInviteeNotifyEmail($language, $partner["name"], $partner["email"], $inviteeEmail, $inviterName, "XXXXXXXXXX");
-			$this->dispatchResponse($language, $inviterNumber, $inviteeEmail);
+			$user = $this->userManager->insert($user);
+			$invite = array (
+				"partnerInx" => $partnerInx,
+				"inviterInx" => $user["inx"],
+				"inviteeInx" => -1,
+				"inviteMsg" => "XXXXXXXX" 
+			);
+			$this->inviteManager->insert($invite);
+			$this->sendInviteeNotifyEmail($country, $partner["name"], $partner["emailAddr"], $user["email"], $user["userAlias"], $invite["inviteMsg"]);
+			$this->dispatchResponse($country, $user["phoneNum"], $user["email"]);
 		} else {
-			$this->dispatchInvitation($token, $language, $inviterName, $inviterNumber, $inviteeEmail, $msgInviterNumberStyle, $msgInviterEmailStyle);
+			$this->dispatchInvitation($partnerInx, $country, $user["userAlias"], $user["phoneNum"], $user["email"], $msgPhoneNumStyle, $msgEmailStyle);
 		}
 	}
 
-	private function dispatchInvitation($token, $language, $inviterName = null, $inviterNumber = null, $inviteeEmail = null, $msgInviterNumberStyle = "none", $msgInviterEmailStyle = "none") {
-		$this->view->assign("token", $token);
-		$this->view->assign("language", $language);
-		$this->view->assign("inviterName", $inviterName);
-		$this->view->assign("inviterNumber", $inviterNumber);
-		$this->view->assign("inviteeEmail", $inviteeEmail);
-		$this->view->assign("msgInviterNumberStyle", $msgInviterNumberStyle);
-		$this->view->assign("msgInviterEmailStyle", $msgInviterEmailStyle);
+	private function dispatchInvitation($partnerInx, $country, $userAlias = null, $phoneNum = null, $email = null, $msgPhoneNumStyle = "none", $msgEmailStyle = "none") {
+		$this->view->assign("partnerInx", $partnerInx);
+		$this->view->assign("country", $country);
+		$this->view->assign("userAlias", $userAlias);
+		$this->view->assign("phoneNum", $phoneNum);
+		$this->view->assign("email", $email);
+		$this->view->assign("msgPhoneNumStyle", $msgPhoneNumStyle);
+		$this->view->assign("msgEmailStyle", $msgEmailStyle);
 		$this->renderScript("/invitation.phtml");
 	}
 
-	private function dispatchResponse($language, $inviterNumber, $inviteeEmail) {
-		$this->view->assign("language", $language);
-		$this->view->assign("inviterNumber", $inviterNumber);
-		$this->view->assign("inviteeEmail", $inviteeEmail);
+	private function dispatchResponse($country, $phoneNum, $email) {
+		$this->view->assign("country", $country);
+		$this->view->assign("phoneNum", $phoneNum);
+		$this->view->assign("email", $email);
 		$this->renderScript("/inviteThanks.phtml");
 	}
 
-	private function sendInviteeNotifyEmail($language, $fromName, $fromMail, $inviteeEmail, $inviterName, $inviterMessage) {
+	private function sendInviteeNotifyEmail($country, $fromName, $fromMail, $email, $userAlias, $inviterMsg) {
 		$titleParam = array (
-			$inviterName 
+			$userAlias 
 		);
 		$contentParam = array (
-			$inviterName,
-			$inviterMessage,
+			$userAlias,
+			$inviterMsg,
 			"URL" 
 		);
 		
-		$subject = MultiLang::getText("email.inviteeNotify.title", $language, $titleParam);
-		$content = MultiLang::getText("email.inviteeNotify.content", $language, $contentParam);
+		$subject = MultiLang::getText("email.inviteeNotify.title", $country, $titleParam);
+		$content = MultiLang::getText("email.inviteeNotify.content", $country, $contentParam);
 		
-		return EmailSender::sendHtmlEmail($fromName, $fromMail, "", $inviteeEmail, $subject, $content);
+		return EmailSender::sendHtmlEmail($fromName, $fromMail, "", $email, $subject, $content);
 	}
 
 }
