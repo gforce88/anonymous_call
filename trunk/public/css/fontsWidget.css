@@ -60,3 +60,7 @@ blockquote {
 em,.link_arrow,.widget_links li,.comments_number,.cmsms_info .category_name,.cmsms_info .user_name,.post_category a,.commentlist .published {
 	font-family: Georgia, Times, "Century Schoolbook L", serif;
 }
+
+.radioblock {
+	font: 18px/24px "Open Sans", Helvetica, sans-serif;
+}

@@ -1,5 +1,4 @@
 <?php
-require_once 'base/WedgitBaseController.php';
 require_once 'log/LoggerFactory.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -22,55 +21,82 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$partnerInx = $_REQUEST["inx"];
-		$partner = $this->partnerManager->findPartnerByInx($partnerInx);
-		
-		$this->dispatchInvitation($partnerInx, $partner["country"]);
+		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
+		$this->view->assign("partnerInx", $partner["inx"]);
+		$this->view->assign("country", $partner["country"]);
+		$this->renderScript("/invitation.phtml");
 	}
 
 	public function validateAction() {
-		$partnerInx = $_POST["partnerInx"];
-		$partner = $this->partnerManager->findPartnerByInx($partnerInx);
-		$country = $partner["country"];
-		
+		// Init parameters
 		$inviter = array (
 			"userAlias" => $_POST["inviterName"],
-			"phoneNum" => $_POST["inviterNumber"] 
+			"phoneNum" => $_POST["inviterNumber"],
+			"email" => $_POST["inviterEmail"] 
 		);
 		$invitee = array (
 			"email" => $_POST["inviteeEmail"] 
 		);
+		$invite = array (
+			"inviteMsg" => $_POST["inviteMsg"] 
+		);
 		
-		$isValidate = true;
-		if (Validator::isValidPhoneNumber($inviter["phoneNum"])) {
-			$msgInviterNumberStyle = "none";
+		// Validation
+		$validFields = array ();
+		$invalidFields = array ();
+		if ($inviter["userAlias"] != null && $inviter["userAlias"] != "") {
+			array_push($validFields, "inviterNameNotNull");
 		} else {
-			$isValidate = false;
-			$msgInviterNumberStyle = "block";
+			array_push($invalidFields, "inviterNameNotNull");
+		}
+		if (Validator::isValidPhoneNumber($inviter["phoneNum"])) {
+			array_push($validFields, "inviterNumberInvalid");
+		} else {
+			array_push($invalidFields, "inviterNumberInvalid");
 		}
 		if (Validator::isValidEmail($invitee["email"])) {
-			$msgInviteeEmailStyle = "none";
+			array_push($validFields, "inviteeEmailInvalid");
 		} else {
-			$isValidate = false;
-			$msgInviteeEmailStyle = "block";
+			array_push($invalidFields, "inviteeEmailInvalid");
+		}
+		if ($_POST["payType"] == 1) {
+			if (Validator::isValidEmail($inviter["email"])) {
+				array_push($validFields, "inviterEmailInvalid");
+			} else {
+				array_push($invalidFields, "inviterEmailInvalid");
+			}
 		}
 		
-		if ($isValidate) {
+		// Dispatch
+		$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
+		if (count($invalidFields) == 0) {
 			$inviter = $this->userManager->insert($inviter);
 			$invitee = $this->userManager->insert($invitee);
 			$invite = array (
-				"partnerInx" => $partnerInx,
+				"partnerInx" => $partner["inx"],
 				"inviterInx" => $inviter["inx"],
 				"inviteeInx" => $invitee["inx"],
 				"inviteToken" => md5(time()),
-				"inviteMsg" => "XXXXXXXX" 
+				"inviteMsg" => $_POST["inviteMsg"] 
 			);
 			$invite = $this->inviteManager->insert($invite);
 			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
-			$this->dispatchResponse($country, $inviter["phoneNum"], $invitee["email"]);
+			$result["success"] = true;
+			$result["url"] = APP_CTX . "/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"];
+			$this->_helper->json->sendJson($result);
 		} else {
-			$this->dispatchInvitation($partnerInx, $country, $inviter["userAlias"], $inviter["phoneNum"], $invitee["email"], $msgInviterNumberStyle, $msgInviteeEmailStyle);
+			$result["success"] = false;
+			$result["validFields"] = $validFields;
+			$result["invalidFields"] = $invalidFields;
+			$this->_helper->json->sendJson($result);
 		}
+	}
+
+	public function thanksAction() {
+		$this->view->assign("country", $_POST["country"]);
+		$this->view->assign("phoneNum", $_POST["phoneNum"]);
+		$this->view->assign("email", $_POST["email"]);
+		$this->renderScript("/inviteThanks.phtml");
 	}
 
 	private function sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite) {
@@ -89,24 +115,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		echo $contentParam[2];
 		
 		return EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
-	}
-
-	private function dispatchInvitation($partnerInx, $country, $inviterName = null, $inviterNumber = null, $inviteeEmail = null, $msgInviterNumberStyle = "none", $msgInviteeEmailStyle = "none") {
-		$this->view->assign("partnerInx", $partnerInx);
-		$this->view->assign("country", $country);
-		$this->view->assign("inviterName", $inviterName);
-		$this->view->assign("inviterNumber", $inviterNumber);
-		$this->view->assign("inviteeEmail", $inviteeEmail);
-		$this->view->assign("msgInviterNumberStyle", $msgInviterNumberStyle);
-		$this->view->assign("msgInviteeEmailStyle", $msgInviteeEmailStyle);
-		$this->renderScript("/invitation.phtml");
-	}
-
-	private function dispatchResponse($country, $phoneNum, $email) {
-		$this->view->assign("country", $country);
-		$this->view->assign("phoneNum", $phoneNum);
-		$this->view->assign("email", $email);
-		$this->renderScript("/inviteThanks.phtml");
 	}
 
 }

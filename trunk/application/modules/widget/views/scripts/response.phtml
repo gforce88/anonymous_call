@@ -1,21 +1,21 @@
 <?php $country = $this->country?>
 <h1><?php echo MultiLang::getText("Make_a_Tokumei_call_to", $country, $this->inviterName)?></h1><br>
 <form name="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" class="label-top">
-	<div><p>
+	<div>
 		<input type="text" name="inviteeCcNumber" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" value="<?php echo $this->inviteeCcNumber?>" tabindex="1" />
-	</p></div>
-	<div><p>
+	</div>
+	<div>
 		<input type="twothird" name="inviteeCcExp" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" value="<?php echo $this->inviteeCcExp?>" tabindex="1" />
 		<input type="fourth" name="inviteeCcCvc" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" value="<?php echo $this->inviteeCcCvc?>" tabindex="1" />
-	</p></div><br>
+	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
 	<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
-	<div><p>
-			<input type="text" name="inviteeNumber" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" value="<?php echo $this->inviteeNumber?>" tabindex="1" />
-			<small style="display:<?php echo $this->msgInviteeNumberStyle?>">
-				<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-			</small>
-	</p></div><br>
+	<div>
+		<input type="text" name="inviteeNumber" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" value="<?php echo $this->inviteeNumber?>" tabindex="1" />
+		<small style="display:<?php echo $this->msgInviteeNumberStyle?>">
+			<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
+		</small>
+	</div><br>
 	<div>
 		<input type="submit" value="<?php echo MultiLang::getText("Make_the_call", $country)?>" />
 	</div>
