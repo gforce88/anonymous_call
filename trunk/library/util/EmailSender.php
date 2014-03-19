@@ -3,11 +3,11 @@
 class EmailSender {
 
 	public static function sendPlainMail($fromName, $fromMail, $toName, $toMail, $subject, $content) {
-		return EmailSender::sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/plain");
+		return self::sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/plain");
 	}
 
 	public static function sendHtmlEmail($fromName, $fromMail, $toName, $toMail, $subject, $content) {
-		return EmailSender::sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/html");
+		return self::sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, "text/html");
 	}
 
 	private static function sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, $type) {

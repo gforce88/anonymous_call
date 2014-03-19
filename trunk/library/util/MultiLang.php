@@ -6,20 +6,25 @@ class MultiLang {
 		$language = strtoupper($language);
 		switch ($language) {
 			case "JP" :
-				$msg = MultiLang::getJapaneseText($key);
+				$msg = self::getJapaneseText($key);
 				break;
 			default :
-				$msg = MultiLang::getEnglishText($key);
+				$msg = self::getEnglishText($key);
 		}
 		
 		if ($params != null) {
-			$i = 1;
-			foreach ($params as $param) {
-				$msg = str_replace("%" . $i . "s", $param, $msg);
-				$i++;
-			}
+			$msg = self::replaceParams($msg, $params);
 		}
 		
+		return $msg;
+	}
+	
+	public static function replaceParams($msg, $params) {
+		$i = 1;
+		foreach ($params as $param) {
+			$msg = str_replace("%" . $i . "s", $param, $msg);
+			$i++;
+		}
 		return $msg;
 	}
 
@@ -31,7 +36,7 @@ class MultiLang {
 	private static function getJapaneseText($key) {
 		$texts = Zend_Registry::get('JAPANESE_TEXTS');
 		if ($texts[$key] == null) {
-			return getEnglish($key);
+			return self::getEnglishText($key);
 		} else {
 			return $texts[$key];
 		}

@@ -83,8 +83,8 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $invite["inx"] . "&token=" . $invite["inviteToken"] . "&country=" . $partner["country"] 
 		);
 		
-		$subject = MultiLang::getText("email.inviteeNotify.title", $partner["country"], $titleParam);
-		$content = MultiLang::getText("email.inviteeNotify.content", $partner["country"], $contentParam);
+		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
 		
 		echo $contentParam[2];
 		
