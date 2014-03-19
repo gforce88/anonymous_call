@@ -1,25 +1,50 @@
+<script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <h1><?php echo MultiLang::getText("Invite_Someone_to_a_Tokumei_Call", $country)?></h1><br>
-<form name="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" class="label-top">
+<form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" onsubmit="submiteInvitation(); return false;">
 	<h3><?php echo MultiLang::getText("Enter_your_name", $country)?></h3>
-	<div><p>
-		<input type="text" name="inviterName" placeholder="<?php echo MultiLang::getText("Name", $country)?>" value="<?php echo $this->inviterName?>" tabindex="1" />
-	</p></div><br>
+	<div>
+		<input type="text" name="inviterName" placeholder="<?php echo MultiLang::getText("Name", $country)?>" tabindex="1" />
+		<small id="inviterNameNotNull" style="display:none">
+			<?php echo MultiLang::getText("Name", $country)?><?php echo MultiLang::getText("not_null", $country)?>
+		</small>
+	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
 	<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
-	<div><p>
-		<input type="text" name="inviterNumber" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" value="<?php echo $this->inviterNumber?>" tabindex="1" />
-		<small style="display:<?php echo $this->msgInviterNumberStyle?>">
+	<div>
+		<input type="text" name="inviterNumber" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" tabindex="1" />
+		<small id="inviterNumberInvalid" style="display:none">
 			<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 		</small>
-	</p></div><br>
+	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_their_email_address", $country)?></h3>
-	<div><p>
-		<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" value="<?php echo $this->inviteeEmail?>" tabindex="1" />
-		<small style="display:<?php echo $this->msgInviteeEmailStyle?>">
+	<div>
+		<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
+		<small id="inviteeEmailInvalid" style="display:none">
 			<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 		</small>
-	</p></div><br>
+	</div><br>
+	<h3><?php echo MultiLang::getText("Enter_message", $country)?></h3>
+	<div>
+		<input type="text" name="inviteMsg" placeholder="<?php echo MultiLang::getText("message", $country)?>" tabindex="1" />
+	</div><br>
+	<div class="radioblock">
+		<input type="radio" name="payType" value=0 onclick="toglePayType(0);" checked><?php echo MultiLang::getText("Pay_by_the_other_side", $country)?><br>
+		<input type="radio" name="payType" value=1 onclick="toglePayType(1);"><?php echo MultiLang::getText("Pay_by_yourself", $country)?>
+	</div>
+	<div id="selfPayInfo" style="display:none">
+		<div>
+			<input type="text" name="inviterCcNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
+			<input type="twothird" name="inviterCcExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
+			<input type="fourth" name="inviterCcCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
+		</div><br>
+		<div>
+			<input type="text" name="inviterEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
+			<small id="inviterEmailInvalid" style="display:none">
+				<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
+			</small>
+		</div>
+	</div><br>
 	<div>
 		<input type="submit" value="<?php echo MultiLang::getText("Send_inviation", $country)?>" />
 	</div>

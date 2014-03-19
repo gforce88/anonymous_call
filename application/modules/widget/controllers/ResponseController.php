@@ -1,5 +1,4 @@
 <?php
-require_once 'base/WedgitBaseController.php';
 require_once 'log/LoggerFactory.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
