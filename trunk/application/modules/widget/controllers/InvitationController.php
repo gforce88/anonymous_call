@@ -86,7 +86,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
 		
-		echo $partner["emailAddr"];
+		echo $contentParam[2];
 		
 		return EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
 	}
