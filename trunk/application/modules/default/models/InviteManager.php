@@ -2,19 +2,29 @@
 require_once 'base/BaseManager.php';
 
 class InviteManager extends BaseManager {
-
-	static $empty = array (
+	private static $empty = array (
 		"inx" => null,
 		"partnerInx" => null,
 		"inviterInx" => null,
 		"inviteeInx" => null,
-		"inviteMsg" => null 
+		"inviteToken" => null,
+		"inviteMsg" => null,
+		"inviteTime" => null 
 	);
+
+	const SQL_FIND_INVITE_BY_INX_TOKEN = "select * from invites where inx = :inx and inviteToken = :token";
 
 	public function insert($invite) {
 		$this->db->insert("invites", array_intersect_key($invite, self::$empty));
 		$invite["inx"] = $this->db->lastInsertId();
 		return $invite;
+	}
+
+	public function findInviteByInxToken($inx, $token) {
+		return $this->db->fetchRow(self::SQL_FIND_INVITE_BY_INX_TOKEN, array (
+			"inx" => $inx,
+			"token" => $token 
+		));
 	}
 
 }

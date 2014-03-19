@@ -305,7 +305,7 @@ form input[type=text],form input[type=password] {
 }
 
 form input[type=twothird] {
-	width: 60%;
+	width: 50%;
 	padding: 6px;
 	color: #999999;;
 	text-align: center;

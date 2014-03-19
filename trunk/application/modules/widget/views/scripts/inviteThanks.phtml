@@ -1,28 +1,13 @@
+
 <?php $country = $this->country?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="keywords" content="insert keywords" />
-<title>Version 1</title>
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/styleWidget.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/fontsWidget.css" media="screen" />
-</head>
-<body>
-	<div class="content">
-		<article>
-			<h1><?php echo MultiLang::getText("Thank_You", $country)?></h1>
-			<br>
-			<h3><?php echo MultiLang::getText("An_invitation_has_been_sent_to", $country)?></h3>
-			<br>
-			<h3><?php echo $this->email?></h3>
-			<br>
-			<h3><?php echo MultiLang::getText("to_call_you_anonymous", $country)?></h3>
-			<br>
-			<h3><?php echo $this->phoneNum?></h3>
-			<br>
-		</article>
-	</div>
-</body>
-</html>
+<h1><?php echo MultiLang::getText("Thank_You", $country)?></h1>
+<br>
+<h3><?php echo MultiLang::getText("An_invitation_has_been_sent_to", $country)?></h3>
+<br>
+<h3><?php echo $this->email?></h3>
+<br>
+<h3><?php echo MultiLang::getText("to_call_you_anonymous", $country)?></h3>
+<br>
+<h3><?php echo $this->phoneNum?></h3>
+<br>
+
