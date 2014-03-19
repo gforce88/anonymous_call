@@ -11,10 +11,6 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$titleParam = array (
-			"Name" 
-		);
-		echo $subject;
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
