@@ -14,7 +14,6 @@ class TestController extends Zend_Controller_Action {
 		$titleParam = array (
 			"Name" 
 		);
-		$subject = MultiLang::getText("email.inviteeNotify.title", "JP", $titleParam);
 		echo $subject;
 		phpinfo();
 		$this->renderScript("/empty.phtml");
