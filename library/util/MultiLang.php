@@ -24,16 +24,16 @@ class MultiLang {
 	}
 
 	private static function getEnglishText($key) {
-		$englishTexts = Zend_Registry::get('ENGLISH_TEXTS');
-		return $englishTexts[$key];
+		$texts = Zend_Registry::get('ENGLISH_TEXTS');
+		return $texts[$key];
 	}
 
 	private static function getJapaneseText($key) {
-		$englishTexts = Zend_Registry::get('JAPANESE_TEXTS');
-		if ($englishTexts[$key] == null) {
+		$texts = Zend_Registry::get('JAPANESE_TEXTS');
+		if ($texts[$key] == null) {
 			return getEnglish($key);
 		} else {
-			return $englishTexts[$key];
+			return $texts[$key];
 		}
 	}
 

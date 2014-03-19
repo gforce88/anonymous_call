@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `inx`					int(11)			NOT NULL	AUTO_INCREMENT,
   `userAlias`			varchar(256)				DEFAULT NULL,
-  `phoneNum`			int(25)			NOT NULL,
+  `phoneNum`			varchar(25)					DEFAULT NULL,
   `email`				varchar(256)				DEFAULT NULL,
   `paypalToken`			varchar(256)				DEFAULT NULL,
   `createTime`			datetime		NOT NULL	DEFAULT NOW(),
@@ -71,7 +71,8 @@ CREATE TABLE `invites` (
   `partnerInx`			int(11)			NOT NULL,
   `inviterInx`			int(11)			NOT NULL,
   `inviteeInx`			int(11)			NOT NULL,
-  `inviteMsg`			varchar(2056)				DEFAULT NULL,
+  `inviteToken`			varchar(256),
+  `inviteMsg`			varchar(2048)				DEFAULT NULL,
   `inviteTime`			timestamp		NOT NULL	DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -117,7 +118,7 @@ CREATE TABLE `phonenumpool` (
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE `countries` (
   `isoCode`				int(11)			NOT NULL,
-  `desc`				varchar(255)	NOT NULL,
+  `desc`				varchar(256)	NOT NULL,
   PRIMARY KEY (`isoCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 

@@ -1,45 +1,27 @@
-<?php $country = $this->country;?>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="keywords" content="insert keywords" />
-<title>Version 1</title>
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/styleWidget.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/fontsWidget.css" media="screen" />
-</head>
-<body>
-	<div class="content">
-		<article>
-			<h1><?php echo MultiLang::getText("Invite_Someone_to_a_Tokumei_Call", $country)?></h1>
-			<br>
-			<form name="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" class="label-top">
-				<h3><?php echo MultiLang::getText("Enter_your_name", $country)?></h3>
-				<div><p>
-					<input type="text" name="userAlias" placeholder="<?php echo MultiLang::getText("Name", $country)?>" value="<?php echo $this->userAlias?>" tabindex="1" />
-				</p></div><br>
-				<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
-				<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
-				<div><p>
-					<input type="text" name="phoneNum" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" value="<?php echo $this->phoneNum?>" tabindex="1" />
-					<small style="display:<?php echo $this->msgPhoneNumStyle?>">
-						<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-					</small>
-				</p></div><br>
-				<h3><?php echo MultiLang::getText("Enter_their_email_address", $country)?></h3>
-				<div><p>
-					<input type="text" name="email" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" value="<?php echo $this->email?>" tabindex="1" />
-					<small style="display:<?php echo $this->msgEmailStyle?>">
-						<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-					</small>
-				</p></div><br>
-				<div>
-					<input type="submit" value="<?php echo MultiLang::getText("Send_inviation", $country)?>" />
-				</div>
-				<input type="hidden" name="partnerInx" value="<?php echo $this->partnerInx?>" />
-			</form>
-		</article>
+<?php $country = $this->country?>
+<h1><?php echo MultiLang::getText("Invite_Someone_to_a_Tokumei_Call", $country)?></h1><br>
+<form name="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" class="label-top">
+	<h3><?php echo MultiLang::getText("Enter_your_name", $country)?></h3>
+	<div><p>
+		<input type="text" name="inviterName" placeholder="<?php echo MultiLang::getText("Name", $country)?>" value="<?php echo $this->inviterName?>" tabindex="1" />
+	</p></div><br>
+	<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
+	<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
+	<div><p>
+		<input type="text" name="inviterNumber" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" value="<?php echo $this->inviterNumber?>" tabindex="1" />
+		<small style="display:<?php echo $this->msgInviterNumberStyle?>">
+			<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
+		</small>
+	</p></div><br>
+	<h3><?php echo MultiLang::getText("Enter_their_email_address", $country)?></h3>
+	<div><p>
+		<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" value="<?php echo $this->inviteeEmail?>" tabindex="1" />
+		<small style="display:<?php echo $this->msgInviteeEmailStyle?>">
+			<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
+		</small>
+	</p></div><br>
+	<div>
+		<input type="submit" value="<?php echo MultiLang::getText("Send_inviation", $country)?>" />
 	</div>
-</body>
-</html>
+	<input type="hidden" name="partnerInx" value="<?php echo $this->partnerInx?>" />
+</form>
