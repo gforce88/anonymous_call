@@ -66,7 +66,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"inviteMsg" => "XXXXXXXX" 
 			);
 			$invite = $this->inviteManager->insert($invite);
-			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
+			echo $this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
 			$this->dispatchResponse($country, $inviter["phoneNum"], $invitee["email"]);
 		} else {
 			$this->dispatchInvitation($partnerInx, $country, $inviter["userAlias"], $inviter["phoneNum"], $invitee["email"], $msgInviterNumberStyle, $msgInviteeEmailStyle);
