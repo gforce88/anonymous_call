@@ -66,7 +66,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"inviteMsg" => "XXXXXXXX" 
 			);
 			$invite = $this->inviteManager->insert($invite);
-			echo $this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
+			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
 			$this->dispatchResponse($country, $inviter["phoneNum"], $invitee["email"]);
 		} else {
 			$this->dispatchInvitation($partnerInx, $country, $inviter["userAlias"], $inviter["phoneNum"], $invitee["email"], $msgInviterNumberStyle, $msgInviteeEmailStyle);
@@ -86,7 +86,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
 		
-		echo $contentParam[2];
+		echo $partner["emailAddr"];
 		
 		return EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
 	}
