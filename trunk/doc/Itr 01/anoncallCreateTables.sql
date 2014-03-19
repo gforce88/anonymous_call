@@ -58,7 +58,7 @@ CREATE TABLE `users` (
   `phoneNum`            varchar(25)                 DEFAULT NULL,
   `email`               varchar(256)                DEFAULT NULL,
   `paypalToken`         varchar(256)                DEFAULT NULL,
-  `createTime`          datetime        NOT NULL    DEFAULT NOW(),
+  `createTime`          timestamp       NOT NULL    DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`inx`,`phoneNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
