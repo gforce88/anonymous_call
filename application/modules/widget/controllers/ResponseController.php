@@ -50,11 +50,11 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$validFields = array ();
 		$invalidFields = array ();
 		if ($_POST["hasCcInfo"] == 1) {
-			$paypalToken = PaypalService::regist($_POST["inviteeCcNumber"], $_POST["inviteeCcExp"], $_POST["inviteeCcCvc"]);
+			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
 			if ($paypalToken != null) {
-				array_push($validFields, "inviterCcInfoInvalid");
+				array_push($validFields, "creditCardInfoInvalid");
 			} else {
-				array_push($invalidFields, "inviterCcInfoInvalid");
+				array_push($invalidFields, "creditCardInfoInvalid");
 			}
 		}
 		if (Validator::isValidPhoneNumber($_POST["inviteePhoneNumber"])) {
@@ -68,7 +68,9 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
 			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
 			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
-			$this->renderScript("/response/following.phtml");
+			$result["success"] = true;
+			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];
+			$this->_helper->json->sendJson($result);
 		} else {
 			$result["success"] = false;
 			$result["validFields"] = $validFields;

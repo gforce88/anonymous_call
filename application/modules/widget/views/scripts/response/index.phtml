@@ -3,10 +3,10 @@
 <h1><?php echo MultiLang::getText("Make_a_Tokumei_call_to", $country, $this->inviterName)?></h1><br>
 <form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom'); return false;">
 	<div id="ccInfo" style="display:<?php echo $this->ccInfo?>">
-		<input type="text" name="inviteeCcNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
-		<input type="twothird" name="inviteeCcExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
-		<input type="fourth" name="inviteeCcCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
-		<small id="inviterCcInfoInvalid" style="display:none">
+		<input type="text" name="creditCardNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
+		<input type="twothird" name="creditCardExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
+		<input type="fourth" name="creditCardCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
+		<small id="creditCardInfoInvalid" style="display:none">
 			<?php echo MultiLang::getText("Credit_Card_Information", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 		</small>
 	</div><br>

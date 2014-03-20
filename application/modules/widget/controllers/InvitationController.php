@@ -65,12 +65,12 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			} else {
 				array_push($invalidFields, "inviterEmailInvalid");
 			}
-			$paypalToken = PaypalService::regist($_POST["inviterCcNumber"], $_POST["inviterCcExp"], $_POST["inviterCcCvc"]);
+			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
 			if ($paypalToken != null) {
 				$inviter["paypalTolen"] = $paypalToken;
-				array_push($validFields, "inviterCcInfoInvalid");
+				array_push($validFields, "creditCardInfoInvalid");
 			} else {
-				array_push($invalidFields, "inviterCcInfoInvalid");
+				array_push($invalidFields, "creditCardInfoInvalid");
 			}
 		}
 		
