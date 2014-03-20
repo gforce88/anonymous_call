@@ -1,5 +1,5 @@
-function submiteInvitation() {
-	$("#invitationFrom").ajaxSubmit(function(result) {
+function submiteAnonCall(formId) {
+	$(formId).ajaxSubmit(function(result) {
 		if (result.success == true) {
 			window.location.replace(result.url);
 		} else {

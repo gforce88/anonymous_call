@@ -2,12 +2,13 @@
 
 class PaypalService {
 	
-	public function regist($creditCardInfo) {
+	public static function regist($ccNumber, $ccExp, $ccCvc) {
 		// TODO:
+		$paypalToken = "dummyToken";
 		return $paypalToken;
 	}
 	
-	public function charge($paypalToken, $amount) {
+	public static function charge($paypalToken, $amount) {
 		// TODO:
 		return;
 	}
