@@ -34,10 +34,10 @@
 	</div>
 	<div id="selfPayInfo" style="display:none">
 		<div>
-			<input type="text" name="inviterCcNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
-			<input type="twothird" name="inviterCcExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
-			<input type="fourth" name="inviterCcCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
-			<small id="inviterCcInfoInvalid" style="display:none">
+			<input type="text" name="creditCardNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
+			<input type="twothird" name="creditCardExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
+			<input type="fourth" name="creditCardCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
+			<small id="creditCardInfoInvalid" style="display:none">
 				<?php echo MultiLang::getText("Credit_Card_Information", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 			</small>
 			</div><br>
