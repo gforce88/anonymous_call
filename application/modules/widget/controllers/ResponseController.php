@@ -1,5 +1,6 @@
 <?php
 require_once 'log/LoggerFactory.php';
+require_once 'service/PaypalService.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -21,31 +22,58 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$inviteInx = $_REQUEST["inx"];
-		$token = $_REQUEST["token"];
-		$invite = $this->inviteManager->findInviteByInxToken($inviteInx, $token);
-		
+		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		if ($invite == null) {
 			$this->view->assign("country", $_REQUEST["country"]);
-			$this->renderScript("/timeout.phtml");
+			$this->renderScript("/response/timeout.phtml");
 		} else {
 			$inviter = $this->userManager->findUserByInx($invite["inviterInx"]);
-			$this->dispatchResponse($invite["inviteeInx"], $_REQUEST["country"], array (
+			if ($inviter["paypalToken"] == null) {
+				$this->view->assign("ccInfo", "block");
+				$this->view->assign("hasCcInfo", 1);
+			} else {
+				$this->view->assign("ccInfo", "none");
+				$this->view->assign("hasCcInfo", 0);
+			}
+			$this->view->assign("country", $_REQUEST["country"]);
+			$this->view->assign("partnerInx", $invite["partnerInx"]);
+			$this->view->assign("inviterInx", $invite["inviterInx"]);
+			$this->view->assign("inviteeInx", $invite["inviteeInx"]);
+			$this->view->assign("inviterName", array (
 				$inviter["userAlias"] 
 			));
 		}
 	}
 
-	private function dispatchResponse($inviteeInx, $country, $inviterName, $inviteeCcNumber = null, $inviteeCcExp = null, $inviteeCcCvc = null, $inviteeNumber = null, $msgInviteeNumberStyle = "none") {
-		$this->view->assign("inviteeInx", $inviteeInx);
-		$this->view->assign("country", $country);
-		$this->view->assign("inviterName", $inviterName);
-		$this->view->assign("inviteeCcNumber", $inviteeCcNumber);
-		$this->view->assign("inviteeCcExp", $inviteeCcExp);
-		$this->view->assign("inviteeCcCvc", $inviteeCcCvc);
-		$this->view->assign("inviteeNumber", $inviteeNumber);
-		$this->view->assign("msgInviteeNumberStyle", $msgInviteeNumberStyle);
-		$this->renderScript("/response.phtml");
+	public function validateAction() {
+		// Validation
+		$validFields = array ();
+		$invalidFields = array ();
+		if ($_POST["hasCcInfo"] == 1) {
+			$paypalToken = PaypalService::regist($_POST["inviteeCcNumber"], $_POST["inviteeCcExp"], $_POST["inviteeCcCvc"]);
+			if ($paypalToken != null) {
+				array_push($validFields, "inviterCcInfoInvalid");
+			} else {
+				array_push($invalidFields, "inviterCcInfoInvalid");
+			}
+		}
+		if (Validator::isValidPhoneNumber($_POST["inviteePhoneNumber"])) {
+			array_push($validFields, "inviteePhoneNumberInvalid");
+		} else {
+			array_push($invalidFields, "inviteePhoneNumberInvalid");
+		}
+	
+		// Dispatch
+		if (count($invalidFields) == 0) {
+			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
+			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
+			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
+			$this->renderScript("/response/following.phtml");
+		} else {
+			$result["success"] = false;
+			$result["validFields"] = $validFields;
+			$result["invalidFields"] = $invalidFields;
+			$this->_helper->json->sendJson($result);
+		}
 	}
-
 } 

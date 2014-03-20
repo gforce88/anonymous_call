@@ -3,6 +3,7 @@ require_once 'log/LoggerFactory.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'util/Validator.php';
+require_once 'service/PaypalService.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
@@ -30,7 +31,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		// Init parameters
 		$inviter = array (
 			"userAlias" => $_POST["inviterName"],
-			"phoneNum" => $_POST["inviterNumber"],
+			"phoneNum" => $_POST["inviterPhoneNumber"],
 			"email" => $_POST["inviterEmail"] 
 		);
 		$invitee = array (
@@ -49,9 +50,9 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			array_push($invalidFields, "inviterNameNotNull");
 		}
 		if (Validator::isValidPhoneNumber($inviter["phoneNum"])) {
-			array_push($validFields, "inviterNumberInvalid");
+			array_push($validFields, "inviterPhoneNumberInvalid");
 		} else {
-			array_push($invalidFields, "inviterNumberInvalid");
+			array_push($invalidFields, "inviterPhoneNumberInvalid");
 		}
 		if (Validator::isValidEmail($invitee["email"])) {
 			array_push($validFields, "inviteeEmailInvalid");
@@ -63,6 +64,13 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				array_push($validFields, "inviterEmailInvalid");
 			} else {
 				array_push($invalidFields, "inviterEmailInvalid");
+			}
+			$paypalToken = PaypalService::regist($_POST["inviterCcNumber"], $_POST["inviterCcExp"], $_POST["inviterCcCvc"]);
+			if ($paypalToken != null) {
+				$inviter["paypalTolen"] = $paypalToken;
+				array_push($validFields, "inviterCcInfoInvalid");
+			} else {
+				array_push($invalidFields, "inviterCcInfoInvalid");
 			}
 		}
 		
