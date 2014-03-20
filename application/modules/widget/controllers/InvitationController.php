@@ -24,7 +24,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
 		$this->view->assign("partnerInx", $partner["inx"]);
 		$this->view->assign("country", $partner["country"]);
-		$this->renderScript("/invitation.phtml");
 	}
 
 	public function validateAction() {
@@ -82,7 +81,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			$invite = $this->inviteManager->insert($invite);
 			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
 			$result["success"] = true;
-			$result["url"] = APP_CTX . "/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"];
+			$result["url"] = APP_CTX . "/widget/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"];
 			$this->_helper->json->sendJson($result);
 		} else {
 			$result["success"] = false;
@@ -93,10 +92,9 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function thanksAction() {
-		$this->view->assign("country", $_POST["country"]);
-		$this->view->assign("phoneNum", $_POST["phoneNum"]);
-		$this->view->assign("email", $_POST["email"]);
-		$this->renderScript("/inviteThanks.phtml");
+		$this->view->assign("country", $_REQUEST["country"]);
+		$this->view->assign("phoneNum", $_REQUEST["phoneNum"]);
+		$this->view->assign("email", $_REQUEST["email"]);
 	}
 
 	private function sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite) {
@@ -111,8 +109,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
-		
-		echo $contentParam[2];
 		
 		return EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
 	}
