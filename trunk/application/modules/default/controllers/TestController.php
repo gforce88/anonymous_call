@@ -6,8 +6,6 @@ class TestController extends Zend_Controller_Action {
 
 	public function init() {
 		parent::init();
-		// $this->_helper->layout->disableLayout();
-		// $this->_helper->viewRenderer->setNeverRender();
 	}
 
 	public function indexAction() {

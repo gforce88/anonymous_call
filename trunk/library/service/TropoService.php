@@ -13,8 +13,8 @@ class TropoService {
 		$this->setting = Zend_Registry::get("TROPO_SETTING");
 	}
 
-	public function initCall($invite) {
-		$parameters = $this->generateCallParameters($invite);
+	public function initCall($tropoCall) {
+		$parameters = $this->generateCallParameters($tropoCall);
 		$url = $this->setting["url"];
 		$token = $this->setting["token"];
 		$params = "action=create&token=$token&" . http_build_query($parameters);
