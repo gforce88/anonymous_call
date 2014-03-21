@@ -83,18 +83,17 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				"inviteInx" => $_POST["inviteInx"] 
 			);
 			
-			
 			if ($paypalToken == null) { // Pay by Inviter
 				$paypalToken = $inviter["paypalToken"];
 				$email = $inviter["email"];
-				$call["callType"] = 0;
+				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
 			} else {
 				// using the existing paypal token which is set above
 				$email = $invitee["email"];
-				$call["callType"] = 1;
+				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
 			}
 			$call = $this->callManager->insert($call);
-				
+			
 			$this->initCall($call["inx"], $inviter["phoneNum"], $invitee["phoneNum"], $paypalToken, $email, $partner);
 			
 			$result["success"] = true;
@@ -109,14 +108,13 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function initCall($callInx, $numberToDial, $callerId, $paypalToken, $email, $partner) {
-		$tropoCall = array(
+		$tropoCall = array (
 			"inx" => $callInx,
 			"numberToDial" => $numberToDial,
 			"callerId" => $callerId,
 			"paypalToken" => $paypalToken,
-			"email" => $email,
-			
-				
+			"email" => $email 
 		);
 	}
+
 } 
