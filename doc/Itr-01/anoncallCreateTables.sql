@@ -32,7 +32,7 @@ CREATE TABLE `partners` (
   `revShare`            decimal(4,0)    NOT NULL,
   `minCallBlkDur`       int(11)         NOT NULL,
   `inviteExpireTimeDur` int(11)         NOT NULL,
-  `maxNumRings`         int(11)         NOT NULL    DEFAULT '5',
+  `maxNumRings`         int(11)         NOT NULL    DEFAULT 5,
   `resourcePath`        varchar(1024)   NOT NULL,
   `emailAddr`           varchar(256)    NOT NULL,
   `inviteEmailSubject`  varchar(256)    NOT NULL,
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `calls`;
 CREATE TABLE `calls` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT,
   `inviteInx`           int(11)         NOT NULL,
-  `callResult`          int(11)         NOT NULL,
+  `callResult`          int(11)         NOT NULL    DEFAULT 0,
   `callDuration`        time            NOT NULL    DEFAULT '00:00:00',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
