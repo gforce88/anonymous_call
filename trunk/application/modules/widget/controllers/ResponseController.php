@@ -26,24 +26,18 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		if ($invite == null) {
-			echo "Incorrect inx or token";
-			// Incorrect inx or token
-			$this->view->assign("country", $_REQUEST["country"]);
-			return $this->renderScript("/response/timeout.phtml");
+			$this->view->assign("reason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
+			return $this->renderScript("/response/invalidUrl.phtml");
 		}
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		if ($partner == null || $this->inviteExpired($partner["inviteExpireTimeDur"], $invite["inviteTime"])) {
-			echo "No partner or invite expired";
-			// No partner or invite expired
-			$this->view->assign("country", $_REQUEST["country"]);
-			$this->renderScript("/response/timeout.phtml");
+			$this->view->assign("reason", MultiLang::getText("This_link_is_no_longer_active", $_REQUEST["country"]));
+			$this->renderScript("/response/invalidUrl.phtml");
 		}
 		$calls = $this->callManager->findAllCallsByInvite($invite["inx"]);
 		if ($this->callCompleted($calls)) {
-			echo "Already completed the call";
-			// Already completed the call
-			$this->view->assign("country", $_REQUEST["country"]);
-			$this->renderScript("/response/timeout.phtml");
+			$this->view->assign("reason", MultiLang::getText("The_call_is_already_completed", $_REQUEST["country"]));
+			$this->renderScript("/response/invalidUrl.phtml");
 		}
 		
 		$inviter = $this->userManager->findUserByInx($invite["inviterInx"]);
