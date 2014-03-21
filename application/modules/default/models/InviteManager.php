@@ -4,7 +4,7 @@ require_once 'base/BaseManager.php';
 class InviteManager extends BaseManager {
 	private static $empty = array (
 		"inx" => null,
-		"partnerInx" => null,
+		"inviteInx" => null,
 		"inviterInx" => null,
 		"inviteeInx" => null,
 		"inviteToken" => null,
@@ -20,6 +20,10 @@ class InviteManager extends BaseManager {
 		$this->db->insert("invites", array_intersect_key($invite, self::$empty));
 		$invite["inx"] = $this->db->lastInsertId();
 		return $invite;
+	}
+
+	public function update($invite) {
+		return $this->db->update('invites', array_intersect_key($invite, self::$empty), $this->db->quoteInto('inx = ?', $invite['inx']));
 	}
 
 	public function findInviteByInx($inx) {
