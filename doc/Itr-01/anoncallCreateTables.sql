@@ -127,6 +127,8 @@ CREATE TABLE `countries` (
 -- Records
 -- ----------------------------
 INSERT `callresult` (`inx`, `desc`)
+        VALUES (0, 'Create');
+INSERT `callresult` (`inx`, `desc`)
         VALUES (1, 'Init');
 INSERT `callresult` (`inx`, `desc`)
         VALUES (2, 'Pickup');
