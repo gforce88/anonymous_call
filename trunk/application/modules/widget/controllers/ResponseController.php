@@ -82,14 +82,19 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$call = array (
 				"inviteInx" => $_POST["inviteInx"] 
 			);
-			$call = $this->callManager->insert($call);
 			
-			$email = $invitee["email"];
+			
 			if ($paypalToken == null) { // Pay by Inviter
-				$email = $inviter["email"];
 				$paypalToken = $inviter["paypalToken"];
+				$email = $inviter["email"];
+				$call["callType"] = 0;
+			} else {
+				// using the existing paypal token which is set above
+				$email = $invitee["email"];
+				$call["callType"] = 1;
 			}
-			
+			$call = $this->callManager->insert($call);
+				
 			$this->initCall($call["inx"], $inviter["phoneNum"], $invitee["phoneNum"], $paypalToken, $email, $partner);
 			
 			$result["success"] = true;

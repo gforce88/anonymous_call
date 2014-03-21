@@ -85,7 +85,8 @@ DROP TABLE IF EXISTS `calls`;
 CREATE TABLE `calls` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT              COMMENT 'primary key',
   `inviteInx`           int(11)         NOT NULL                                COMMENT 'index to invites table',
-  `callResult`          int(11)         NOT NULL    DEFAULT 0                   COMMENT 'index to callresults table',
+  `callType`            int(1)          NOT NULL                                COMMENT '0 - first call inviter; 1 - first call invitee',
+  `callResult`          int(2)          NOT NULL    DEFAULT 0                   COMMENT 'index to callresults table',
   `callDuration`        time            NOT NULL    DEFAULT '00:00:00'          COMMENT 'total duration of call',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -131,31 +132,19 @@ INSERT `callresult` (`inx`, `desc`)
 INSERT `callresult` (`inx`, `desc`)
         VALUES (1, 'Init');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (2, 'Complete');
+        VALUES (2, '1stLegNoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (101, 'InviterAnswer');
+        VALUES (3, '1stLegIsAnswerMachine');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (102, 'InviterIsAnswerMachine');
+        VALUES (4, '1stLegAnswered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (103, 'InviterNoAnswer');
+        VALUES (5, 'ConferenceTo2ndLeg');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (104, 'ConferenceToInvitee');
+        VALUES (6, '2ndLegNoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (105, 'InviteeAnswer');
+        VALUES (7, '2ndLegAnswered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (106, 'InviteeNoAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (201, 'InviteeAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (202, 'InviteeIsAnswerMachine');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (203, 'InviteeNoAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (204, 'ConferenceToInviter');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (205, 'InviterAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (206, 'InviterNoAnswer');
+        VALUES (8, 'Complete');
 
 INSERT `countries` (`isoCode`, `desc`)
         VALUES (1, 'United States');
