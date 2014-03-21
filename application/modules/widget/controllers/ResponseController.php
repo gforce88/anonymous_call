@@ -4,9 +4,10 @@ require_once 'service/PaypalService.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
+require_once 'models/InviteManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
-require_once 'models/InviteManager.php';
+require_once 'models/CallManager.php';
 
 class Widget_ResponseController extends Zend_Controller_Action {
 	private $logger;
@@ -16,9 +17,10 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
+		$this->inviteManager = new InviteManager();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
-		$this->inviteManager = new InviteManager();
+		$this->callManager = new CallManager();
 	}
 
 	public function indexAction() {
@@ -36,6 +38,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				$this->view->assign("hasCcInfo", 0);
 			}
 			$this->view->assign("country", $_REQUEST["country"]);
+			$this->view->assign("inviteInx", $invite["inx"]);
 			$this->view->assign("partnerInx", $invite["partnerInx"]);
 			$this->view->assign("inviterInx", $invite["inviterInx"]);
 			$this->view->assign("inviteeInx", $invite["inviteeInx"]);
@@ -65,12 +68,19 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		} else {
 			array_push($invalidFields, "inviteePhoneNumberInvalid");
 		}
-	
+		
 		// Dispatch
 		if (count($invalidFields) == 0) {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
 			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
 			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
+			
+			$call = array (
+				"inviteInx" => $_POST["inviteInx"],
+				"csllResult" => 0 
+			);
+			$this->callManager->insert($call);
+			
 			$result["success"] = true;
 			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];
 			$this->_helper->json->sendJson($result);
@@ -81,4 +91,5 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$this->_helper->json->sendJson($result);
 		}
 	}
+
 } 

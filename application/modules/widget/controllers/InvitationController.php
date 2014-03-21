@@ -1,12 +1,12 @@
 <?php
 require_once 'log/LoggerFactory.php';
+require_once 'service/PaypalService.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'util/Validator.php';
-require_once 'service/PaypalService.php';
+require_once 'models/InviteManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
-require_once 'models/InviteManager.php';
 
 class Widget_InvitationController extends Zend_Controller_Action {
 	private $logger;
@@ -16,9 +16,9 @@ class Widget_InvitationController extends Zend_Controller_Action {
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
+		$this->inviteManager = new InviteManager();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
-		$this->inviteManager = new InviteManager();
 	}
 
 	public function indexAction() {
