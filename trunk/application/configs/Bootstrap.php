@@ -1,11 +1,12 @@
 <?php
+require_once 'Constant.php';
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
-	// Init Router
-	protected function _initRouter() {
-		$front = Zend_Controller_Front::getInstance();
-		// force the dispatcher to dispatch camelCased action names
-		// $front->setParam("useCaseSensitiveActions", true);
+	// Init Application
+	protected function _initApplication() {
+		$app = $this->getOption('app');
+		defined('APP_CTX') || define('APP_CTX', $app['ctx']);
+		defined('APP_TITLE') || define('APP_TITLE', $app['title']);
 	}
 	
 	// Init DB
@@ -14,13 +15,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$db = $resources->getDbAdapter();
 		Zend_Db_Table::setDefaultAdapter($db);
 		Zend_Registry::set('DB_ADAPTER', $db);
-	}
-	
-	// Init Application
-	protected function _initApplication() {
-		$app = $this->getOption('app');
-		defined('APP_CTX') || define('APP_CTX', $app['ctx']);
-		defined('APP_TITLE') || define('APP_TITLE', $app['title']);
 	}
 	
 	// Init Logger
