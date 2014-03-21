@@ -82,7 +82,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				"inviteInx" => $_POST["inviteInx"],
 				"csllResult" => 0 
 			);
-			$this->callManager->insert($call);
+			$call = $this->callManager->insert($call);
 			
 			$result["success"] = true;
 			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];

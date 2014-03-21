@@ -1,0 +1,6 @@
+<?php
+define('CALL_RESULT_CREATE', 0);
+define('CALL_RESULT_INIT', 1);
+define('CALL_RESULT_PICKUP', 2);
+define('CALL_RESULT_CONFERENCE', 3);
+define('CALL_RESULT_ANSWER', 4);
