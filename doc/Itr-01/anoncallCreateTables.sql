@@ -132,17 +132,17 @@ INSERT `callresult` (`inx`, `desc`)
 INSERT `callresult` (`inx`, `desc`)
         VALUES (1, 'Init');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (2, '1stLegNoAnswer');
+        VALUES (2, '1stLeg_NoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (3, '1stLegIsAnswerMachine');
+        VALUES (3, '1stLeg_IsAnswerMachine');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (4, '1stLegAnswered');
+        VALUES (4, '1stLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (5, 'ConferenceTo2ndLeg');
+        VALUES (5, '1stLeg_To_2ndLeg');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (6, '2ndLegNoAnswer');
+        VALUES (6, '2ndLeg_NoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (7, '2ndLegAnswered');
+        VALUES (7, '2ndLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
         VALUES (8, 'Complete');
 
