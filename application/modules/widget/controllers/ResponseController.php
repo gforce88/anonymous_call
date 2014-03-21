@@ -74,6 +74,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
 			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
 			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
+			
 			$invitee["phoneNum"] = $_POST["inviteePhoneNumber"];
 			$invitee["paypalToken"] = $paypalToken;
 			$this->userManager->update($invitee);
@@ -82,6 +83,14 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				"inviteInx" => $_POST["inviteInx"] 
 			);
 			$call = $this->callManager->insert($call);
+			
+			$email = $invitee["email"];
+			if ($paypalToken == null) { // Pay by Inviter
+				$email = $inviter["email"];
+				$paypalToken = $inviter["paypalToken"];
+			}
+			
+			$this->initCall($call["inx"], $inviter["phoneNum"], $invitee["phoneNum"], $paypalToken, $email, $partner);
 			
 			$result["success"] = true;
 			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];
@@ -94,4 +103,14 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		}
 	}
 
+	private function initCall($callInx, $numberToDial, $callerId, $paypalToken, $email, $partner) {
+		$tropoCall = array(
+			"inx" => $callInx,
+			"numberToDial" => $numberToDial,
+			"callerId" => $callerId,
+			"paypalToken" => $paypalToken,
+			"email" => $email,
+				
+		)
+	}
 } 
