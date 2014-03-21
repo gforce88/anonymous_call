@@ -110,7 +110,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			"callerId" => $callerId,
 			"paypalToken" => $paypalToken,
 			"email" => $email,
+			
 				
-		)
+		);
 	}
 } 
