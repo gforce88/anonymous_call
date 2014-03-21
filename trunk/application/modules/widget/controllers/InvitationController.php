@@ -70,7 +70,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			}
 			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
 			if ($paypalToken != null) {
-				$inviter["paypalTolen"] = $paypalToken;
+				$inviter["paypalToken"] = $paypalToken;
 				array_push($validFields, "creditCardInfoInvalid");
 			} else {
 				array_push($invalidFields, "creditCardInfoInvalid");

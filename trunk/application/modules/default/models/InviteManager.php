@@ -4,7 +4,7 @@ require_once 'base/BaseManager.php';
 class InviteManager extends BaseManager {
 	private static $empty = array (
 		"inx" => null,
-		"inviteInx" => null,
+		"partnerInx" => null,
 		"inviterInx" => null,
 		"inviteeInx" => null,
 		"inviteToken" => null,
