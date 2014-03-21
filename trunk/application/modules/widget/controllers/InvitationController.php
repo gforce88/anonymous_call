@@ -28,6 +28,9 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function validateAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNeverRender();
+		
 		// Init parameters
 		$inviter = array (
 			"userAlias" => $_POST["inviterName"],

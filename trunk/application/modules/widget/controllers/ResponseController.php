@@ -46,6 +46,9 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function validateAction() {
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNeverRender();
+		
 		// Validation
 		$validFields = array ();
 		$invalidFields = array ();
