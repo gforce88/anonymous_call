@@ -74,6 +74,9 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
 			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
 			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
+			$invitee["phoneNum"] = $_POST["inviteePhoneNumber"];
+			$invitee["paypalToken"] = $paypalToken;
+			$this->userManager->update($invitee);
 			
 			$call = array (
 				"inviteInx" => $_POST["inviteInx"],

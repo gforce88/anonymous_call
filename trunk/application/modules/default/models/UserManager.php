@@ -19,6 +19,10 @@ class UserManager extends BaseManager {
 		return $user;
 	}
 
+	public function update($user) {
+		return $this->db->update('users', array_intersect_key($user, self::$empty), $this->db->quoteInto('inx = ?', $user['inx']));
+	}
+
 	public function findUserByInx($inx) {
 		return $this->db->fetchRow(self::SQL_FIND_USER_BY_INX, array (
 			"inx" => $inx 

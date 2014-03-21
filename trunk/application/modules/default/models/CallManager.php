@@ -6,7 +6,7 @@ class CallManager extends BaseManager {
 		"inx" => null,
 		"inviteInx" => null,
 		"callResult" => null,
-		"callDuration" => null
+		"callDuration" => null 
 	);
 
 	const SQL_FIND_CALL_BY_INX = "select * from calls where inx=:inx";
@@ -15,6 +15,10 @@ class CallManager extends BaseManager {
 		$this->db->insert("calls", array_intersect_key($call, self::$empty));
 		$call["inx"] = $this->db->lastInsertId();
 		return $call;
+	}
+
+	public function update($call) {
+		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('inx = ?', $call['inx']));
 	}
 
 	public function findcallByInx($inx) {
