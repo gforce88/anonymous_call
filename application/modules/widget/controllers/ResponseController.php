@@ -79,8 +79,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$this->userManager->update($invitee);
 			
 			$call = array (
-				"inviteInx" => $_POST["inviteInx"],
-				"csllResult" => 0 
+				"inviteInx" => $_POST["inviteInx"] 
 			);
 			$call = $this->callManager->insert($call);
 			
