@@ -6,9 +6,6 @@ defined('APPLICATION_PATH') || define('APPLICATION_PATH', realpath(dirname(__FIL
 // Define application environment
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', 'production');
 
-// Set default timezone
-date_default_timezone_set("UTC");
-
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array (
 	realpath(APPLICATION_PATH . '/../library'),

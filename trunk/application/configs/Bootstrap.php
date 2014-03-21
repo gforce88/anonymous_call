@@ -7,6 +7,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$app = $this->getOption('app');
 		defined('APP_CTX') || define('APP_CTX', $app['ctx']);
 		defined('APP_TITLE') || define('APP_TITLE', $app['title']);
+		
+		// Set default timezone
+		// date_default_timezone_set("UTC");
 	}
 	
 	// Init DB

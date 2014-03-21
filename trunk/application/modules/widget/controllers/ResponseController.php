@@ -26,26 +26,42 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		if ($invite == null) {
+			echo "Incorrect inx or token";
+			// Incorrect inx or token
+			$this->view->assign("country", $_REQUEST["country"]);
+			return $this->renderScript("/response/timeout.phtml");
+		}
+		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
+		if ($partner == null || $this->inviteExpired($partner["inviteExpireTimeDur"], $invite["inviteTime"])) {
+			echo "No partner or invite expired";
+			// No partner or invite expired
 			$this->view->assign("country", $_REQUEST["country"]);
 			$this->renderScript("/response/timeout.phtml");
-		} else {
-			$inviter = $this->userManager->findUserByInx($invite["inviterInx"]);
-			if ($inviter["paypalToken"] == null) {
-				$this->view->assign("ccInfo", "block");
-				$this->view->assign("hasCcInfo", 1);
-			} else {
-				$this->view->assign("ccInfo", "none");
-				$this->view->assign("hasCcInfo", 0);
-			}
-			$this->view->assign("country", $_REQUEST["country"]);
-			$this->view->assign("inviteInx", $invite["inx"]);
-			$this->view->assign("partnerInx", $invite["partnerInx"]);
-			$this->view->assign("inviterInx", $invite["inviterInx"]);
-			$this->view->assign("inviteeInx", $invite["inviteeInx"]);
-			$this->view->assign("inviterName", array (
-				$inviter["userAlias"] 
-			));
 		}
+		$calls = $this->callManager->findAllCallsByInvite($invite["inx"]);
+		if ($this->callCompleted($calls)) {
+			echo "Already completed the call";
+			// Already completed the call
+			$this->view->assign("country", $_REQUEST["country"]);
+			$this->renderScript("/response/timeout.phtml");
+		}
+		
+		$inviter = $this->userManager->findUserByInx($invite["inviterInx"]);
+		if ($inviter["paypalToken"] == null) {
+			$this->view->assign("ccInfo", "block");
+			$this->view->assign("hasCcInfo", 1);
+		} else {
+			$this->view->assign("ccInfo", "none");
+			$this->view->assign("hasCcInfo", 0);
+		}
+		$this->view->assign("country", $_REQUEST["country"]);
+		$this->view->assign("inviteInx", $invite["inx"]);
+		$this->view->assign("partnerInx", $invite["partnerInx"]);
+		$this->view->assign("inviterInx", $invite["inviterInx"]);
+		$this->view->assign("inviteeInx", $invite["inviteeInx"]);
+		$this->view->assign("inviterName", array (
+			$inviter["userAlias"] 
+		));
 	}
 
 	public function validateAction() {
@@ -74,7 +90,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
 			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
 			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
-			
 			$invitee["phoneNum"] = $_POST["inviteePhoneNumber"];
 			$invitee["paypalToken"] = $paypalToken;
 			$this->userManager->update($invitee);
@@ -82,19 +97,29 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$call = array (
 				"inviteInx" => $_POST["inviteInx"] 
 			);
+			$tropoCall = array (
+				"callerId" => $partner["phoneNumber"] 
+			);
 			
-			if ($paypalToken == null) { // Pay by Inviter
-				$paypalToken = $inviter["paypalToken"];
-				$email = $inviter["email"];
+			if ($paypalToken == null) {
+				// Pay by Inviter, first call inviter
+				$tropoCall["numberToDial"] = $inviter["phoneNum"];
+				$tropoCall["2ndLegNumber"] = $invitee["phoneNum"];
+				$tropoCall["paypalToken"] = $inviter["paypalToken"];
+				$tropoCall["email"] = $inviter["email"];
 				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
 			} else {
-				// using the existing paypal token which is set above
-				$email = $invitee["email"];
+				// Pay by Invitee, first call invitee
+				$tropoCall["numberToDial"] = $invitee["phoneNum"];
+				$tropoCall["2ndLegNumber"] = $inviter["phoneNum"];
+				$tropoCall["paypalToken"] = $paypalToken;
+				$tropoCall["email"] = $invitee["email"];
 				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
 			}
 			$call = $this->callManager->insert($call);
+			$tropoCall["callInx"] = $call["inx"];
 			
-			$this->initCall($call["inx"], $inviter["phoneNum"], $invitee["phoneNum"], $paypalToken, $email, $partner);
+			$this->initCall($tropoCall, $partner);
 			
 			$result["success"] = true;
 			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];
@@ -107,14 +132,35 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		}
 	}
 
-	private function initCall($callInx, $numberToDial, $callerId, $paypalToken, $email, $partner) {
-		$tropoCall = array (
-			"inx" => $callInx,
-			"numberToDial" => $numberToDial,
-			"callerId" => $callerId,
-			"paypalToken" => $paypalToken,
-			"email" => $email 
-		);
+	private function inviteExpired($expHour, $inviteTime) {
+		$interval = strtotime(date("Y-m-d H:i:s")) - strtotime($inviteTime);
+		if ($interval > $expHour * 3600) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private function callCompleted($calls) {
+		foreach ($calls as $call) {
+			if ($call["callResult"] >= CALL_RESULT_2NDLEG_ANSWERED) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private function initCall($tropoCall, $partner) {
+		$tropoCall["minCallBlkDur"] = $partner["minCallBlkDur"];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
+		$tropoCall[""] = $partner[""];
 	}
 
 } 
