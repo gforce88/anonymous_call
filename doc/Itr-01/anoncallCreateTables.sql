@@ -10,123 +10,123 @@ source /root/workspace/dist/doc/Itr-01/anoncallCreateTables.sql;
 
 SET FOREIGN_KEY_CHECKS=0;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for admins
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
-  `inx`                 int(11)         NOT NULL                                COMMENT 'primary key',
-  `partnerInx`          int(11)         NOT NULL                                COMMENT 'inx to partner table',
-  `userName`            varchar(256)    NOT NULL                                COMMENT 'log in user name',
-  `pw`                  varchar(256)    NOT NULL                                COMMENT 'password hash',
+  `inx`                 int(11)         NOT NULL                    COMMENT 'primary key',
+  `partnerInx`          int(11)         NOT NULL                    COMMENT 'inx to partner table',
+  `userName`            varchar(256)    NOT NULL                    COMMENT 'log in user name',
+  `pw`                  varchar(256)    NOT NULL                    COMMENT 'password hash',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for partners
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `partners`;
 CREATE TABLE `partners` (
-  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT              COMMENT 'parimary key',
-  `name`                varchar(256)    NOT NULL                                COMMENT 'partner name',
-  `revShare`            decimal(4,0)    NOT NULL                                COMMENT '% revshare for partner',
-  `minCallBlkDur`       int(11)         NOT NULL                                COMMENT 'minimum call block duration as defined in the PRD',
-  `inviteExpireTimeDur` int(11)         NOT NULL                                COMMENT 'duration of time an invite link is live for',
-  `maxNumRings`         int(11)         NOT NULL    DEFAULT 5                   COMMENT 'maximum number of rings system should wait before hanging up',
-  `resourcePath`        varchar(1024)   NOT NULL                                COMMENT 'server path to partner specific resources such as CSS, images and other configurable resources',
-  `phoneNum`            varchar(25)     NOT NULL                                COMMENT 'partner phone number',
-  `emailAddr`           varchar(256)    NOT NULL                                COMMENT 'from address to use for invite email',
-  `inviteEmailSubject`  varchar(256)    NOT NULL                                COMMENT 'subject line to use for invite email',
-  `inviteEmailBody`     varchar(2048)   NOT NULL                                COMMENT 'invite email body',
-  `confirmEmailSubject` varchar(256)    NOT NULL                                COMMENT 'subject line to use for confirm email',
-  `confirmEmailBody`    varchar(2048)   NOT NULL                                COMMENT 'confirm email body',
-  `thanksEmailSubject`  varchar(256)    NOT NULL                                COMMENT 'subject line to use for thanks email',
-  `thanksEmailBody`     varchar(2048)   NOT NULL                                COMMENT 'thanks email body',
-  `address1`            varchar(1024)               DEFAULT NULL                COMMENT 'partner address line 1',
-  `address2`            varchar(1024)               DEFAULT NULL                COMMENT 'partner address line 2',
-  `postalCode`          varchar(25)                 DEFAULT NULL                COMMENT 'partner postal code',
-  `country`             varchar(128)                DEFAULT NULL                COMMENT 'country where partner is located',
+  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'parimary key',
+  `name`                varchar(256)    NOT NULL                    COMMENT 'partner name',
+  `revShare`            decimal(4,0)    NOT NULL                    COMMENT '% revshare for partner',
+  `minCallBlkDur`       int(11)         NOT NULL                    COMMENT 'minimum call block duration as defined in the PRD',
+  `inviteExpireTimeDur` int(11)         NOT NULL                    COMMENT 'duration of time an invite link is live for',
+  `maxNumRings`         int(11)         NOT NULL    DEFAULT 5       COMMENT 'maximum number of rings system should wait before hanging up',
+  `resourcePath`        varchar(1024)   NOT NULL                    COMMENT 'server path to partner specific resources such as CSS, images and other configurable resources',
+  `phoneNum`            varchar(25)     NOT NULL                    COMMENT 'partner phone number',
+  `emailAddr`           varchar(256)    NOT NULL                    COMMENT 'from address to use for invite email',
+  `inviteEmailSubject`  varchar(256)    NOT NULL                    COMMENT 'subject line to use for invite email',
+  `inviteEmailBody`     varchar(2048)   NOT NULL                    COMMENT 'invite email body',
+  `confirmEmailSubject` varchar(256)    NOT NULL                    COMMENT 'subject line to use for confirm email',
+  `confirmEmailBody`    varchar(2048)   NOT NULL                    COMMENT 'confirm email body',
+  `thanksEmailSubject`  varchar(256)    NOT NULL                    COMMENT 'subject line to use for thanks email',
+  `thanksEmailBody`     varchar(2048)   NOT NULL                    COMMENT 'thanks email body',
+  `address1`            varchar(1024)               DEFAULT NULL    COMMENT 'partner address line 1',
+  `address2`            varchar(1024)               DEFAULT NULL    COMMENT 'partner address line 2',
+  `postalCode`          varchar(25)                 DEFAULT NULL    COMMENT 'partner postal code',
+  `country`             varchar(128)                DEFAULT NULL    COMMENT 'country where partner is located',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for users
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT              COMMENT 'primary key',
-  `userAlias`           varchar(256)                DEFAULT NULL                COMMENT 'alias of user, may or may not be user name',
-  `phoneNum`            varchar(25)                 DEFAULT NULL                COMMENT 'user phone number',
-  `email`               varchar(256)                DEFAULT NULL                COMMENT 'user email',
-  `paypalToken`         varchar(256)                DEFAULT NULL                COMMENT 'paypal token for the user',
-  `createTime`          timestamp       NOT NULL    DEFAULT CURRENT_TIMESTAMP   COMMENT 'time this user record was created',
+  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
+  `userAlias`           varchar(256)                DEFAULT NULL    COMMENT 'alias of user, may or may not be user name',
+  `phoneNum`            varchar(25)                 DEFAULT NULL    COMMENT 'user phone number',
+  `email`               varchar(256)                DEFAULT NULL    COMMENT 'user email',
+  `paypalToken`         varchar(256)                DEFAULT NULL    COMMENT 'paypal token for the user',
+  `createTime`          timestamp       NOT NULL                    COMMENT 'time this user record was created',
   PRIMARY KEY (`inx`,`phoneNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for invites
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `invites`;
 CREATE TABLE `invites` (
-  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT              COMMENT 'primary key',
-  `partnerInx`          int(11)         NOT NULL                                COMMENT 'index to partner table',
-  `inviterInx`          int(11)         NOT NULL                                COMMENT 'index to user table of users who sent invitation',
-  `inviteeInx`          int(11)         NOT NULL                                COMMENT 'index of user who an invitation was sent to',
-  `inviteToken`         varchar(256)                                            COMMENT 'token in URL of invite email',
-  `inviteMsg`           varchar(2048)               DEFAULT NULL                COMMENT 'time this invitation was extended',
-  `inviteTime`          timestamp       NOT NULL    DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
+  `partnerInx`          int(11)         NOT NULL                    COMMENT 'index to partner table',
+  `inviterInx`          int(11)         NOT NULL                    COMMENT 'index to user table of users who sent invitation',
+  `inviteeInx`          int(11)         NOT NULL                    COMMENT 'index of user who an invitation was sent to',
+  `inviteToken`         varchar(256)                                COMMENT 'token in URL of invite email',
+  `inviteMsg`           varchar(2048)               DEFAULT NULL    COMMENT 'invite message',
+  `inviteTime`          timestamp       NOT NULL                    COMMENT 'time this invitation was created / extended',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for calls
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `calls`;
 CREATE TABLE `calls` (
-  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT              COMMENT 'primary key',
-  `inviteInx`           int(11)         NOT NULL                                COMMENT 'index to invites table',
-  `callType`            int(1)          NOT NULL                                COMMENT '0 - first call inviter; 1 - first call invitee',
-  `callResult`          int(2)          NOT NULL    DEFAULT 0                   COMMENT 'index to callresults table',
-  `callDuration`        time            NOT NULL    DEFAULT '00:00:00'          COMMENT 'total duration of call',
+  `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
+  `inviteInx`           int(11)         NOT NULL                    COMMENT 'index to invites table',
+  `callType`            int(1)          NOT NULL                    COMMENT '0 - first call inviter; 1 - first call invitee',
+  `callResult`          int(2)          NOT NULL    DEFAULT 0       COMMENT 'index to callresults table',
+  `callDuration`        time            NOT NULL    DEFAULT 0       COMMENT 'total duration of call',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for callresult
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `callresult`;
 CREATE TABLE `callresult` (
-  `inx`                 int(11)         NOT NULL                                COMMENT 'primary key',
-  `desc`                varchar(256)    NOT NULL                                COMMENT 'text description of result',
+  `inx`                 int(11)         NOT NULL                    COMMENT 'primary key',
+  `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of result',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for phonenumpool
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `phonenumpool`;
 CREATE TABLE `phonenumpool` (
-  `inx`                 int(11)         NOT NULL                                COMMENT 'primary key',
-  `partnerInx`          int(11)         NOT NULL                                COMMENT 'link to partner who this number can be used for, if zero, number can be used for all partners',
-  `phoneNum`            int(11)         NOT NULL                                COMMENT 'phone number (with country and area code)',
-  `countryInx`          int(11)         NOT NULL                                COMMENT 'the country of origin of this phone number, links to countries table',
-  `lastUsed`            timestamp       NOT NULL    DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP  COMMENT 'time stamp the last time this number was used to connect users',
+  `inx`                 int(11)         NOT NULL                    COMMENT 'primary key',
+  `partnerInx`          int(11)         NOT NULL                    COMMENT 'link to partner who this number can be used for, if zero, number can be used for all partners',
+  `phoneNum`            int(11)         NOT NULL                    COMMENT 'phone number (with country and area code)',
+  `countryInx`          int(11)         NOT NULL                    COMMENT 'the country of origin of this phone number, links to countries table',
+  `lastUsed`            timestamp       NOT NULL                    COMMENT 'time stamp the last time this number was used to connect users',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
+-- ------------------------------------
 -- Table structure for countries
--- ----------------------------
+-- ------------------------------------
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE `countries` (
-  `isoCode`             int(11)         NOT NULL                                COMMENT 'iso 3166 country code',
-  `desc`                varchar(256)    NOT NULL                                COMMENT 'text description of country',
+  `isoCode`             int(11)         NOT NULL                    COMMENT 'iso 3166 country code',
+  `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of country',
   PRIMARY KEY (`isoCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
--- ----------------------------
--- Records
--- ----------------------------
+-- ------------------------------------
+-- Msater Data
+-- ------------------------------------
 INSERT `callresult` (`inx`, `desc`)
         VALUES (0, 'Create');
 INSERT `callresult` (`inx`, `desc`)
@@ -151,9 +151,9 @@ INSERT `countries` (`isoCode`, `desc`)
 INSERT `countries` (`isoCode`, `desc`)
         VALUES (81, 'Japan');
 
--- ----------------------------
+-- ------------------------------------
 -- Test data
--- ----------------------------
+-- ------------------------------------
 INSERT `admins` (`inx`, `partnerInx`, `userName`, `pw`)
         VALUES (1, 0, 'admin', PASSWORD('admin'));
 INSERT `partners` (`name`, `revShare`, `minCallBlkDur`, `inviteExpireTimeDur`, `maxNumRings`, `resourcePath`, `emailAddr`, `inviteEmailSubject`, `inviteEmailBody`, `confirmEmailSubject`, `confirmEmailBody`, `thanksEmailSubject`, `thanksEmailBody`, `address1`, `address2`, `postalcode`, `phoneNum`, `country`)

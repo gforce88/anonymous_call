@@ -3,7 +3,6 @@ require_once 'tropo/tropo.class.php';
 require_once 'log/LoggerFactory.php';
 
 class TropoController extends Zend_Controller_Action {
-
 	private $logger;
 
 	public function init() {
