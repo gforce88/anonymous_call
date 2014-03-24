@@ -31,13 +31,13 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$call = $this->callManager->findcallByInx($_POST["callInx"]);
 		$callStartTime = strtotime($call["callStartTime"]);
 		$callEndTime = strtotime($call["callEndTime"]);
-		$this->logger->logInfo($call["inviteInx"], $call["inx"], "callStartTime: $callStartTime, callEndTime: $callEndTime");
-		if ($callStartTime == 0) {
+		// $this->logger->logInfo($call["inviteInx"], $call["inx"], "callStartTime: $callStartTime, callEndTime: $callEndTime");
+		if ($callStartTime <= 0) {
 			// Call is not started
 			$result = array (
 				"status" => 0 
 			);
-		} else if ($callEndTime == 0) {
+		} else if ($callEndTime <= 0) {
 			// Call is started but not completed
 			$result = array (
 				"status" => 1,
