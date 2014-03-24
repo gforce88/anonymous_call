@@ -5,7 +5,7 @@ require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
 
-class Tropo_FirstLegController extends Zend_Controller_Action {
+class Tropo_SecondLegController extends Zend_Controller_Action {
 	private $logger;
 	private $callManager;
 
@@ -47,11 +47,11 @@ class Tropo_FirstLegController extends Zend_Controller_Action {
 			$session = new Session($tropoJson);
 			$paramArr = $this->initSessionParameters($session);
 			$_GET = array_merge($_GET, $paramarray);
-			$this->callUser();
+			$this->callFirstLeg();
 		}
 	}
 
-	private function callUser() {
+	private function callFirstLeg() {
 		$this->log("Start call to 1st leg");
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT);
 		
@@ -93,8 +93,9 @@ class Tropo_FirstLegController extends Zend_Controller_Action {
 		$this->setEvent($tropo, $parameters, "continue", "holding");
 		$tropo->RenderJson();
 		
+		$_GET["callType"] = CALL_TYPE_1ST_CALL_INVITEE;
 		$tropoService = new TropoService();
-		$tropoService->init2ndLegCall($tropoCall);
+		$tropoService->initCall($tropoCall);
 	}
 
 	public function holdingAction() {

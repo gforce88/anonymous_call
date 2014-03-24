@@ -12,11 +12,18 @@ class IvrService {
 
 	private $ivrLocation;
 
-	public function IvrService($accountId, $language) {
+	public function IvrService($accountId, $country) {
 		$this->accountId = $accountId;
-		$this->language = $language;
 		$this->config = Zend_Registry::get("IVR_SETTING");
-		$this->$ivrLocation = $this->config["rootlocation"] . "$language/";
+		$this->$ivrLocation = $this->config["rootlocation"] . "$country/";
+	}
+	
+	public function promptInviterGreeting() {
+		// TODO:
+	}
+	
+	public function promptInviteeGreeting() {
+		// TODO:
 	}
 
 	private function getIvrAudio($key) {
