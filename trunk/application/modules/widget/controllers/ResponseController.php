@@ -1,5 +1,6 @@
 <?php
 require_once 'service/PaypalService.php';
+require_once 'service/TropoService.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -88,33 +89,28 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$call = array (
 				"inviteInx" => $_POST["inviteInx"] 
 			);
-			$tropoCall = array (
-				"callerId" => $partner["phoneNumber"] 
-			);
-			
 			if ($paypalToken == null) {
 				// Pay by Inviter, first call inviter
-				$tropoCall["numberToDial"] = $inviter["phoneNum"];
-				$tropoCall["2ndLegNumber"] = $invitee["phoneNum"];
-				$tropoCall["paypalToken"] = $inviter["paypalToken"];
-				$tropoCall["email"] = $inviter["email"];
 				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
 			} else {
 				// Pay by Invitee, first call invitee
-				$tropoCall["numberToDial"] = $invitee["phoneNum"];
-				$tropoCall["2ndLegNumber"] = $inviter["phoneNum"];
-				$tropoCall["paypalToken"] = $paypalToken;
-				$tropoCall["email"] = $invitee["email"];
 				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
 			}
 			$call = $this->callManager->insert($call);
-			$tropoCall["callInx"] = $call["inx"];
 			
-			$this->initCall($tropoCall, $partner);
+			$tropoCall = array (
+				"partnerInx" => $partner["inx"],
+				"inviteInx" => $call["inviteInx"],
+				"callInx" => $call["inx"],
+				"callType" => $call["callType"] 
+			);
+			
+			$tropoService = new TropoService();
+			$tropoService->initCall($tropoCall);
 			
 			$result = array (
 				"success" => true,
-				"url" => APP_CTX . "/widget/following?callInx=" . $call["inx"]
+				"url" => APP_CTX . "/widget/following?callInx=" . $call["inx"] 
 			);
 			$this->_helper->json->sendJson($result);
 		} else {
@@ -128,7 +124,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function inviteExpired($expHour, $inviteTime) {
-		$interval = strtotime((new DateTime)->format("Y-m-d H:i:s")) - strtotime($inviteTime);
+		$interval = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($inviteTime);
 		if ($interval > $expHour * 3600) {
 			return true;
 		} else {
@@ -146,8 +142,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function initCall($tropoCall, $partner) {
-		$tropoCall["minCallBlkDur"] = $partner["minCallBlkDur"];
-		$tropoCall[""] = $partner[""];
+		$tropoCall["partnerInx"] = $partner["minCallBlkDur"];
+		$tropoCall["inviteInx"] = $tropoCall["inviteInx"];
 		$tropoCall[""] = $partner[""];
 		$tropoCall[""] = $partner[""];
 		$tropoCall[""] = $partner[""];
