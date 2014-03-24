@@ -1,42 +1,40 @@
 <?php
-require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
-require_once 'models/InviteManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
+require_once 'models/InviteManager.php';
 require_once 'models/CallManager.php';
 
 class Widget_ResponseController extends Zend_Controller_Action {
-	private $logger;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
+	private $callManager;
 
 	public function init() {
-		$this->logger = LoggerFactory::getSysLogger();
-		$this->inviteManager = new InviteManager();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
+		$this->inviteManager = new InviteManager();
 		$this->callManager = new CallManager();
 	}
 
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		if ($invite == null) {
-			$this->view->assign("reason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
+			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
 			return $this->renderScript("/response/invalidUrl.phtml");
 		}
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
-		if ($partner == null || $this->inviteExpired($partner["inviteExpireTimeDur"], $invite["inviteTime"])) {
-			$this->view->assign("reason", MultiLang::getText("This_link_is_no_longer_active", $_REQUEST["country"]));
+		if ($partner == null || $this->inviteExpired($partner["inviteExpireDur"], $invite["inviteTime"])) {
+			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_no_longer_active", $_REQUEST["country"]));
 			$this->renderScript("/response/invalidUrl.phtml");
 		}
 		$calls = $this->callManager->findAllCallsByInvite($invite["inx"]);
 		if ($this->callCompleted($calls)) {
-			$this->view->assign("reason", MultiLang::getText("The_call_is_already_completed", $_REQUEST["country"]));
+			$this->view->assign("invalidReason", MultiLang::getText("The_call_is_already_completed", $_REQUEST["country"]));
 			$this->renderScript("/response/invalidUrl.phtml");
 		}
 		
@@ -53,12 +51,11 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$this->view->assign("partnerInx", $invite["partnerInx"]);
 		$this->view->assign("inviterInx", $invite["inviterInx"]);
 		$this->view->assign("inviteeInx", $invite["inviteeInx"]);
-		$this->view->assign("inviterName", array (
-			$inviter["userAlias"] 
-		));
+		$this->view->assign("inviterName", $inviter["userAlias"]);
 	}
 
 	public function validateAction() {
+		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
@@ -115,13 +112,17 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			
 			$this->initCall($tropoCall, $partner);
 			
-			$result["success"] = true;
-			$result["url"] = APP_CTX . "/widget/following?country=" . $partner["country"];
+			$result = array (
+				"success" => true,
+				"url" => APP_CTX . "/widget/following?callInx=" . $call["inx"]
+			);
 			$this->_helper->json->sendJson($result);
 		} else {
-			$result["success"] = false;
-			$result["validFields"] = $validFields;
-			$result["invalidFields"] = $invalidFields;
+			$result = array (
+				"success" => false,
+				"validFields" => $validFields,
+				"invalidFields" => $invalidFields 
+			);
 			$this->_helper->json->sendJson($result);
 		}
 	}

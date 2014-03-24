@@ -1,24 +1,21 @@
 <?php
-require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'util/Validator.php';
-require_once 'models/InviteManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
+require_once 'models/InviteManager.php';
 
 class Widget_InvitationController extends Zend_Controller_Action {
-	private $logger;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
-
+	
 	public function init() {
-		$this->logger = LoggerFactory::getSysLogger();
-		$this->inviteManager = new InviteManager();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
+		$this->inviteManager = new InviteManager();
 	}
 
 	public function indexAction() {
@@ -28,6 +25,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function validateAction() {
+		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
@@ -91,13 +89,18 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			);
 			$invite = $this->inviteManager->insert($invite);
 			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
-			$result["success"] = true;
-			$result["url"] = APP_CTX . "/widget/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"];
+			
+			$result = array (
+				"success" => true,
+				"url" => APP_CTX . "/widget/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"] 
+			);
 			$this->_helper->json->sendJson($result);
 		} else {
-			$result["success"] = false;
-			$result["validFields"] = $validFields;
-			$result["invalidFields"] = $invalidFields;
+			$result = array (
+				"success" => false,
+				"validFields" => $validFields,
+				"invalidFields" => $invalidFields 
+			);
 			$this->_helper->json->sendJson($result);
 		}
 	}
