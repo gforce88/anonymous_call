@@ -12,25 +12,34 @@ class TropoController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$hasJson = file_get_contents("php://input");
-		if (empty($hasJson)) {
+		$tropoJson = file_get_contents("php://input");
+		if ($tropoJson == null) {
 			$this->logger->logInfo("TropoController", "indexAction", "Tropo check via HTTP Header request.");
 			$tropo = new Tropo();
 			$tropo->renderJson();
 		} else {
-			$this->logger->logInfo("TropoController", "New Tropo session", $hasJson);
-			$session = new Session($hasJson);
-			$paramarray = $this->initSessionParameters($session);
-			$parameters = $this->generateInteractiveParameters($paramarray);
+			$this->logger->logInfo("TropoController", "New Tropo session", $tropoJson);
+			$session = new Session($tropoJson);
+			$paramArray = $this->initSessionParameters($session);
+			$_GET = array_merge($_GET, $paramArray);
 			
-			$_GET = array_merge($_GET, $paramarray);
-			$this->callInviter();
+			if ($paramArray["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
+				$this->callInviter();
+			} else {
+				$this->callInvitee();
+			}
 		}
 	}
 
-	private function callInviter() {}
+	private function callInviter() {
+		$this->log("Start 1st leg call to inviter");
+		$tropo = $this->initTropo($_GET);
+	}
 
-	private function callInvitee() {}
+	private function callInvitee() {
+		$this->log("Start 1st leg call to invitee");
+		$tropo = $this->initTropo($_GET);
+	}
 
 	private function initSessionParameters($session) {
 		// Parameters for call flow control
@@ -38,12 +47,13 @@ class TropoController extends Zend_Controller_Action {
 		$paramarray["session_id"] = $session->getId();
 		$tropoSessionTimestampstr = $session->getTimeStamp();
 		$tropoSessionTimestamp = substr($tropoSessionTimestampstr, 0, 10) . " " . substr($tropoSessionTimestampstr, 11, 8);
+		$paramarray["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
 		
-		// Parameters for partner
+		// parameters introduced in response controller
 		$paramarray["partnerInx"] = $session->getParameters("partnerInx");
-		
-		// Parameters for invitation
 		$paramarray["inviteInx"] = $session->getParameters("inviteInx");
+		$paramarray["callInx"] = $session->getParameters("callInx");
+		$paramarray["callType"] = $session->getParameters("callType");
 		
 		// log
 		$this->logger->logInfo($paramarray["partnerInx"], $paramarray["inviteInx"], $session);
@@ -61,13 +71,13 @@ class TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function initTropo($paramarray, $appendHangup = true) {
+	private function initTropo($paramArray, $appendError = true) {
 		$tropo = new Tropo();
 		
-		if ($appendHangup) {
-			$this->setEvent($tropo, $paramarray, "hangup");
-			$this->setEvent($tropo, $paramarray, "error");
-			$this->setEvent($tropo, $paramarray, "incomplete");
+		if ($appendError) {
+			$this->setEvent($tropo, $paramArray, "hangup");
+			$this->setEvent($tropo, $paramArray, "error");
+			$this->setEvent($tropo, $paramArray, "incomplete");
 		}
 		return $tropo;
 	}

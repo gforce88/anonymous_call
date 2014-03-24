@@ -34,7 +34,7 @@ CREATE TABLE `partners` (
 -- callAlertOffset is added recording to the PRD
   `callAlertOffset`     int(11)         NOT NULL                    COMMENT 'offset from the min call block duration to alert an message to the user (second)',
   `inviteExpireDur`     int(11)         NOT NULL                    COMMENT 'duration of time an invite link is live for (hour)',
-  `maxNumRings`         int(11)         NOT NULL    DEFAULT 5       COMMENT 'maximum number of rings system should wait before hanging up',
+  `maxRingDur`          int(11)         NOT NULL    DEFAULT 20      COMMENT 'maximum duration of rings system should wait before hanging up (second)',
   `resourcePath`        varchar(1024)   NOT NULL                    COMMENT 'server path to partner specific resources such as CSS, images and other configurable resources',
   `phoneNum`            varchar(25)     NOT NULL                    COMMENT 'partner phone number',
 -- emailAddr is renamed from inviteEmailAddr
@@ -134,7 +134,7 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- ------------------------------------
--- Msater Data
+-- Master Data
 -- ------------------------------------
 INSERT `callresult` (`inx`, `desc`)
         VALUES (0, 'Create');
@@ -171,7 +171,7 @@ INSERT `partners` (
           `minCallBlkDur`,
           `callAlertOffset`,
           `inviteExpireDur`,
-          `maxNumRings`,
+          `maxRingDur`,
           `resourcePath`,
           `phoneNum`,
           `emailAddr`,
@@ -209,7 +209,7 @@ INSERT `partners` (
           `minCallBlkDur`,
           `callAlertOffset`,
           `inviteExpireDur`,
-          `maxNumRings`,
+          `maxRingDur`,
           `resourcePath`,
           `phoneNum`,
           `emailAddr`,

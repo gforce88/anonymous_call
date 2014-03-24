@@ -14,10 +14,9 @@ class TropoService {
 	}
 
 	public function initCall($tropoCall) {
-		$parameters = $this->generateCallParameters($tropoCall);
 		$url = $this->setting["url"];
 		$token = $this->setting["token"];
-		$params = "action=create&token=$token&" . http_build_query($parameters);
+		$params = "action=create&token=$token&" . http_build_query($tropoCall);
 		
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
@@ -31,17 +30,6 @@ class TropoService {
 		$params = "action=create&token=$hackToken&numberToCall=$numberToCall&callerID=$callerID&initialMessage=$sentences&s2lSipNum=$s2lSipNum&querystringId=$querystringId";
 		
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
-	}
-
-	private function generateCallParameters($invite) {
-		$parameters = array ();
-		$parameters["numberToDial"] = $invite["numberToDial"];
-		$parameters["callerId"] = $invite["callerId"];
-		$parameters["saleOrder"] = -1;
-		$parameters["inviteInx"] = $invite["inx"];
-		$parameters["partnerInx"] = $invite["partner"]["inx"];
-		
-		return $parameters;
 	}
 
 }
