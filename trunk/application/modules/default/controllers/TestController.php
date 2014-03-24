@@ -9,12 +9,10 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		echo date("H:i:s", 1)."<br>";
-		echo date("H:i:s", 10)."<br>";
-		echo date("H:i:s", 50)."<br>";
-		echo date("H:i:s", 100)."<br>";
-		echo date("H:i:s", 150)."<br>";
-		echo date("H:i:s", 200)."<br>";
+		$paramarray = array (
+			"test" => "TEST" 
+		);
+		$_GET = array_merge($_GET, $paramarray);
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
