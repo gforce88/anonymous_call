@@ -24,8 +24,8 @@ class Logger {
 	}
 
 	private function formatMessage($class, $function, $infomations) {
-		$date = date("Y-m-d");
-		$time = date("H:i:s");
+		$date = (new DateTime)->format("Y-m-d");
+		$time = (new DateTime)->format("H:i:s");
 		if (is_array($infomations)) {
 			$value = "";
 			foreach ($infomations as $key => $info) {

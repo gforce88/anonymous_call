@@ -128,7 +128,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function inviteExpired($expHour, $inviteTime) {
-		$interval = strtotime(date("Y-m-d H:i:s")) - strtotime($inviteTime);
+		$interval = strtotime((new DateTime)->format("Y-m-d H:i:s")) - strtotime($inviteTime);
 		if ($interval > $expHour * 3600) {
 			return true;
 		} else {
