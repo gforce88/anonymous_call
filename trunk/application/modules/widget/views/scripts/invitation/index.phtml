@@ -19,14 +19,14 @@
 	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_their_email_address", $country)?></h3>
 	<div>
-		<input type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
+		<input value="imddl137@gmail.com" type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
 		<small id="inviteeEmailInvalid" style="display:none">
 			<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 		</small>
 	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_message", $country)?></h3>
 	<div>
-		<input value="imddl137@gmail.com" type="text" name="inviteMsg" placeholder="<?php echo MultiLang::getText("message", $country)?>" tabindex="1" />
+		<input type="text" name="inviteMsg" placeholder="<?php echo MultiLang::getText("message", $country)?>" tabindex="1" />
 	</div><br>
 	<div class="radioblock">
 		<input type="radio" name="payType" value=0 onclick="toglePayType(0);" tabindex="1" checked><?php echo MultiLang::getText("Pay_by_the_other_side", $country)?><br>
