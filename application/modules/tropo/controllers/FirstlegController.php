@@ -34,6 +34,8 @@ class Tropo_FirstlegController extends Zend_Controller_Action {
 		$paramArr["2ndLegNumber"] = $session->getParameters("2ndLegNumber");
 		$paramArr["maxRingDur"] = $session->getParameters("maxRingDur");
 		$paramArr["country"] = $session->getParameters("country");
+		
+		return $paramArr;
 	}
 
 	public function indexAction() {
@@ -46,7 +48,7 @@ class Tropo_FirstlegController extends Zend_Controller_Action {
 			$this->logger->logInfo("TropoController", "New Tropo session", $tropoJson);
 			$session = new Session($tropoJson);
 			$paramArr = $this->initSessionParameters($session);
-			$_GET = array_merge($_GET, $paramarray);
+			$_GET = array_merge($_GET, $paramArr);
 			$this->logger->logInfo($_GET);
 			$this->callUser();
 		}
