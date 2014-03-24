@@ -52,11 +52,11 @@ class TropoController extends Zend_Controller_Action {
 		
 		// parameters introduced in response controller
 		$paramArray["partnerInx"] = $session->getParameters("partnerInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>2");
+		$this->logger->logInfo("TropoController", "initSessionParameters", $paramArray["partnerInx"]);
 		$paramArray["inviteInx"] = $session->getParameters("inviteInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>3");
+		$this->logger->logInfo("TropoController", "initSessionParameters", $paramArray["inviteInx"]);
 		$paramArray["callInx"] = $session->getParameters("callInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>4");
+		$this->logger->logInfo("TropoController", "initSessionParameters", $session);
 		$paramArray["callType"] = $session->getParameters("callType");
 		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>5");
 		
