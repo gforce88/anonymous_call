@@ -62,7 +62,7 @@ class Tropo_FirstlegController extends Zend_Controller_Action {
 		$tropo = $this->initTropo($parameters);
 		
 		$options = array (
-			// "from" => $_GET["partnerNumber"],
+			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]) 
 		);
