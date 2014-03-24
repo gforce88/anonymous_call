@@ -11,8 +11,7 @@ class EmailSender {
 	}
 
 	private static function sendEmail($fromName, $fromMail, $toName, $toMail, $subject, $content, $type) {
-		// $headers = "From: $fromName<$fromMail> \n";
-		$headers = "From: Tokumei_Invite@incognitosys.com \n";
+		$headers = "From: $fromName<$fromMail> \n";
 		$headers .= "Content-type: $type; charset=utf-8 \n";
 		return mail($toMail, $subject, $content, $headers);
 	}
