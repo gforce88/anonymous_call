@@ -76,7 +76,7 @@ class Tropo_FirstlegController extends Zend_Controller_Action {
 		$this->log("Start greeting for 1st leg");
 		
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		if ($_GET["callType"] == CALL_TYPE_1ST_CALL_INVITER) {
+		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
 			$sentences = $ivrService->promptInviterGreeting() . " ";
 		} else {
 			$sentences = $ivrService->promptInviteeGreeting() . " ";
