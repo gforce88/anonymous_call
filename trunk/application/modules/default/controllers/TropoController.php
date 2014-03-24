@@ -48,20 +48,12 @@ class TropoController extends Zend_Controller_Action {
 		$tropoSessionTimestampstr = $session->getTimeStamp();
 		$tropoSessionTimestamp = substr($tropoSessionTimestampstr, 0, 10) . " " . substr($tropoSessionTimestampstr, 11, 8);
 		$paramArray["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
-		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>1");
 		
 		// parameters introduced in response controller
 		$paramArray["partnerInx"] = $session->getParameters("partnerInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", $paramArray["partnerInx"]);
 		$paramArray["inviteInx"] = $session->getParameters("inviteInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", $paramArray["inviteInx"]);
 		$paramArray["callInx"] = $session->getParameters("callInx");
-		$this->logger->logInfo("TropoController", "initSessionParameters", $session);
 		$paramArray["callType"] = $session->getParameters("callType");
-		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>5");
-		
-		// log
-		$this->logger->logInfo($paramArray["partnerInx"], $paramArray["inviteInx"], $session);
 	}
 
 	private function generateInteractiveParameters($paramarray) {
