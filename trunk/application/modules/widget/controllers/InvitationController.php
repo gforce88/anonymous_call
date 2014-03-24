@@ -37,11 +37,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"userAlias" => $_POST["inviterName"],
 			"phoneNum" => $_POST["inviterPhoneNumber"],
 			"email" => $_POST["inviterEmail"],
-			"createTime" => (new DateTime)->format("Y-m-d H:i:s") 
+			"createTime" => (new DateTime())->format("Y-m-d H:i:s") 
 		);
 		$invitee = array (
 			"email" => $_POST["inviteeEmail"],
-			"createTime" => (new DateTime)->format("Y-m-d H:i:s") 
+			"createTime" => (new DateTime())->format("Y-m-d H:i:s") 
 		);
 		
 		// Validation
@@ -127,7 +127,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($partner["inx"], $invite["inx"], "Sending invitation emal to: [$contentParam[2]]");
+		$this->logger->logInfo($partner["inx"], $invite["inx"], "Sending invitation emal to: [" . $invitee["email"] . "] with URL: [$contentParam[2]]");
 		$sendResult = EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
 		$this->logger->logInfo($partner["inx"], $invite["inx"], "Email sent result: [$sendResult]");
 		
