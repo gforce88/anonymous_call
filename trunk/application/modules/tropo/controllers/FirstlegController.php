@@ -5,7 +5,7 @@ require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
 
-class Tropo_FirstLegController extends Zend_Controller_Action {
+class Tropo_FirstlegController extends Zend_Controller_Action {
 	private $logger;
 	private $callManager;
 

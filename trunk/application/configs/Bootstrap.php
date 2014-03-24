@@ -23,25 +23,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	// Init Router
 	protected function _initRouter() {
 		$front = Zend_Controller_Front::getInstance();
-		// force the dispatcher to dispatch camelCased action names
-		$front->setParam("useCaseSensitiveActions", true);
 		$router = $front->getRouter();
 		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/firstLeg/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("tropo/firstleg/(.+)\.php", array (
 			"module" => "tropo",
-			"controller" => "firstLeg" 
+			"controller" => "firstleg" 
 		), array (
 			1 => "action" 
-		), "tropo/firstLeg/%s.php");
-		$router->addRoute("tropo/firstLeg", $route);
+		), "tropo/firstleg/%s.php");
+		$router->addRoute("tropo/firstleg", $route);
 		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/secondLeg/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("tropo/secondleg/(.+)\.php", array (
 			"module" => "tropo",
-			"controller" => "secondLeg" 
+			"controller" => "secondleg" 
 		), array (
 			1 => "action" 
-		), "tropo/secondLeg/%s.php");
-		$router->addRoute("tropo/secondLeg", $route);
+		), "tropo/secondleg/%s.php");
+		$router->addRoute("tropo/secondleg", $route);
 	}
 	
 	// Init Logger
