@@ -89,24 +89,32 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$call = array (
 				"inviteInx" => $_POST["inviteInx"] 
 			);
-			if ($paypalToken == null) {
-				// Pay by Inviter, first call inviter
-				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
-			} else {
-				// Pay by Invitee, first call invitee
-				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
-			}
-			$call = $this->callManager->insert($call);
-			
-			$tropoCall = array (
+			$paramArr = array (
 				"partnerInx" => $partner["inx"],
+				"maxRingDur" => $partner["maxRingDur"],
 				"inviteInx" => $call["inviteInx"],
-				"callInx" => $call["inx"],
-				"callType" => $call["callType"] 
+				"partnerNumber" => $partner["phoneNum"],
+				"country" => $partner["country"] 
 			);
 			
+			if ($paypalToken == null) {
+				// Pay by Inviter, first call inviter
+				$call["callType"] = CALL_TYPE_1ST_CALL_INVITER;
+				$paramArr["callType"] = CALL_TYPE_1ST_CALL_INVITER;
+				$paramArr["1stLegNumber"] = $inviter["phoneNum"];
+				$paramArr["2ndLegNumber"] = $invitee["phoneNum"];
+			} else {
+				// Pay by Invitee, first call invitee
+				$call["callType"] = CALL_TYPE_1ST_CALL_INVITEE;
+				$paramArr["callType"] = CALL_TYPE_1ST_CALL_INVITEE;
+				$paramArr["1stLegNumber"] = $invitee["phoneNum"];
+				$paramArr["2ndLegNumber"] = $inviter["phoneNum"];
+			}
+			$call = $this->callManager->insert($call);
+			$paramArr["callInx"] = $call["inx"];
+			
 			$tropoService = new TropoService();
-			$tropoService->initCall($tropoCall);
+			$tropoService->init1stLegCall($paramArr);
 			
 			$result = array (
 				"success" => true,
@@ -141,17 +149,4 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		return false;
 	}
 
-	private function initCall($tropoCall, $partner) {
-		$tropoCall["partnerInx"] = $partner["minCallBlkDur"];
-		$tropoCall["inviteInx"] = $tropoCall["inviteInx"];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-		$tropoCall[""] = $partner[""];
-	}
-
-} 
+}

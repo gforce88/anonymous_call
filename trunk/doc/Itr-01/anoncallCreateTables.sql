@@ -137,23 +137,21 @@ CREATE TABLE `countries` (
 -- Master Data
 -- ------------------------------------
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (0, 'Create');
+        VALUES (0, 'Init');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (1, 'Init');
+        VALUES (1, '1stLeg_NoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (2, '1stLeg_NoAnswer');
+        VALUES (2, '1stLeg_IsAnswerMachine');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (3, '1stLeg_IsAnswerMachine');
+        VALUES (3, '1stLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (4, '1stLeg_Answered');
+        VALUES (4, '1stLeg_To_2ndLeg');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (5, '1stLeg_To_2ndLeg');
+        VALUES (5, '2ndLeg_NoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (6, '2ndLeg_NoAnswer');
+        VALUES (6, '2ndLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (7, '2ndLeg_Answered');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (8, 'Complete');
+        VALUES (7, 'Complete');
 
 INSERT `countries` (`isoCode`, `desc`)
         VALUES (1, 'United States');
