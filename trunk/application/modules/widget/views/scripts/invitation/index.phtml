@@ -4,7 +4,7 @@
 <form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" onsubmit="submiteAnonCall('#invitationFrom'); return false;">
 	<h3><?php echo MultiLang::getText("Enter_your_name", $country)?></h3>
 	<div>
-		<input type="text" name="inviterName" placeholder="<?php echo MultiLang::getText("Name", $country)?>" tabindex="1" />
+		<input value="Daniel" type="text" name="inviterName" placeholder="<?php echo MultiLang::getText("Name", $country)?>" tabindex="1" />
 		<small id="inviterNameNotNull" style="display:none">
 			<?php echo MultiLang::getText("Name", $country)?><?php echo MultiLang::getText("not_null", $country)?>
 		</small>
@@ -12,7 +12,7 @@
 	<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
 	<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
 	<div>
-		<input type="text" name="inviterPhoneNumber" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" tabindex="1" />
+		<input value="2176507163" type="text" name="inviterPhoneNumber" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" tabindex="1" />
 		<small id="inviterPhoneNumberInvalid" style="display:none">
 			<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
 		</small>
@@ -26,7 +26,7 @@
 	</div><br>
 	<h3><?php echo MultiLang::getText("Enter_message", $country)?></h3>
 	<div>
-		<input type="text" name="inviteMsg" placeholder="<?php echo MultiLang::getText("message", $country)?>" tabindex="1" />
+		<input value="imddl137@gmail.com" type="text" name="inviteMsg" placeholder="<?php echo MultiLang::getText("message", $country)?>" tabindex="1" />
 	</div><br>
 	<div class="radioblock">
 		<input type="radio" name="payType" value=0 onclick="toglePayType(0);" tabindex="1" checked><?php echo MultiLang::getText("Pay_by_the_other_side", $country)?><br>
