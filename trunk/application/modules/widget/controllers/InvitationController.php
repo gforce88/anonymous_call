@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -8,11 +9,13 @@ require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
 
 class Widget_InvitationController extends Zend_Controller_Action {
+	private $logger;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
 
 	public function init() {
+		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
@@ -124,7 +127,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
 		
-		return EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
+		$this->logger->logInfo($partner["inx"], $invite["inx"], "Sending invitation emal to: [$contentParam[2]]");
+		$sendResult = EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
+		$this->logger->logInfo($partner["inx"], $invite["inx"], "Email sent result: [$sendResult]");
+		
+		return $sendResult;
 	}
 
 }
