@@ -99,14 +99,14 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			
 			if ($paypalToken == null) {
 				// Pay by Inviter, first call inviter
-				$call["callType"] = CALL_TYPE_1ST_CALL_INVITER;
-				$paramArr["callType"] = CALL_TYPE_1ST_CALL_INVITER;
+				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
+				$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
 				$paramArr["1stLegNumber"] = $inviter["phoneNum"];
 				$paramArr["2ndLegNumber"] = $invitee["phoneNum"];
 			} else {
 				// Pay by Invitee, first call invitee
-				$call["callType"] = CALL_TYPE_1ST_CALL_INVITEE;
-				$paramArr["callType"] = CALL_TYPE_1ST_CALL_INVITEE;
+				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
+				$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
 				$paramArr["1stLegNumber"] = $invitee["phoneNum"];
 				$paramArr["2ndLegNumber"] = $inviter["phoneNum"];
 			}
