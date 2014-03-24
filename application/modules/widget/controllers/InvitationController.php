@@ -11,7 +11,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
-	
+
 	public function init() {
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
@@ -34,11 +34,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"userAlias" => $_POST["inviterName"],
 			"phoneNum" => $_POST["inviterPhoneNumber"],
 			"email" => $_POST["inviterEmail"],
-			"createTime" => date("Y-m-d H:i:s") 
+			"createTime" => (new DateTime)->format("Y-m-d H:i:s") 
 		);
 		$invitee = array (
 			"email" => $_POST["inviteeEmail"],
-			"createTime" => date("Y-m-d H:i:s") 
+			"createTime" => (new DateTime)->format("Y-m-d H:i:s") 
 		);
 		
 		// Validation
@@ -85,7 +85,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"inviteeInx" => $invitee["inx"],
 				"inviteToken" => md5(time()),
 				"inviteMsg" => $_POST["inviteMsg"],
-				"inviteTime" => date("Y-m-d H:i:s") 
+				"inviteTime" => (new DateTime())->format("Y-m-d H:i:s") 
 			);
 			$invite = $this->inviteManager->insert($invite);
 			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
