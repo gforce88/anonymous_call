@@ -20,18 +20,33 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		Zend_Registry::set('DB_ADAPTER', $db);
 	}
 	
+	// Init Router
+	protected function _initRouter() {
+		$front = Zend_Controller_Front::getInstance();
+		// force the dispatcher to dispatch camelCased action names
+		$front->setParam("useCaseSensitiveActions", true);
+		$router = $front->getRouter();
+		
+		$route = new Zend_Controller_Router_Route_Regex('default/tropo/(.+)\.php', array (
+			'controller' => 'tropo' 
+		), array (
+			1 => 'action' 
+		), 'default/tropo/%s.php');
+		$router->addRoute('default/tropo', $route);
+	}
+	
 	// Init Logger
 	protected function _initLog() {
 		$adminFormat = '%message%' . PHP_EOL;
 		$adminFormatter = new Zend_Log_Formatter_Simple($adminFormat);
 		$logSetting = $this->getOption('log');
 		
-		$ivrLogWriter = new Zend_Log_Writer_Stream($logSetting['ivr_log_path'] . "." . (new DateTime)->format("Y-m-d"));
+		$ivrLogWriter = new Zend_Log_Writer_Stream($logSetting['ivr_log_path'] . "." . (new DateTime())->format("Y-m-d"));
 		$ivrLogWriter->setFormatter($adminFormatter);
 		$ivrLogger = new Zend_Log($ivrLogWriter);
 		Zend_Registry::set('IVR_LOGGER', $ivrLogger);
 		
-		$sysLogWriter = new Zend_Log_Writer_Stream($logSetting['sys_log_path'] . "." . (new DateTime)->format("Y-m-d"));
+		$sysLogWriter = new Zend_Log_Writer_Stream($logSetting['sys_log_path'] . "." . (new DateTime())->format("Y-m-d"));
 		$sysLogWriter->setFormatter($adminFormatter);
 		$sysLogger = new Zend_Log($sysLogWriter);
 		Zend_Registry::set('SYS_LOGGER', $sysLogger);
