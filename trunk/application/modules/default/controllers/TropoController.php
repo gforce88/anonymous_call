@@ -43,21 +43,25 @@ class TropoController extends Zend_Controller_Action {
 
 	private function initSessionParameters($session) {
 		// Parameters for call flow control
-		$paramarray = array ();
-		$paramarray["session_id"] = $session->getId();
+		$paramArray = array ();
+		$paramArray["session_id"] = $session->getId();
 		$tropoSessionTimestampstr = $session->getTimeStamp();
 		$tropoSessionTimestamp = substr($tropoSessionTimestampstr, 0, 10) . " " . substr($tropoSessionTimestampstr, 11, 8);
-		$this->logger->logInfo("TropoController", "tropoSessionTimestamp", $tropoSessionTimestamp);
-		$paramarray["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
+		$paramArray["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
+		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>1");
 		
 		// parameters introduced in response controller
-		$paramarray["partnerInx"] = $session->getParameters("partnerInx");
-		$paramarray["inviteInx"] = $session->getParameters("inviteInx");
-		$paramarray["callInx"] = $session->getParameters("callInx");
-		$paramarray["callType"] = $session->getParameters("callType");
+		$paramArray["partnerInx"] = $session->getParameters("partnerInx");
+		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>2");
+		$paramArray["inviteInx"] = $session->getParameters("inviteInx");
+		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>3");
+		$paramArray["callInx"] = $session->getParameters("callInx");
+		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>4");
+		$paramArray["callType"] = $session->getParameters("callType");
+		$this->logger->logInfo("TropoController", "initSessionParameters", "<><><><>5");
 		
 		// log
-		$this->logger->logInfo($paramarray["partnerInx"], $paramarray["inviteInx"], $session);
+		$this->logger->logInfo($paramArray["partnerInx"], $paramArray["inviteInx"], $session);
 	}
 
 	private function generateInteractiveParameters($paramarray) {
