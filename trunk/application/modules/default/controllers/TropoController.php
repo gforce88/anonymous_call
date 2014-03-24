@@ -20,7 +20,6 @@ class TropoController extends Zend_Controller_Action {
 		} else {
 			$this->logger->logInfo("TropoController", "New Tropo session", $tropoJson);
 			$session = new Session($tropoJson);
-			$this->logger->logInfo("TropoController", "indexAction", "Session created");
 			$paramArray = $this->initSessionParameters($session);
 			$_GET = array_merge($_GET, $paramArray);
 			
@@ -46,9 +45,9 @@ class TropoController extends Zend_Controller_Action {
 		// Parameters for call flow control
 		$paramarray = array ();
 		$paramarray["session_id"] = $session->getId();
-		$this->logger->logInfo("TropoController", "session_id", $paramarray["session_id"]);
 		$tropoSessionTimestampstr = $session->getTimeStamp();
 		$tropoSessionTimestamp = substr($tropoSessionTimestampstr, 0, 10) . " " . substr($tropoSessionTimestampstr, 11, 8);
+		$this->logger->logInfo("TropoController", "tropoSessionTimestamp", $tropoSessionTimestamp);
 		$paramarray["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
 		
 		// parameters introduced in response controller
