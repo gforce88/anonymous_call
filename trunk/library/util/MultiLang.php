@@ -21,6 +21,9 @@ class MultiLang {
 	
 	public static function replaceParams($msg, $params) {
 		$i = 1;
+		if (!is_array($params)) {
+			$params = array($params);
+		}
 		foreach ($params as $param) {
 			$msg = str_replace("%" . $i . "s", $param, $msg);
 			$i++;

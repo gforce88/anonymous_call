@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 
 abstract class BaseManager {
 

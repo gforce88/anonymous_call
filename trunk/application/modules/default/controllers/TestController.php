@@ -9,22 +9,13 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		echo date("H:i:s", 1)."<br>";
+		echo date("H:i:s", 10)."<br>";
+		echo date("H:i:s", 50)."<br>";
+		echo date("H:i:s", 100)."<br>";
+		echo date("H:i:s", 150)."<br>";
+		echo date("H:i:s", 200)."<br>";
 		phpinfo();
-		$this->renderScript("/empty.phtml");
-	}
-
-	public function inviteAction() {
-		$partner = array ();
-		$partner["inx"] = "1001";
-		$invite = array ();
-		$invite["numberToDial"] = "15167346602";
-		$invite["callerId"] = "1020304050'";
-		$invite["inx"] = "9001";
-		$invite["partner"] = $partner;
-		
-		$tropoService = new TropoService();
-		$tropoService->initCall($invite);
-		
 		$this->renderScript("/empty.phtml");
 	}
 

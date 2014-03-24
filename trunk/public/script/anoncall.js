@@ -12,14 +12,6 @@ function submiteAnonCall(formId) {
 	});
 }
 
-function toglePayType(payType) {
-	if (payType == 0) {
-		$("#selfPayInfo").attr("style", "display:none");
-	} else {
-		$("#selfPayInfo").attr("style", "display:block");
-	}
-}
-
 function inputCheck(keyWords, evt) {
 	var theEvent = evt || window.event;
 	var key = theEvent.keyCode || theEvent.which;
@@ -30,4 +22,15 @@ function inputCheck(keyWords, evt) {
 		if (theEvent.preventDefault)
 			theEvent.preventDefault();
 	}
+}
+
+function timestamp2His(totalTime) {
+	second = totalTime % 60;
+	totalMinute = (totalTime - second) / 60;
+	minute = totalMinute % 60;
+	hour = (totalTime - minute * 60 - second) / 3600;
+	if (second < 10) second = "0" + second;
+	if (minute < 10) minute = "0" + minute;
+	if (hour < 10) hour = "0" + hour;
+	return hour + ":" + minute + ":" + second;
 }
