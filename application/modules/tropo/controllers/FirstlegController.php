@@ -153,7 +153,7 @@ class Tropo_FirstlegController extends Zend_Controller_Action {
 
 	private function setEvent($tropo, $parameters, $event, $handler = null) {
 		if ($handler == null) {
-			$handler = $event . "php";
+			$handler = $event . ".php";
 		}
 		$tropo->on(array (
 			"event" => $event,
