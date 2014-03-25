@@ -120,15 +120,15 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				"success" => true,
 				"url" => APP_CTX . "/widget/following?callInx=" . $call["inx"] 
 			);
-			$this->_helper->json->sendJson($result);
 		} else {
 			$result = array (
 				"success" => false,
 				"validFields" => $validFields,
 				"invalidFields" => $invalidFields 
 			);
-			$this->_helper->json->sendJson($result);
 		}
+		
+		$this->_helper->json->sendJson($result);
 	}
 
 	private function inviteExpired($expHour, $inviteTime) {
