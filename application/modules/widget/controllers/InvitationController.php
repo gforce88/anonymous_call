@@ -97,15 +97,15 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"success" => true,
 				"url" => APP_CTX . "/widget/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"] 
 			);
-			$this->_helper->json->sendJson($result);
 		} else {
 			$result = array (
 				"success" => false,
 				"validFields" => $validFields,
 				"invalidFields" => $invalidFields 
 			);
-			$this->_helper->json->sendJson($result);
 		}
+		
+		$this->_helper->json->sendJson($result);
 	}
 
 	public function thanksAction() {
