@@ -1,0 +1,25 @@
+<script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
+<?php $country = $this->country?>
+<form id="loginFrom" action="<?php echo APP_CTX?>/widget/report/validate" method="post" onsubmit="submiteAnonCall('#loginFrom'); return false;">
+	<h3><?php echo MultiLang::getText("User_name", $country)?></h3>
+	<div>
+		<input value="Admin" type="text" name="userName" placeholder="<?php echo MultiLang::getText("User_name", $country)?>" tabindex="1" />
+		<small id="userNameNotNull" style="display:none">
+			<?php echo MultiLang::getText("User_name", $country)?><?php echo MultiLang::getText("not_null", $country)?>
+		</small>
+	</div><br>
+	<h3><?php echo MultiLang::getText("Password", $country)?></h3>
+	<div>
+		<input value="Admin" type="password" name="password" placeholder="<?php echo MultiLang::getText("Password", $country)?>" tabindex="1" />
+		<small id="passwordNotNull" style="display:none">
+			<?php echo MultiLang::getText("Password", $country)?><?php echo MultiLang::getText("not_null", $country)?>
+		</small>
+		<small id="invalidPassword" style="display:none">
+			<?php echo MultiLang::getText("Password", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
+		</small>
+	</div><br>
+	<div>
+		<input type="submit" value="<?php echo MultiLang::getText("Login", $country)?>" />
+	</div>
+	<input type="hidden" name="partnerInx" value="<?php echo $this->partnerInx?>" />
+</form>
