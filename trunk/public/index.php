@@ -13,6 +13,10 @@ set_include_path(implode(PATH_SEPARATOR, array (
 	get_include_path() 
 )));
 
+// initialize PayPal library
+require __DIR__ . '/../vendor/autoload.php';
+define("PP_CONFIG_PATH", __DIR__);
+
 // Zend_Application
 require_once 'Zend/Application.php';
 

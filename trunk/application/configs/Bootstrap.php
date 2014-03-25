@@ -1,6 +1,10 @@
 <?php
 require_once 'Constant.php';
 
+
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	// Init Application
 	protected function _initApplication() {
@@ -73,6 +77,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		Zend_Registry::set("IVR_SETTING", $ivr_setting);
 		$tropo_setting = $this->getOption("tropo");
 		Zend_Registry::set("TROPO_SETTING", $tropo_setting);
+	}
+	
+	// Init PayPal app context
+	protected function _initPaypalAppContext() {
+		$apiContext = new ApiContext(new OAuthTokenCredential('EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+				'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'));
+		Zend_Registry::set('PAYPAL_APP_CTX', $apiContext);
+		
 	}
 
 }
