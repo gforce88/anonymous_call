@@ -1,5 +1,5 @@
-crontab -l to check all cron job
-crontab -e to edie the cron job
+crontab -l for display
+crontab -e for edit
 
 */1 * * * *           /root/workspace/AnonCall/shell/Timer.php > /root/res.log
 */1 * * * * sleep 5;  /root/workspace/AnonCall/shell/Timer.php > /root/res.log
