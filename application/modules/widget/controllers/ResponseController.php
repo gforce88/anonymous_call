@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'util/Validator.php';
@@ -10,12 +11,14 @@ require_once 'models/InviteManager.php';
 require_once 'models/CallManager.php';
 
 class Widget_ResponseController extends Zend_Controller_Action {
+	private $logger;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
 	private $callManager;
 
 	public function init() {
+		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
@@ -114,7 +117,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$paramArr["callInx"] = $call["inx"];
 			
 			$tropoService = new TropoService();
-			$tropoService->init1stLegCall($paramArr);
+			$tropoService->initCall($paramArr);
 			
 			$result = array (
 				"success" => true,
