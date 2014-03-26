@@ -6,7 +6,7 @@
  */
 $parameters = "";
 $HOST = "localhost";
-$URL = "/anoncall/default/paypal/checkpayment";
+$URL = "/anoncall/default/timer/fire";
 
 /* 
  * Description: Function used to check if the given functions are available with the given php version
