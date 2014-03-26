@@ -1,6 +1,6 @@
 RewriteEngine On
 Options FollowSymLinks
-RewriteBase /a
+RewriteBase /anoncall
 
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
