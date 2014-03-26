@@ -29,6 +29,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = Zend_Controller_Front::getInstance();
 		$router = $front->getRouter();
 		
+		$route = new Zend_Controller_Router_Route_Regex("default/tropo/(.+)\.php", array (
+			"controller" => "tropo" 
+		), array (
+			1 => "action" 
+		), "default/tropo/%s.php");
+		$router->addRoute("default/tropo", $route);
+		
 		$route = new Zend_Controller_Router_Route_Regex("tropo/firstleg/(.+)\.php", array (
 			"module" => "tropo",
 			"controller" => "firstleg" 
