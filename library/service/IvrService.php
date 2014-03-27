@@ -15,7 +15,7 @@ class IvrService {
 	public function IvrService($accountId, $country) {
 		$this->accountId = $accountId;
 		$this->config = Zend_Registry::get("IVR_SETTING");
-		$this->$ivrLocation = $this->config["rootlocation"] . "$country/";
+		$this->ivrLocation = $this->config["rootlocation"] . "$country/";
 	}
 	
 	public function promptInviterGreeting() {
