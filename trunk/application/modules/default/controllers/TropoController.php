@@ -138,6 +138,26 @@ class TropoController extends Zend_Controller_Action {
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
 	}
 
+	public function hangupAction() {
+		$result = new Result();
+		$this->log("Call state is " . $result->getState());
+		
+		$tropo = new Tropo();
+		$tropo->hangup();
+		$tropo->renderJson();
+	}
+
+	public function errorAction() {
+		$this->log("System error with below parameters:");
+		foreach ($_GET as $k => $v) {
+			$$k = $v;
+			$this->log("$k = $v");
+		}
+		$tropo = new Tropo();
+		$tropo->hangup();
+		$tropo->renderJson();
+	}
+
 	private function initTropo($parameters, $appendError = true) {
 		$tropo = new Tropo();
 		if ($appendError) {
@@ -167,26 +187,6 @@ class TropoController extends Zend_Controller_Action {
 			$i++;
 		}
 		return $parameters;
-	}
-
-	public function hangupAction() {
-		$result = new Result();
-		$this->log("Call state is " . $result->getState());
-		
-		$tropo = new Tropo();
-		$tropo->hangup();
-		$tropo->renderJson();
-	}
-
-	public function errorAction() {
-		$this->log("System error with below parameters:");
-		foreach ($_GET as $k => $v) {
-			$$k = $v;
-			$this->log("$k = $v");
-		}
-		$tropo = new Tropo();
-		$tropo->hangup();
-		$tropo->renderJson();
 	}
 
 	private function updateCallResult($callInx, $callResult, $callStartTime = null, $callEndTime = null) {
