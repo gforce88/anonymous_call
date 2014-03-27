@@ -62,12 +62,12 @@ class TropoController extends Zend_Controller_Action {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
-		$options = array (
-			// "from" => $_GET["partnerNumber"],
+		$callOptions = array (
+			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]) 
 		);
-		$tropo->call($_GET["1stLegNumber"], $options);
+		$tropo->call($_GET["1stLegNumber"], $callOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "greeting");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
@@ -83,7 +83,7 @@ class TropoController extends Zend_Controller_Action {
 
 	public function greetingAction() {
 		$this->log("Start greeting for 1st leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
@@ -95,13 +95,13 @@ class TropoController extends Zend_Controller_Action {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
-		$askoptions = array (
+		$askOptions = array (
 			"attempts" => 1,
 			"bargein" => true,
 			"timeout" => 0.1,
 			"allowSignals" => "" 
 		);
-		$tropo->ask($sentences, $askoptions);
+		$tropo->ask($sentences, $askOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "transfer");
 		$tropo->RenderJson();
@@ -113,13 +113,13 @@ class TropoController extends Zend_Controller_Action {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
-		$transferoptions = array (
+		$transferOptions = array (
 			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]),
 			"ringRepeat" => 10 
 		);
-		$tropo->transfer($_GET["2ndLegNumber"], $transferoptions);
+		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "transfercontinue");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
@@ -128,14 +128,16 @@ class TropoController extends Zend_Controller_Action {
 
 	public function failedtransferAction() {
 		$this->log("Failed transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$this->hangupAction();
 	}
 
 	public function transfercontinueAction() {
 		$this->log("Connected to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, (new DateTime())->format("Y-m-d H:i:s"));
+		
+		// TODO: 
 	}
 
 	public function hangupAction() {

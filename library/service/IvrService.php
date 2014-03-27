@@ -19,11 +19,12 @@ class IvrService {
 	}
 	
 	public function promptInviterGreeting() {
-		// TODO:
+		return $this->getIvrAudio("inviter_greeting");
 	}
 	
 	public function promptInviteeGreeting() {
-		// TODO:
+		// TODO: invitee greeting should be combined with a couple of audios
+		return $this->getIvrAudio("invitee_greeting");
 	}
 
 	private function getIvrAudio($key) {

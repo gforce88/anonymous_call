@@ -28,16 +28,19 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		if ($invite == null) {
+			// The URL is invalid
 			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
 			return $this->renderScript("/response/invalidUrl.phtml");
 		}
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		if ($partner == null || $this->inviteExpired($partner["inviteExpireDur"], $invite["inviteTime"])) {
+			// The URL is valid but expired
 			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_no_longer_active", $_REQUEST["country"]));
 			$this->renderScript("/response/invalidUrl.phtml");
 		}
 		$calls = $this->callManager->findAllCallsByInvite($invite["inx"]);
 		if ($this->callCompleted($calls)) {
+			// The call is already completed. It can NOT be inited again
 			$this->view->assign("invalidReason", MultiLang::getText("The_call_is_already_completed", $_REQUEST["country"]));
 			$this->renderScript("/response/invalidUrl.phtml");
 		}
@@ -145,7 +148,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	private function callCompleted($calls) {
 		foreach ($calls as $call) {
-			if ($call["callResult"] >= CALL_RESULT_2NDLEG_ANSWERED) {
+			if (strtotime($call["callEndTime"]) > 0) {
 				return true;
 			}
 		}
