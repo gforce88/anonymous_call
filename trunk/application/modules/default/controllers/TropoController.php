@@ -51,12 +51,12 @@ class TropoController extends Zend_Controller_Action {
 			$_GET = array_merge($_GET, $paramArr);
 			$this->log($_GET);
 			$this->log($paramArr);
-			$this->callUser();
+			$this->call1stLeg();
 		}
 	}
 
-	private function callUser() {
-		$this->log("Start call to 1st leg");
+	private function call1stLeg() {
+		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
@@ -70,11 +70,20 @@ class TropoController extends Zend_Controller_Action {
 		$tropo->call($_GET["1stLegNumber"], $options);
 		
 		$this->setEvent($tropo, $parameters, "continue", "greeting");
+		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
 		$tropo->renderJSON();
+	}
+
+	public function failedconnectAction() {
+		$this->log("Failed to connect to 1st leg: " . $_GET["1stLegNumber"]);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER);
+		
+		$this->hangupAction();
 	}
 
 	public function greetingAction() {
 		$this->log("Start greeting for 1st leg");
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED);
 		
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
@@ -94,53 +103,39 @@ class TropoController extends Zend_Controller_Action {
 		);
 		$tropo->ask($sentences, $askoptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "holding");
+		$this->setEvent($tropo, $parameters, "continue", "transfer");
 		$tropo->RenderJson();
-		
-		$tropoService = new TropoService();
-		$tropoService->init2ndLegCall($tropoCall);
 	}
 
-	public function holdingAction() {
-		$this->log("Start holding for 1st leg");
+	public function transferAction() {
+		$this->log("Start transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $sentences . $ivrService->promptHolding() . " ";
-		$tropo->say($sentences);
+		$transferoptions = array (
+			"from" => $_GET["partnerNumber"],
+			"allowSignals" => "",
+			"timeout" => floatval($_GET["maxRingDur"]),
+			"ringRepeat" => 10 
+		);
+		$tropo->transfer($_GET["2ndLegNumber"], $transferoptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "holding");
-		$this->setEvent($tropo, $parameters, "startconf");
-		$this->setEvent($tropo, $parameters, "noagent");
+		$this->setEvent($tropo, $parameters, "continue", "transfercontinue");
+		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$tropo->renderJson();
 	}
 
-	public function startconfAction() {
-		$_GET["callStatusId"] = CALL_STATUS_ANSWERED;
+	public function failedtransferAction() {
+		$this->log("Failed transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER);
 		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$recordingSetting = $this->callRecordingManager->findByCustomerId($_GET["accountId"]);
-		if (isset($recordingSetting) && $recordingSetting["is_enabled"] == "1") {
-			$recordingOptions = TropoUtil::startRecording($recordingSetting);
-			$tropo->startRecording($recordingOptions);
-			$inquiry = $this->inquiryManager->getById($_GET["inquiryId"]);
-			$inquiry["callRecordingName"] = $recordingOptions["fileName"];
-			$this->inquiryManager->update($inquiry);
-		}
-		$tropo->conference(null, array (
-			"name" => "conference",
-			"id" => "CONF." . $_GET["session_id"] 
-		));
-		// $tropo->conference("CONF." . $_GET["session_id"] , $confOptions);
-		$tropo->renderJson();
-		$sessionId = $this->reverseCallSessionManager->findSecondLegSessionId($_GET["first_leg_session_id"]);
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
-		$result = file_get_contents("$url");
-		$this->log("sending signal to: [$url] with result: [$result]");
+		$this->hangupAction();
+	}
+
+	public function transfercontinueAction() {
+		$this->log("Connected to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
 	}
 
 	private function initTropo($parameters, $appendError = true) {
@@ -175,14 +170,16 @@ class TropoController extends Zend_Controller_Action {
 	}
 
 	public function hangupAction() {
+		$result = new Result();
+		$this->log("Call state is " . $result->getState());
+		
 		$tropo = new Tropo();
 		$tropo->hangup();
 		$tropo->renderJson();
 	}
 
 	public function errorAction() {
-		$this->log("System get error.");
-		$this->log("==================== Parameters ====================");
+		$this->log("System error with below parameters:");
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
 			$this->log("$k = $v");
