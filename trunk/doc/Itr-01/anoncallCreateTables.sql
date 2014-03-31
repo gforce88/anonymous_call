@@ -145,6 +145,8 @@ INSERT `callresult` (`inx`, `desc`)
         VALUES (6, '2ndLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
         VALUES (7, 'Complete');
+INSERT `callresult` (`inx`, `desc`)
+        VALUES (-1, 'Error');
 
 INSERT `countries` (`isoCode`, `desc`)
         VALUES (1, 'United States');

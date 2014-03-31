@@ -76,7 +76,7 @@ class TropoController extends Zend_Controller_Action {
 
 	public function failedconnectAction() {
 		$this->log("Failed to connect to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$this->hangupAction();
 	}
@@ -109,6 +109,7 @@ class TropoController extends Zend_Controller_Action {
 
 	public function transferAction() {
 		$this->log("Start transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_TO_2NDLEG, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
@@ -128,16 +129,28 @@ class TropoController extends Zend_Controller_Action {
 
 	public function failedtransferAction() {
 		$this->log("Failed transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$this->hangupAction();
 	}
 
 	public function transfercontinueAction() {
 		$this->log("Connected to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
 		
-		// TODO: 
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters, false);
+		
+		$this->setEvent($tropo, $parameters, "hangup", "complete");
+		$this->setEvent($tropo, $parameters, "error");
+		$tropo->renderJson();
+	}
+
+	public function completeAction() {
+		$this->log("Call completed: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_COMPLETE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		
+		$this->hangupAction();
 	}
 
 	public function hangupAction() {
@@ -151,6 +164,8 @@ class TropoController extends Zend_Controller_Action {
 
 	public function errorAction() {
 		$this->log("System error with below parameters:");
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_ERROR, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
 			$this->log("$k = $v");
@@ -191,11 +206,14 @@ class TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function updateCallResult($callInx, $callResult, $callStartTime = null, $callEndTime = null) {
+	private function updateCallResult($callInx, $callResult, $callStartTime = null, $transferStartTime = null, $callEndTime = null) {
 		$call = $this->callManager->findcallByInx($callInx);
 		$call["callResult"] = $callResult;
 		if ($callStartTime != null) {
 			$call["callStartTime"] = $callStartTime;
+		}
+		if ($transferStartTime != null) {
+			$call["transferStartTime"] = $transferStartTime;
 		}
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime;

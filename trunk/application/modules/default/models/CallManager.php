@@ -8,6 +8,7 @@ class CallManager extends BaseManager {
 		"callType" => null,
 		"callResult" => null,
 		"callStartTime" => null,
+		"transferStartTime" => null,
 		"callEndTime" => null 
 	);
 
