@@ -98,11 +98,11 @@ class TropoController extends Zend_Controller_Action {
 		$askOptions = array (
 			"attempts" => 1,
 			"bargein" => true,
-			"timeout" => 0.1,
+			"timeout" => 5,
 			"allowSignals" => "" 
 		);
 		$tropo->ask($sentences, $askOptions);
-		$this->log("Play autio " . $sentences);
+		$this->log("Play audio " . $sentences);
 		
 		$this->setEvent($tropo, $parameters, "continue", "transfer");
 		$tropo->RenderJson();
@@ -113,7 +113,7 @@ class TropoController extends Zend_Controller_Action {
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_TO_2NDLEG, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
+		$tropo = $this->initTropo($parameters, false);
 		
 		$transferOptions = array (
 			"from" => $_GET["partnerNumber"],
@@ -125,6 +125,8 @@ class TropoController extends Zend_Controller_Action {
 		
 		$this->setEvent($tropo, $parameters, "continue", "transfercontinue");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
+		$this->setEvent($tropo, $parameters, "hangup", "complete");
+		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
 	}
 
@@ -155,8 +157,8 @@ class TropoController extends Zend_Controller_Action {
 	}
 
 	public function hangupAction() {
-		$result = new Result();
-		$this->log("Call state is " . $result->getState());
+		$this->log("Call is hungup");
+		$this->updateCallResult($_GET["callInx"], null, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$tropo = new Tropo();
 		$tropo->hangup();
@@ -207,9 +209,11 @@ class TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function updateCallResult($callInx, $callResult, $callStartTime = null, $transferStartTime = null, $callEndTime = null) {
+	private function updateCallResult($callInx, $callResult = null, $callStartTime = null, $transferStartTime = null, $callEndTime = null) {
 		$call = $this->callManager->findcallByInx($callInx);
-		$call["callResult"] = $callResult;
+		if ($callResult != null) {
+			$call["callResult"] = $callResult;
+		}
 		if ($callStartTime != null) {
 			$call["callStartTime"] = $callStartTime;
 		}
