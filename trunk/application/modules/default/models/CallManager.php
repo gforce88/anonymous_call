@@ -1,5 +1,5 @@
 <?php
-require_once 'base/BaseManager.php';
+require_once 'models/BaseManager.php';
 
 class CallManager extends BaseManager {
 	private static $empty = array (

@@ -1,5 +1,5 @@
 <?php
-require_once 'base/BaseManager.php';
+require_once 'models/BaseManager.php';
 
 class PartnerManager extends BaseManager {
 

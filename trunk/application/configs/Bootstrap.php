@@ -88,10 +88,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	
 	// Init PayPal app context
 	protected function _initPaypalAppContext() {
-		$apiContext = new ApiContext(new OAuthTokenCredential('EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-				'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'));
-		Zend_Registry::set('PAYPAL_APP_CTX', $apiContext);
-		
+		$paypalSetting = $this->getOption("paypal");
+		$paypalApiCtx = new ApiContext(new OAuthTokenCredential($paypalSetting["client_id"], $paypalSetting["secret"]));
+		Zend_Registry::set('PAYPAL_API_CTX', $paypalApiCtx);
 	}
 
 }
