@@ -31,17 +31,14 @@ CREATE TABLE `partners` (
   `name`                varchar(256)    NOT NULL                    COMMENT 'partner name',
   `revShare`            decimal(4,0)    NOT NULL                    COMMENT '% revshare for partner',
   `minCallBlkDur`       int(11)         NOT NULL                    COMMENT 'minimum call block duration as defined in the PRD (minute)',
--- callAlertOffset is added recording to the PRD
   `callAlertOffset`     int(11)         NOT NULL                    COMMENT 'offset from the min call block duration to alert an message to the user (second)',
   `inviteExpireDur`     int(11)         NOT NULL                    COMMENT 'duration of time an invite link is live for (hour)',
   `maxRingDur`          int(11)         NOT NULL    DEFAULT 20      COMMENT 'maximum duration of rings system should wait before hanging up (second)',
   `resourcePath`        varchar(1024)   NOT NULL                    COMMENT 'server path to partner specific resources such as CSS, images and other configurable resources',
   `phoneNum`            varchar(25)     NOT NULL                    COMMENT 'partner phone number',
--- emailAddr is renamed from inviteEmailAddr
   `emailAddr`           varchar(256)    NOT NULL                    COMMENT 'from address to use for invite email',
   `inviteEmailSubject`  varchar(256)    NOT NULL                    COMMENT 'subject line to use for invite email',
   `inviteEmailBody`     varchar(2048)   NOT NULL                    COMMENT 'invite email body',
--- confirmEmailSubject, confirmEmailBody, thanksEmailSubject, thanksEmailBody are added for other 2 kinds of email
   `confirmEmailSubject` varchar(256)    NOT NULL                    COMMENT 'subject line to use for confirm email',
   `confirmEmailBody`    varchar(2048)   NOT NULL                    COMMENT 'confirm email body',
   `thanksEmailSubject`  varchar(256)    NOT NULL                    COMMENT 'subject line to use for thanks email',
@@ -73,11 +70,8 @@ DROP TABLE IF EXISTS `invites`;
 CREATE TABLE `invites` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
   `partnerInx`          int(11)         NOT NULL                    COMMENT 'index to partner table',
--- inviterInx is renamed from inviteUserInx
   `inviterInx`          int(11)         NOT NULL                    COMMENT 'index to user table of users who sent invitation',
--- inviteeInx is renamed from responseUserInx
   `inviteeInx`          int(11)         NOT NULL                    COMMENT 'index of user who an invitation was sent to',
--- inviteToken is added to check the validation of URL from an email
   `inviteToken`         varchar(256)                                COMMENT 'token in URL of invite email',
   `inviteMsg`           varchar(2048)               DEFAULT NULL    COMMENT 'invite message',
   `inviteTime`          timestamp       NOT NULL                    COMMENT 'time this invitation was created / extended',
@@ -91,11 +85,10 @@ DROP TABLE IF EXISTS `calls`;
 CREATE TABLE `calls` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
   `inviteInx`           int(11)         NOT NULL                    COMMENT 'index to invites table',
--- callType is added to indicate whether the first call goes to inviter or invitee
   `callType`            int(1)          NOT NULL                    COMMENT '0 - first call inviter; 1 - first call invitee',
   `callResult`          int(2)          NOT NULL    DEFAULT 0       COMMENT 'index to callresults table',
--- callDuration is renamed to callStartTime and callEndTime because the application requires the start time to calculate the curent duration displayed in the following widget
   `callStartTime`       timestamp                   DEFAULT 0       COMMENT 'call start time',
+  `transferStartTime`   timestamp                   DEFAULT 0       COMMENT 'transfer start time',
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -188,7 +181,7 @@ INSERT `partners` (
           5,
           30,
           8,
-          5,
+          30,
           'OutOfScopt',
           '15167346602',
           'EnTest@email.com',
@@ -226,7 +219,7 @@ INSERT `partners` (
           5,
           30,
           8,
-          5,
+          30,
           'OutOfScopt',
           '15167346602',
           'JpTest@email.com',
