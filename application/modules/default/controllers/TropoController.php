@@ -102,6 +102,7 @@ class TropoController extends Zend_Controller_Action {
 			"allowSignals" => "" 
 		);
 		$tropo->ask($sentences, $askOptions);
+		$this->log("Play autio " . $sentences);
 		
 		$this->setEvent($tropo, $parameters, "continue", "transfer");
 		$tropo->RenderJson();
@@ -128,14 +129,14 @@ class TropoController extends Zend_Controller_Action {
 	}
 
 	public function failedtransferAction() {
-		$this->log("Failed transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->log("Failed transfer to 2nd leg");
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$this->hangupAction();
 	}
 
 	public function transfercontinueAction() {
-		$this->log("Connected to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->log("Connected to 2nd leg");
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
