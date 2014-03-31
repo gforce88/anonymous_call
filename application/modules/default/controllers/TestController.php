@@ -1,5 +1,6 @@
 <?php
 require_once 'util/MultiLang.php';
+require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
@@ -22,6 +23,8 @@ class TestController extends Zend_Controller_Action {
 			"test" => "TEST" 
 		);
 		$_GET = array_merge($_GET, $paramarray);
+		$ivrService = new IvrService(2, "JP");
+		echo $ivrService->promptInviterGreeting() . "<br>";
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
