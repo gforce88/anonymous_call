@@ -70,7 +70,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$validFields = array ();
 		$invalidFields = array ();
 		if ($_POST["hasCcInfo"] == 1) {
-			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
+			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"], $_POST["firstName"], $_POST["lastName"]);
 			if ($paypalToken != null) {
 				array_push($validFields, "creditCardInfoInvalid");
 			} else {
