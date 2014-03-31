@@ -24,7 +24,7 @@ class TestController extends Zend_Controller_Action {
 		);
 		$_GET = array_merge($_GET, $paramarray);
 		$ivrService = new IvrService(2, "JP");
-		echo $ivrService->promptInviterGreeting() . "<br>";
+		echo $ivrService->promptInviteeGreeting() . "<br>";
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
