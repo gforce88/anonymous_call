@@ -63,7 +63,7 @@ class TropoController extends Zend_Controller_Action {
 		$tropo = $this->initTropo($parameters);
 		
 		$callOptions = array (
-			"from" => $_GET["partnerNumber"],
+			// "from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]) 
 		);
@@ -114,7 +114,7 @@ class TropoController extends Zend_Controller_Action {
 		$tropo = $this->initTropo($parameters);
 		
 		$transferOptions = array (
-			"from" => $_GET["partnerNumber"],
+			// "from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]),
 			"ringRepeat" => 10 
