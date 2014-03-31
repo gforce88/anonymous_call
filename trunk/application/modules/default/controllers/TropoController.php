@@ -123,7 +123,7 @@ class TropoController extends Zend_Controller_Action {
 		);
 		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "transfercontinue");
+		$this->setEvent($tropo, $parameters, "continue", "complete");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
@@ -137,21 +137,9 @@ class TropoController extends Zend_Controller_Action {
 		$this->hangupAction();
 	}
 
-	public function transfercontinueAction() {
-		$this->log("Connected to 2nd leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED);
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters, false);
-		
-		$this->setEvent($tropo, $parameters, "hangup", "complete");
-		$this->setEvent($tropo, $parameters, "error");
-		$tropo->renderJson();
-	}
-
 	public function completeAction() {
 		$this->log("Call completed: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_COMPLETE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$this->hangupAction();
 	}
