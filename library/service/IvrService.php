@@ -28,11 +28,11 @@ class IvrService {
 	}
 
 	private function getIvrAudio($key) {
-		$ivrKey = self::ACCOUNT_PREFIX . $this->accountId . ".$key";
+		$ivrKey = self::ACCOUNT_PREFIX . $this->accountId . "$key";
 		if (isset($this->config[$ivrKey])) {
 			return $this->ivrLocation . $this->config[$ivrKey];
 		} else {
-			return $this->ivrLocation . $this->config[self::IVR_DEFAULT . ".$key"];
+			return $this->ivrLocation . $this->config[self::IVR_DEFAULT . "$key"];
 		}
 	}
 
