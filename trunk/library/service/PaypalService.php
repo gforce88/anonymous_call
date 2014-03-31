@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
 use PayPal\Api\FundingInstrument;
@@ -10,10 +11,10 @@ use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 
 class PaypalService {
-	
-	
+	private $logger;
+
 	public function __construct() {
-		
+		$this->logger = LoggerFactory::getSysLogger();
 	}
 
 	public function regist($ccNumber, $ccExp, $ccCvc, $firstName, $lastName) {
@@ -49,7 +50,7 @@ class PaypalService {
 		try {
 			$card->create($paypalApiCtx);
 		} catch (\PPConnectionException $ex) {
-			echo "Exception:" . $ex->getMessage() . PHP_EOL;
+			$this->logger->logError("PaypalService", "regist", $ex->getMessage());
 			return false;
 		}
 		
@@ -90,7 +91,7 @@ class PaypalService {
 		try {
 			$payment->create($paypalApiCtx);
 		} catch (\PPConnectionException $ex) {
-			echo "Exception: " . $ex->getMessage() . PHP_EOL;
+			$this->logger->logError("PaypalService", "regist", $ex->getMessage());
 			return false;
 		}
 		
