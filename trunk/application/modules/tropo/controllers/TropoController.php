@@ -94,11 +94,13 @@ class Tropo_TropoController extends Zend_Controller_Action {
 	public function cpadetectAction() {
 		$this->log("Start CPA detection for 1st leg");
 		
-		$result = new Result();
+		$json = file_get_contents("php://input");
+		$this->log($json);
+		$result = new Result($json);
+		
 		$cpaType = $result->getUserType();
 		$cpaState = $result->getState();
 		$this->log('CPA type: ' . $cpaType . ', CPA state: ' . $cpaState);
-		$this->log($result);
 		
 		if ($cpaState == 'DISCONNECTED') {
 			// Call ended
