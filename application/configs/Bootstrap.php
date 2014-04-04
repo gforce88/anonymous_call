@@ -29,21 +29,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = Zend_Controller_Front::getInstance();
 		$router = $front->getRouter();
 		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/tropo/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("tropo/(.+)\.php", array (
 			"module" => "tropo",
 			"controller" => "tropo" 
 		), array (
 			1 => "action" 
-		), "tropo/tropo/%s.php");
-		$router->addRoute("tropo/tropo", $route);
+		), "tropo/%s.php");
+		$router->addRoute("tropo", $route);
 		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/conf/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("conf/(.+)\.php", array (
 			"module" => "tropo",
 			"controller" => "conf" 
 		), array (
 			1 => "action" 
-		), "tropo/conf/%s.php");
-		$router->addRoute("tropo/conf", $route);
+		), "conf/%s.php");
+		$router->addRoute("conf", $route);
 	}
 	
 	// Init Logger
