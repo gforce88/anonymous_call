@@ -98,14 +98,14 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		
 		$cpaType = $result->getUserType();
 		$cpaState = $result->getState();
-		$this->log('CPA type: ' . $cpaType . ', CPA state: ' . $cpaState);
+		$this->log("CPA type: " . $cpaType . ", CPA state: " . $cpaState);
 		
-		if ($cpaState == 'DISCONNECTED') {
+		if ($cpaState == "DISCONNECTED") {
 			// Call ended
 			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 			$this->hangupAction();
 		} else {
-			if ($cpaType == 'MACHINE' || $cpaType == "FAX") {
+			if ($cpaType == "MACHINE" || $cpaType == "FAX") {
 				// Call ended
 				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 				$this->hangupAction();
