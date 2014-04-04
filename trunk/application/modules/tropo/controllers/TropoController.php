@@ -207,11 +207,11 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	private function setEvent($tropo, $parameters, $event, $handler = null) {
 		if ($handler == null) {
-			$handler = $event . ".php";
+			$handler = $event;
 		}
 		$tropo->on(array (
 			"event" => $event,
-			"next" => "$handler?$parameters" 
+			"next" => "$handler.php?$parameters" 
 		));
 	}
 
