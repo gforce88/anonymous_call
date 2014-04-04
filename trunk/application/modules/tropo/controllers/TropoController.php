@@ -61,14 +61,25 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
+		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
+			$sentences = $ivrService->promptInviterGreeting() . " ";
+		} else {
+			$sentences = $ivrService->promptInviteeGreeting() . " ";
+		}
+		
 		$callOptions = array (
 			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
-			"timeout" => floatval($_GET["maxRingDur"]) 
+			"timeout" => floatval($_GET["maxRingDur"]),
+			"machineDetection" => Array (
+				"introduction" => $sentences 
+			) 
 		);
+		
 		$tropo->call($_GET["1stLegNumber"], $callOptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "greeting");
+		$this->setEvent($tropo, $parameters, "continue", "cpadetect");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
 		$tropo->renderJSON();
 	}
@@ -107,7 +118,28 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$tropo->RenderJson();
 	}
 
-	public function transferAction() {
+	public function cpadetectAction() {
+		$this->log("Start CPA detection for 1st leg");
+		
+		$result = new Result();
+		$cpaType = $result->getUserType();
+		$cpaState = $result->getState();
+		$this->log('CPA type: ' . $cpaType . ', CPA state: ' . $cpaState);
+		
+		if ($cpaState == 'DISCONNECTED') {
+			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+			$this->hangupAction();
+		} else {
+			if ($cpaType == 'MACHINE' || $cpaType == "FAX") {
+				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+				$this->hangupAction();
+			} else {
+				$this->transfer();
+			}
+		}
+	}
+
+	private function transfer() {
 		$this->log("Start transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_TO_2NDLEG, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
@@ -145,7 +177,6 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	public function hangupAction() {
 		$this->log("Call is hungup");
-		$this->updateCallResult($_GET["callInx"], null, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$tropo = new Tropo();
 		$tropo->hangup();
