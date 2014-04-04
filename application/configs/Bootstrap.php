@@ -29,28 +29,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$front = Zend_Controller_Front::getInstance();
 		$router = $front->getRouter();
 		
-		$route = new Zend_Controller_Router_Route_Regex("default/tropo/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("tropo/tropo/(.+)\.php", array (
+			"module" => "tropo",
 			"controller" => "tropo" 
 		), array (
 			1 => "action" 
-		), "default/tropo/%s.php");
-		$router->addRoute("default/tropo", $route);
+		), "tropo/tropo/%s.php");
+		$router->addRoute("tropo/tropo", $route);
 		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/firstleg/(.+)\.php", array (
+		$route = new Zend_Controller_Router_Route_Regex("tropo/conf/(.+)\.php", array (
 			"module" => "tropo",
-			"controller" => "firstleg" 
+			"controller" => "conf" 
 		), array (
 			1 => "action" 
-		), "tropo/firstleg/%s.php");
-		$router->addRoute("tropo/firstleg", $route);
-		
-		$route = new Zend_Controller_Router_Route_Regex("tropo/secondleg/(.+)\.php", array (
-			"module" => "tropo",
-			"controller" => "secondleg" 
-		), array (
-			1 => "action" 
-		), "tropo/secondleg/%s.php");
-		$router->addRoute("tropo/secondleg", $route);
+		), "tropo/conf/%s.php");
+		$router->addRoute("tropo/conf", $route);
 	}
 	
 	// Init Logger
