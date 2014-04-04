@@ -56,7 +56,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	private function call1stLeg() {
 		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT);
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
@@ -91,33 +91,6 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->hangupAction();
 	}
 
-	public function greetingAction() {
-		$this->log("Start greeting for 1st leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
-			$sentences = $ivrService->promptInviterGreeting() . " ";
-		} else {
-			$sentences = $ivrService->promptInviteeGreeting() . " ";
-		}
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$askOptions = array (
-			"attempts" => 1,
-			"bargein" => true,
-			"timeout" => 5,
-			"allowSignals" => "" 
-		);
-		$tropo->ask($sentences, $askOptions);
-		$this->log("Play audio " . $sentences);
-		
-		$this->setEvent($tropo, $parameters, "continue", "transfer");
-		$tropo->RenderJson();
-	}
-
 	public function cpadetectAction() {
 		$this->log("Start CPA detection for 1st leg");
 		
@@ -127,13 +100,17 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->log('CPA type: ' . $cpaType . ', CPA state: ' . $cpaState);
 		
 		if ($cpaState == 'DISCONNECTED') {
-			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+			// Call ended
+			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 			$this->hangupAction();
 		} else {
 			if ($cpaType == 'MACHINE' || $cpaType == "FAX") {
-				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+				// Call ended
+				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 				$this->hangupAction();
 			} else {
+				// Call started
+				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, null, (new DateTime())->format("Y-m-d H:i:s"));
 				$this->transfer();
 			}
 		}
@@ -141,7 +118,6 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	private function transfer() {
 		$this->log("Start transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_TO_2NDLEG, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
@@ -227,16 +203,16 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function updateCallResult($callInx, $callResult = null, $callStartTime = null, $transferStartTime = null, $callEndTime = null) {
+	private function updateCallResult($callInx, $callResult = null, $callInitTime = null, $callStartTime = null, $callEndTime = null) {
 		$call = $this->callManager->findcallByInx($callInx);
 		if ($callResult != null) {
 			$call["callResult"] = $callResult;
 		}
+		if ($callInitTime != null) {
+			$call["callInitTime"] = $callInitTime;
+		}
 		if ($callStartTime != null) {
 			$call["callStartTime"] = $callStartTime;
-		}
-		if ($transferStartTime != null) {
-			$call["transferStartTime"] = $transferStartTime;
 		}
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime;
