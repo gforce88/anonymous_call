@@ -4,14 +4,17 @@ require_once 'log/LoggerFactory.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
+require_once 'models/PartnerManager.php';
 
 class Tropo_TropoController extends Zend_Controller_Action {
 	private $logger;
 	private $callManager;
+	private $partnerManager;
 
 	public function init() {
 		$this->logger = LoggerFactory::getIvrLogger();
 		$this->callManager = new CallManager();
+		$this->partnerManager = new PartnerManager();
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 	}
@@ -56,7 +59,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	private function call1stLeg() {
 		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT, new DateTime());
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
@@ -84,7 +87,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	public function failedconnectAction() {
 		$this->log("Failed to connect to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, new DateTime());
 		
 		$this->hangupAction();
 	}
@@ -102,16 +105,16 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		
 		if ($cpaState == "DISCONNECTED") {
 			// Call ended
-			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+			$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, new DateTime());
 			$this->hangupAction();
 		} else {
 			if ($cpaType == "MACHINE" || $cpaType == "FAX") {
 				// Call ended
-				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERMACHINE, null, null, new DateTime());
 				$this->hangupAction();
 			} else {
 				// Call started
-				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, null, (new DateTime())->format("Y-m-d H:i:s"));
+				$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, null, new DateTime());
 				$this->transfer();
 			}
 		}
@@ -140,14 +143,14 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	public function failedtransferAction() {
 		$this->log("Failed transfer to 2nd leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, new DateTime());
 		
 		$this->hangupAction();
 	}
 
 	public function completeAction() {
 		$this->log("Call completed: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, null, new DateTime());
 		
 		$this->hangupAction();
 	}
@@ -162,7 +165,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	public function errorAction() {
 		$this->log("System error with below parameters:");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_ERROR, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_ERROR, null, null, new DateTime());
 		
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
@@ -210,15 +213,19 @@ class Tropo_TropoController extends Zend_Controller_Action {
 			$call["callResult"] = $callResult;
 		}
 		if ($callInitTime != null) {
-			$call["callInitTime"] = $callInitTime;
+			$call["callInitTime"] = $callInitTime->format("Y-m-d H:i:s");
 		}
 		if ($callStartTime != null) {
-			$call["callStartTime"] = $callStartTime;
-			$call["nextRemindTime"] = $callStartTime;
-			$call["nextChargeTime"] = $callStartTime;
+			$partner = $this->partnerManager->findPartnerByCall($callInx);
+			$nextChargeTime = $callStartTime->getTimestamp() + $partner["minCallBlkDur"];
+			$nextRemindTime = $nextChargeTime - $partner["callAlertOffset"] - 5; // 5 seconds for tropo comunication time
+			
+			$call["callStartTime"] = $callStartTime->format("Y-m-d H:i:s");
+			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextRemindTime);
+			$call["nextChargeTime"] = date("Y-m-d H:i:s", $nextChargeTime);
 		}
 		if ($callEndTime != null) {
-			$call["callEndTime"] = $callEndTime;
+			$call["callEndTime"] = $callEndTime->format("Y-m-d H:i:s");
 		}
 		$this->callManager->update($call);
 	}

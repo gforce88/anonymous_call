@@ -19,12 +19,13 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$paramarray = array (
-			"test" => "TEST" 
-		);
-		$_GET = array_merge($_GET, $paramarray);
-		$ivrService = new IvrService(2, "JP");
-		echo $ivrService->promptInviteeGreeting() . "<br>";
+		$datetime = new DateTime();
+		echo $datetime->format("Y-m-d H:i:s") . "<br>";
+		$timestamp = $datetime->getTimestamp();
+		echo $timestamp . "<br>";
+		$result = $timestamp - 300;
+		echo $result . "<br>";
+		echo date("Y-m-d H:i:s", $result) . "<br>";
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
