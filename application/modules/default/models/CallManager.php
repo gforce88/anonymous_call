@@ -9,7 +9,9 @@ class CallManager extends BaseManager {
 		"callResult" => null,
 		"callInitTime" => null,
 		"callStartTime" => null,
-		"callEndTime" => null 
+		"callEndTime" => null,
+		"nextRemindTime" => null,
+		"nextChargeTime" => null 
 	);
 
 	const SQL_FIND_CALL_BY_INX = "select * from calls where inx=:inx";
