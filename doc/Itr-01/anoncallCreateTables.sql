@@ -87,8 +87,8 @@ CREATE TABLE `calls` (
   `inviteInx`           int(11)         NOT NULL                    COMMENT 'index to invites table',
   `callType`            int(1)          NOT NULL                    COMMENT '0 - first call inviter; 1 - first call invitee',
   `callResult`          int(2)          NOT NULL    DEFAULT 0       COMMENT 'index to callresults table',
+  `callInitTime`        timestamp                   DEFAULT 0       COMMENT 'call init time',
   `callStartTime`       timestamp                   DEFAULT 0       COMMENT 'call start time',
-  `transferStartTime`   timestamp                   DEFAULT 0       COMMENT 'transfer start time',
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -138,13 +138,9 @@ INSERT `callresult` (`inx`, `desc`)
 INSERT `callresult` (`inx`, `desc`)
         VALUES (3, '1stLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (4, '1stLeg_To_2ndLeg');
+        VALUES (4, '2ndLeg_NoAnswer');
 INSERT `callresult` (`inx`, `desc`)
-        VALUES (5, '2ndLeg_NoAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (6, '2ndLeg_Answered');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (7, 'Complete');
+        VALUES (5, '2ndLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
         VALUES (-1, 'Error');
 
