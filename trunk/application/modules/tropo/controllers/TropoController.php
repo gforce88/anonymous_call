@@ -214,6 +214,8 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		}
 		if ($callStartTime != null) {
 			$call["callStartTime"] = $callStartTime;
+			$call["nextRemindTime"] = $callStartTime;
+			$call["nextChargeTime"] = $callStartTime;
 		}
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime;

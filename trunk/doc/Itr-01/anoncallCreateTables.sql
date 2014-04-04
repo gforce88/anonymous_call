@@ -29,7 +29,8 @@ DROP TABLE IF EXISTS `partners`;
 CREATE TABLE `partners` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'parimary key',
   `name`                varchar(256)    NOT NULL                    COMMENT 'partner name',
-  `revShare`            decimal(4,0)    NOT NULL                    COMMENT '% revshare for partner',
+  `revShare`            decimal(2, 0)   NOT NULL                    COMMENT '% revshare for partner',
+  `chargeAmount`        decimal(6, 2)   NOT NULL                    COMMENT 'charge amount for each min call blk dur',
   `minCallBlkDur`       int(11)         NOT NULL                    COMMENT 'minimum call block duration as defined in the PRD (minute)',
   `callAlertOffset`     int(11)         NOT NULL                    COMMENT 'offset from the min call block duration to alert an message to the user (second)',
   `inviteExpireDur`     int(11)         NOT NULL                    COMMENT 'duration of time an invite link is live for (hour)',
@@ -90,6 +91,8 @@ CREATE TABLE `calls` (
   `callInitTime`        timestamp                   DEFAULT 0       COMMENT 'call init time',
   `callStartTime`       timestamp                   DEFAULT 0       COMMENT 'call start time',
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
+  `nextRemindTime`      timestamp                   DEFAULT 0       COMMENT 'next remind time',
+  `nextChargeTime`      timestamp                   DEFAULT 0       COMMENT 'next charge time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -157,6 +160,7 @@ INSERT `admins` (`inx`, `partnerInx`, `userName`, `pw`)
 INSERT `partners` (
           `name`,
           `revShare`,
+          `chargeAmount`,
           `minCallBlkDur`,
           `callAlertOffset`,
           `inviteExpireDur`,
@@ -175,6 +179,7 @@ INSERT `partners` (
           `country`)
         VALUES (
           'EnTest',
+          12,
           12.34,
           5,
           30,
@@ -195,6 +200,7 @@ INSERT `partners` (
 INSERT `partners` (
           `name`,
           `revShare`,
+          `chargeAmount`,
           `minCallBlkDur`,
           `callAlertOffset`,
           `inviteExpireDur`,
@@ -213,6 +219,7 @@ INSERT `partners` (
           `country`)
         VALUES (
           'JpTest',
+          12,
           12.34,
           5,
           30,
