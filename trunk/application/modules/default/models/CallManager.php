@@ -7,8 +7,8 @@ class CallManager extends BaseManager {
 		"inviteInx" => null,
 		"callType" => null,
 		"callResult" => null,
+		"callInitTime" => null,
 		"callStartTime" => null,
-		"transferStartTime" => null,
 		"callEndTime" => null 
 	);
 
