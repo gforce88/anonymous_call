@@ -148,7 +148,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	private function callCompleted($calls) {
 		foreach ($calls as $call) {
-			if (strtotime($call["callEndTime"]) > 0) {
+			if (strtotime($call["callResult"]) >= CALL_RESULT_2NDLEG_ANSWERED) {
 				return true;
 			}
 		}
