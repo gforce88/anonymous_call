@@ -72,9 +72,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]),
-			"machineDetection" => Array (
-				"introduction" => $sentences 
-			) 
+			"machineDetection" => $sentences 
 		);
 		
 		$tropo->call($_GET["1stLegNumber"], $callOptions);
