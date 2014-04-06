@@ -207,7 +207,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function updateCallResult($callInx, $callResult = null, $callInitTime = null, $callStartTime = null, $callEndTime = null, $tropoSessionId = null) {
+	private function updateCallResult($callInx, $callResult = null, $callInitTime = null, $callStartTime = null, $callEndTime = null, $tropoSession = null) {
 		$call = array (
 			"inx" => $callInx 
 		);
@@ -230,7 +230,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 			$call["callEndTime"] = $callEndTime->format("Y-m-d H:i:s");
 		}
 		if ($tropoSessionId != null) {
-			$call["tropoSessionId"] = $tropoSessionId;
+			$call["tropoSession"] = $tropoSession;
 		}
 		$this->callManager->update($call);
 	}
