@@ -3,16 +3,19 @@ require_once 'models/BaseManager.php';
 
 class TimerManager extends BaseManager {
 
-	const SQL_FIND_ACCOUNT_BY_NAME_PW = "select * from admins where userName=:userName and pw=PASSWORD(:pw)";
+	const SQL_FIND_REMINDS = "select tropoSessionId from calls where callEndTime = 0 and nextRemindTime != 0 and nextRemindTime < :now";
 
-	public function findNextCharge() {
-		return $this->db->fetchRow(self::SQL_FIND_ACCOUNT_BY_NAME_PW, array (
+	public function findNextCharges() {
+		return $this->db->fetchAll(self::SQL_FIND_ACCOUNT_BY_NAME_PW, array (
 			"userName" => $userName,
 			"pw" => $pw 
 		));
 	}
-	
-	public function findNextRemind() {
 
+	public function findNextReminds() {
+		return $this->db->fetchAll(self::SQL_FIND_ACCOUNT_BY_NAME_PW, array (
+			"now" => (new DateTime())->format("Y-m-d H:i:s") 
+		));
 	}
+
 }
