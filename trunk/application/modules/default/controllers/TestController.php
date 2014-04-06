@@ -2,6 +2,7 @@
 require_once 'util/MultiLang.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
+require_once 'models/CallManager.php';
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
 use PayPal\Api\FundingInstrument;
@@ -19,13 +20,6 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$datetime = new DateTime();
-		echo $datetime->format("Y-m-d H:i:s") . "<br>";
-		$timestamp = $datetime->getTimestamp();
-		echo $timestamp . "<br>";
-		$result = $timestamp - 300;
-		echo $result . "<br>";
-		echo date("Y-m-d H:i:s", $result) . "<br>";
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
@@ -75,7 +69,7 @@ class TestController extends Zend_Controller_Action {
 
 	public function chargeAction() {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
-				
+		
 		$creditCardId = $_GET["card_id"];
 		$creditCardToken = new CreditCardToken();
 		$creditCardToken->setCredit_card_id($creditCardId);

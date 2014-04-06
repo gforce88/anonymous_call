@@ -7,6 +7,7 @@ class CallManager extends BaseManager {
 		"inviteInx" => null,
 		"callType" => null,
 		"callResult" => null,
+		"tropoSessionId" => null,
 		"callInitTime" => null,
 		"callStartTime" => null,
 		"callEndTime" => null,

@@ -59,7 +59,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 
 	private function call1stLeg() {
 		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT, new DateTime());
+		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT, new DateTime(), null, null, $_GET["session_id"]);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
@@ -207,8 +207,10 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		return $parameters;
 	}
 
-	private function updateCallResult($callInx, $callResult = null, $callInitTime = null, $callStartTime = null, $callEndTime = null) {
-		$call = $this->callManager->findcallByInx($callInx);
+	private function updateCallResult($callInx, $callResult = null, $callInitTime = null, $callStartTime = null, $callEndTime = null, $tropoSessionId = null) {
+		$call = array (
+			"inx" => $callInx 
+		);
 		if ($callResult != null) {
 			$call["callResult"] = $callResult;
 		}
@@ -226,6 +228,9 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		}
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime->format("Y-m-d H:i:s");
+		}
+		if ($tropoSessionId != null) {
+			$call["tropoSessionId"] = $tropoSessionId;
 		}
 		$this->callManager->update($call);
 	}
