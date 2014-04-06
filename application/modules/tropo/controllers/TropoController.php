@@ -229,7 +229,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime->format("Y-m-d H:i:s");
 		}
-		if ($tropoSessionId != null) {
+		if ($tropoSession != null) {
 			$call["tropoSession"] = $tropoSession;
 		}
 		$this->callManager->update($call);
