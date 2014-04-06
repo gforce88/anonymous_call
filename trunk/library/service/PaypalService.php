@@ -18,7 +18,7 @@ class PaypalService {
 	}
 
 	public function regist($ccNumber, $ccExp, $ccCvc, $firstName, $lastName) {
-		return true; // For testing only
+		return "test_payapl_token"; // For testing only
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$ccExpArr = explode("/", $ccExp);
