@@ -220,14 +220,11 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		}
 		if ($callStartTime != null) {
 			$partner = $this->partnerManager->findPartnerByCall($callInx);
-			$this->logger->logInfo("Test", "partner", $partner);
 			$nextTime = new NextTime($callStartTime, $partner);
-			$this->logger->logInfo("Test", "<><><><>", "1");
 				
 			$call["callStartTime"] = $callStartTime->format("Y-m-d H:i:s");
 			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
 			$call["nextChargeTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
-			$this->logger->logInfo("Test", "<><><><>", "2");
 		}
 		if ($callEndTime != null) {
 			$call["callEndTime"] = $callEndTime->format("Y-m-d H:i:s");
@@ -235,9 +232,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		if ($tropoSession != null) {
 			$call["tropoSession"] = $tropoSession;
 		}
-			$this->logger->logInfo("Test", "<><><><>", "3");
 		$this->callManager->update($call);
-			$this->logger->logInfo("Test", "<><><><>", "4");
 	}
 
 	private function log($infomations) {
