@@ -1,5 +1,5 @@
 <?php
-require_once 'models/BaseManager.php';
+require_once 'BaseManager.php';
 
 class CallManager extends BaseManager {
 	private static $empty = array (
@@ -27,7 +27,7 @@ class CallManager extends BaseManager {
 			 where inviteInx=:inviteInx";
 
 	const SQL_FIND_REMINDS = "
-			select calls.*, partners.minCallBlkDur, partners.callRemindOffset
+			select calls.inx, partners.inx as partinerInx, invites.inx as inviteInx, calls.tropoSession, partners.minCallBlkDur, partners.callRemindOffset, partners.country
 			  from calls, invites, partners
 			 where calls.inviteInx = invites.inx
 			   and invites.partnerInx = partners.inx

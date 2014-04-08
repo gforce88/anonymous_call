@@ -2,7 +2,6 @@
 require_once 'tropo/tropo.class.php';
 require_once 'log/LoggerFactory.php';
 require_once 'service/IvrService.php';
-require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'data/NextTime.php';
@@ -29,10 +28,10 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$paramArr["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
 		
 		// parameters introduced in response controller
-		$paramArr["partnerInx"] = $session->getParameters("partnerInx");
-		$paramArr["inviteInx"] = $session->getParameters("inviteInx");
 		$paramArr["callInx"] = $session->getParameters("callInx");
 		$paramArr["callType"] = $session->getParameters("callType");
+		$paramArr["partnerInx"] = $session->getParameters("partnerInx");
+		$paramArr["inviteInx"] = $session->getParameters("inviteInx");
 		$paramArr["partnerNumber"] = $session->getParameters("partnerNumber");
 		$paramArr["1stLegNumber"] = $session->getParameters("1stLegNumber");
 		$paramArr["2ndLegNumber"] = $session->getParameters("2ndLegNumber");
@@ -78,7 +77,6 @@ class Tropo_TropoController extends Zend_Controller_Action {
 			"timeout" => floatval($_GET["maxRingDur"]),
 			"machineDetection" => $sentences 
 		);
-		
 		$tropo->call($_GET["1stLegNumber"], $callOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "cpadetect");
@@ -135,6 +133,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		);
 		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
+		$this->setEvent($tropo, $parameters, "startconf");
 		$this->setEvent($tropo, $parameters, "continue", "complete");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
@@ -147,6 +146,20 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, new DateTime());
 		
 		$this->hangupAction();
+	}
+
+	public function startconfAction() {
+		$this->log("Start waiting conferance call");
+		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters);
+		
+		$confOptions = array (
+			"name" => "conference",
+			"id" => "CONF." . $_GET["session_id"] 
+		);
+		$tropo->conference(null, $confOptions);
+		$tropo->renderJson();
 	}
 
 	public function completeAction() {
@@ -221,7 +234,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		if ($callStartTime != null) {
 			$partner = $this->partnerManager->findPartnerByCall($callInx);
 			$nextTime = new NextTime($callStartTime, $partner);
-				
+			
 			$call["callStartTime"] = $callStartTime->format("Y-m-d H:i:s");
 			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
 			$call["nextChargeTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);

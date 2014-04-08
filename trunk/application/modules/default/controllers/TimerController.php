@@ -48,7 +48,11 @@ class TimerController extends Zend_Controller_Action {
 		// 2. Invoke Tropo service for conference call
 		foreach ($reminds as $remind) {
 			$paramArr = array (
-				"mainSessionId" => $remind["tropoSession"] 
+				"callInx" => $remind["inx"],
+				"partnerInx" => $remind["partnerInx"],
+				"inviteInx" => $remind["inviteInx"],
+				"mainCallSession" => $remind["tropoSession"],
+				"country" => $remind["country"] 
 			);
 			$this->tropoService->initConfCall($paramArr);
 		}
