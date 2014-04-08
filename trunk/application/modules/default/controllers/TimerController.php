@@ -1,10 +1,12 @@
 <?php
-require_once 'data/NextTime.php';
+require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
+require_once 'data/NextTime.php';
 
 class TimerController extends Zend_Controller_Action {
+	private $logger;
 	private $paypalService;
 	private $tropoService;
 	private $callManager;
@@ -13,7 +15,8 @@ class TimerController extends Zend_Controller_Action {
 		// Disable layout because no return page
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
-
+		
+		$this->logger = LoggerFactory::getSysLogger();
 		$this->paypalService = new PaypalService();
 		$this->tropoService = new TropoService();
 		$this->callManager = new CallManager();
@@ -29,12 +32,16 @@ class TimerController extends Zend_Controller_Action {
 		$charges = $this->callManager->findNextCharges($nowStr);
 		
 		// 1. Update database to avoid duplicate fire by the nest timer
-		foreach ($reminds as $remind) {
-			$nextTime = new NextTime($now, $remind);
-			$remind["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextRemindTime);
-			$this->callManager->update($remind);
+		if ($reminds != null) {
+			$this->logger->logInfo("Timer", "reminds", $reminds);
+			foreach ($reminds as $remind) {
+				$nextTime = new NextTime($now, $remind);
+				$remind["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextRemindTime);
+				$this->callManager->update($remind);
+			}
 		}
 		if ($charges != null) {
+			$this->logger->logInfo("Timer", "charges", $charges);
 			$this->callManager->updateCharges($nowStr);
 		}
 		
