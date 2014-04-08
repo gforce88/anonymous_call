@@ -1,15 +1,21 @@
 <?php
 require_once 'data/NextTime.php';
+require_once 'service/PaypalService.php';
+require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
 
 class TimerController extends Zend_Controller_Action {
+	private $paypalService;
+	private $tropoService;
 	private $callManager;
 
 	public function init() {
 		// Disable layout because no return page
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
-		
+
+		$this->paypalService = new PaypalService();
+		$this->tropoService = new TropoService();
 		$this->callManager = new CallManager();
 	}
 	
@@ -32,7 +38,18 @@ class TimerController extends Zend_Controller_Action {
 			$this->callManager->updateCharges($nowStr);
 		}
 		
-		// 2. TODO: invoke Tropo conference call
+		// 2. Invoke Tropo service for conference call
+		foreach ($reminds as $remind) {
+			$paramArr = array (
+				"mainSessionId" => $remind["tropoSession"] 
+			);
+			$this->tropoService->initConfCall($paramArr);
+		}
+		
+		// 3. Invoke Paypal service for charge
+		foreach ($charges as $charge) {
+			$this->paypalService->charge($charge["paypalToken"], $charge["chargeAmount"]);
+		}
 	}
 
 }

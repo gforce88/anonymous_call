@@ -36,11 +36,17 @@ class CallManager extends BaseManager {
 			   and nextRemindTime < :now";
 
 	const SQL_FIND_CHARGES = "
-			select *
-			  from calls
-			 where callEndTime = 0
-			   and nextChargeTime != 0
-			   and nextChargeTime < :now";
+			select users.paypalToken, partners.chargeAmount
+			  from calls, invites, partners, users
+			 where calls.inviteInx = invites.inx
+			   and invites.partnerInx = partners.inx
+			   and users.inx = case calls.callType
+                        when 0 then invites.inviterInx 
+                               else invites.inviteeInx 
+                                end
+			   and calls.callEndTime = 0
+			   and calls.nextChargeTime != 0
+			   and calls.nextChargeTime < :now";
 
 	public function insert($call) {
 		$this->db->insert("calls", array_intersect_key($call, self::$empty));
@@ -53,12 +59,16 @@ class CallManager extends BaseManager {
 	}
 
 	public function updateReminds($nextRremindTime, $now) {
-		$call = array("nextRemindTime" => $nextRremindTime);
+		$call = array (
+			"nextRemindTime" => $nextRremindTime 
+		);
 		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('callEndTime = 0 and nextRemindTime != 0 and nextChargeTime < ?', $now));
 	}
 
 	public function updateCharges($now) {
-		$call = array("nextChargeTime" => '00:00:00');
+		$call = array (
+			"nextChargeTime" => '00:00:00' 
+		);
 		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('callEndTime = 0 and nextChargeTime != 0 and nextChargeTime < ?', $now));
 	}
 

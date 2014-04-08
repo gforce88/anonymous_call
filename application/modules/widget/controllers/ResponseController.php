@@ -12,6 +12,8 @@ require_once 'models/CallManager.php';
 
 class Widget_ResponseController extends Zend_Controller_Action {
 	private $logger;
+	private $paypalService;
+	private $tropoService;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
@@ -19,6 +21,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
+		$this->paypalService = new PaypalService();
+		$this->tropoService = new TropoService();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
@@ -70,7 +74,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$validFields = array ();
 		$invalidFields = array ();
 		if ($_POST["hasCcInfo"] == 1) {
-			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"], $_POST["firstName"], $_POST["lastName"]);
+			// Register paypal credit card ID as payapl token
+			$paypalToken = $this->paypalService->regist($_POST["creditCardNumber"], $_POST["creditCardType"], $_POST["creditCardExp"], $_POST["creditCardCvc"], $_POST["firstName"], $_POST["lastName"]);
 			if ($paypalToken != null) {
 				array_push($validFields, "creditCardInfoInvalid");
 			} else {
@@ -121,8 +126,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$call = $this->callManager->insert($call);
 			$paramArr["callInx"] = $call["inx"];
 			
-			$tropoService = new TropoService();
-			$tropoService->initCall($paramArr);
+			// Init a Tropo call
+			$this->tropoService->initCall($paramArr);
 			
 			$result = array (
 				"success" => true,

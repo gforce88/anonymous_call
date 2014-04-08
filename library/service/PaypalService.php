@@ -17,31 +17,15 @@ class PaypalService {
 		$this->logger = LoggerFactory::getSysLogger();
 	}
 
-	public function regist($ccNumber, $ccExp, $ccCvc, $firstName, $lastName) {
+	public function regist($ccNumber, $ccType, $ccExp, $ccCvc, $firstName, $lastName) {
 		return "test_payapl_token"; // For testing only
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$ccExpArr = explode("/", $ccExp);
 		
-		$ccNum1 = substr($ccNumber, 0, 1);
-		$ccNum2 = substr($ccNumber, 0, 2);
-		$ccNum4 = substr($ccNumber, 0, 4);
-		
-		if ($ccNum4 == "6011" || $ccNum2 == "65") {
-			$ccType = "discover";
-		} else if ($ccNum2 == "51" || $ccNum2 == "52" || $ccNum2 == "53" || $ccNum2 == "54" || $ccNum2 == "55") {
-			$ccType = "mastercard";
-		} else if ($ccNum2 == "34" || $ccNum2 == "37") {
-			$ccType = "amex";
-		} else if ($ccNum1 == "4") {
-			$ccType = "visa";
-		} else {
-			return false;
-		}
-		
 		$card = new CreditCard();
-		$card->setType($ccType);
 		$card->setNumber($ccNumber);
+		$card->setType($ccType);
 		$card->setExpire_month($ccExpArr[0]);
 		$card->setExpire_year($ccExpArr[1]);
 		$card->setCvv2($ccCvc);
@@ -58,7 +42,7 @@ class PaypalService {
 		return $card->getId();
 	}
 
-	public function charge($paypalToken, $amount) {
+	public function charge($paypalToken, $chargeAmount) {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$creditCardToken = new CreditCardToken();
@@ -76,7 +60,7 @@ class PaypalService {
 		
 		$amount = new Amount();
 		$amount->setCurrency("USD");
-		$amount->setTotal($amount);
+		$amount->setTotal($chargeAmount);
 		
 		$transaction = new Transaction();
 		$transaction->setAmount($amount);
