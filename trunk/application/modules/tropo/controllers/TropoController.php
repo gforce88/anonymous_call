@@ -133,8 +133,8 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		);
 		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
-		$this->setEvent($tropo, $parameters, "startconf");
 		$this->setEvent($tropo, $parameters, "continue", "complete");
+		$this->setEvent($tropo, $parameters, "startconf");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
