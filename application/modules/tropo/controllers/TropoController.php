@@ -219,7 +219,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		}
 		if ($callStartTime != null) {
 			$partner = $this->partnerManager->findPartnerByCall($callInx);
-			$nextTime = new NextTime($callStartTime, $partner["minCallBlkDur"], $partner["callRemindOffset"]);
+			$nextTime = new NextTime($callStartTime, $partner);
 			
 			$call["callStartTime"] = $callStartTime->format("Y-m-d H:i:s");
 			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
