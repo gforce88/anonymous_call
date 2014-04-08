@@ -25,14 +25,10 @@ class Tropo_ConfController extends Zend_Controller_Action {
 		$paramArr["sessionTimeOffset"] = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($tropoSessionTimestamp);
 		
 		// parameters introduced in response controller
+		$paramArr["callInx"] = $session->getParameters("callInx");
 		$paramArr["partnerInx"] = $session->getParameters("partnerInx");
 		$paramArr["inviteInx"] = $session->getParameters("inviteInx");
-		$paramArr["callInx"] = $session->getParameters("callInx");
-		$paramArr["callType"] = $session->getParameters("callType");
-		$paramArr["partnerNumber"] = $session->getParameters("partnerNumber");
-		$paramArr["1stLegNumber"] = $session->getParameters("1stLegNumber");
-		$paramArr["2ndLegNumber"] = $session->getParameters("2ndLegNumber");
-		$paramArr["maxRingDur"] = $session->getParameters("maxRingDur");
+		$paramArr["mainCallSession"] = $session->getParameters("mainCallSession");
 		$paramArr["country"] = $session->getParameters("country");
 		
 		return $paramArr;
@@ -41,106 +37,63 @@ class Tropo_ConfController extends Zend_Controller_Action {
 	public function indexAction() {
 		$tropoJson = file_get_contents("php://input");
 		if ($tropoJson == null) {
-			$this->logger->logInfo("TropoController", "indexAction", "Tropo check via HTTP Header request.");
+			$this->logger->logInfo("ConfController", "indexAction", "Tropo check via HTTP Header request.");
 			$tropo = new Tropo();
 			$tropo->renderJson();
 		} else {
-			$this->logger->logInfo("TropoController", "New Tropo session", $tropoJson);
+			$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
 			$session = new Session($tropoJson);
 			$paramArr = $this->initSessionParameters($session);
 			$_GET = array_merge($_GET, $paramArr);
 			$this->log($_GET);
-			$this->call1stLeg();
+			
+			$response = $this->sendStartconfSignal($_GET["mainCallSession"]);
+			if (!$response) {
+				$this->log("Main call exit. conference not started");
+				$this->failconnectRepAction();
+				$this->hangupAction();
+				return;
+			}
+			
+			$parameters = $this->generateInteractiveParameters($_GET);
+			$tropo = $this->initTropo($parameters);
+			
+			$this->setEvent($tropo, $parameters, "joinconf");
+			$tropo->renderJson();
 		}
 	}
 
-	private function call1stLeg() {
-		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_INIT);
+	public function joinconfAction() {
+		$this->log("Start join conferance call");
 		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$callOptions = array (
-			"from" => $_GET["partnerNumber"],
-			"allowSignals" => "",
-			"timeout" => floatval($_GET["maxRingDur"]) 
+		$confOptions = array (
+			"name" => "conference",
+			"id" => "CONF." . $_GET["mainCallSession"],
+			"mute" => false,
+			"terminator" => "#",
+			"allowSignals" => "exit" 
 		);
-		$tropo->call($_GET["1stLegNumber"], $callOptions);
+		$tropo->conference("CONF." . $_GET["first_leg_session_id"], $confOptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "greeting");
-		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
-		$tropo->renderJSON();
-	}
-
-	public function failedconnectAction() {
-		$this->log("Failed to connect to 1st leg: " . $_GET["1stLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$this->hangupAction();
-	}
-
-	public function greetingAction() {
-		$this->log("Start greeting for 1st leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_ANSWERED, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
-			$sentences = $ivrService->promptInviterGreeting() . " ";
-		} else {
-			$sentences = $ivrService->promptInviteeGreeting() . " ";
-		}
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$askOptions = array (
-			"attempts" => 1,
-			"bargein" => true,
-			"timeout" => 5,
-			"allowSignals" => "" 
-		);
-		$tropo->ask($sentences, $askOptions);
-		$this->log("Play audio " . $sentences);
-		
-		$this->setEvent($tropo, $parameters, "continue", "transfer");
-		$tropo->RenderJson();
-	}
-
-	public function transferAction() {
-		$this->log("Start transfer to 2nd leg: " . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_1STLEG_TO_2NDLEG, null, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters, false);
-		
-		$transferOptions = array (
-			"from" => $_GET["partnerNumber"],
-			"allowSignals" => "",
-			"timeout" => floatval($_GET["maxRingDur"]),
-			"ringRepeat" => 10 
-		);
-		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
-		
-		$this->setEvent($tropo, $parameters, "continue", "complete");
-		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
-		$this->setEvent($tropo, $parameters, "hangup", "complete");
-		$this->setEvent($tropo, $parameters, "error");
+		$this->setEvent($tropo, $parameters, "continue", "playremind");
 		$tropo->renderJson();
 	}
 
-	public function failedtransferAction() {
-		$this->log("Failed transfer to 2nd leg");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_NOANSWER, null, null, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$this->hangupAction();
+	private function sendJoinconfSignal($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
+		$this->log("sending signal to : [$url]");
+		$content = file_get_contents("$url");
 	}
 
-	public function completeAction() {
-		$this->log("Call completed: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_2NDLEG_ANSWERED, null, null, (new DateTime())->format("Y-m-d H:i:s"));
-		
-		$this->hangupAction();
+	private function sendStartconfSignal($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
+		$content = file_get_contents("$url");
+		$this->log("sending signal to : [$url] > content $content");
+		if (strpos($content, "NOTFOUND")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public function hangupAction() {
