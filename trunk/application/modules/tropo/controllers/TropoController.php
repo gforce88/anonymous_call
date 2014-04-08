@@ -5,6 +5,7 @@ require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
 require_once 'models/PartnerManager.php';
+require_once 'data/NextTime.php';
 
 class Tropo_TropoController extends Zend_Controller_Action {
 	private $logger;
