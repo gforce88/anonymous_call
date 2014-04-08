@@ -3,7 +3,10 @@ require_once 'models/BaseManager.php';
 
 class PartnerManager extends BaseManager {
 
-	const SQL_FIND_PARTNER_BY_INX = "select * from partners where inx=:inx";
+	const SQL_FIND_PARTNER_BY_INX = "
+			select *
+			  from partners
+			 where inx=:inx";
 
 	const SQL_FIND_PARTNER_BY_CALL = "
 			select *

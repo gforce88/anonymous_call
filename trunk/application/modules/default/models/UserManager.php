@@ -11,7 +11,10 @@ class UserManager extends BaseManager {
 		"createTime" => null 
 	);
 
-	const SQL_FIND_USER_BY_INX = "select * from users where inx=:inx";
+	const SQL_FIND_USER_BY_INX = "
+			select *
+			  from users
+			 where inx=:inx";
 
 	public function insert($user) {
 		$this->db->insert("users", array_intersect_key($user, self::$empty));

@@ -18,7 +18,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	public function indexAction() {
 		$partner = $this->partnerManager->findPartnerByCall($_REQUEST["callInx"]);
 		$this->view->assign("minCallBlkDur", $partner["minCallBlkDur"]);
-		$this->view->assign("callAlertOffset", $partner["callAlertOffset"]);
+		$this->view->assign("callRemindOffset", $partner["callRemindOffset"]);
 		$this->view->assign("country", $partner["country"]);
 		$this->view->assign("callInx", $_REQUEST["callInx"]);
 	}

@@ -12,9 +12,16 @@ class InviteManager extends BaseManager {
 		"inviteTime" => null 
 	);
 
-	const SQL_FIND_INVITE_BY_INX = "select * from invites where inx = :inx";
+	const SQL_FIND_INVITE_BY_INX = "
+			select *
+			  from invites
+			 where inx = :inx";
 
-	const SQL_FIND_INVITE_BY_INX_TOKEN = "select * from invites where inx = :inx and inviteToken = :token";
+	const SQL_FIND_INVITE_BY_INX_TOKEN = "
+			select *
+			  from invites
+			 where inx = :inx
+			   and inviteToken = :token";
 
 	public function insert($invite) {
 		$this->db->insert("invites", array_intersect_key($invite, self::$empty));
