@@ -2,10 +2,12 @@
 require_once 'util/HttpUtil.php';
 
 class TropoService {
+	private $logger;
 	private $httpUtil;
 	private $querystringManager;
 
-	public function __construct() {
+	public function __construct($logger = null) {
+		$this->logger = $logger;
 		$this->httpUtil = new HttpUtil();
 		$this->setting = Zend_Registry::get("TROPO_SETTING");
 	}
@@ -26,21 +28,21 @@ class TropoService {
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
 
-	public function sendJoinconfSignal($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
-		$this->log("sending signal to : [$url]");
-		$content = file_get_contents("$url");
-	}
-
 	public function sendStartconfSignal($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["conf"]["token"];
 		$content = file_get_contents("$url");
-		$this->log("sending signal to : [$url] > content $content");
+		$this->logger->log("sending signal to : [$url] > content $content");
 		if (strpos($content, "NOTFOUND")) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	public function sendJoinconfSignal($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["conf"]["token"];
+		$this->logger->log("sending signal to : [$url]");
+		$content = file_get_contents("$url");
 	}
 
 }
