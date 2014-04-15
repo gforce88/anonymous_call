@@ -48,7 +48,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			$this->log($_GET);
 			
 			$tropoService = new TropoService($this->logger);
-			$response = $tropoService->sendStartconfSignal($_GET["mainCallSession"]);
+			$response = $tropoService->startConf($_GET["mainCallSession"]);
 			
 			if (!$response) {
 				$this->log("Main call exit. conference not started");
@@ -57,11 +57,12 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			}
 			$parameters = $this->generateInteractiveParameters($_GET);
 			$tropo = $this->initTropo($parameters);
-
+			
+			$this->setEvent($tropo, $parameters, "continue", "joinconf");
 			$this->setEvent($tropo, $parameters, "joinconf");
 			$tropo->renderJson();
 			
-			$tropoService->sendJoinConfSignal($_GET["session_id"]);
+			$tropoService->joinConf($_GET["session_id"]);
 		}
 	}
 
@@ -75,15 +76,35 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			"terminator" => "#",
 			"allowSignals" => "exit" 
 		);
-		$tropo->conference("CONF." . $_GET["first_leg_session_id"], $confOptions);
+		$tropo->conference("CONF." . $_GET["mainCallSession"], $confOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "playremind");
 		$tropo->renderJson();
 	}
 
+	public function playremindAction() {
+		$this->log("Play remind");
+		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+		$sentences = $ivrService->promptInviterGreeting() . " ";
+		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters);
+		
+		$askOptions = array (
+			"attempts" => 1,
+			"bargein" => true,
+			"timeout" => 5,
+			"allowSignals" => "" 
+		);
+		$tropo->ask($sentences, $askOptions);
+		$this->log("Play audio " . $sentences);
+		
+		$this->setEvent($tropo, $parameters, "continue", "hangup");
+		$tropo->RenderJson();
+	}
+
 	public function hangupAction() {
-		$this->log("Call is hungup");
-		$this->updateCallResult($_GET["callInx"], null, null, null, (new DateTime())->format("Y-m-d H:i:s"));
+		$this->log("Conf call is hungup");
 		
 		$tropo = new Tropo();
 		$tropo->hangup();
