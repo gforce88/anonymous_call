@@ -30,8 +30,8 @@ class TropoService {
 
 	public function sendStartConfSignal($sessionId) {
 		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["conf"]["token"];
-		$content = file_get_contents("$url");
-		$this->logger->log("Sent start signal to : [$url] > content: $content");
+		$content = file_get_contents($url);
+		$this->logger->logInfo("Sent start signal to : [$url] > content: $content");
 		if (strpos($content, "NOTFOUND")) {
 			return false;
 		} else {
@@ -41,8 +41,8 @@ class TropoService {
 
 	public function sendJoinConfSignal($sessionId) {
 		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["conf"]["token"];
-		$content = file_get_contents("$url");
-		$this->logger->log("Sent join signal to : [$url] > content: $content");
+		$content = file_get_contents($url);
+		$this->logger->logInfo("Sent join signal to : [$url] > content: $content");
 	}
 
 }
