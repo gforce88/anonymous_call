@@ -80,23 +80,6 @@ class Tropo_ConfController extends Zend_Controller_Action {
 		$tropo->renderJson();
 	}
 
-	private function sendJoinconfSignal($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
-		$this->log("sending signal to : [$url]");
-		$content = file_get_contents("$url");
-	}
-
-	private function sendStartconfSignal($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
-		$content = file_get_contents("$url");
-		$this->log("sending signal to : [$url] > content $content");
-		if (strpos($content, "NOTFOUND")) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
 	public function hangupAction() {
 		$this->log("Call is hungup");
 		$this->updateCallResult($_GET["callInx"], null, null, null, (new DateTime())->format("Y-m-d H:i:s"));
