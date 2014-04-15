@@ -27,7 +27,7 @@ class CallManager extends BaseManager {
 			 where inviteInx=:inviteInx";
 
 	const SQL_FIND_REMINDS = "
-			select calls.inx, partners.inx as partinerInx, invites.inx as inviteInx, calls.tropoSession, partners.minCallBlkDur, partners.callRemindOffset, partners.country
+			select calls.inx, partners.inx as partnerInx, invites.inx as inviteInx, calls.tropoSession, partners.minCallBlkDur, partners.callRemindOffset, partners.country
 			  from calls, invites, partners
 			 where calls.inviteInx = invites.inx
 			   and invites.partnerInx = partners.inx
