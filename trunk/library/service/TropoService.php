@@ -28,7 +28,7 @@ class TropoService {
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
 
-	public function sendStartconfSignal($sessionId) {
+	public function sendStartConfSignal($sessionId) {
 		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["conf"]["token"];
 		$content = file_get_contents("$url");
 		$this->logger->log("Sent start signal to : [$url] > content: $content");
@@ -39,7 +39,7 @@ class TropoService {
 		}
 	}
 
-	public function sendJoinconfSignal($sessionId) {
+	public function sendJoinConfSignal($sessionId) {
 		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["conf"]["token"];
 		$content = file_get_contents("$url");
 		$this->logger->log("Sent join signal to : [$url] > content: $content");
