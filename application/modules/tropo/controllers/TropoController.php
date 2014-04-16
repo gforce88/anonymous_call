@@ -153,15 +153,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
 		
-		$confOptions = array (
-			"name" => "conference",
-			"id" => $confId,
-			"mute" => false,
-			"terminator" => "#",
-			"allowSignals" => "" 
-		);
-		
-		$tropo->conference(null, $confOptions);
+		$tropo->conference($confId);
 		$tropo->renderJson();
 	}
 
