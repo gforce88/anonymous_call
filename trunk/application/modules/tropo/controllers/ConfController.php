@@ -110,7 +110,6 @@ class Tropo_ConfController extends Zend_Controller_Action {
 
 	public function errorAction() {
 		$this->log("System error with below parameters:");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_ERROR, null, null, (new DateTime())->format("Y-m-d H:i:s"));
 		
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
@@ -132,11 +131,11 @@ class Tropo_ConfController extends Zend_Controller_Action {
 
 	private function setEvent($tropo, $parameters, $event, $handler = null) {
 		if ($handler == null) {
-			$handler = $event . ".php";
+			$handler = $event;
 		}
 		$tropo->on(array (
 			"event" => $event,
-			"next" => "$handler?$parameters" 
+			"next" => "$handler.php?$parameters" 
 		));
 	}
 
@@ -150,23 +149,6 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			$i++;
 		}
 		return $parameters;
-	}
-
-	private function updateCallResult($callInx, $callResult = null, $callStartTime = null, $transferStartTime = null, $callEndTime = null) {
-		$call = $this->callManager->findcallByInx($callInx);
-		if ($callResult != null) {
-			$call["callResult"] = $callResult;
-		}
-		if ($callStartTime != null) {
-			$call["callStartTime"] = $callStartTime;
-		}
-		if ($transferStartTime != null) {
-			$call["transferStartTime"] = $transferStartTime;
-		}
-		if ($callEndTime != null) {
-			$call["callEndTime"] = $callEndTime;
-		}
-		$this->callManager->update($call);
 	}
 
 	private function log($infomations) {
