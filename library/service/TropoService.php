@@ -7,7 +7,7 @@ class TropoService {
 	private $httpUtil;
 	private $querystringManager;
 
-	public function __construct($logger = null) {
+	public function __construct() {
 		$this->logger = LoggerFactory::getIvrLogger();
 		$this->httpUtil = new HttpUtil();
 		$this->setting = Zend_Registry::get("TROPO_SETTING");
