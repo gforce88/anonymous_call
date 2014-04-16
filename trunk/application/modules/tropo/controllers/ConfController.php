@@ -36,42 +36,42 @@ class Tropo_ConfController extends Zend_Controller_Action {
 
 	public function indexAction() {
 		$tropoJson = file_get_contents("php://input");
-// 		if ($tropoJson == null) {
-// 			$this->logger->logInfo("ConfController", "indexAction", "Tropo check via HTTP Header request.");
-// 			$tropo = new Tropo();
-// 			$tropo->renderJson();
-// 		} else {
-			$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
-			$session = new Session($tropoJson);
-			$paramArr = $this->initSessionParameters($session);
-			$_GET = array_merge($_GET, $paramArr);
-			$this->log($_GET);
-			
-			$parameters = $this->generateInteractiveParameters($_GET);
-			$tropo = $this->initTropo($parameters);
-			
-			$confId = "CONF." . $_GET["mainCallSession"];
-			$confOptions = array (
-					"name" => "conference",
-					"id" => $confId,
-					"mute" => false,
-					"terminator" => "#",
-					"allowSignals" => "exit"
-			);
-			$tropo->conference(null, $confOptions);
-			$this->log("Start conferance call: $confId");
-			
-			$this->setEvent($tropo, $parameters, "continue", "playremind");
-			$tropo->renderJson();
-				
-			$tropoService = new TropoService($this->logger);
-			$response = $tropoService->joinConf($_GET["mainCallSession"]);
-			if (!$response) {
-				$this->log("Main call exit. conference not started");
-				$this->hangupAction();
-				return;
-			}
-// 		}
+		$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
+		$session = new Session($tropoJson);
+		$paramArr = $this->initSessionParameters($session);
+		$_GET = array_merge($_GET, $paramArr);
+		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters);
+		
+		$confId = "CONF." . $_GET["mainCallSession"];
+		$confOptions = array (
+			"name" => "conference",
+			"id" => $confId,
+			"mute" => false,
+			"terminator" => "#",
+			"allowSignals" => "exit" 
+		);
+		$tropo->conference(null, $confOptions);
+		$this->log("Start conferance call: $confId");
+		
+		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$tropo->renderJson();
+	}
+
+	public function joinconfAction() {
+		$this->log("Start join conferance call");
+		
+		$tropoService = new TropoService($this->logger);
+		$response = $tropoService->joinConf($_GET["mainCallSession"]);
+		if (!$response) {
+			$this->log("Main call exit. conference not started");
+			$this->hangupAction();
+			return;
+		}
+		
+		$this->setEvent($tropo, $parameters, "continue", "playremind");
+		$tropo->renderJson();
 	}
 
 	public function playremindAction() {
@@ -104,7 +104,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 	}
 
 	public function errorAction() {
-		$this->log("System error with below parameters:");
+		$this->log("Conf system error with below parameters:");
 		
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
