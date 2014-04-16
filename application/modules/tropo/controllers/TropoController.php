@@ -151,8 +151,16 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$confId = "CONF." . $_GET["session_id"];
 		$this->log("Join conferance call: $confId");
 		
+		$confOptions = array (
+			"name" => "conference",
+			"id" => $confId,
+			"mute" => false,
+			"terminator" => "#",
+			"allowSignals" => "exit" 
+		);
+		
 		$tropo = $this->initTropo();
-		$tropo->conference($confId);
+		$tropo->conference(null, $confOptions);
 		$tropo->renderJson();
 	}
 
