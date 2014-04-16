@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 require_once 'util/MultiLang.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
@@ -20,6 +21,8 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		$logger = LoggerFactory::getIvrLogger();
+		$logger->logInfo(1, 2, 3);
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}

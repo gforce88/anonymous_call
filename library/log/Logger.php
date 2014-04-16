@@ -26,7 +26,7 @@ class Logger {
 	private function formatMessage($class, $function, $info) {
 		$date = (new DateTime)->format("Y-m-d");
 		$time = (new DateTime)->format("H:i:s");
-		$resule = formatInformation($info);
+		$resule = $this->formatInformation($info);
 		return "$date|$time|$class|$function|$resule";
 	}
 	
