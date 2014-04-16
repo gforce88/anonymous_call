@@ -54,7 +54,8 @@ class TimerController extends Zend_Controller_Action {
 				"mainCallSession" => $remind["tropoSession"],
 				"country" => $remind["country"] 
 			);
-			$this->tropoService->initConfCall($paramArr);
+			// $this->tropoService->initConfCall($paramArr);
+			$this->tropoService->playRemind($remind["tropoSession"]);
 		}
 		
 		// 3. Invoke Paypal service for charge

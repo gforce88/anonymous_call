@@ -132,7 +132,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		);
 		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
-		$this->setEvent($tropo, $parameters, "startconf");
+		$this->setEvent($tropo, $parameters, "playremind");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
@@ -146,15 +146,19 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->hangupAction();
 	}
 
-	public function startconfAction() {
-		$confId = "CONF." . $_GET["session_id"];
-		$this->log("Start conferance call: $confId");
+	public function playremindAction() {
+		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+		$sentences = $ivrService->promptInviterGreeting() . " ";
+		$this->log("Play remind audio " . $sentences);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters, false);
+		$tropo = $this->initTropo($parameters);
 		
-		$tropo->conference($confId);
-		$tropo->renderJson();
+		$sayOptions = array (
+			"allowSignals" => "" 
+		);
+		$tropo->say($sentences, $sayOptions);
+		$tropo->RenderJson();
 	}
 
 	public function completeAction() {
