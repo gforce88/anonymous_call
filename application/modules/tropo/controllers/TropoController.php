@@ -126,7 +126,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		
 		$transferOptions = array (
 			"from" => $_GET["partnerNumber"],
-			"allowSignals" => "joinconf",
+			"allowSignals" => "startconf",
 			"timeout" => floatval($_GET["maxRingDur"]),
 			"ringRepeat" => 10 
 		);
@@ -147,22 +147,32 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->hangupAction();
 	}
 
-	public function joinconfAction() {
+	public function startconfAction() {
 		$confId = "CONF." . $_GET["session_id"];
-		$this->log("Join conferance call: $confId");
+		$this->log("Start conferance call: $confId");
 		
-		$confOptions = array (
-			"name" => "conference",
-			"id" => $confId,
-			"mute" => false,
-			"terminator" => "#",
-			"allowSignals" => "exit" 
-		);
-		
+		$conference = new Conference("conference", $confId, false);
 		$tropo = $this->initTropo();
-		$tropo->conference(null, $confOptions);
+		$tropo->conference($conference);
 		$tropo->renderJson();
 	}
+
+// 	public function joinconfAction() {
+// 		$confId = "CONF." . $_GET["session_id"];
+// 		$this->log("Join conferance call: $confId");
+		
+// 		$confOptions = array (
+// 			"name" => "conference",
+// 			"id" => $confId,
+// 			"mute" => false,
+// 			"terminator" => "#",
+// 			"allowSignals" => "exit" 
+// 		);
+		
+// 		$tropo = $this->initTropo();
+// 		$tropo->conference(null, $confOptions);
+// 		$tropo->renderJson();
+// 	}
 
 	public function completeAction() {
 		$this->log("Call completed: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);

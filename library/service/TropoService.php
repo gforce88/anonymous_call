@@ -28,15 +28,21 @@ class TropoService {
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
 
-	public function joinConf($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
+	public function startConf($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
 		$content = file_get_contents($url);
-		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
+		$this->logger->logInfo("Sent startconf signal to : [$url] > content: $content");
 		if (strpos($content, "NOTFOUND")) {
 			return false;
 		} else {
 			return true;
 		}
+	}
+
+	public function joinConf($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["conf"]["token"];
+		$content = file_get_contents($url);
+		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
 	}
 
 }
