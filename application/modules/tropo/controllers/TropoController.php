@@ -52,7 +52,6 @@ class Tropo_TropoController extends Zend_Controller_Action {
 			$session = new Session($tropoJson);
 			$paramArr = $this->initSessionParameters($session);
 			$_GET = array_merge($_GET, $paramArr);
-			$this->log($_GET);
 			$this->call1stLeg();
 		}
 	}
