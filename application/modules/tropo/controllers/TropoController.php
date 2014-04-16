@@ -152,12 +152,15 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->log("Play remind audio " . $sentences);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
+		$tropo = $this->initTropo($parameters, false);
 		
 		$sayOptions = array (
 			"allowSignals" => "" 
 		);
 		$tropo->say($sentences, $sayOptions);
+		
+		$this->setEvent($tropo, $parameters, "hangup", "complete");
+		$this->setEvent($tropo, $parameters, "error");
 		$tropo->RenderJson();
 	}
 
