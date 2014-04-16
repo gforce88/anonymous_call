@@ -63,7 +63,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			$tropo->renderJson();
 				
 			$tropoService = new TropoService($this->logger);
-			$response = $tropoService->startConf($_GET["mainCallSession"]);
+			$response = $tropoService->joinConf($_GET["mainCallSession"]);
 			if (!$response) {
 				$this->log("Main call exit. conference not started");
 				$this->hangupAction();
