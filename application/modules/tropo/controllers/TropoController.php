@@ -149,7 +149,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 	}
 
 	public function startconfAction() {
-		$this->log("Start waiting conferance call");
+		$this->log("Start conferance call");
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
