@@ -127,17 +127,14 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		
 		$transferOptions = array (
 			"from" => $_GET["partnerNumber"],
-			"allowSignals" => array (
-				"startconf",
-				"exit" 
-			),
+			"allowSignals" => "joinconf",
 			"timeout" => floatval($_GET["maxRingDur"]),
 			"ringRepeat" => 10 
 		);
 		$tropo->transfer($_GET["2ndLegNumber"], $transferOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "complete");
-		$this->setEvent($tropo, $parameters, "startconf");
+		$this->setEvent($tropo, $parameters, "joinconf");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedtransfer");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
