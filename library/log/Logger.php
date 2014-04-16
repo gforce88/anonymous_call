@@ -8,33 +8,37 @@ class Logger {
 		$this->logger = $logger;
 	}
 
-	public function logInfo($class, $function, $infomations) {
-		$message = $this->formatMessage($class, $function, $infomations);
+	public function logInfo($class, $function, $info) {
+		$message = $this->formatMessage($class, $function, $info);
 		$this->logger->info($message);
 	}
 
-	public function logWarn($class, $function, $infomations) {
-		$message = $this->formatMessage($class, $function, $infomations);
+	public function logWarn($class, $function, $info) {
+		$message = $this->formatMessage($class, $function, $info);
 		$this->logger->warn($message);
 	}
 
-	public function logError($class, $function, $infomations) {
-		$message = $this->formatMessage($class, $function, $infomations);
+	public function logError($class, $function, $info) {
+		$message = $this->formatMessage($class, $function, $info);
 		$this->logger->error($message);
 	}
 
-	private function formatMessage($class, $function, $infomations) {
+	private function formatMessage($class, $function, $info) {
 		$date = (new DateTime)->format("Y-m-d");
 		$time = (new DateTime)->format("H:i:s");
-		if (is_array($infomations)) {
-			$value = "";
-			foreach ($infomations as $key => $info) {
-				$value .= "[" . $key . ":" . $info . "]";
+		$resule = formatInformation($info);
+		return "$date|$time|$class|$function|$resule";
+	}
+	
+	private function formatInformation($info) {
+		if (is_array($info)) {
+			foreach ($info as $key => $val) {
+				$result .= "[" . $key . ":" . $this->formatInformation($val) . "]";
 			}
 		} else {
-			$value = $infomations;
+			$result = $info;
 		}
-		return "$date|$time|$class|$function|$value";
+		return $result;
 	}
 
 }
