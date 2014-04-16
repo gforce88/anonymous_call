@@ -18,7 +18,7 @@ class TimerController extends Zend_Controller_Action {
 		
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->paypalService = new PaypalService();
-		$this->tropoService = new TropoService($this->logger);
+		$this->tropoService = new TropoService();
 		$this->callManager = new CallManager();
 	}
 	
