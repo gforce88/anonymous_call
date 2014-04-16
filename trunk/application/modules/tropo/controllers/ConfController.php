@@ -47,10 +47,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 		$confId = "CONF." . $_GET["mainCallSession"];
 		$confOptions = array (
 			"name" => "conference",
-			"id" => $confId,
-			"mute" => false,
-			"terminator" => "#",
-			"allowSignals" => "exit" 
+			"id" => $confId 
 		);
 		$tropo->conference(null, $confOptions);
 		$this->log("Start conferance call: $confId");
@@ -60,7 +57,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 	}
 
 	public function joinconfAction() {
-		$this->log("Start join conferance call");
+		$this->log("Before join conferance call");
 		
 		$tropoService = new TropoService($this->logger);
 		$response = $tropoService->joinConf($_GET["mainCallSession"]);
