@@ -49,20 +49,17 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			
 			$tropoService = new TropoService($this->logger);
 			$response = $tropoService->startConf($_GET["mainCallSession"]);
-			
 			if (!$response) {
 				$this->log("Main call exit. conference not started");
 				$this->hangupAction();
 				return;
 			}
+			
 			$parameters = $this->generateInteractiveParameters($_GET);
 			$tropo = $this->initTropo($parameters);
 			
 			$this->setEvent($tropo, $parameters, "continue", "joinconf");
-			$this->setEvent($tropo, $parameters, "joinconf");
 			$tropo->renderJson();
-			
-			$tropoService->joinConf($_GET["session_id"]);
 		}
 	}
 
@@ -83,7 +80,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 	}
 
 	public function playremindAction() {
-		$this->log("Play remind");
+		$this->log("Play remind audio");
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		$sentences = $ivrService->promptInviterGreeting() . " ";
 		

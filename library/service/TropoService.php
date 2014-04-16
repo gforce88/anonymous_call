@@ -29,7 +29,7 @@ class TropoService {
 	}
 
 	public function startConf($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["conf"]["token"];
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
 		$content = file_get_contents($url);
 		$this->logger->logInfo("Sent start signal to : [$url] > content: $content");
 		if (strpos($content, "NOTFOUND")) {
