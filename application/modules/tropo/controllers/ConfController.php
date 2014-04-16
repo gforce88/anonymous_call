@@ -36,17 +36,32 @@ class Tropo_ConfController extends Zend_Controller_Action {
 
 	public function indexAction() {
 		$tropoJson = file_get_contents("php://input");
-		if ($tropoJson == null) {
-			$this->logger->logInfo("ConfController", "indexAction", "Tropo check via HTTP Header request.");
-			$tropo = new Tropo();
-			$tropo->renderJson();
-		} else {
+// 		if ($tropoJson == null) {
+// 			$this->logger->logInfo("ConfController", "indexAction", "Tropo check via HTTP Header request.");
+// 			$tropo = new Tropo();
+// 			$tropo->renderJson();
+// 		} else {
 			$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
 			$session = new Session($tropoJson);
 			$paramArr = $this->initSessionParameters($session);
 			$_GET = array_merge($_GET, $paramArr);
 			$this->log($_GET);
 			
+			$parameters = $this->generateInteractiveParameters($_GET);
+			$tropo = $this->initTropo($parameters);
+			
+			$confOptions = array (
+					"name" => "conference",
+					"id" => "CONF." . $_GET["mainCallSession"],
+					"mute" => false,
+					"terminator" => "#",
+					"allowSignals" => "exit"
+			);
+			$tropo->conference(null, $confOptions);
+			
+			$this->setEvent($tropo, $parameters, "continue", "playremind");
+			$tropo->renderJson();
+				
 			$tropoService = new TropoService($this->logger);
 			$response = $tropoService->startConf($_GET["mainCallSession"]);
 			if (!$response) {
@@ -54,32 +69,7 @@ class Tropo_ConfController extends Zend_Controller_Action {
 				$this->hangupAction();
 				return;
 			}
-			
-			$parameters = $this->generateInteractiveParameters($_GET);
-			$tropo = $this->initTropo($parameters);
-			
-			$this->setEvent($tropo, $parameters, "continue", "joinconf");
-			$tropo->renderJson();
-		}
-	}
-
-	public function joinconfAction() {
-		$this->log("Start join conferance call");
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$confOptions = array (
-			"name" => "conference",
-			"id" => "CONF." . $_GET["mainCallSession"],
-			"mute" => false,
-			"terminator" => "#",
-			"allowSignals" => "exit" 
-		);
-		$tropo->conference("CONF." . $_GET["mainCallSession"], $confOptions);
-		
-		$this->setEvent($tropo, $parameters, "continue", "playremind");
-		$tropo->renderJson();
+// 		}
 	}
 
 	public function playremindAction() {

@@ -151,19 +151,12 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$this->hangupAction();
 	}
 
-	public function startconfAction() {
-		$this->log("Start conferance call");
+	public function joinconfAction() {
+		$confId = "CONF." . $_GET["session_id"];
+		$this->log("Join conferance call: $confId");
 		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$confOptions = array (
-			"name" => "conference",
-			"id" => "CONF." . $_GET["session_id"] 
-		);
-		$this->log($confOptions);
-		
-		$tropo->conference(null, $confOptions);
+		$tropo = $this->initTropo();
+		$tropo->conference($confId);
 		$tropo->renderJson();
 	}
 
@@ -195,7 +188,7 @@ class Tropo_TropoController extends Zend_Controller_Action {
 		$tropo->renderJson();
 	}
 
-	private function initTropo($parameters, $appendError = true) {
+	private function initTropo($parameters = null, $appendError = true) {
 		$tropo = new Tropo();
 		if ($appendError) {
 			$this->setEvent($tropo, $parameters, "hangup");
