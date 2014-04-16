@@ -1,4 +1,5 @@
 <?php
+require_once 'log/LoggerFactory.php';
 require_once 'util/HttpUtil.php';
 
 class TropoService {
@@ -7,7 +8,7 @@ class TropoService {
 	private $querystringManager;
 
 	public function __construct($logger = null) {
-		$this->logger = $logger;
+		$this->logger = LoggerFactory::getIvrLogger();
 		$this->httpUtil = new HttpUtil();
 		$this->setting = Zend_Registry::get("TROPO_SETTING");
 	}
