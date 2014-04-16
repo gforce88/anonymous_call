@@ -50,14 +50,16 @@ class Tropo_ConfController extends Zend_Controller_Action {
 			$parameters = $this->generateInteractiveParameters($_GET);
 			$tropo = $this->initTropo($parameters);
 			
+			$confId = "CONF." . $_GET["mainCallSession"];
 			$confOptions = array (
 					"name" => "conference",
-					"id" => "CONF." . $_GET["mainCallSession"],
+					"id" => $confId,
 					"mute" => false,
 					"terminator" => "#",
 					"allowSignals" => "exit"
 			);
 			$tropo->conference(null, $confOptions);
+			$this->log("Start conferance call: $confId");
 			
 			$this->setEvent($tropo, $parameters, "continue", "playremind");
 			$tropo->renderJson();

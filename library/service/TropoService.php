@@ -31,7 +31,7 @@ class TropoService {
 	public function joinConf($sessionId) {
 		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["token"];
 		$content = file_get_contents($url);
-		$this->logger->logInfo("Sent start signal to : [$url] > content: $content");
+		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
 		if (strpos($content, "NOTFOUND")) {
 			return false;
 		} else {
