@@ -45,4 +45,10 @@ class TropoService {
 		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
 	}
 
+	public function playRemind($sessionId) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=playremind&token=" . $this->setting["token"];
+		$content = file_get_contents($url);
+		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
+	}
+
 }
