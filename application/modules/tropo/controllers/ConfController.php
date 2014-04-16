@@ -66,6 +66,9 @@ class Tropo_ConfController extends Zend_Controller_Action {
 	public function joinconfAction() {
 		$this->log("Start join conferance call");
 		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters);
+		
 		$confOptions = array (
 			"name" => "conference",
 			"id" => "CONF." . $_GET["mainCallSession"],
