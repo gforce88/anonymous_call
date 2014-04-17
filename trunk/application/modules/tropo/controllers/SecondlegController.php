@@ -92,8 +92,10 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$this->log("$this->indicator completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
-		$tropoService = new TropoService();
-		$tropoService->exit1stLeg($call["firstLegSession"]);
+		if ($call["firstLegSession"] != null) {
+			$tropoService = new TropoService();
+			$tropoService->exit1stLeg($call["firstLegSession"]);
+		}
 		
 		$this->exitAction();
 	}
