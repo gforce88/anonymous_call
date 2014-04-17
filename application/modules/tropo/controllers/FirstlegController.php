@@ -129,16 +129,32 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropo->conference(null, $conference);
 		
 		$this->setEvent($tropo, $parameters, "playremind");
+		$this->setEvent($tropo, $parameters, "exit", "complete");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
 	}
 
 	public function playremindAction() {
-		parent::playremindAction();
+		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+		$sentences = $ivrService->promptInviterGreeting() . " ";
+		$this->log("$this->indicator play remind audio " . $sentences);
+		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters, false);
+		
+		$sayOptions = array (
+			"allowSignals" => "" 
+		);
+		$tropo->say($sentences, $sayOptions);
+		
+		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$this->setEvent($tropo, $parameters, "hangup", "complete");
+		$this->setEvent($tropo, $parameters, "error");
+		$tropo->RenderJson();
 	}
 
-	public function completeAction() {
+		public function completeAction() {
 		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		$call = array (
 			"inx" => $_GET["callInx"],

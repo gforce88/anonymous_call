@@ -89,22 +89,17 @@ class Tropo_SecondlegController extends BaseTropoController {
 		);
 		$tropo->conference(null, $conference);
 		
-		$json = file_get_contents("php://input");
-		$this->log($json);
-		$this->log($_GET);
-		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$this->setEvent($tropo, $parameters, "joinconf");
+		$this->setEvent($tropo, $parameters, "exit");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
 	}
 
-	public function playremindAction() {
-		parent::playremindAction();
-	}
-
 	public function completeAction() {
 		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
+		
+		// Do NOT record the call status here. The call status will be recorded in 1st leg
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
 		if ($call["firstLegSession"] != null) {
