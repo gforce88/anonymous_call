@@ -154,6 +154,15 @@ CREATE TABLE `countries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- ------------------------------------
+-- Hosekeeping jobs
+-- ------------------------------------
+DROP EVENT IF EXISTS `hosekeeping`;
+CREATE EVENT `hosekeeping`
+  ON SCHEDULE EVERY 1 DAY
+  STARTS CAST(CURDATE() AS DATETIME)
+  DO DELETE FROM `calls_hist` where `insertedTime` < now() - INTERVAL 7 DAY;
+
+-- ------------------------------------
 -- Triggers for calls --> calls_hist
 -- ------------------------------------
 DELIMITER /
@@ -222,15 +231,6 @@ CREATE TRIGGER `calls_hist_a_u` AFTER UPDATE ON `calls`
     );
   END /
 DELIMITER ;
-
--- ------------------------------------
--- Hosekeeping jobs
--- ------------------------------------
-DROP EVENT IF EXISTS `hosekeeping`;
-CREATE EVENT `hosekeeping`
-  ON SCHEDULE EVERY 1 DAY
-  STARTS CAST(CURDATE() AS DATETIME)
-  DO DELETE FROM `calls_hist` where `insertedTime` < now() - INTERVAL 7 DAY;
 
 -- ------------------------------------
 -- Master Data
