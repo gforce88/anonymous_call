@@ -10,17 +10,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$this->indicator = "1stLeg";
 	}
 
-	public function indexAction() {
-		$tropoJson = file_get_contents("php://input");
-		$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
-		
-		$session = new Session($tropoJson);
-		$paramArr = $this->initSessionParameters($session);
-		$_GET = array_merge($_GET, $paramArr);
-		$this->call2ndLeg();
-	}
-
-	private function call2ndLeg() {
+	private function initCall() {
 		$this->log("Start call to 2nd leg: " . $_GET["2ndLegNumber"]);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
