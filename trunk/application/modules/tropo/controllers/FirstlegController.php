@@ -10,6 +10,10 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$this->indicator = "1stLeg";
 	}
 
+	public function indexAction() {
+		parent::indexAction();
+	}
+
 	private function initCall() {
 		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
 		$call = array (
@@ -117,12 +121,16 @@ class Tropo_FirstlegController extends BaseTropoController {
 			) 
 		);
 		$tropo->conference(null, $conference);
-
+		
 		$this->setEvent($tropo, $parameters, "continue", "joinconf");
 		$this->setEvent($tropo, $parameters, "playremind");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
+	}
+
+	public function playremindAction() {
+		parent::playremindAction();
 	}
 
 	public function completeAction() {
@@ -133,6 +141,18 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropoService->exit2ndLeg($call["secondLegSession"]);
 		
 		$this->exitAction();
+	}
+
+	public function exitAction() {
+		parent::exitAction();
+	}
+
+	public function hangupAction() {
+		parent::hangupAction();
+	}
+
+	public function errorAction() {
+		parent::errorAction();
 	}
 
 }
