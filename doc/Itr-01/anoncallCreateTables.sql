@@ -250,6 +250,8 @@ INSERT `callresult` (`inx`, `desc`)
 INSERT `callresult` (`inx`, `desc`)
         VALUES (5, '2ndLeg_Answered');
 INSERT `callresult` (`inx`, `desc`)
+        VALUES (6, 'Complete');
+INSERT `callresult` (`inx`, `desc`)
         VALUES (-1, 'Error');
 
 INSERT `countries` (`isoCode`, `desc`)
