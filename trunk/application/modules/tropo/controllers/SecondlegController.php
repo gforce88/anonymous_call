@@ -22,6 +22,11 @@ class Tropo_SecondlegController extends BaseTropoController {
 
 	private function initCall() {
 		$this->log("Start call to number " . $_GET["2ndLegNumber"]);
+		$call = array (
+				"inx" => $_GET["callInx"],
+				"secondLegSession" => $_GET["session_id"]
+		);
+		$this->updateCallResult($call);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
