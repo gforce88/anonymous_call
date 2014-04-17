@@ -31,7 +31,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 			"allowSignals" => "",
 			"timeout" => floatval($_GET["maxRingDur"]) 
 		);
-		$tropo->call($_GET["1stLegNumber"], $callOptions);
+		$tropo->call($_GET["2ndLegNumber"], $callOptions);
 		
 		$this->setEvent($tropo, $parameters, "continue", "joinconf");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
