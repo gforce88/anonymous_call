@@ -11,7 +11,7 @@ class CallManager extends BaseManager {
 		"firstLegSession" => null,
 		"secondLegSession" => null,
 		"callInitTime" => null,
-		"callStartTime" => null,
+		"callConnectTime" => null,
 		"callEndTime" => null,
 		"nextRemindTime" => null,
 		"nextChargeTime" => null 
