@@ -11,7 +11,13 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	public function indexAction() {
-		parent::indexAction();
+		$tropoJson = file_get_contents("php://input");
+		$this->logger->logInfo($this->indicator, "New Tropo session", $tropoJson);
+		
+		$session = new Session($tropoJson);
+		$paramArr = $this->initSessionParameters($session);
+		$_GET = array_merge($_GET, $paramArr);
+		$this->initCall();
 	}
 
 	private function initCall() {
