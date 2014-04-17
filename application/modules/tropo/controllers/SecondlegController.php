@@ -64,7 +64,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$call = array (
 			"inx" => $_GET["callInx"],
 			"callResult" => CALL_RESULT_2NDLEG_ANSWERED,
-			"callEndTime" => new DateTime() 
+			"callConnectTime" => new DateTime() 
 		);
 		$this->updateCallResult($call);
 		
