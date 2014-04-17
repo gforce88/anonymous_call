@@ -132,7 +132,7 @@ class BaseTropoController extends Zend_Controller_Action {
 	}
 
 	protected function log($infomations) {
-		$this->logger->logInfo($_GET["partnerInx"], $_GET["inviteInx"], $infomations);
+		$this->logger->logInfo($_GET["partnerInx"], $_GET["inviteInx"]."|".$this->indicator, $infomations);
 	}
 
 }
