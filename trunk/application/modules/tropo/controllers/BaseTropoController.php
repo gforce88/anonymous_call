@@ -37,25 +37,6 @@ class BaseTropoController extends Zend_Controller_Action {
 		return $paramArr;
 	}
 
-	public function playremindAction() {
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $ivrService->promptInviterGreeting() . " ";
-		$this->log("$this->indicator play remind audio " . $sentences);
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters, false);
-		
-		$sayOptions = array (
-			"allowSignals" => "" 
-		);
-		$tropo->say($sentences, $sayOptions);
-		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
-		$this->setEvent($tropo, $parameters, "hangup", "complete");
-		$this->setEvent($tropo, $parameters, "error");
-		$tropo->RenderJson();
-	}
-
 	public function exitAction() {
 		$this->log("$this->indicator exit the confrence call");
 		$this->hangupAction();
