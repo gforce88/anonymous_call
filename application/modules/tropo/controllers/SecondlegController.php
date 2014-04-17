@@ -10,6 +10,10 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$this->indicator = "1stLeg";
 	}
 
+	public function indexAction() {
+		parent::indexAction();
+	}
+
 	private function initCall() {
 		$this->log("Start call to 2nd leg: " . $_GET["2ndLegNumber"]);
 		
@@ -74,6 +78,10 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$tropo->renderJson();
 	}
 
+	public function playremindAction() {
+		parent::playremindAction();
+	}
+
 	public function completeAction() {
 		$this->log("$this->indicator completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		
@@ -82,6 +90,18 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$tropoService->exit1stLeg($call["firstLegSession"]);
 		
 		$this->exitAction();
+	}
+
+	public function exitAction() {
+		parent::exitAction();
+	}
+
+	public function hangupAction() {
+		parent::hangupAction();
+	}
+
+	public function errorAction() {
+		parent::errorAction();
 	}
 
 }
