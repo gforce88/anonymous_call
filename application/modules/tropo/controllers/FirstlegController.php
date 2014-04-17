@@ -158,7 +158,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		$call = array (
 			"inx" => $_GET["callInx"],
-			"callResult" => CALL_RESULT_1STLEG_NOANSWER,
+			"callResult" => CALL_RESULT_COMPLETED,
 			"callEndTime" => new DateTime() 
 		);
 		$this->updateCallResult($call);
