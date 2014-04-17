@@ -89,6 +89,11 @@ class Tropo_SecondlegController extends BaseTropoController {
 		);
 		$tropo->conference(null, $conference);
 		
+		$json = file_get_contents("php://input");
+		$this->log($json);
+		$this->log($_GET);
+		
+		$this->setEvent($tropo, $parameters, "continue", "joinconf");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
