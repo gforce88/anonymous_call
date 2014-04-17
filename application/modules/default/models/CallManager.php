@@ -8,7 +8,8 @@ class CallManager extends BaseManager {
 		"callType" => null,
 		"callResult" => null,
 		"paypalToken" => null,
-		"tropoSession" => null,
+		"firstLegSession" => null,
+		"secondLegSession" => null,
 		"callInitTime" => null,
 		"callStartTime" => null,
 		"callEndTime" => null,
@@ -27,7 +28,7 @@ class CallManager extends BaseManager {
 			 where inviteInx=:inviteInx";
 
 	const SQL_FIND_REMINDS = "
-			select calls.inx, partners.inx as partnerInx, invites.inx as inviteInx, calls.tropoSession, partners.minCallBlkDur, partners.callRemindOffset, partners.country
+			select calls.inx, partners.inx as partnerInx, invites.inx as inviteInx, calls.firstLegSession, calls.secondLegSession, partners.minCallBlkDur, partners.callRemindOffset, partners.country
 			  from calls, invites, partners
 			 where calls.inviteInx = invites.inx
 			   and invites.partnerInx = partners.inx
@@ -72,7 +73,7 @@ class CallManager extends BaseManager {
 		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('callEndTime = 0 and nextChargeTime != 0 and nextChargeTime < ?', $now));
 	}
 
-	public function findcallByInx($inx) {
+	public function findCallByInx($inx) {
 		return $this->db->fetchRow(self::SQL_FIND_CALL_BY_INX, array (
 			"inx" => $inx 
 		));

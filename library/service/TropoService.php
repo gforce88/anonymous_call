@@ -14,42 +14,45 @@ class TropoService {
 	}
 
 	public function initCall($paramArr) {
-		$url = $this->setting["url"];
-		$token = $this->setting["token"];
-		$params = "action=create&token=$token&" . http_build_query($paramArr);
-		
-		$response = $this->httpUtil->doHTTPPOST($url, $params);
+		$params = "action=create&token=" . $this->setting["token"] . "&" . http_build_query($paramArr);
+		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}
 
 	public function initConfCall($paramArr) {
-		$url = $this->setting["url"];
-		$token = $this->setting["conf"]["token"];
-		$params = "action=create&token=$token&" . http_build_query($paramArr);
-		
+		$params = "action=create&token=" . $this->setting["conf"]["token"] . "&" . http_build_query($paramArr);
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
 
 	public function startConf($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=startconf&token=" . $this->setting["token"];
+		return $this->sendSignal($sessionId, $this->setting["token"], "startconf");
+	}
+
+	public function joinConf($sessionId) {
+		return $this->sendSignal($sessionId, $this->setting["conf"]["token"], "joinconf");
+	}
+
+	public function playRemind($firstLegSessionId, $secondLegSessionId) {
+		$this->sendSignal($firstLegSessionId, $this->setting["token"], "playremind");
+		$this->sendSignal($secondLegSessionId, $this->setting["conf"]["token"], "playremind");
+	}
+
+	public function exit1stLeg($sessionId) {
+		return $this->sendSignal($sessionId, $this->setting["token"], "exit");
+	}
+
+	public function exit2ndLeg($sessionId) {
+		return $this->sendSignal($sessionId, $this->setting["conf"]["token"], "exit");
+	}
+
+	private function sendSignal($sessionId, $token, $action) {
+		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=" . $action . "&token=" . $token;
 		$content = file_get_contents($url);
-		$this->logger->logInfo("Sent startconf signal to : [$url] > content: $content");
+		$this->logger->logInfo("TropoService", $action, "Sent signal to : [$url] > content: $content");
 		if (strpos($content, "NOTFOUND")) {
 			return false;
 		} else {
 			return true;
 		}
-	}
-
-	public function joinConf($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=joinconf&token=" . $this->setting["conf"]["token"];
-		$content = file_get_contents($url);
-		$this->logger->logInfo("Sent joinconf signal to : [$url] > content: $content");
-	}
-
-	public function playRemind($sessionId) {
-		$url = $this->setting["url"] . "/" . $sessionId . "/signals?action=signal&value=playremind&token=" . $this->setting["token"];
-		$content = file_get_contents($url);
-		$this->logger->logInfo("TropoService", "playRemind", "Sent joinconf signal to : [$url] > content: $content");
 	}
 
 }
