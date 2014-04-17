@@ -7,21 +7,17 @@ class Tropo_SecondlegController extends BaseTropoController {
 
 	public function init() {
 		parent::init();
+		$this->indicator = "1stLeg";
 	}
 
 	public function indexAction() {
 		$tropoJson = file_get_contents("php://input");
-		if ($tropoJson == null) {
-			$this->logger->logInfo("ConfController", "indexAction", "Tropo check via HTTP Header request.");
-			$tropo = new Tropo();
-			$tropo->renderJson();
-		} else {
-			$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
-			$session = new Session($tropoJson);
-			$paramArr = $this->initSessionParameters($session);
-			$_GET = array_merge($_GET, $paramArr);
-			$this->call2ndLeg();
-		}
+		$this->logger->logInfo("ConfController", "New Tropo session", $tropoJson);
+		
+		$session = new Session($tropoJson);
+		$paramArr = $this->initSessionParameters($session);
+		$_GET = array_merge($_GET, $paramArr);
+		$this->call2ndLeg();
 	}
 
 	private function call2ndLeg() {
@@ -59,7 +55,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	public function joinconfAction() {
-		$this->log("Start conference call");
+		$this->log("$this->indicator join conference call");
 		$call = array (
 			"inx" => $_GET["callInx"],
 			"callResult" => CALL_RESULT_2NDLEG_ANSWERED,
@@ -88,31 +84,8 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$tropo->renderJson();
 	}
 
-	public function playremindAction() {
-		$this->log("Play remind audio for 2nd leg");
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $ivrService->promptInviterGreeting() . " ";
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters);
-		
-		$askOptions = array (
-			"attempts" => 1,
-			"bargein" => true,
-			"timeout" => 5,
-			"allowSignals" => "" 
-		);
-		$tropo->ask($sentences, $askOptions);
-		$this->log("Play audio " . $sentences);
-		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
-		$this->setEvent($tropo, $parameters, "hangup", "complete");
-		$this->setEvent($tropo, $parameters, "error");
-		$tropo->RenderJson();
-	}
-
-public function completeAction() {
-		$this->log("Call completed from 2nd leg: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
+	public function completeAction() {
+		$this->log("$this->indicator completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
 		$tropoService = new TropoService();
@@ -121,9 +94,5 @@ public function completeAction() {
 		$this->exitAction();
 	}
 
-	public function exitAction() {
-		$this->log("2nd leg exit the confrence call");
-		$this->hangupAction();
-	}
 }
 
