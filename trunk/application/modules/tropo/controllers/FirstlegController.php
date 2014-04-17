@@ -141,9 +141,9 @@ class Tropo_FirstlegController extends BaseTropoController {
 	public function completeAction() {
 		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		$call = array (
-				"inx" => $_GET["callInx"],
-				"callResult" => CALL_RESULT_1STLEG_NOANSWER,
-				"callEndTime" => new DateTime()
+			"inx" => $_GET["callInx"],
+			"callResult" => CALL_RESULT_1STLEG_NOANSWER,
+			"callEndTime" => new DateTime() 
 		);
 		$this->updateCallResult($call);
 		
@@ -153,6 +153,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 			$tropoService->exit2ndLeg($call["secondLegSession"]);
 		}
 		
+		$this->log($_GET);
 		$this->exitAction();
 	}
 
