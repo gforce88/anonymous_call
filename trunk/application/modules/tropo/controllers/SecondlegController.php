@@ -38,7 +38,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 		);
 		$tropo->call($_GET["2ndLegNumber"], $callOptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$this->setEvent($tropo, $parameters, "continue", "connect");
 		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
 		$tropo->renderJSON();
 	}
@@ -59,8 +59,8 @@ class Tropo_SecondlegController extends BaseTropoController {
 		$this->hangupAction();
 	}
 
-	public function joinconfAction() {
-		$this->log("Join conference call");
+	public function connectAction() {
+		$this->log("Call connected");
 		$call = array (
 			"inx" => $_GET["callInx"],
 			"callResult" => CALL_RESULT_2NDLEG_ANSWERED,
@@ -68,6 +68,12 @@ class Tropo_SecondlegController extends BaseTropoController {
 		);
 		$this->updateCallResult($call);
 		
+		$this->joinconfAction();
+	}
+	
+	public function joinconfAction() {
+		$this->log("Join conference call");
+
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
 		
