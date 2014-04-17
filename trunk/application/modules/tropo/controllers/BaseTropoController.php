@@ -117,11 +117,11 @@ class BaseTropoController extends Zend_Controller_Action {
 		if ($call["callInitTime"] != null) {
 			$call["callInitTime"] = $call["callInitTime"]->format("Y-m-d H:i:s");
 		}
-		if ($call["callStartTime"] != null) {
+		if ($call["callConnectTime"] != null) {
 			$partner = $this->partnerManager->findPartnerByCall($call["inx"]);
-			$nextTime = new NextTime($call["callStartTime"], $partner);
+			$nextTime = new NextTime($call["callConnectTime"], $partner);
 			
-			$call["callStartTime"] = $call["callStartTime"]->format("Y-m-d H:i:s");
+			$call["callConnectTime"] = $call["callConnectTime"]->format("Y-m-d H:i:s");
 			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextRemindTime);
 			$call["nextChargeTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
 		}

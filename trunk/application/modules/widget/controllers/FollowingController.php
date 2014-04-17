@@ -29,24 +29,24 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->viewRenderer->setNeverRender();
 		
 		$call = $this->callManager->findCallByInx($_POST["callInx"]);
-		$callStartTime = strtotime($call["callStartTime"]);
+		$callConnectTime = strtotime($call["callConnectTime"]);
 		$callEndTime = strtotime($call["callEndTime"]);
-		if ($callStartTime <= 0) {
+		if ($callConnectTime <= 0) {
 			// Call is not started
 			$result = array (
 				"status" => 0 
 			);
 		} else if ($callEndTime <= 0) {
-			// Call is started but not completed
+			// Call is connected but not completed
 			$result = array (
 				"status" => 1,
-				"totalTime" => time() - $callStartTime 
+				"totalTime" => time() - $callConnectTime 
 			);
 		} else {
 			// Call is completed
 			$result = array (
 				"status" => 2,
-				"totalTime" => $callEndTime - $callStartTime 
+				"totalTime" => $callEndTime - $callConnectTime 
 			);
 		}
 		
