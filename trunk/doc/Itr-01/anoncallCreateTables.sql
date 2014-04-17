@@ -91,6 +91,7 @@ CREATE TABLE `calls` (
   `firstLegSession`     varchar(64)                                 COMMENT 'tropo session ID for 1st leg',
   `secondLegSession`    varchar(64)                                 COMMENT 'tropo session ID for 2nd leg',
   `callInitTime`        timestamp                   DEFAULT 0       COMMENT 'call init time',
+  `callStartTime`       timestamp                   DEFAULT 0       COMMENT 'call start time',
   `callConnectTime`     timestamp                   DEFAULT 0       COMMENT 'call connect time',
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
   `nextRemindTime`      timestamp                   DEFAULT 0       COMMENT 'next remind time',
