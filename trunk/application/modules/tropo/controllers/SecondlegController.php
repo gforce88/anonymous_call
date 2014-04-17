@@ -7,7 +7,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 
 	public function init() {
 		parent::init();
-		$this->indicator = "1stLeg";
+		$this->indicator = "2ndLeg";
 	}
 
 	public function indexAction() {

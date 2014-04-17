@@ -20,7 +20,7 @@ class TropoService {
 
 	public function initConfCall($paramArr) {
 		$params = "action=create&token=" . $this->setting["secondleg"]["token"] . "&" . http_build_query($paramArr);
-		$response = $this->httpUtil->doHTTPPOST($url, $params);
+		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}
 
 	public function startConf($sessionId) {
