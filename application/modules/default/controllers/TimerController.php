@@ -47,15 +47,7 @@ class TimerController extends Zend_Controller_Action {
 		
 		// 2. Invoke Tropo service for conference call
 		foreach ($reminds as $remind) {
-			$paramArr = array (
-				"callInx" => $remind["inx"],
-				"partnerInx" => $remind["partnerInx"],
-				"inviteInx" => $remind["inviteInx"],
-				"mainCallSession" => $remind["tropoSession"],
-				"country" => $remind["country"] 
-			);
-			// $this->tropoService->initConfCall($paramArr);
-			$this->tropoService->playRemind($remind["tropoSession"]);
+			$this->tropoService->playRemind($remind["firstLegSessionId"], $remind["secondLegSessionId"]);
 		}
 		
 		// 3. Invoke Paypal service for charge
