@@ -10,24 +10,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$this->indicator = "1stLeg";
 	}
 
-	public function indexAction() {
-		$tropoJson = file_get_contents("php://input");
-		if ($tropoJson == null) {
-			$this->logger->logInfo("TropoController", "indexAction", "Tropo check via HTTP Header request.");
-			
-			$tropo = new Tropo();
-			$tropo->renderJson();
-		} else {
-			$this->logger->logInfo("TropoController", "New Tropo session", $tropoJson);
-			
-			$session = new Session($tropoJson);
-			$paramArr = $this->initSessionParameters($session);
-			$_GET = array_merge($_GET, $paramArr);
-			$this->call1stLeg();
-		}
-	}
-
-	private function call1stLeg() {
+	private function initCall() {
 		$this->log("Start call to 1st leg: " . $_GET["1stLegNumber"]);
 		$call = array (
 			"inx" => $_GET["callInx"],

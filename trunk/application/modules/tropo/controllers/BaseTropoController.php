@@ -37,6 +37,16 @@ class BaseTropoController extends Zend_Controller_Action {
 		return $paramArr;
 	}
 
+	public function indexAction() {
+		$tropoJson = file_get_contents("php://input");
+		$this->logger->logInfo($this->indicator, "New Tropo session", $tropoJson);
+		
+		$session = new Session($tropoJson);
+		$paramArr = $this->initSessionParameters($session);
+		$_GET = array_merge($_GET, $paramArr);
+		$this->initCall();
+	}
+
 	public function playremindAction() {
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		$sentences = $ivrService->promptInviterGreeting() . " ";
