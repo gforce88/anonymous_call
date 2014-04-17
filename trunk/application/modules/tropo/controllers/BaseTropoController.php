@@ -122,7 +122,7 @@ class BaseTropoController extends Zend_Controller_Action {
 			$nextTime = new NextTime($call["callStartTime"], $partner);
 			
 			$call["callStartTime"] = $call["callStartTime"]->format("Y-m-d H:i:s");
-			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
+			$call["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextRemindTime);
 			$call["nextChargeTime"] = date("Y-m-d H:i:s", $nextTime->nextChargeTime);
 		}
 		if ($call["callEndTime"] != null) {
