@@ -153,6 +153,87 @@ CREATE TABLE `countries` (
   PRIMARY KEY (`isoCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
+/*
+-- ------------------------------------
+-- Hosekeeping jobs
+-- ------------------------------------
+DROP EVENT IF EXISTS `hosekeeping`;
+CREATE EVENT `hosekeeping`
+  ON SCHEDULE EVERY 1 DAY
+  STARTS CAST(CURDATE() AS DATETIME)
+  DO DELETE FROM `calls_hist` where `insertedTime` < now() - INTERVAL 7 DAY;
+
+-- ------------------------------------
+-- Triggers for calls --> calls_hist
+-- ------------------------------------
+DELIMITER /
+CREATE TRIGGER `calls_hist_a_i` AFTER INSERT ON `calls`
+  FOR EACH ROW BEGIN
+    INSERT INTO calls_hist (
+      `insertedTime`,
+      `inx`,
+      `inviteInx`,
+      `callType`,
+      `callResult`,
+      `firstLegSession`,
+      `secondLegSession`,
+      `callInitTime`,
+      `callStartTime`,
+      `callConnectTime`,
+      `callEndTime`,
+      `nextRemindTime`,
+      `nextChargeTime`
+    ) values (
+      now(),
+      NEW.`inx`,
+      NEW.`inviteInx`,
+      NEW.`callType`,
+      NEW.`callResult`,
+      NEW.`firstLegSession`,
+      NEW.`secondLegSession`,
+      NEW.`callInitTime`,
+      NEW.`callStartTime`,
+      NEW.`callConnectTime`,
+      NEW.`callEndTime`,
+      NEW.`nextRemindTime`,
+      NEW.`nextChargeTime`
+    );
+  END /
+CREATE TRIGGER `calls_hist_a_u` AFTER UPDATE ON `calls`
+  FOR EACH ROW BEGIN
+    INSERT INTO calls_hist (
+      `insertedTime`,
+      `inx`,
+      `inviteInx`,
+      `callType`,
+      `callResult`,
+      `firstLegSession`,
+      `secondLegSession`,
+      `callInitTime`,
+      `callStartTime`,
+      `callConnectTime`,
+      `callEndTime`,
+      `nextRemindTime`,
+      `nextChargeTime`
+    ) values (
+      now(),
+      NEW.`inx`,
+      NEW.`inviteInx`,
+      NEW.`callType`,
+      NEW.`callResult`,
+      NEW.`firstLegSession`,
+      NEW.`secondLegSession`,
+      NEW.`callInitTime`,
+      NEW.`callStartTime`,
+      NEW.`callConnectTime`,
+      NEW.`callEndTime`,
+      NEW.`nextRemindTime`,
+      NEW.`nextChargeTime`
+    );
+  END /
+DELIMITER ;
+*/
+
 -- ------------------------------------
 -- Master Data
 -- ------------------------------------
