@@ -117,6 +117,9 @@ class BaseTropoController extends Zend_Controller_Action {
 		if ($call["callInitTime"] != null) {
 			$call["callInitTime"] = $call["callInitTime"]->format("Y-m-d H:i:s");
 		}
+		if ($call["callStartTime"] != null) {
+			$call["callStartTime"] = $call["callStartTime"]->format("Y-m-d H:i:s");
+		}
 		if ($call["callConnectTime"] != null) {
 			$partner = $this->partnerManager->findPartnerByCall($call["inx"]);
 			$nextTime = new NextTime($call["callConnectTime"], $partner);
@@ -132,7 +135,7 @@ class BaseTropoController extends Zend_Controller_Action {
 	}
 
 	protected function log($infomations) {
-		$this->logger->logInfo($_GET["partnerInx"], $_GET["inviteInx"]."|".$this->indicator, $infomations);
+		$this->logger->logInfo($_GET["partnerInx"], $_GET["inviteInx"] . "|" . $this->indicator, $infomations);
 	}
 
 }
