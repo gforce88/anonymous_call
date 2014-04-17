@@ -28,7 +28,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
-		$call = $this->callManager->findcallByInx($_POST["callInx"]);
+		$call = $this->callManager->findCallByInx($_POST["callInx"]);
 		$callStartTime = strtotime($call["callStartTime"]);
 		$callEndTime = strtotime($call["callEndTime"]);
 		if ($callStartTime <= 0) {

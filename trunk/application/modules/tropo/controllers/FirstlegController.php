@@ -3,7 +3,7 @@ require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'BaseTropoController.php';
 
-class Tropo_TropoController extends BaseTropoController {
+class Tropo_FirstlegController extends BaseTropoController {
 
 	public function init() {
 		parent::init();

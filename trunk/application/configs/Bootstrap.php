@@ -44,6 +44,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 			1 => "action" 
 		), "conf/%s.php");
 		$router->addRoute("conf", $route);
+		
+		$route = new Zend_Controller_Router_Route_Regex("firstleg/(.+)\.php", array (
+				"module" => "tropo",
+				"controller" => "firstleg"
+		), array (
+				1 => "action"
+		), "firstleg/%s.php");
+		$router->addRoute("firstleg", $route);
+		
+		$route = new Zend_Controller_Router_Route_Regex("secondleg/(.+)\.php", array (
+				"module" => "tropo",
+				"controller" => "secondleg"
+		), array (
+				1 => "action"
+		), "secondleg/%s.php");
+		$router->addRoute("secondleg", $route);
+		
 	}
 	
 	// Init Logger
