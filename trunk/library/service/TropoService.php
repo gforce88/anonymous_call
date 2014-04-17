@@ -14,34 +14,34 @@ class TropoService {
 	}
 
 	public function initCall($paramArr) {
-		$params = "action=create&token=" . $this->setting["token"] . "&" . http_build_query($paramArr);
+		$params = "action=create&token=" . $this->setting["firstleg"]["token"] . "&" . http_build_query($paramArr);
 		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}
 
 	public function initConfCall($paramArr) {
-		$params = "action=create&token=" . $this->setting["conf"]["token"] . "&" . http_build_query($paramArr);
+		$params = "action=create&token=" . $this->setting["secondleg"]["token"] . "&" . http_build_query($paramArr);
 		$response = $this->httpUtil->doHTTPPOST($url, $params);
 	}
 
 	public function startConf($sessionId) {
-		return $this->sendSignal($sessionId, $this->setting["token"], "startconf");
+		return $this->sendSignal($sessionId, $this->setting["firstleg"]["token"], "startconf");
 	}
 
 	public function joinConf($sessionId) {
-		return $this->sendSignal($sessionId, $this->setting["conf"]["token"], "joinconf");
+		return $this->sendSignal($sessionId, $this->setting["secondleg"]["token"], "joinconf");
 	}
 
 	public function playRemind($firstLegSessionId, $secondLegSessionId) {
-		$this->sendSignal($firstLegSessionId, $this->setting["token"], "playremind");
-		$this->sendSignal($secondLegSessionId, $this->setting["conf"]["token"], "playremind");
+		$this->sendSignal($firstLegSessionId, $this->setting["firstleg"]["token"], "playremind");
+		$this->sendSignal($secondLegSessionId, $this->setting["secondleg"]["token"], "playremind");
 	}
 
 	public function exit1stLeg($sessionId) {
-		return $this->sendSignal($sessionId, $this->setting["token"], "exit");
+		return $this->sendSignal($sessionId, $this->setting["firstleg"]["token"], "exit");
 	}
 
 	public function exit2ndLeg($sessionId) {
-		return $this->sendSignal($sessionId, $this->setting["conf"]["token"], "exit");
+		return $this->sendSignal($sessionId, $this->setting["secondleg"]["token"], "exit");
 	}
 
 	private function sendSignal($sessionId, $token, $action) {
