@@ -156,8 +156,6 @@ CREATE TABLE `countries` (
 -- ------------------------------------
 -- Triggers for calls --> calls_hist
 -- ------------------------------------
-DROP TRIGGER IF EXISTS `calls_hist_a_i`;
-DROP TRIGGER IF EXISTS `calls_hist_a_u`;
 DELIMITER /
 CREATE TRIGGER `calls_hist_a_i` AFTER INSERT ON `calls`
   FOR EACH ROW BEGIN
