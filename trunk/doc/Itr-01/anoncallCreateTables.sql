@@ -98,7 +98,7 @@ CREATE TABLE `calls` (
   `nextChargeTime`      timestamp                   DEFAULT 0       COMMENT 'next charge time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-
+/*
 -- ------------------------------------
 -- Table structure for calls
 -- ------------------------------------
@@ -119,7 +119,7 @@ CREATE TABLE `calls_hist` (
   `nextChargeTime`      timestamp,
   PRIMARY KEY (`insertedTime`, `inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-
+*/
 -- ------------------------------------
 -- Table structure for callresult
 -- ------------------------------------
