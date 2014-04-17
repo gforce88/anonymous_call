@@ -21,7 +21,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	private function initCall() {
-		$this->log("Start call to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->log("Start call to number " . $_GET["2ndLegNumber"]);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
@@ -39,7 +39,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	public function failedconnectAction() {
-		$this->log("Failed to connect to 2nd leg: " . $_GET["2ndLegNumber"]);
+		$this->log("Failed to connect to number " . $_GET["2ndLegNumber"]);
 		$call = array (
 			"inx" => $_GET["callInx"],
 			"callResult" => CALL_RESULT_2NDLEG_NOANSWER,
@@ -55,7 +55,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	public function joinconfAction() {
-		$this->log("$this->indicator join conference call");
+		$this->log("Join conference call");
 		$call = array (
 			"inx" => $_GET["callInx"],
 			"callResult" => CALL_RESULT_2NDLEG_ANSWERED,
@@ -89,7 +89,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 	}
 
 	public function completeAction() {
-		$this->log("$this->indicator completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
+		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
 		if ($call["firstLegSession"] != null) {
