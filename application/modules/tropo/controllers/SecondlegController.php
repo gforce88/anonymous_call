@@ -23,8 +23,8 @@ class Tropo_SecondlegController extends BaseTropoController {
 	private function initCall() {
 		$this->log("Start call to number " . $_GET["2ndLegNumber"]);
 		$call = array (
-				"inx" => $_GET["callInx"],
-				"secondLegSession" => $_GET["session_id"]
+			"inx" => $_GET["callInx"],
+			"secondLegSession" => $_GET["session_id"] 
 		);
 		$this->updateCallResult($call);
 		
@@ -70,10 +70,10 @@ class Tropo_SecondlegController extends BaseTropoController {
 		
 		$this->joinconfAction();
 	}
-	
+
 	public function joinconfAction() {
 		$this->log("Join conference call");
-
+		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
 		
