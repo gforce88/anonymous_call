@@ -100,6 +100,27 @@ CREATE TABLE `calls` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- ------------------------------------
+-- Table structure for calls
+-- ------------------------------------
+DROP TABLE IF EXISTS `calls_hist`;
+CREATE TABLE `calls_hist` (
+  `insertedTime`        timestamp,
+  `inx`                 int(11),
+  `inviteInx`           int(11),
+  `callType`            int(1),
+  `callResult`          int(2),
+  `firstLegSession`     varchar(64),
+  `secondLegSession`    varchar(64),
+  `callInitTime`        timestamp,
+  `callStartTime`       timestamp,
+  `callConnectTime`     timestamp,
+  `callEndTime`         timestamp,
+  `nextRemindTime`      timestamp,
+  `nextChargeTime`      timestamp,
+  PRIMARY KEY (`insertedTime`, `inx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+-- ------------------------------------
 -- Table structure for callresult
 -- ------------------------------------
 DROP TABLE IF EXISTS `callresult`;
@@ -131,6 +152,87 @@ CREATE TABLE `countries` (
   `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of country',
   PRIMARY KEY (`isoCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+-- ------------------------------------
+-- Triggers for calls --> calls_hist
+-- ------------------------------------
+DROP TRIGGER IF EXISTS `calls_hist_a_i`;
+DROP TRIGGER IF EXISTS `calls_hist_a_u`;
+DELIMITER /
+CREATE TRIGGER `calls_hist_a_i` AFTER INSERT ON `calls`
+  FOR EACH ROW BEGIN
+    INSERT INTO calls_hist (
+      `insertedTime`,
+      `inx`,
+      `inviteInx`,
+      `callType`,
+      `callResult`,
+      `firstLegSession`,
+      `secondLegSession`,
+      `callInitTime`,
+      `callStartTime`,
+      `callConnectTime`,
+      `callEndTime`,
+      `nextRemindTime`,
+      `nextChargeTime`
+    ) values (
+      now(),
+      NEW.`inx`,
+      NEW.`inviteInx`,
+      NEW.`callType`,
+      NEW.`callResult`,
+      NEW.`firstLegSession`,
+      NEW.`secondLegSession`,
+      NEW.`callInitTime`,
+      NEW.`callStartTime`,
+      NEW.`callConnectTime`,
+      NEW.`callEndTime`,
+      NEW.`nextRemindTime`,
+      NEW.`nextChargeTime`
+    );
+  END /
+CREATE TRIGGER `calls_hist_a_u` AFTER UPDATE ON `calls`
+  FOR EACH ROW BEGIN
+    INSERT INTO calls_hist (
+      `insertedTime`,
+      `inx`,
+      `inviteInx`,
+      `callType`,
+      `callResult`,
+      `firstLegSession`,
+      `secondLegSession`,
+      `callInitTime`,
+      `callStartTime`,
+      `callConnectTime`,
+      `callEndTime`,
+      `nextRemindTime`,
+      `nextChargeTime`
+    ) values (
+      now(),
+      NEW.`inx`,
+      NEW.`inviteInx`,
+      NEW.`callType`,
+      NEW.`callResult`,
+      NEW.`firstLegSession`,
+      NEW.`secondLegSession`,
+      NEW.`callInitTime`,
+      NEW.`callStartTime`,
+      NEW.`callConnectTime`,
+      NEW.`callEndTime`,
+      NEW.`nextRemindTime`,
+      NEW.`nextChargeTime`
+    );
+  END /
+DELIMITER ;
+
+-- ------------------------------------
+-- Hosekeeping jobs
+-- ------------------------------------
+DROP EVENT IF EXISTS `hosekeeping`;
+CREATE EVENT `hosekeeping`
+  ON SCHEDULE EVERY 1 DAY
+  STARTS CAST(CURDATE() AS DATETIME)
+  DO DELETE FROM `calls_hist` where `insertedTime` < now() - INTERVAL 7 DAY;
 
 -- ------------------------------------
 -- Master Data
