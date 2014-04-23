@@ -30,7 +30,8 @@ CREATE TABLE `partners` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'parimary key',
   `name`                varchar(256)    NOT NULL                    COMMENT 'partner name',
   `revShare`            decimal(2, 0)   NOT NULL                    COMMENT '% revshare for partner',
-  `chargeAmount`        decimal(6, 2)   NOT NULL                    COMMENT 'charge amount for each min call blk dur',
+  `freeCallDur`         int(11)         NOT NULL                    COMMENT 'free call duration (second)',
+  `chargeAmount`        decimal(6, 2)   NOT NULL                    COMMENT 'charge amount for each min call blk dur (USD)',
   `minCallBlkDur`       int(11)         NOT NULL                    COMMENT 'minimum call block duration as defined in the PRD (second)',
   `callRemindOffset`    int(11)         NOT NULL                    COMMENT 'offset from the min call block duration to remind an message to the user (second)',
   `inviteExpireDur`     int(11)         NOT NULL                    COMMENT 'duration of time an invite link is live for (hour)',
@@ -56,7 +57,6 @@ CREATE TABLE `partners` (
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
-  `userAlias`           varchar(256)                DEFAULT NULL    COMMENT 'alias of user, may or may not be user name',
   `phoneNum`            varchar(25)                 DEFAULT NULL    COMMENT 'user phone number',
   `email`               varchar(256)                DEFAULT NULL    COMMENT 'user email',
   `paypalToken`         varchar(256)                DEFAULT NULL    COMMENT 'paypal token for the user',
@@ -74,7 +74,6 @@ CREATE TABLE `invites` (
   `inviterInx`          int(11)         NOT NULL                    COMMENT 'index to user table of users who sent invitation',
   `inviteeInx`          int(11)         NOT NULL                    COMMENT 'index of user who an invitation was sent to',
   `inviteToken`         varchar(256)                                COMMENT 'token in URL of invite email',
-  `inviteMsg`           varchar(2048)               DEFAULT NULL    COMMENT 'invite message',
   `inviteTime`          timestamp       NOT NULL                    COMMENT 'time this invitation was created / extended',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -98,28 +97,7 @@ CREATE TABLE `calls` (
   `nextChargeTime`      timestamp                   DEFAULT 0       COMMENT 'next charge time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-/*
--- ------------------------------------
--- Table structure for calls
--- ------------------------------------
-DROP TABLE IF EXISTS `calls_hist`;
-CREATE TABLE `calls_hist` (
-  `insertedTime`        timestamp,
-  `inx`                 int(11),
-  `inviteInx`           int(11),
-  `callType`            int(1),
-  `callResult`          int(2),
-  `firstLegSession`     varchar(64),
-  `secondLegSession`    varchar(64),
-  `callInitTime`        timestamp,
-  `callStartTime`       timestamp,
-  `callConnectTime`     timestamp,
-  `callEndTime`         timestamp,
-  `nextRemindTime`      timestamp,
-  `nextChargeTime`      timestamp,
-  PRIMARY KEY (`insertedTime`, `inx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-*/
+
 -- ------------------------------------
 -- Table structure for callresult
 -- ------------------------------------
@@ -152,86 +130,7 @@ CREATE TABLE `countries` (
   `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of country',
   PRIMARY KEY (`isoCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-/*
--- ------------------------------------
--- Hosekeeping jobs
--- ------------------------------------
-DROP EVENT IF EXISTS `hosekeeping`;
-CREATE EVENT `hosekeeping`
-  ON SCHEDULE EVERY 1 DAY
-  STARTS CAST(CURDATE() AS DATETIME)
-  DO DELETE FROM `calls_hist` where `insertedTime` < now() - INTERVAL 7 DAY;
 
--- ------------------------------------
--- Triggers for calls --> calls_hist
--- ------------------------------------
-DELIMITER /
-CREATE TRIGGER `calls_hist_a_i` AFTER INSERT ON `calls`
-  FOR EACH ROW BEGIN
-    INSERT INTO calls_hist (
-      `insertedTime`,
-      `inx`,
-      `inviteInx`,
-      `callType`,
-      `callResult`,
-      `firstLegSession`,
-      `secondLegSession`,
-      `callInitTime`,
-      `callStartTime`,
-      `callConnectTime`,
-      `callEndTime`,
-      `nextRemindTime`,
-      `nextChargeTime`
-    ) values (
-      now(),
-      NEW.`inx`,
-      NEW.`inviteInx`,
-      NEW.`callType`,
-      NEW.`callResult`,
-      NEW.`firstLegSession`,
-      NEW.`secondLegSession`,
-      NEW.`callInitTime`,
-      NEW.`callStartTime`,
-      NEW.`callConnectTime`,
-      NEW.`callEndTime`,
-      NEW.`nextRemindTime`,
-      NEW.`nextChargeTime`
-    );
-  END /
-CREATE TRIGGER `calls_hist_a_u` AFTER UPDATE ON `calls`
-  FOR EACH ROW BEGIN
-    INSERT INTO calls_hist (
-      `insertedTime`,
-      `inx`,
-      `inviteInx`,
-      `callType`,
-      `callResult`,
-      `firstLegSession`,
-      `secondLegSession`,
-      `callInitTime`,
-      `callStartTime`,
-      `callConnectTime`,
-      `callEndTime`,
-      `nextRemindTime`,
-      `nextChargeTime`
-    ) values (
-      now(),
-      NEW.`inx`,
-      NEW.`inviteInx`,
-      NEW.`callType`,
-      NEW.`callResult`,
-      NEW.`firstLegSession`,
-      NEW.`secondLegSession`,
-      NEW.`callInitTime`,
-      NEW.`callStartTime`,
-      NEW.`callConnectTime`,
-      NEW.`callEndTime`,
-      NEW.`nextRemindTime`,
-      NEW.`nextChargeTime`
-    );
-  END /
-DELIMITER ;
-*/
 -- ------------------------------------
 -- Master Data
 -- ------------------------------------
@@ -265,6 +164,7 @@ INSERT `admins` (`inx`, `partnerInx`, `userName`, `pw`)
 INSERT `partners` (
           `name`,
           `revShare`,
+          `freeCallDur`,
           `chargeAmount`,
           `minCallBlkDur`,
           `callRemindOffset`,
@@ -285,6 +185,7 @@ INSERT `partners` (
         VALUES (
           'EnTest',
           12,
+          120,
           12.34,
           300,
           30,
@@ -305,6 +206,7 @@ INSERT `partners` (
 INSERT `partners` (
           `name`,
           `revShare`,
+          `freeCallDur`,
           `chargeAmount`,
           `minCallBlkDur`,
           `callRemindOffset`,
@@ -325,6 +227,7 @@ INSERT `partners` (
         VALUES (
           'JpTest',
           12,
+          120,
           12.34,
           300,
           30,

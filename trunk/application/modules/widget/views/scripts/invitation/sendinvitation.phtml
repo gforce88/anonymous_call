@@ -1,8 +1,11 @@
 <script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form action="<?php echo APP_CTX?>/widget/invitation/continue" method="post">
+<form action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
+	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
+	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
+	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
 	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("GET_STARTED", $country)?>" />
+		<input type="submit" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" />
 	</div>
 </form>
 <script type="text/javascript">

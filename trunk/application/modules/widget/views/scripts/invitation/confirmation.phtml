@@ -1,9 +1,7 @@
 <script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form action="<?php echo APP_CTX?>/widget/invitation/continue" method="post">
-	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("GET_STARTED", $country)?>" />
-	</div>
+<form action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
+	Confirmation Screen
 </form>
 <script type="text/javascript">
 function toglePayType(payType) {
