@@ -23,10 +23,18 @@ class Widget_InvitationController extends Zend_Controller_Action {
 
 	public function indexAction() {
 		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
-		$this->view->assign("partnerInx", $partner["inx"]);
+		
+		session_start();
+		$_SESSION["partnerInx"] = $partner["inx"];
+		$_SESSION["country"] = $partner["country"];
+		
 		$this->view->assign("country", $partner["country"]);
 	}
 
+	public function continueAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+	}
+	
 	public function validateAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
@@ -34,7 +42,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		// Init parameters
 		$inviter = array (
-			"userAlias" => $_POST["inviterName"],
 			"phoneNum" => $_POST["inviterPhoneNumber"],
 			"email" => $_POST["inviterEmail"],
 			"createTime" => (new DateTime())->format("Y-m-d H:i:s") 
@@ -47,10 +54,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		// Validation
 		$validFields = array ();
 		$invalidFields = array ();
-		if ($inviter["userAlias"] != null && $inviter["userAlias"] != "") {
-			array_push($validFields, "inviterNameNotNull");
+		if (Validator::isValidEmail($inviter["email"])) {
+			array_push($validFields, "inviterEmailInvalid");
 		} else {
-			array_push($invalidFields, "inviterNameNotNull");
+			array_push($invalidFields, "inviterEmailInvalid");
 		}
 		if (Validator::isValidPhoneNumber($inviter["phoneNum"])) {
 			array_push($validFields, "inviterPhoneNumberInvalid");
@@ -62,20 +69,14 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		} else {
 			array_push($invalidFields, "inviteeEmailInvalid");
 		}
-		if ($_POST["payType"] == 1) {
-			if (Validator::isValidEmail($inviter["email"])) {
-				array_push($validFields, "inviterEmailInvalid");
-			} else {
-				array_push($invalidFields, "inviterEmailInvalid");
-			}
-			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
-			if ($paypalToken != null) {
-				$inviter["paypalToken"] = $paypalToken;
-				array_push($validFields, "creditCardInfoInvalid");
-			} else {
-				array_push($invalidFields, "creditCardInfoInvalid");
-			}
-		}
+// 		$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
+// 		if ($paypalToken != null) {
+// 			$inviter["paypalToken"] = $paypalToken;
+// 			array_push($validFields, "creditCardInfoInvalid");
+// 		} else {
+// 			array_push($invalidFields, "creditCardInfoInvalid");
+// 		}
+
 		
 		// Dispatch
 		$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
@@ -87,15 +88,14 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"inviterInx" => $inviter["inx"],
 				"inviteeInx" => $invitee["inx"],
 				"inviteToken" => md5(time()),
-				"inviteMsg" => $_POST["inviteMsg"],
 				"inviteTime" => (new DateTime())->format("Y-m-d H:i:s") 
 			);
 			$invite = $this->inviteManager->insert($invite);
-			$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
+			$_SESSION["inviteInx"] = $invite["inx"];
 			
 			$result = array (
 				"success" => true,
-				"url" => APP_CTX . "/widget/invitation/thanks?country=" . $partner["country"] . "&phoneNum=" . $inviter["phoneNum"] . "&email=" . $invitee["email"] 
+				"url" => APP_CTX . "/widget/invitation/sendinvitation?country=" . $partner["country"] . "&freeCallDur=" . $partner["freeCallDur"] . "&chargeAmount=" . $partner["chargeAmount"] . "&minCallBlkDur=" . $partner["minCallBlkDur"] 
 			);
 		} else {
 			$result = array (
@@ -108,19 +108,25 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function thanksAction() {
-		$this->view->assign("country", $_REQUEST["country"]);
-		$this->view->assign("phoneNum", $_REQUEST["phoneNum"]);
-		$this->view->assign("email", $_REQUEST["email"]);
+	public function sendinvitationAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+		$this->view->assign("freeCallDur", $_REQUEST["freeCallDur"]);
+		$this->view->assign("chargeAmount", $_REQUEST["chargeAmount"]);
+		$this->view->assign("minCallBlkDur", $_REQUEST["minCallBlkDur"]);
 	}
 
+	public function confirmationAction() {
+		$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
+		$this->view->assign("country", $_SESSION["country"]);
+		
+	}
+	
 	private function sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite) {
 		$titleParam = array (
 			$inviter["userAlias"] 
 		);
 		$contentParam = array (
 			$inviter["userAlias"],
-			$invite["inviteMsg"],
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $invite["inx"] . "&token=" . $invite["inviteToken"] . "&country=" . $partner["country"] 
 		);
 		
