@@ -23,7 +23,7 @@ class InviteManager extends BaseManager {
 			   and inviteToken = :token";
 
 	const SQL_FIND_INVITE_4_EMAIL = "
-			select invites.inx, invites.inviteToken,
+			select invites.inx, invites.partnerInx, invites.inviteToken,
 			       partners.name, partners.emailAddr, partners.country, partners.inviteEmailSubject, partners.inviteEmailBody,
 			       inviter.email inviterEmail, invitee.email inviteeEmail
 			  from invites, users inviter, users invitee, partners

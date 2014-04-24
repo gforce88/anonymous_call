@@ -131,7 +131,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			
 			$result = array (
 				"success" => true,
-				"url" => APP_CTX . "/widget/invitation/confirmation"
+				"url" => APP_CTX . "/widget/invitation/confirmation" 
 			);
 		} else {
 			$result = array (
@@ -145,7 +145,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function confirmationAction() {
-		$this->sendInviteeNotifyEmail($partner, $inviter, $invitee, $invite);
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
@@ -158,12 +157,12 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $invite4Email["inx"] . "&token=" . $invite4Email["inviteToken"] . "&country=" . $invite4Email["country"] 
 		);
 		
-		$subject = MultiLang::replaceParams($partner["inviteEmailSubject"], $titleParam);
-		$content = MultiLang::replaceParams($partner["inviteEmailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($invite4Email["inviteEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($invite4Email["inviteEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($partner["inx"], $invite["inx"], "Sending invitation emal to: [" . $invitee["email"] . "] with URL: [$contentParam[2]]");
-		$sendResult = EmailSender::sendHtmlEmail($partner["name"], $partner["emailAddr"], "", $invitee["email"], $subject, $content);
-		$this->logger->logInfo($partner["inx"], $invite["inx"], "Email sent result: [$sendResult]");
+		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Sending invitation emal to: [" . $invite4Email["inviteeEmail"] . "] with URL: [$contentParam[2]]");
+		$sendResult = EmailSender::sendHtmlEmail($invite4Email["name"], $invite4Email["emailAddr"], "", $invite4Email["inviteeEmail"], $subject, $content);
+		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
 	}
