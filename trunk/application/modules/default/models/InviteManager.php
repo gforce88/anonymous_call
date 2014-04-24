@@ -22,6 +22,15 @@ class InviteManager extends BaseManager {
 			 where inx = :inx
 			   and inviteToken = :token";
 
+	const SQL_FIND_INVITE_4_EMAIL = "
+			select invites.inx, invites.inviteToken,
+			       partners.name, partners.emailAddr, partners.country, partners.inviteEmailSubject, partners.inviteEmailBody,
+			       inviter.email inviterEmail, invitee.email inviteeEmail
+			  from invites, users inviter, users invitee, partners
+			 where invites.inviterInx = inviter.inx
+			   and invites.inviteeInx = invitee.inx
+			   and invites.partnerInx = partners.inx";
+
 	public function insert($invite) {
 		$this->db->insert("invites", array_intersect_key($invite, self::$empty));
 		$invite["inx"] = $this->db->lastInsertId();
@@ -42,6 +51,12 @@ class InviteManager extends BaseManager {
 		return $this->db->fetchRow(self::SQL_FIND_INVITE_BY_INX_TOKEN, array (
 			"inx" => $inx,
 			"token" => $token 
+		));
+	}
+
+	public function findInvite4Email($inx) {
+		return $this->db->fetchRow(self::SQL_FIND_INVITE_4_EMAIL, array (
+			"inx" => $inx 
 		));
 	}
 
