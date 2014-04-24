@@ -1,12 +1,21 @@
 <script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
+<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/acknowlegment-validate" method="post" onsubmit="submiteAnonCall('#acknowlegmentFrom'); return false;">
 	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
 	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
 	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
 	<div>
+		<small id="agreementInvalid" style="display:none">
+			agreement invalid
+		</small>
+	</div>
+	<div>
 		<input type="submit" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" />
 	</div>
+	<div>
+		<input type="checkbox" name="agreement" tabindex="1" />I agree
+	</div>
+	
 </form>
 <script type="text/javascript">
 function toglePayType(payType) {
