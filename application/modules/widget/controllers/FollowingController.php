@@ -3,16 +3,19 @@ require_once 'log/LoggerFactory.php';
 require_once 'util/MultiLang.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/CallManager.php';
+require_once 'models/InviteManager.php';
 
 class Widget_FollowingController extends Zend_Controller_Action {
 	private $logger;
 	private $partnerManager;
 	private $callManager;
+	private $inviteManager;
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
 		$this->callManager = new CallManager();
+		$this->inviteManager = new InviteManager();
 	}
 
 	public function indexAction() {

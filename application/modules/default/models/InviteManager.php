@@ -7,6 +7,8 @@ class InviteManager extends BaseManager {
 		"partnerInx" => null,
 		"inviterInx" => null,
 		"inviteeInx" => null,
+		"inviteResult" => null,
+		"inviteType" => null,
 		"inviteToken" => null,
 		"inviteTime" => null 
 	);

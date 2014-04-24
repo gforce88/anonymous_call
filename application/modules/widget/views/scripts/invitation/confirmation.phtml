@@ -1,9 +1,19 @@
 <script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
+<form id="confirmationFrom" action="<?php echo APP_CTX?>/widget/invitation/refresh" method="post">
 	Confirmation Screen
 </form>
 <script type="text/javascript">
+var timerRefresh = window.setInterval(refreshPage, 5000);
+
+function refreshPage() {
+	$("#confirmationFrom").ajaxSubmit(function(result) {
+		if (result.success == true) {
+			window.location.replace(result.url);
+		}
+	});
+}
+
 function toglePayType(payType) {
 	if (payType == 0) {
 		$("#selfPayInfo").attr("style", "display:none");

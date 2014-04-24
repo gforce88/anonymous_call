@@ -64,7 +64,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$this->view->assign("inviteeInx", $invite["inviteeInx"]);
 		$this->view->assign("inviterName", $inviter["userAlias"]);
 	}
-
+	
 	public function validateAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
