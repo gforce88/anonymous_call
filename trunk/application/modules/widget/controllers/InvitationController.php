@@ -86,6 +86,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"partnerInx" => $partner["inx"],
 				"inviterInx" => $inviter["inx"],
 				"inviteeInx" => $invitee["inx"],
+				"inviteType" => 1, // TODO: how to detemine the invite type?
 				"inviteToken" => md5(time()),
 				"inviteTime" => (new DateTime())->format("Y-m-d H:i:s") 
 			);
@@ -94,7 +95,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			
 			$result = array (
 				"success" => true,
-				"url" => APP_CTX . "/widget/invitation/acknowlegment?&freeCallDur=" . $partner["freeCallDur"] . "&chargeAmount=" . $partner["chargeAmount"] . "&minCallBlkDur=" . $partner["minCallBlkDur"] 
+				"url" => APP_CTX . "/widget/invitation/agreement?&freeCallDur=" . $partner["freeCallDur"] . "&chargeAmount=" . $partner["chargeAmount"] . "&minCallBlkDur=" . $partner["minCallBlkDur"] 
 			);
 		} else {
 			$result = array (
@@ -107,14 +108,21 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function acknowlegmentAction() {
+	public function agreementAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 		$this->view->assign("freeCallDur", $_REQUEST["freeCallDur"]);
 		$this->view->assign("chargeAmount", $_REQUEST["chargeAmount"]);
 		$this->view->assign("minCallBlkDur", $_REQUEST["minCallBlkDur"]);
+		
+		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
+		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$this->renderScript("/invitation/acceptance.phtml");
+		} else {
+			$this->renderScript("/invitation/acknowlegment.phtml");
+		}
 	}
 
-	public function acknowlegmentValidateAction() {
+	public function agreementValidateAction() {
 		// Validation
 		$validFields = array ();
 		$invalidFields = array ();
@@ -126,7 +134,13 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
-			$invite4Email = $this->inviteManager->findInvite4Email($_SESSION["inviteInx"]);
+			$invite = array (
+				"inx" => $_SESSION["inviteInx"],
+				"inviterResult" => INVITE_RESULT_INVITE 
+			);
+			$invite = $this->inviteManager->update($invite);
+			
+			$invite4Email = $this->inviteManager->findInvite4Email($invite["inx"]);
 			$this->sendInviteeNotifyEmail($invite4Email);
 			
 			$result = array (
@@ -148,6 +162,40 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
+	public function refreshAction() {
+		// Disable layout for return json
+		$this->_helper->layout->disableLayout();
+		$this->_helper->viewRenderer->setNeverRender();
+		
+		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
+		if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
+			// Invite is declined by invitee
+			$result = array (
+				"url" => APP_CTX . "/widget/invitation/decline" 
+			);
+		} else if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
+			// Invite is accepted by invitee
+			$result = array (
+				"url" => APP_CTX . "/widget/invitation/accept" 
+			);
+		} else {
+			// No response yet
+			$result = array (
+				"url" => "" 
+			);
+		}
+		
+		$this->_helper->json->sendJson($result);
+	}
+
+	public function declineAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+	}
+
+	public function acceptAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+	}
+
 	private function sendInviteeNotifyEmail($invite4Email) {
 		$titleParam = array (
 			$invite4Email["inviterEmail"] 
@@ -160,7 +208,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$subject = MultiLang::replaceParams($invite4Email["inviteEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($invite4Email["inviteEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Sending invitation emal to: [" . $invite4Email["inviteeEmail"] . "] with URL: [$contentParam[2]]");
+		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Sending invitation emal to: [" . $invite4Email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
 		$sendResult = EmailSender::sendHtmlEmail($invite4Email["name"], $invite4Email["emailAddr"], "", $invite4Email["inviteeEmail"], $subject, $content);
 		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Email sent result: [$sendResult]");
 		

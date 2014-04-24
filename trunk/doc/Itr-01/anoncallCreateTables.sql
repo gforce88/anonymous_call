@@ -73,8 +73,20 @@ CREATE TABLE `invites` (
   `partnerInx`          int(11)         NOT NULL                    COMMENT 'index to partner table',
   `inviterInx`          int(11)         NOT NULL                    COMMENT 'index to user table of users who sent invitation',
   `inviteeInx`          int(11)         NOT NULL                    COMMENT 'index of user who an invitation was sent to',
+  `inviteResult`        int(2)          NOT NULL    DEFAULT 0       COMMENT 'index to inviteresult table',
+  `inviteType`          int(1)          NOT NULL                    COMMENT '1 - inviter pay; 2 - invitee pay',
   `inviteToken`         varchar(256)                                COMMENT 'token in URL of invite email',
   `inviteTime`          timestamp       NOT NULL                    COMMENT 'time this invitation was created / extended',
+  PRIMARY KEY (`inx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+-- ------------------------------------
+-- Table structure for inviteresult
+-- ------------------------------------
+DROP TABLE IF EXISTS `inviteresult`;
+CREATE TABLE `inviteresult` (
+  `inx`                 int(2)          NOT NULL                    COMMENT 'primary key',
+  `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of result',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -85,8 +97,8 @@ DROP TABLE IF EXISTS `calls`;
 CREATE TABLE `calls` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
   `inviteInx`           int(11)         NOT NULL                    COMMENT 'index to invites table',
-  `callType`            int(1)          NOT NULL                    COMMENT '0 - first call inviter; 1 - first call invitee',
   `callResult`          int(2)          NOT NULL    DEFAULT 0       COMMENT 'index to callresults table',
+  `callType`            int(1)          NOT NULL                    COMMENT '1 - first call inviter; 2 - first call invitee',
   `firstLegSession`     varchar(64)                                 COMMENT 'tropo session ID for 1st leg',
   `secondLegSession`    varchar(64)                                 COMMENT 'tropo session ID for 2nd leg',
   `callInitTime`        timestamp                   DEFAULT 0       COMMENT 'call init time',
@@ -103,7 +115,7 @@ CREATE TABLE `calls` (
 -- ------------------------------------
 DROP TABLE IF EXISTS `callresult`;
 CREATE TABLE `callresult` (
-  `inx`                 int(11)         NOT NULL                    COMMENT 'primary key',
+  `inx`                 int(2)          NOT NULL                    COMMENT 'primary key',
   `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of result',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
@@ -134,6 +146,23 @@ CREATE TABLE `countries` (
 -- ------------------------------------
 -- Master Data
 -- ------------------------------------
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (0, 'Init');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (1, 'Invited');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (2, 'Decline');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (3, 'Accept');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (4, 'NoCheckout');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (5, 'Checkout');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (6, 'NoPay');
+INSERT `inviteresult` (`inx`, `desc`)
+        VALUES (7, 'Payed');
+
 INSERT `callresult` (`inx`, `desc`)
         VALUES (0, 'Init');
 INSERT `callresult` (`inx`, `desc`)
