@@ -167,22 +167,29 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
+		$result = array (
+			"url" => "" 
+		);
 		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
-		if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
-			// Invite is declined by invitee
-			$result = array (
-				"url" => APP_CTX . "/widget/invitation/decline" 
-			);
-		} else if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
-			// Invite is accepted by invitee
-			$result = array (
-				"url" => APP_CTX . "/widget/invitation/accept" 
-			);
+		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
+				// Invite is declined by invitee
+				$result["url"] = APP_CTX . "/widget/invitation/decline";
+			} else if ($invite["inviteResult"] == INVITE_RESULT_ACCEPT) {
+				// Invite is accepted by invitee
+				$result["url"] = APP_CTX . "/widget/following";
+			}
 		} else {
-			// No response yet
-			$result = array (
-				"url" => "" 
-			);
+			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
+				// Invite is declined by invitee
+				$result["url"] = APP_CTX . "/widget/invitation/decline";
+			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
+				// Invite is paied by invitee
+				$result["url"] = APP_CTX . "/widget/invitation/acceptready";
+			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
+				// Invite is paied by invitee
+				$result["url"] = APP_CTX . "/widget/following/problem";
+			}
 		}
 		
 		$this->_helper->json->sendJson($result);
