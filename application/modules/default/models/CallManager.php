@@ -50,6 +50,22 @@ class CallManager extends BaseManager {
 			   and calls.nextChargeTime != 0
 			   and calls.nextChargeTime < :now";
 
+	const SQL_COUNT_TOTAL_CALL = "
+			select count(inx) as result
+			  from calls
+			 where inx = :inx";
+
+	const SQL_COUNT_ACCEPTED_CALL = "
+			select count(inx) as result
+			  from calls
+			 where calls.inx = :inx
+			   and calls.callResult >= 3";
+
+	const SQL_FIND_TOTAL_SECONDS = "
+			select sum(callEndTime - callStartTime) as result
+			  from calls
+			 where inx = :inx";
+
 	public function insert($call) {
 		$this->db->insert("calls", array_intersect_key($call, self::$empty));
 		$call["inx"] = $this->db->lastInsertId();
@@ -95,6 +111,24 @@ class CallManager extends BaseManager {
 	public function findNextCharges($now) {
 		return $this->db->fetchAll(self::SQL_FIND_CHARGES, array (
 			"now" => $now 
+		));
+	}
+
+	public function countTotalCallByInx($inx) {
+		return $this->db->fetchRow(self::SQL_COUNT_TOTAL_CALL, array (
+			"inx" => $inx 
+		));
+	}
+
+	public function countAcceptedCallByInx($inx) {
+		return $this->db->fetchRow(self::SQL_COUNT_ACCEPTED_CALL, array (
+			"inx" => $inx 
+		));
+	}
+
+	public function FindTotalSecondsByInx($inx) {
+		return $this->db->fetchRow(self::SQL_FIND_TOTAL_SECONDS, array (
+			"inx" => $inx 
 		));
 	}
 

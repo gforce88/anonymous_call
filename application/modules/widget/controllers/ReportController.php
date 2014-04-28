@@ -12,6 +12,7 @@ class Widget_ReportController extends Zend_Controller_Action {
 	private $callManager;
 
 	public function init() {
+		$this->_helper->layout->disableLayout();
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->adminManager = new AdminManager();
 		$this->partnerManager = new PartnerManager();
@@ -19,7 +20,6 @@ class Widget_ReportController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$this->_helper->layout->disableLayout();
 		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
 		$this->view->assign("partnerInx", $partner["inx"]);
 		$this->view->assign("country", $partner["country"]);
@@ -27,7 +27,6 @@ class Widget_ReportController extends Zend_Controller_Action {
 
 	public function loginAction() {
 		// Disable layout for return json
-		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
 		// Validation
@@ -82,9 +81,31 @@ class Widget_ReportController extends Zend_Controller_Action {
 			return;
 		}
 		
+		if ($_POST["startDate"] != null && $_POST["endDate"] != null) {
+			$startDate = $_POST["startDate"];
+			$endDate = $_POST["endDate"];
+		} else {
+			$startDate = (new DateTime())->format("m/01/Y");
+			$endDate = (new DateTime())->format("m/d/Y");
+		}
+		
+		$totalCalls = $this->callManager->countTotalCallByInx($partnerInx)["result"];
+		$acceptedCalls = $this->callManager->countAcceptedCallByInx($partnerInx)["result"];
+		if ($totalCalls == 0) {
+			$acceptedPercent = 0;
+		} else {
+			$acceptedPercent = $acceptedCalls / $totalCalls * 100;
+		}
+		$totalSeconds = $this->callManager->FindTotalSecondsByInx($partnerInx)["result"];
+		$totalMinutes = round($totalSeconds / 60);
+		
 		$this->view->assign("country", $_REQUEST["country"]);
-		$this->view->assign("startDate", (new DateTime())->format("m/01/Y"));
-		$this->view->assign("endDate", (new DateTime())->format("m/d/Y"));
+		$this->view->assign("startDate", $startDate);
+		$this->view->assign("endDate", $endDate);
+		$this->view->assign("totalCalls", $totalCalls);
+		$this->view->assign("acceptedCalls", $acceptedCalls);
+		$this->view->assign("acceptedPercent", $acceptedPercent);
+		$this->view->assign("totalMinutes", $totalMinutes);
 	}
 
 }
