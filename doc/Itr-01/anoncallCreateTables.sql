@@ -189,7 +189,7 @@ INSERT `countries` (`isoCode`, `desc`)
 -- Test data
 -- ------------------------------------
 INSERT `admins` (`inx`, `partnerInx`, `userName`, `pw`)
-        VALUES (1, 0, 'admin', PASSWORD('admin'));
+        VALUES (1, 0, 'admin', PASSWORD('1234'));
 INSERT `partners` (
           `name`,
           `revShare`,
