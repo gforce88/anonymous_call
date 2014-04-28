@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)http://8.19.32.115/usersiteJ/admin/vnumAdmin.php -->
+<html class="animations fluid top-full menuh-top sticky-top js no-touch csstransforms3d csstransitions"><!-- <![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Anonymous Call Admin Page</title>
+	
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	
+	<!-- Bootstrap -->
+	<link href="<?php echo APP_CTX?>/report/css/bootstrap.css" rel="stylesheet" type="text/css">
+	
+	<!-- Glyphicons Font Icons -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_regular.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_social.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_filetypes.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/fonts/font-awesome/css/font-awesome.min.css">
+	
+	<!-- Uniform Pretty Checkboxes -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css" rel="stylesheet">
+	
+	<!-- PrettyPhoto -->
+    <link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/gallery/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
+    
+    <!-- JQuery -->
+	<script src="<?php echo APP_CTX?>/report/jquery-2.1.0.min.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery-migrate-1.2.1.min.js"></script>
+    
+	<!--[if IE]><!--><script src="<?php echo APP_CTX?>/report/script/excanvas.js"></script><!--<![endif]-->
+	
+	<!-- Bootstrap Extended -->
+	<link href="http://8.19.32.115/usersiteJ/common/bootstrap/extend/jasny-fileupload/css/fileupload.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/bootstrap/extend/bootstrap-select/bootstrap-select.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/bootstrap/extend/bootstrap-switch/static/stylesheets/bootstrap-switch.css" rel="stylesheet">
+	
+	<!-- DateTimePicker Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/forms/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet">
+	
+	<!-- JQueryUI -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/system/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
+	
+	<!-- MiniColors ColorPicker Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/color/jquery-miniColors/jquery.miniColors.css" rel="stylesheet">
+	
+	<!-- Notyfy Notifications Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/notifications/notyfy/jquery.notyfy.css" rel="stylesheet">
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/notifications/notyfy/themes/default.css" rel="stylesheet">
+	
+	<!-- Gritter Notifications Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/notifications/Gritter/css/jquery.gritter.css" rel="stylesheet">
+	
+	<!-- Easy-pie Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/charts/easy-pie/jquery.easy-pie-chart.css" rel="stylesheet">
+
+	<!-- Google Code Prettify Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/other/google-code-prettify/prettify.css" rel="stylesheet">
+	
+	<!-- Select2 Plugin -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/forms/select2/select2.css" rel="stylesheet">
+
+	<!-- Pageguide Guided Tour Plugin -->
+	<!--[if gt IE 8]><!--><link media="screen" href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/other/pageguide/css/pageguide.css" rel="stylesheet"><!--<![endif]-->
+
+	<!-- Bootstrap Image Gallery -->
+	<link href="http://8.19.32.115/usersiteJ/common/bootstrap/extend/bootstrap-image-gallery/css/bootstrap-image-gallery.min.css" rel="stylesheet">
+	
+	<!-- Main Theme Stylesheet :: CSS -->
+	<link href="http://8.19.32.115/usersiteJ/common/theme/css/style-default-menus-dark.css" rel="stylesheet" type="text/css">
+	
+	
+	<!-- FireBug Lite -->
+	<!-- <script src="https://getfirebug.com/firebug-lite-debug.js"></script> -->
+
+	<!-- LESS.js Library -->
+	<script src="<?php echo APP_CTX?>/report/script/less.min.js"></script>
+	
+	<!-- Global -->
+	<script>
+	//<![CDATA[
+	var basePath = '',
+		commonPath = '../common/';
+
+	// colors
+	var primaryColor = '#e5412d',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+
+	var themerPrimaryColor = primaryColor;
+	//]]>
+	</script>
+<style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style></head>
+<body class="document-body " style="">
+	
+		<!-- Main Container Fluid -->
+	<div class="container-fluid menu-hidden sidebar-hidden-phone fluid menu-left">
+		
+				
+		<!-- Content -->
+		<div id="content">
+		
+				<!-- Top navbar -->
+		<div class="navbar main hidden-print">
+		
+			<!-- Menu Toggle Button -->
+			<button type="button" class="btn btn-navbar pull-left visible-xs">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<!-- // Menu Toggle Button END -->
+			
+						<!-- Not Blank page -->
+			
+						<!-- Full Top Style -->
+			<ul class="topnav pull-left">
+				<li class="active"><a href="http://8.19.32.115/usersiteJ/admin/vnumAdmin.php?lang=en&layout_type=fluid&style=style-default-menus-dark&sidebar=false" class="glyphicons dashboard"><i></i> Dashboard</a></li>
+			</ul>
+			<!-- // Full Top Style END -->
+						
+			<!-- // Not Blank Page END -->
+						
+						
+						<!-- Top Menu Right -->
+			<ul class="topnav pull-right hidden-sm">
+			
+								<!-- Themer -->
+
+				<!-- // Themer END -->
+								
+				<!-- Language menu -->
+				
+				<!-- // Language menu END -->
+			
+				<!-- Profile / Logout menu -->
+				<li class="account dropdown dd-1">
+					<a data-toggle="dropdown" href="http://8.19.32.115/usersiteJ/admin/my_account.html?lang=en&layout_type=fluid&style=style-default-menus-dark&sidebar=false" class="glyphicons logout lock"><span class="hidden-md hidden-sm hidden-desktop-1">Administrator</span></a>
+					<ul class="dropdown-menu pull-right">
+						<li>
+							<span>
+								<a class="btn btn-default btn-mini pull-right" href="http://8.19.32.115/usersiteJ/login.html">Sign Out</a>
+							</span>
+						</li>
+					</ul>
+									</li>
+				<!-- // Profile / Logout menu END -->
+				
+			</ul>
+			<!-- // Top Menu Right END -->
+			
+						<div class="clearfix"></div>
+			
+		</div>
+		<!-- Top navbar END -->
+				
+	<div class="innerL innerT">
+</div>
+
+<h2>Anonymous Call Admin Dashboard</h2>
+
+<!-- <div class="row border-top border-bottom innerLR"></div> -->
+
+<!-- <p class="separator text-center"><i class="icon-ellipsis-horizontal icon-3x"></i></p> -->
+<div class="innerLR innerB">
+
+	<div class="row">
+		<div class="col-md-9 tablet-column-reset">
+		
+			<!-- <h2 class="margin-none separator bottom"> -->
+			<!-- <i class="icon-sitemap text-primary icon-fixed-width"></i>Contacts</h2> -->
+			<!-- </i>Reports</h2> -->
+			<h2></h2>
+			<div class="relativeWrap overflow-hidden">
+			<div class="row border-bottom  layout-timeline layout-timeline-mirror">
+				<div class="col-md-6"></div>					
+						
+						<div class="widget">
+		
+<div class="widget-body">
+<table class="table table-white table-vertical-center margin-none table-striped">
+			
+	<thead><tr> <th class="center">Total Calls</th> 
+				<th class="center">Accepted Calls</th> 
+				<th class="center">Accepted Percent</th> 
+				<th class="center">Total Call Minutes</th>
+				<th class="center">Total Rev Share (TBD)</th>
+	</thead>
+				
+	<tbody><tr>
+				<td class="strong center"><?php echo $this->totalCalls?></td>
+				<td class="strong center"><?php echo $this->acceptedCalls?></td>
+				<td class="strong center"><?php echo $this->acceptedCalls?></td>
+				<td class="strong center"><?php echo $this->acceptedPercent?></td>
+				<td class="strong center"><?php echo $this->totalMinutes?></td>
+			</tr>
+				
+	</tbody>
+			
+		</table>
+		
+		</div>
+	
+		</div>
+	
+
+				
+				</div>
+			</div>
+			<div class="separator bottom"></div>
+			
+			<div class="widget widget-heading-simple widget-body-simple">
+				<div class="widget-body">
+					<div class="widget widget-tabs widget-tabs-icons-only-2 widget-activity margin-none widget-tabs-gray">
+						<div class="widget-body">
+							<div class="tab-content">
+							
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					
+					
+				</div>
+				<div class="col-md-6">
+				
+				</div>
+			</div>
+			
+		
+		</div>
+	
+			<!-- // Dial Out END -->
+
+			
+		</div>
+	</div>
+	
+</div>	
+	
+		
+		</div>
+		<!-- // Content END -->
+		
+				
+		<div id="footer" class="hidden-print">
+			
+			<!--  Copyright Line -->
+					© 2013 - <a href="http://www.incognitosys.com/">Incognito Systems LLC</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/index.html">HOME</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/faq.html">FAQ</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/faq.html">Contact Us</a>
+			<!--  End Copyright Line -->
+	
+		</div>
+		<!-- // Footer END -->
+		
+	
+	<!-- // Main Container Fluid END -->
+	
+
+	<!-- jQuery Event Move -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.event.move.js"></script>
+	
+	<!-- jQuery Event Swipe -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.event.swipe.js"></script>
+	
+	
+	<!-- Code Beautify -->
+	<script src="<?php echo APP_CTX?>/report/script/beautify.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/beautify-html.js"></script>
+	
+	<!-- PrettyPhoto -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.prettyPhoto.js"></script>
+	
+	<!-- JQueryUI -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery-ui-1.9.2.custom.min.js"></script>
+	
+	<!-- JQueryUI Touch Punch -->
+	<!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.ui.touch-punch.min.js"></script>
+	
+	
+	<!-- Modernizr -->
+	<script src="<?php echo APP_CTX?>/report/script/modernizr.js"></script>
+	
+	<!-- Bootstrap -->
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap.min.js"></script>
+	
+	<!-- SlimScroll Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.slimscroll.js"></script>
+	
+	<!-- Holder Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/holder.js"></script>
+	
+	<!-- Uniform Forms Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.uniform.min.js"></script>
+	
+	<!-- MegaMenu -->
+	<script src="<?php echo APP_CTX?>/report/script/megamenu.js"></script>
+
+	<!-- Bootstrap Extended -->
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-select.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-switch.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-fileupload.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/bootbox.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/wysihtml5-0.3.0_rc2.min.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-wysihtml5-0.0.2.js"></script>
+	
+	<!-- Google Code Prettify -->
+	<script src="<?php echo APP_CTX?>/report/script/prettify.js"></script>
+	
+	<!-- Gritter Notifications Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.gritter.min.js"></script>
+	
+	<!-- Notyfy Notifications Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.notyfy.js"></script>
+	
+	<!-- MiniColors Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.miniColors.js"></script>
+	
+	<!-- DateTimePicker Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-datetimepicker.min.js"></script>
+
+	<!-- Cookie Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.cookie.js"></script>
+	
+	<!-- Select2 Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/select2.js"></script>
+	
+	<!-- Themer -->
+	<script src="<?php echo APP_CTX?>/report/script/themer.js"></script>
+	
+	<!-- Twitter Feed -->
+	<script src="<?php echo APP_CTX?>/report/script/twitter.js"></script>
+	
+	<!-- Easy-pie Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.easy-pie-chart.js"></script>
+	
+	<!-- Sparkline Charts Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.sparkline.min.js"></script>
+	
+	<!-- Ba-Resize Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.ba-resize.js"></script>
+	
+	
+	<!--  Flot Charts Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.pie.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.tooltip.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.selection.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.resize.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/jquery.flot.orderBars.js"></script>
+	
+	<!-- Charts Helper Demo Script -->
+	<script src="<?php echo APP_CTX?>/report/script/charts.helper.js"></script>
+	
+	
+	<!-- Bootstrap Image Gallery -->
+	<script src="<?php echo APP_CTX?>/report/script/load-image.min.js"></script>
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap-image-gallery.min.js" type="text/javascript"></script>
+
+	<!-- Dashboard Demo Script -->
+	<script src="<?php echo APP_CTX?>/report/script/index.js"></script>
+	
+	<!-- Common Demo Script -->
+	<script src="<?php echo APP_CTX?>/report/script/common.js"></script>
+	
+
+</body></html>

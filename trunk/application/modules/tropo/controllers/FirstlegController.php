@@ -154,7 +154,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropo->RenderJson();
 	}
 
-		public function completeAction() {
+	public function completeAction() {
 		$this->log("Completed call: " . $_GET["1stLegNumber"] . "<-->" . $_GET["2ndLegNumber"]);
 		$call = array (
 			"inx" => $_GET["callInx"],
