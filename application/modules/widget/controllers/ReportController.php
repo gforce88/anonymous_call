@@ -78,11 +78,13 @@ class Widget_ReportController extends Zend_Controller_Action {
 		$partnerInx = $_SESSION["partnerInx"];
 		if ($partnerInx == null) {
 			$partnerInx = $_REQUEST["partnerInx"];
-			header("Location: " . APP_CTX . "/widget/report/login?inx=" . $indexInx);
+			header("Location: " . APP_CTX . "/widget/report?inx=" . $indexInx);
 			return;
 		}
 		
 		$this->view->assign("country", $_REQUEST["country"]);
+		$this->view->assign("startDate", (new DateTime())->format("m/01/Y"));
+		$this->view->assign("endDate", (new DateTime())->format("m/d/Y"));
 	}
 
 }
