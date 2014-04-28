@@ -18,13 +18,14 @@ class Widget_ReportController extends Zend_Controller_Action {
 		$this->callManager = new CallManager();
 	}
 
-	public function loginAction() {
+	public function indexAction() {
+		$this->_helper->layout->disableLayout();
 		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
 		$this->view->assign("partnerInx", $partner["inx"]);
 		$this->view->assign("country", $partner["country"]);
 	}
 
-	public function validateAction() {
+	public function loginAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
@@ -53,7 +54,7 @@ class Widget_ReportController extends Zend_Controller_Action {
 				$_SESSION["partnerInx"] = $account["partnerInx"];
 				$result = array (
 					"success" => true,
-					"url" => APP_CTX . "/widget/report/report?country=" . $_POST["country"]
+					"url" => APP_CTX . "/widget/report/report?country=" . $_POST["country"] 
 				);
 				return $this->_helper->json->sendJson($result);
 			}

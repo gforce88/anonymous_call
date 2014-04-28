@@ -1,6 +1,6 @@
-<script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
+<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/agreement-validate" method="post" onsubmit="submiteAnonCall('#acknowlegmentFrom'); return false;">
+<form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/agreement-validate" method="post" onsubmit="submiteAnonCall('#acceptanceFrom'); return false;">
 	<div>Accpetance</div>
 	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
 	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
