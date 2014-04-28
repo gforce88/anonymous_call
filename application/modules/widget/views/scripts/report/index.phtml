@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="animations front fluid top-full menuh-top sticky-top js no-touch csstransforms3d csstransitions">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>View Report</title>
+	
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	
+	<!-- Bootstrap -->
+	<link href="<?php echo APP_CTX?>/report/css/bootstrap.css" rel="stylesheet" type="text/css">
+	
+	<!-- Glyphicons Font Icons -->
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_regular.css">
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_social.css">
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/fonts/glyphicons/css/glyphicons_filetypes.css">
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/fonts/font-awesome/css/font-awesome.min.css">
+	
+	<!-- Uniform Pretty Checkboxes -->
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css">
+	
+	<!-- Main Theme Stylesheet :: CSS -->
+	<link rel="stylesheet" href="http://8.19.32.115/usersiteJ/common/theme/css/style-default-menus-dark.css?1382019519">
+	
+	<style id="holderjs-style" type="text/css">.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}.holderjs-fluid {font-size:16px;font-weight:bold;text-align:center;font-family:sans-serif;margin:0}</style>
+	
+	<script src="<?php echo APP_CTX?>/script/jquery-2.1.0.min.js"></script>
+	<script src="<?php echo APP_CTX?>/script/jquery.form.min.js"></script>
+	<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
+	
+</head>
+
+<body class="login">
+	
+	
+<div id="login">
+
+	<div class="container">
+	
+		<div class="wrapper">
+		
+			<h1 class="glyphicons unlock">Log In <i></i></h1>
+		
+		<p class="separator text-center"></p>
+	<div class="separator bottom"></div>
+	
+			<!-- Box -->
+			<div class="widget widget-heading-simple widget-body-gray">
+				
+				<div class="widget-body">
+				
+					<!-- Form -->
+					<form id="loginForm" action="<?php echo APP_CTX?>/widget/report/login" method="post" onsubmit="submiteAnonCall('#loginForm'); return false;">
+						<label>Username or Email</label>
+						<input type="text" name="userName" class="input-block-level form-control margin-none" placeholder="Your Username or Email address"> 
+						<small id="userNameNotNull" style="display:none">
+							<?php echo MultiLang::getText("User_name", $country)?><?php echo MultiLang::getText("not_null", $country)?>
+						</small>
+						<br>
+						<label>Password</label>
+						<a class="pull-right" href="">forgot it?</a>
+						<div class="clearfix"></div>
+						<input type="password" name="password" class="input-block-level form-control margin-none" placeholder="Your Password">
+						<small id="passwordNotNull" style="display:none">
+							<?php echo MultiLang::getText("Password", $country)?><?php echo MultiLang::getText("not_null", $country)?>
+						</small>
+						<small id="invalidPassword" style="display:none">
+							<?php echo MultiLang::getText("Password", $country)?><?php echo MultiLang::getText("is_wrong", $country)?>
+						</small>
+						<div class="separator bottom"></div> 
+						<div class="row">
+							<div class="col-md-8">
+								<div class="uniformjs"><label class="checkbox"><div class="checker" id="uniform-undefined"><span><input type="checkbox" value="remember-me" style="opacity: 0;"></span></div>Remember me</label></div>
+							</div>
+							<div class="col-md-4 center">
+								<!--  <a href="admin/index.html" class="btn btn-block btn-inverse" type="submit">Log In<i></i></a> -->
+								<input class="btn btn-block btn-inverse" type="submit" value="Log in">
+							</div>
+						</div>
+					</form>
+					<!-- // Form END -->
+					
+				</div>
+				
+				<div class="widget-footer">
+					<p class="glyphicons restart"><i></i>Please enter your username and password ...</p>
+				</div>
+			</div>
+			<!-- // Box END -->
+			
+			<p class="separator text-center"></p>
+	<div class="separator bottom"></div>
+	
+		</div>
+		
+	</div>
+	
+</div>
+
+<!-- // Content END -->
+<div id="footer" class="hidden-print">
+	<div class="container-960 innerTB">
+		<div class="row"></div>
+		<!--  Copyright Line -->
+		<div class="copy">
+			© 2013 - <a href="http://www.incognitosys.com/">Incognito Systems LLC</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/index.html">HOME</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/faq.html">FAQ</a>&nbsp;&nbsp; | &nbsp;&nbsp;<a href="http://8.19.32.115/usersiteJ/faq.html">Contact Us</a>
+		</div>
+		<!--  End Copyright Line -->
+	</div>
+</div>
+<!-- // Footer END -->
+
+	<script src="<?php echo APP_CTX?>/report/script/jquery-migrate-1.2.1.min.js"></script>
+
+	<!-- SlimScroll Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.slimscroll.js"></script>
+
+	<!-- Uniform Forms Plugin -->
+	<script src="<?php echo APP_CTX?>/report/script/jquery.uniform.min.js"></script>
+
+	<!-- Bootstrap -->
+	<script src="<?php echo APP_CTX?>/report/script/bootstrap.min.js"></script>
+
+	<!-- Modernizr -->
+	<script src="<?php echo APP_CTX?>/report/script/modernizr.js"></script>
+
+	<!-- Common Demo Script -->
+	<script src="<?php echo APP_CTX?>/report/script/common.js"></script>
+
+</body></html>
