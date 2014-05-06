@@ -1,17 +1,15 @@
 <script type="text/javascript" src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <h1><?php echo MultiLang::getText("Make_a_Tokumei_call_to", $country, $this->inviterName)?></h1><br>
-<form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom'); return false;">
-	<div id="ccInfo" style="display:<?php echo $this->ccInfo?>">
-		<input type="text" name="creditCardNumber" onkeypress="inputCheck('[0-9]|\-', event)" placeholder="<?php echo MultiLang::getText("Credit_Card_Number", $country)?>" tabindex="1" /><br>
-		<input type="twothird" name="creditCardExp" onkeypress="inputCheck('[0-9]|\/', event)" placeholder="<?php echo MultiLang::getText("Exp", $country)?>" tabindex="1" />
-		<input type="fourth" name="creditCardCvc" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("CVC", $country)?>" tabindex="1" />
-		<small id="creditCardInfoInvalid" style="display:none">
-			<?php echo MultiLang::getText("Credit_Card_Information", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-		</small>
-	</div><br>
-	<h3><?php echo MultiLang::getText("Enter_your_phone_number", $country)?></h3>
-	<h4><?php echo MultiLang::getText("This_number_will_be_kept_private", $country)?></h4>
+<form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/response-validate" method="post" onsubmit="submiteAnonCall('#responseFrom'); return false;">
+	<div id="inviteePay" style="display:<?php echo $this->inviteePay?>">
+		<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
+		<div>Charge Amount: <?php echo $this->chargeAmount?></div>
+		<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
+	</div>
+	<div id="inviterPay" style="display:<?php echo $this->inviterPay?>">
+		Inviter pay
+	</div>
 	<div>
 		<input value="14158004768" type="text" name="inviteePhoneNumber" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" tabindex="1" />
 		<small id="inviteePhoneNumberInvalid" style="display:none">
@@ -19,12 +17,16 @@
 		</small>
 	</div><br>
 	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("Make_the_call", $country)?>" />
+		<input type="submit" value="Accept" />
 	</div>
-	<input type="hidden" name="hasCcInfo" value="<?php echo $this->hasCcInfo?>" />
-	<input type="hidden" name="inviteInx" value="<?php echo $this->inviteInx?>" />
-	<input type="hidden" name="partnerInx" value="<?php echo $this->partnerInx?>" />
-	<input type="hidden" name="inviterInx" value="<?php echo $this->inviterInx?>" />
-	<input type="hidden" name="inviteeInx" value="<?php echo $this->inviteeInx?>" />
+	<div>
+		<input type="checkbox" name="agreement" tabindex="1" />I agree
+		<small id="agreementInvalid" style="display:none">
+			agreement invalid
+		</small>
+	</div>
+	<div>
+		<a href="<?php echo APP_CTX?>/widget/response/decline"></a>
+	</div>
 </form>
 

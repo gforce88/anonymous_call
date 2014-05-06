@@ -7,18 +7,21 @@ require_once 'util/Validator.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
+require_once 'models/EmailManager.php';
 
 class Widget_InvitationController extends Zend_Controller_Action {
 	private $logger;
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
+	private $emailManager;
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
+		$this->emailManager = new EmailManager();
 		session_start();
 	}
 
@@ -27,6 +30,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		$_SESSION["partnerInx"] = $partner["inx"];
 		$_SESSION["country"] = $partner["country"];
+		$_SESSION["inviteType"] = $_REQUEST["type"];
 		
 		$this->view->assign("country", $partner["country"]);
 	}
@@ -78,15 +82,14 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		// }
 		
 		// Dispatch
-		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		if (count($invalidFields) == 0) {
 			$inviter = $this->userManager->insert($inviter);
 			$invitee = $this->userManager->insert($invitee);
 			$invite = array (
-				"partnerInx" => $partner["inx"],
+				"partnerInx" => $_SESSION["partnerInx"],
 				"inviterInx" => $inviter["inx"],
 				"inviteeInx" => $invitee["inx"],
-				"inviteType" => 1, // TODO: how to detemine the invite type?
+				"inviteType" => $_SESSION["inviteType"],
 				"inviteToken" => md5(time()),
 				"inviteTime" => (new DateTime())->format("Y-m-d H:i:s") 
 			);
@@ -94,12 +97,12 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			$_SESSION["inviteInx"] = $invite["inx"];
 			
 			$result = array (
-				"success" => true,
-				"url" => APP_CTX . "/widget/invitation/agreement?&freeCallDur=" . $partner["freeCallDur"] . "&chargeAmount=" . $partner["chargeAmount"] . "&minCallBlkDur=" . $partner["minCallBlkDur"] 
+				"redirect" => true,
+				"url" => APP_CTX . "/widget/invitation/agreement" 
 			);
 		} else {
 			$result = array (
-				"success" => false,
+				"redirect" => false,
 				"validFields" => $validFields,
 				"invalidFields" => $invalidFields 
 			);
@@ -110,12 +113,13 @@ class Widget_InvitationController extends Zend_Controller_Action {
 
 	public function agreementAction() {
 		$this->view->assign("country", $_SESSION["country"]);
-		$this->view->assign("freeCallDur", $_REQUEST["freeCallDur"]);
-		$this->view->assign("chargeAmount", $_REQUEST["chargeAmount"]);
-		$this->view->assign("minCallBlkDur", $_REQUEST["minCallBlkDur"]);
 		
-		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
-		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
+		$this->view->assign("freeCallDur", $partner["freeCallDur"]);
+		$this->view->assign("chargeAmount", $partner["chargeAmount"]);
+		$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
+		
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$this->renderScript("/invitation/acceptance.phtml");
 		} else {
 			$this->renderScript("/invitation/acknowlegment.phtml");
@@ -136,20 +140,20 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		if (count($invalidFields) == 0) {
 			$invite = array (
 				"inx" => $_SESSION["inviteInx"],
-				"inviterResult" => INVITE_RESULT_INVITE 
+				"inviteResult" => INVITE_RESULT_INVITE 
 			);
-			$invite = $this->inviteManager->update($invite);
+			$this->inviteManager->update($invite);
 			
-			$invite4Email = $this->inviteManager->findInvite4Email($invite["inx"]);
-			$this->sendInviteeNotifyEmail($invite4Email);
+			$inviteEmail = $this->emailManager->findInviteEmail($invite["inx"]);
+			$this->sendInviteEmail($inviteEmail);
 			
 			$result = array (
-				"success" => true,
+				"redirect" => true,
 				"url" => APP_CTX . "/widget/invitation/confirmation" 
 			);
 		} else {
 			$result = array (
-				"success" => false,
+				"redirect" => false,
 				"validFields" => $validFields,
 				"invalidFields" => $invalidFields 
 			);
@@ -168,26 +172,31 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->viewRenderer->setNeverRender();
 		
 		$result = array (
-			"url" => "" 
+			"redirect" => "false" 
 		);
 		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
 		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
 				// Invite is declined by invitee
+				$result["redirect"] = true;
 				$result["url"] = APP_CTX . "/widget/invitation/decline";
 			} else if ($invite["inviteResult"] == INVITE_RESULT_ACCEPT) {
 				// Invite is accepted by invitee
+				$result["redirect"] = true;
 				$result["url"] = APP_CTX . "/widget/following";
 			}
 		} else {
 			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
 				// Invite is declined by invitee
+				$result["redirect"] = true;
 				$result["url"] = APP_CTX . "/widget/invitation/decline";
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is paied by invitee
-				$result["url"] = APP_CTX . "/widget/invitation/acceptready";
+				$result["redirect"] = true;
+				$result["url"] = APP_CTX . "/widget/invitation/accept";
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
-				// Invite is paied by invitee
+				// Invite is not paied by invitee
+				$result["redirect"] = true;
 				$result["url"] = APP_CTX . "/widget/following/problem";
 			}
 		}
@@ -203,21 +212,21 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	private function sendInviteeNotifyEmail($invite4Email) {
+	private function sendInviteEmail($inviteEmail) {
 		$titleParam = array (
-			$invite4Email["inviterEmail"] 
+			$inviteEmail["fromEmail"] 
 		);
 		$contentParam = array (
-			$invite4Email["inviterEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $invite4Email["inx"] . "&token=" . $invite4Email["inviteToken"] . "&country=" . $invite4Email["country"] 
+			$inviteEmail["fromEmail"],
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $inviteEmail["inx"] . "&token=" . $inviteEmail["inviteToken"] 
 		);
 		
-		$subject = MultiLang::replaceParams($invite4Email["inviteEmailSubject"], $titleParam);
-		$content = MultiLang::replaceParams($invite4Email["inviteEmailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($inviteEmail["inviteEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($inviteEmail["inviteEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Sending invitation emal to: [" . $invite4Email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($invite4Email["name"], $invite4Email["emailAddr"], "", $invite4Email["inviteeEmail"], $subject, $content);
-		$this->logger->logInfo($invite4Email["partnerInx"], $invite4Email["inx"], "Email sent result: [$sendResult]");
+		$this->logger->logInfo($inviteEmail["partnerInx"], $inviteEmail["inx"], "Sending invitation email to: [" . $inviteEmail["toEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($inviteEmail["name"], $inviteEmail["emailAddr"], "", $inviteEmail["toEmail"], $subject, $content);
+		$this->logger->logInfo($inviteEmail["partnerInx"], $inviteEmail["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
 	}

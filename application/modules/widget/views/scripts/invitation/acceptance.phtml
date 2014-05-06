@@ -6,15 +6,13 @@
 	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
 	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
 	<div>
-		<small id="agreementInvalid" style="display:none">
-			agreement invalid
-		</small>
-	</div>
-	<div>
 		<input type="submit" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" />
 	</div>
 	<div>
 		<input type="checkbox" name="agreement" tabindex="1" />I agree
+		<small id="agreementInvalid" style="display:none">
+			agreement invalid
+		</small>
 	</div>
 	
 </form>

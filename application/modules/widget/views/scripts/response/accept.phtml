@@ -1,13 +1,13 @@
 <script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="confirmationFrom" action="<?php echo APP_CTX?>/widget/invitation/refresh" method="post">
-	Confirmation Screen
+<form id="acceptFrom" action="<?php echo APP_CTX?>/widget/response/refresh" method="post">
+	Accept Screen
 </form>
 <script type="text/javascript">
 var timerRefresh = window.setInterval(refreshPage, 5000);
 
 function refreshPage() {
-	$("#confirmationFrom").ajaxSubmit(function(result) {
+	$("#acceptFrom").ajaxSubmit(function(result) {
 		if (result.redirect == true) {
 			window.location.replace(result.url);
 		}

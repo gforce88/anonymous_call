@@ -8,12 +8,18 @@ class PartnerManager extends BaseManager {
 			  from partners
 			 where inx=:inx";
 
-	const SQL_FIND_PARTNER_BY_CALL = "
+	const SQL_FIND_PARTNER_BY_INVITE = "
 			select *
 			  from partners, invites, calls
 			 where partners.inx = invites.partnerInx
 			   and invites.inx = calls.inviteInx
 			   and calls.inx = :callInx";
+
+	const SQL_FIND_PARTNER_BY_CALL = "
+			select *
+			  from partners, invites
+			 where partners.inx = invites.partnerInx
+			   and invites.inx = :inviteInx";
 
 	public function insert($partner) {
 		$this->db->insert("partners", array_intersect_key($partner, self::$empty));
@@ -28,6 +34,12 @@ class PartnerManager extends BaseManager {
 	public function findPartnerByInx($inx) {
 		return $this->db->fetchRow(self::SQL_FIND_PARTNER_BY_INX, array (
 			"inx" => $inx 
+		));
+	}
+
+	public function findPartnerByInvite($inviteInx) {
+		return $this->db->fetchRow(self::SQL_FIND_PARTNER_BY_INVITE, array (
+			"inviteInx" => $inviteInx 
 		));
 	}
 
