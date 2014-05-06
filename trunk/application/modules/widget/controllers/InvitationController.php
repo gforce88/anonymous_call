@@ -35,7 +35,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->view->assign("country", $partner["country"]);
 	}
 
-	public function invitationformAction() {
+	public function invitationAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
@@ -193,7 +193,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is paied by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/invitation/accept";
+				$result["url"] = APP_CTX . "/widget/invitation/ready";
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is not paied by invitee
 				$result["redirect"] = true;
@@ -204,11 +204,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function declineAction() {
+	public function readyAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	public function acceptAction() {
+	public function declineAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
