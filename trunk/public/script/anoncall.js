@@ -1,6 +1,6 @@
 function submiteAnonCall(formId) {
 	$(formId).ajaxSubmit(function(result) {
-		if (result.success == true) {
+		if (result.redirect == true) {
 			window.location.replace(result.url);
 		} else {
 			$(result.validFields).each(function(index, element){

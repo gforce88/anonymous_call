@@ -54,7 +54,7 @@ class Widget_ReportController extends Zend_Controller_Action {
 			} else {
 				$_SESSION["partnerInx"] = $account["partnerInx"];
 				$result = array (
-					"success" => true,
+					"redirect" => true,
 					"url" => APP_CTX . "/widget/report/report" 
 				);
 				return $this->_helper->json->sendJson($result);
@@ -63,7 +63,7 @@ class Widget_ReportController extends Zend_Controller_Action {
 		
 		// invalid result
 		$result = array (
-			"success" => false,
+			"redirect" => false,
 			"validFields" => $validFields,
 			"invalidFields" => $invalidFields 
 		);
