@@ -59,7 +59,9 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function declineAction() {
-		// TODO: send decline email
+		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
+		$this->sendAcceptEmail($email);
+		
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
@@ -94,6 +96,11 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			array_push($invalidFields, "agreementInvalid");
 		}
 		
+		$result = array (
+			"redirect" => false,
+			"validFields" => $validFields,
+			"invalidFields" => $invalidFields 
+		);
 		if (count($invalidFields) == 0) {
 			$invitee = array (
 				"inx" => $_SESSION["inviteeInx"],
@@ -101,31 +108,21 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			);
 			$this->userManager->update($invitee);
 			
-			$result = array (
-				"redirect" => true 
-			);
 			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-				$result["url"] = APP_CTX . "/widget/response/accept";
+				$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
+				$this->sendAcceptEmail($email);
 			} else {
-				$result["url"] = APP_CTX . "/widget/following";
+				$result = array (
+					"redirect" => true,
+					"url" => APP_CTX . "/widget/following" 
+				);
 			}
-		} else {
-			$result = array (
-				"redirect" => false,
-				"validFields" => $validFields,
-				"invalidFields" => $invalidFields 
-			);
 		}
 		
 		$this->_helper->json->sendJson($result);
 	}
 
 	public function invalidAction() {
-		$this->view->assign("country", $_SESSION["country"]);
-	}
-
-	public function acceptAction() {
-		// TODO: send accept email
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
@@ -141,11 +138,11 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 			// Invite is paied by inviter
 			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/invitation/accept";
+			$result["url"] = APP_CTX . "/widget/following/ready";
 		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
 			// Invite is not paied by inviter
 			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/following/problem?inx=" . $invite["inx"];
+			$result["url"] = APP_CTX . "/widget/following/problem";
 		}
 		
 		$this->_helper->json->sendJson($result);
@@ -169,21 +166,40 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		return false;
 	}
 
-	private function sendAcceptEmail($accept4Email) {
+	private function sendAcceptEmail($email) {
 		$titleParam = array (
-			$accept4Email["inviteeEmail"] 
+			$email["inviteeEmail"] 
 		);
 		$contentParam = array (
-			$accept4Email["inviteeEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $accept4Email["inx"] . "&token=" . $accept4Email["inviteToken"] 
+			$email["inviteeEmail"],
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
-		$subject = MultiLang::replaceParams($accept4Email["inviteEmailSubject"], $titleParam);
-		$content = MultiLang::replaceParams($accept4Email["inviteEmailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($email["acceptEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($accept4Email["partnerInx"], $accept4Email["inx"], "Sending invitation email to: [" . $accept4Email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($accept4Email["name"], $accept4Email["emailAddr"], "", $accept4Email["inviteeEmail"], $subject, $content);
-		$this->logger->logInfo($accept4Email["partnerInx"], $accept4Email["inx"], "Email sent result: [$sendResult]");
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["inviteeEmail"], $subject, $content);
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
+		
+		return $sendResult;
+	}
+
+	private function sendDeclineEmail($email) {
+		$titleParam = array (
+			$email["inviteeEmail"] 
+		);
+		$contentParam = array (
+			$email["inviteeEmail"],
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
+		);
+		
+		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($email["declineEmailBody"], $contentParam);
+		
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["inviteeEmail"], $subject, $content);
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
 	}

@@ -144,8 +144,8 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			);
 			$this->inviteManager->update($invite);
 			
-			$inviteEmail = $this->emailManager->findInviteEmail($invite["inx"]);
-			$this->sendInviteEmail($inviteEmail);
+			$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
+			$this->sendInviteEmail($email);
 			
 			$result = array (
 				"redirect" => true,
@@ -183,7 +183,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			} else if ($invite["inviteResult"] == INVITE_RESULT_ACCEPT) {
 				// Invite is accepted by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/following";
+				$result["url"] = APP_CTX . "/widget/following/paypal";
 			}
 		} else {
 			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
@@ -193,7 +193,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is paied by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/invitation/ready";
+				$result["url"] = APP_CTX . "/widget/following/ready";
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is not paied by invitee
 				$result["redirect"] = true;
@@ -204,29 +204,25 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function readyAction() {
-		$this->view->assign("country", $_SESSION["country"]);
-	}
-
 	public function declineAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	private function sendInviteEmail($inviteEmail) {
+	private function sendInviteEmail($email) {
 		$titleParam = array (
-			$inviteEmail["fromEmail"] 
+			$email["fromEmail"] 
 		);
 		$contentParam = array (
-			$inviteEmail["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $inviteEmail["inx"] . "&token=" . $inviteEmail["inviteToken"] 
+			$email["fromEmail"],
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
-		$subject = MultiLang::replaceParams($inviteEmail["inviteEmailSubject"], $titleParam);
-		$content = MultiLang::replaceParams($inviteEmail["inviteEmailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($email["inviteEmailSubject"], $titleParam);
+		$content = MultiLang::replaceParams($email["inviteEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($inviteEmail["partnerInx"], $inviteEmail["inx"], "Sending invitation email to: [" . $inviteEmail["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($inviteEmail["name"], $inviteEmail["emailAddr"], "", $inviteEmail["toEmail"], $subject, $content);
-		$this->logger->logInfo($inviteEmail["partnerInx"], $inviteEmail["inx"], "Email sent result: [$sendResult]");
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending invitation email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
 	}

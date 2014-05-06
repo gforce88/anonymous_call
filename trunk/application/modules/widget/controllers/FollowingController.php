@@ -47,6 +47,10 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		}
 	}
 
+	public function readyAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+	}
+
 	public function problemAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
