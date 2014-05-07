@@ -89,16 +89,6 @@ CREATE TABLE `invites` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- ------------------------------------
--- Table structure for inviteresult
--- ------------------------------------
-DROP TABLE IF EXISTS `inviteresult`;
-CREATE TABLE `inviteresult` (
-  `inx`                 int(2)          NOT NULL                    COMMENT 'primary key',
-  `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of result',
-  PRIMARY KEY (`inx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-
--- ------------------------------------
 -- Table structure for calls
 -- ------------------------------------
 DROP TABLE IF EXISTS `calls`;
@@ -115,16 +105,6 @@ CREATE TABLE `calls` (
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
   `nextRemindTime`      timestamp                   DEFAULT 0       COMMENT 'next remind time',
   `nextChargeTime`      timestamp                   DEFAULT 0       COMMENT 'next charge time',
-  PRIMARY KEY (`inx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16;
-
--- ------------------------------------
--- Table structure for callresult
--- ------------------------------------
-DROP TABLE IF EXISTS `callresult`;
-CREATE TABLE `callresult` (
-  `inx`                 int(2)          NOT NULL                    COMMENT 'primary key',
-  `desc`                varchar(256)    NOT NULL                    COMMENT 'text description of result',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
@@ -154,40 +134,6 @@ CREATE TABLE `countries` (
 -- ------------------------------------
 -- Master Data
 -- ------------------------------------
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (0, 'Init');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (1, 'Invited');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (2, 'Decline');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (3, 'Accept');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (4, 'NoCheckout');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (5, 'Checkout');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (6, 'NoPay');
-INSERT `inviteresult` (`inx`, `desc`)
-        VALUES (7, 'Payed');
-
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (0, 'Init');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (1, '1stLeg_NoAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (2, '1stLeg_IsAnswerMachine');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (3, '1stLeg_Answered');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (4, '2ndLeg_NoAnswer');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (5, '2ndLeg_Answered');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (6, 'Complete');
-INSERT `callresult` (`inx`, `desc`)
-        VALUES (-1, 'Error');
-
 INSERT `countries` (`isoCode`, `desc`)
         VALUES (1, 'United States');
 INSERT `countries` (`isoCode`, `desc`)

@@ -74,9 +74,14 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
 		if ($this->inviteExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || $this->callCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
+			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+				$_SESSION["inviteType"] = INVITE_TYPE_INVITEE_PAY;
+			} else {
+				$_SESSION["inviteType"] = INVITE_TYPE_INVITER_PAY;
+			}
 			$result = array (
 				"redirect" => true,
-				"url" => APP_CTX . "/notification/exipred" 
+				"url" => APP_CTX . "/widget/notification/expired?" 
 			);
 		} else {
 			// Validation
@@ -89,6 +94,12 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			}
 			
 			if (count($invalidFields) == 0) {
+				$invite = array (
+					"inx" => $_SESSION["inviteInx"],
+					"inviteResult" => INVITE_RESULT_ACCEPT 
+				);
+				$this->inviteManager->update($invite);
+				
 				$invitee = array (
 					"inx" => $_SESSION["inviteeInx"],
 					"phoneNum" => $_POST["inviteePhoneNumber"] 
@@ -119,12 +130,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function acceptAction() {
-		$invite = array (
-			"inx" => $_SESSION["inviteInx"],
-			"inviteResult" => INVITE_RESULT_ACCEPT
-		);
-		$this->inviteManager->update($invite);
-		
 		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
 		$this->sendAcceptEmail($email);
 		
@@ -135,13 +140,13 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	public function declineAction() {
 		$invite = array (
 			"inx" => $_SESSION["inviteInx"],
-			"inviteResult" => INVITE_RESULT_DECLINE
+			"inviteResult" => INVITE_RESULT_DECLINE 
 		);
 		$this->inviteManager->update($invite);
 		
 		$email = $this->emailManager->findDeclineEmail($_SESSION["inviteInx"]);
 		$this->sendDeclineEmail($email);
-
+		
 		$this->view->assign("name", $email["inviterName"]);
 		$this->view->assign("country", $_SESSION["country"]);
 	}
@@ -188,7 +193,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$email["fromEmail"] 
 		);
 		$contentParam = array (
-			$email["fromEmail"]
+			$email["fromEmail"] 
 		);
 		
 		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $subjectParam);
