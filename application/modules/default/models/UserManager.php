@@ -17,13 +17,13 @@ class UserManager extends BaseManager {
 			 where inx=:inx";
 
 	const SQL_FIND_INVITER_BY_INVITE_INX = "
-			select users.*, users.email as name
+			select users.*, users.email name
 			  from users, invites
 			 where users.inx = invites.inviterInx
 			   and invites.inx=:inviteInx";
 
 	const SQL_FIND_INVITEE_BY_INVITE_INX = "
-			select users.*
+			select users.*, users.email name
 			  from users, invites
 			 where users.inx = invites.inviteeInx
 			   and invites.inx=:inviteInx";

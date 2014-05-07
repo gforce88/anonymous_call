@@ -5,8 +5,8 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_INVITE_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name, partners.emailAddr, partners.inviteEmailSubject, partners.inviteEmailBody,
-			       inviter.email fromEmail, invitee.email toEmail
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.inviteEmailSubject, partners.inviteEmailBody,
+			       inviter.email fromEmail, invitee.email toEmail, invitee.email inviteeName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx
 			   and invites.inviteeInx = invitee.inx
@@ -15,8 +15,8 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_ACCEPT_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name, partners.emailAddr, partners.acceptEmailSubject, partners.acceptEmailBody,
-			       inviter.email toEmail, invitee.email fromEmail
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.acceptEmailSubject, partners.acceptEmailBody,
+			       inviter.email toEmail, invitee.email fromEmail, inviter.email inviterName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx
 			   and invites.inviteeInx = invitee.inx
@@ -25,8 +25,8 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_DECLINE_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name, partners.emailAddr, partners.declineEmailSubject, partners.declineEmailBody,
-			       inviter.email toEmail, invitee.email fromEmail
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.declineEmailSubject, partners.declineEmailBody,
+			       inviter.email toEmail, invitee.email fromEmail, inviter.email inviterName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx
 			   and invites.inviteeInx = invitee.inx
