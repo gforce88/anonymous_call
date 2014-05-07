@@ -148,7 +148,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	private function sendInviteEmail($email) {
-		$titleParam = array (
+		$subjectParam = array (
 			$email["fromEmail"] 
 		);
 		$contentParam = array (
@@ -156,7 +156,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
-		$subject = MultiLang::replaceParams($email["inviteEmailSubject"], $titleParam);
+		$subject = MultiLang::replaceParams($email["inviteEmailSubject"], $subjectParam);
 		$content = MultiLang::replaceParams($email["inviteEmailBody"], $contentParam);
 		
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending invitation email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
