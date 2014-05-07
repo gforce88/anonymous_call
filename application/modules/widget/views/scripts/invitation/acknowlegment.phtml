@@ -1,15 +1,16 @@
 <script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/confimation" method="post" onsubmit="submiteAnonCall('#acknowlegmentFrom'); return false;">
+<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
 	<div>Acknowlegment</div>
 	<div>Send to <?php echo $this->name?></div>
 	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" />
+		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" disabled />
 	</div>
 	<div>
-		<input type="checkbox" name="agreement" tabindex="1" />I agree
+		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')"/>I agree
 		<small id="agreementInvalid" style="display:none">
 			agreement invalid
 		</small>
 	</div>
 </form>
+	
