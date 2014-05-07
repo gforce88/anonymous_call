@@ -1,6 +1,6 @@
 <script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/invitation-validate" method="post" onsubmit="submiteAnonCall('#invitationFrom'); return false;">
+<form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" onsubmit="submiteAnonCall('#invitationFrom'); return false;">
 	<div>
 		<input value="imddl137@gmail.com" type="text" name="inviterEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
 		<small id="inviterEmailInvalid" style="display:none">

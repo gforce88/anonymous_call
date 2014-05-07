@@ -16,6 +16,18 @@ class UserManager extends BaseManager {
 			  from users
 			 where inx=:inx";
 
+	const SQL_FIND_INVITER_BY_INVITE_INX = "
+			select users.*, users.email as name
+			  from users, invites
+			 where users.inx = invites.inviterInx
+			   and invites.inx=:inviteInx";
+
+	const SQL_FIND_INVITEE_BY_INVITE_INX = "
+			select users.*
+			  from users, invites
+			 where users.inx = invites.inviteeInx
+			   and invites.inx=:inviteInx";
+
 	public function insert($user) {
 		$this->db->insert("users", array_intersect_key($user, self::$empty));
 		$user["inx"] = $this->db->lastInsertId();
@@ -29,6 +41,18 @@ class UserManager extends BaseManager {
 	public function findUserByInx($inx) {
 		return $this->db->fetchRow(self::SQL_FIND_USER_BY_INX, array (
 			"inx" => $inx 
+		));
+	}
+
+	public function findInviterByInviteInx($inviteInx) {
+		return $this->db->fetchRow(self::SQL_FIND_INVITER_BY_INVITE_INX, array (
+			"inviteInx" => $inviteInx 
+		));
+	}
+
+	public function findInviteeByInviteInx($inviteInx) {
+		return $this->db->fetchRow(self::SQL_FIND_INVITEE_BY_INVITE_INX, array (
+			"inviteInx" => $inviteInx 
 		));
 	}
 

@@ -26,6 +26,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		$this->getstartAction();
+		$this->renderScript("/invitation/getstart.phtml");
+	}
+
+	public function getstartAction() {
 		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
 		
 		$_SESSION["partnerInx"] = $partner["inx"];
@@ -39,7 +44,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	public function invitationValidateAction() {
+	public function validateAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
@@ -112,14 +117,16 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function agreementAction() {
+		$invitee = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		$this->view->assign("name", $invitee["name"]);
 		$this->view->assign("country", $_SESSION["country"]);
 		
-		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
-		$this->view->assign("freeCallDur", $partner["freeCallDur"]);
-		$this->view->assign("chargeAmount", $partner["chargeAmount"]);
-		$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
-		
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
+			$this->view->assign("freeCallDur", $partner["freeCallDur"]);
+			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
+			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
+			
 			$this->renderScript("/invitation/acceptance.phtml");
 		} else {
 			$this->renderScript("/invitation/acknowlegment.phtml");
@@ -163,6 +170,15 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function confirmationAction() {
+		$invite = array (
+			"inx" => $_SESSION["inviteInx"],
+			"inviteResult" => INVITE_RESULT_INVITE 
+		);
+		$this->inviteManager->update($invite);
+		
+		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
+		$this->sendInviteEmail($email);
+		
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
