@@ -17,6 +17,7 @@ class Widget_NotificationController extends Zend_Controller_Action {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
+		$_SESSION["notificationType"] = NOTIFICATION_TYPE_INVITATION;
 		$result = array (
 			"redirect" => false 
 		);
@@ -40,11 +41,11 @@ class Widget_NotificationController extends Zend_Controller_Action {
 			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 				// Invite is paied by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/notification/ready1";
-			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
+				$result["url"] = APP_CTX . "/widget/notification/ready";
+			} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
 				// Invite is not paied by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/notification/sorry1";
+				$result["url"] = APP_CTX . "/widget/notification/sorry";
 			}
 		}
 		
@@ -56,6 +57,7 @@ class Widget_NotificationController extends Zend_Controller_Action {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
+		$_SESSION["notificationType"] = NOTIFICATION_TYPE_RESPONSE;
 		$result = array (
 			"redirect" => false 
 		);
@@ -64,53 +66,44 @@ class Widget_NotificationController extends Zend_Controller_Action {
 		if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
 			// Invite is paied by inviter
 			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/notification/ready2";
+			$result["url"] = APP_CTX . "/widget/notification/ready";
 		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
 			// Invite is not paied by inviter
 			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/notification/sorry2";
+			$result["url"] = APP_CTX . "/widget/notification/sorry";
 		}
 		
 		$this->_helper->json->sendJson($result);
 	}
+	
+	public function expiredAction() {
+		$this->view->assign("country", $_SESSION["country"]);
+	}
 
 	public function declineAction() {
-		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		$this->prepareScreen();
+	}
+
+	public function readyAction() {
+		$this->prepareScreen();
+	}
+
+	public function sorryAction() {
+		$this->prepareScreen();
+	}
+	
+	private function prepareScreen() {
+		$user = $this->getUser();
 		$this->view->assign("name", $user["name"]);
 		$this->view->assign("country", $_SESSION["country"]);
-		$this->renderScript("/notification/decline.phtml");
 	}
 
-	public function ready1Action() {
-		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
-		$this->ready($invitee);
-	}
-
-	public function ready2Action() {
-		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
-		$this->ready($inviter);
-	}
-
-	public function sorry1Action() {
-		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
-		$this->sorry($invitee);
-	}
-
-	public function sorry2Action() {
-		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
-		$this->sorry($inviter);
-	}
-
-	private function ready($user) {
-		$this->view->assign("name", $user["name"]);
-		$this->view->assign("country", $_SESSION["country"]);
-		$this->renderScript("/notification/ready.phtml");
-	}
-
-	private function sorry($user) {
-		$this->view->assign("name", $user["name"]);
-		$this->view->assign("country", $_SESSION["country"]);
-		$this->renderScript("/notification/sorry.phtml");
+	private function getUser() {
+		if ($_SESSION["notificationType"] == NOTIFICATION_TYPE_INVITATION) {
+			return $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		} else {
+			return $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		}
 	}
 
 }

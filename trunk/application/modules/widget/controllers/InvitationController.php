@@ -27,7 +27,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 
 	public function indexAction() {
 		$this->getstartAction();
-		$this->renderScript("/invitation/getstart.phtml");
 	}
 
 	public function getstartAction() {
@@ -38,6 +37,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$_SESSION["inviteType"] = $_REQUEST["type"];
 		
 		$this->view->assign("country", $partner["country"]);
+		$this->renderScript("/invitation/getstart.phtml");
 	}
 
 	public function invitationAction() {
@@ -117,7 +117,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function agreementAction() {
-		$invitee = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
 		$this->view->assign("country", $_SESSION["country"]);
 		
@@ -143,6 +143,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
 		$this->sendInviteEmail($email);
 		
+		$this->view->assign("name", $email["inviteeName"]);
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
@@ -159,7 +160,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$content = MultiLang::replaceParams($email["inviteEmailBody"], $contentParam);
 		
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending invitation email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
+		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;

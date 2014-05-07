@@ -28,12 +28,16 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		$this->responseAction();
+	}
+
+	public function responseAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		if ($invite == null || $partner == null) {
 			// The URL is invalid
 			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
-			return $this->renderScript("/response/invalid.phtml");
+			return $this->renderScript("/notification/wrong.phtml");
 		}
 		
 		$_SESSION["inviteInx"] = $invite["inx"];
@@ -56,6 +60,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
 		}
+		
+		return $this->renderScript("/response/response.phtml");
 	}
 
 	public function declineAction() {
@@ -65,7 +71,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	public function responseValidateAction() {
+	public function validateAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
@@ -77,7 +83,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			// The URL is expired or the call is already completed. It can NOT be inited again
 			$result = array (
 				"redirect" => true,
-				"url" => APP_CTX . "/response/invalid" 
+				"url" => APP_CTX . "/notification/exipred" 
 			);
 			return;
 		}
@@ -179,7 +185,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$content = MultiLang::replaceParams($email["acceptEmailBody"], $contentParam);
 		
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
+		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
@@ -198,7 +204,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$content = MultiLang::replaceParams($email["declineEmailBody"], $contentParam);
 		
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
+		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
