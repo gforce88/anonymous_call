@@ -133,42 +133,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		}
 	}
 
-	public function agreementValidateAction() {
-		// Validation
-		$validFields = array ();
-		$invalidFields = array ();
-		if ($_POST["agreement"] == "on") {
-			array_push($validFields, "agreementInvalid");
-		} else {
-			array_push($invalidFields, "agreementInvalid");
-		}
-		
-		// Dispatch
-		if (count($invalidFields) == 0) {
-			$invite = array (
-				"inx" => $_SESSION["inviteInx"],
-				"inviteResult" => INVITE_RESULT_INVITE 
-			);
-			$this->inviteManager->update($invite);
-			
-			$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
-			$this->sendInviteEmail($email);
-			
-			$result = array (
-				"redirect" => true,
-				"url" => APP_CTX . "/widget/invitation/confirmation" 
-			);
-		} else {
-			$result = array (
-				"redirect" => false,
-				"validFields" => $validFields,
-				"invalidFields" => $invalidFields 
-			);
-		}
-		
-		$this->_helper->json->sendJson($result);
-	}
-
 	public function confirmationAction() {
 		$invite = array (
 			"inx" => $_SESSION["inviteInx"],
@@ -179,48 +143,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
 		$this->sendInviteEmail($email);
 		
-		$this->view->assign("country", $_SESSION["country"]);
-	}
-
-	public function refreshAction() {
-		// Disable layout for return json
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNeverRender();
-		
-		$result = array (
-			"redirect" => "false" 
-		);
-		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
-		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
-				// Invite is declined by invitee
-				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/invitation/decline";
-			} else if ($invite["inviteResult"] == INVITE_RESULT_ACCEPT) {
-				// Invite is accepted by invitee
-				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/following/paypal";
-			}
-		} else {
-			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
-				// Invite is declined by invitee
-				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/invitation/decline";
-			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
-				// Invite is paied by invitee
-				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/following/ready";
-			} else if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
-				// Invite is not paied by invitee
-				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/following/problem";
-			}
-		}
-		
-		$this->_helper->json->sendJson($result);
-	}
-
-	public function declineAction() {
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 

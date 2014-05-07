@@ -74,6 +74,13 @@ class Widget_NotificationController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
+	public function declineAction() {
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		$this->view->assign("name", $user["name"]);
+		$this->view->assign("country", $_SESSION["country"]);
+		$this->renderScript("/notification/decline.phtml");
+	}
+
 	public function ready1Action() {
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->ready($invitee);

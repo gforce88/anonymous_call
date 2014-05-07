@@ -34,3 +34,11 @@ function timestamp2His(totalTime) {
 	if (hour < 10) hour = "0" + hour;
 	return hour + ":" + minute + ":" + second;
 }
+
+function checkAgree(agreeCheckbox, agreeButton) {
+	if ($(agreeCheckbox).is(':checked')) {
+		$(agreeButton).removeAttr("disabled");
+	} else {
+		$(agreeButton).addAttr("disabled");
+	}
+}
