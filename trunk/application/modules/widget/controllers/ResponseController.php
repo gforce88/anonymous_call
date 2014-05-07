@@ -33,7 +33,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		if ($invite == null || $partner == null) {
 			// The URL is invalid
 			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
-			return $this->renderScript("/response/invalidUrl.phtml");
+			return $this->renderScript("/response/invalid.phtml");
 		}
 		
 		$_SESSION["inviteInx"] = $invite["inx"];
@@ -60,7 +60,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	public function declineAction() {
 		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
-		$this->sendAcceptEmail($email);
+		$this->sendDeclineEmail($email);
 		
 		$this->view->assign("country", $_SESSION["country"]);
 	}
@@ -168,18 +168,18 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	private function sendAcceptEmail($email) {
 		$titleParam = array (
-			$email["inviteeEmail"] 
+			$email["fromEmail"] 
 		);
 		$contentParam = array (
-			$email["inviteeEmail"],
+			$email["fromEmail"],
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
 		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($email["acceptEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["inviteeEmail"], $subject, $content);
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
@@ -187,18 +187,18 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	private function sendDeclineEmail($email) {
 		$titleParam = array (
-			$email["inviteeEmail"] 
+			$email["fromEmail"] 
 		);
 		$contentParam = array (
-			$email["inviteeEmail"],
+			$email["fromEmail"],
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
 		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $titleParam);
 		$content = MultiLang::replaceParams($email["declineEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["inviteeEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["inviteeEmail"], $subject, $content);
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
+		$sendResult = EmailSender::sendHtmlEmail($email["name"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;

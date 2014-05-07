@@ -1,10 +1,8 @@
 <script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/agreement-validate" method="post" onsubmit="submiteAnonCall('#acknowlegmentFrom'); return false;">
+<form id="acknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/confimation" method="post" onsubmit="submiteAnonCall('#acknowlegmentFrom'); return false;">
 	<div>Acknowlegment</div>
-	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
-	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
-	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
+	<div>Send to <?php echo $this->name?></div>
 	<div>
 		<input type="submit" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" />
 	</div>
