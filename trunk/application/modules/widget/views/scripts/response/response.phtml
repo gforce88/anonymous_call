@@ -26,20 +26,6 @@
 		</small>
 	</div>
 	<div>
-		<a href="<?php echo APP_CTX?>/widget/response/decline"></a>
+		<a href="<?php echo APP_CTX?>/widget/response/decline">decline</a>
 	</div>
 </form>
-<form id="refreshFrom" action="<?php echo APP_CTX?>/widget/response/refresh" method="post">
-	Accept Screen
-</form>
-<script type="text/javascript">
-var timerRefresh = window.setInterval(refreshPage, 5000);
-
-function refreshPage() {
-	$("#refreshFrom").ajaxSubmit(function(result) {
-		if (result.redirect == true) {
-			window.location.replace(result.url);
-		}
-	});
-}
-</script>

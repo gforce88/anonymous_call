@@ -64,13 +64,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		return $this->renderScript("/response/response.phtml");
 	}
 
-	public function declineAction() {
-		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
-		$this->sendDeclineEmail($email);
-		
-		$this->view->assign("country", $_SESSION["country"]);
-	}
-
 	public function validateAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
@@ -85,42 +78,39 @@ class Widget_ResponseController extends Zend_Controller_Action {
 				"redirect" => true,
 				"url" => APP_CTX . "/notification/exipred" 
 			);
-			return;
-		}
-		
-		// Validation
-		$validFields = array ();
-		$invalidFields = array ();
-		if (Validator::isValidPhoneNumber($_POST["inviteePhoneNumber"])) {
-			array_push($validFields, "inviteePhoneNumberInvalid");
 		} else {
-			array_push($invalidFields, "inviteePhoneNumberInvalid");
-		}
-		if ($_POST["agreement"] == "on") {
-			array_push($validFields, "agreementInvalid");
-		} else {
-			array_push($invalidFields, "agreementInvalid");
-		}
-		
-		$result = array (
-			"redirect" => false,
-			"validFields" => $validFields,
-			"invalidFields" => $invalidFields 
-		);
-		if (count($invalidFields) == 0) {
-			$invitee = array (
-				"inx" => $_SESSION["inviteeInx"],
-				"phoneNum" => $_POST["inviteePhoneNumber"] 
-			);
-			$this->userManager->update($invitee);
+			// Validation
+			$validFields = array ();
+			$invalidFields = array ();
+			if (Validator::isValidPhoneNumber($_POST["inviteePhoneNumber"])) {
+				array_push($validFields, "inviteePhoneNumberInvalid");
+			} else {
+				array_push($invalidFields, "inviteePhoneNumberInvalid");
+			}
 			
-			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-				$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
-				$this->sendAcceptEmail($email);
+			if (count($invalidFields) == 0) {
+				$invitee = array (
+					"inx" => $_SESSION["inviteeInx"],
+					"phoneNum" => $_POST["inviteePhoneNumber"] 
+				);
+				$this->userManager->update($invitee);
+				
+				if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+					$result = array (
+						"redirect" => true,
+						"url" => APP_CTX . "/widget/response/accept" 
+					);
+				} else {
+					$result = array (
+						"redirect" => true,
+						"url" => APP_CTX . "/widget/following/paypal" 
+					);
+				}
 			} else {
 				$result = array (
-					"redirect" => true,
-					"url" => APP_CTX . "/widget/following" 
+					"redirect" => false,
+					"validFields" => $validFields,
+					"invalidFields" => $invalidFields 
 				);
 			}
 		}
@@ -128,30 +118,32 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function invalidAction() {
+	public function acceptAction() {
+		$invite = array (
+			"inx" => $_SESSION["inviteInx"],
+			"inviteResult" => INVITE_RESULT_ACCEPT
+		);
+		$this->inviteManager->update($invite);
+		
+		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
+		$this->sendAcceptEmail($email);
+		
+		$this->view->assign("name", $email["inviterName"]);
 		$this->view->assign("country", $_SESSION["country"]);
 	}
 
-	public function refreshAction() {
-		// Disable layout for return json
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNeverRender();
-		
-		$result = array (
-			"redirect" => "false" 
+	public function declineAction() {
+		$invite = array (
+			"inx" => $_SESSION["inviteInx"],
+			"inviteResult" => INVITE_RESULT_DECLINE
 		);
-		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
-		if ($invite["inviteResult"] == INVITE_RESULT_PAYED) {
-			// Invite is paied by inviter
-			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/following/ready";
-		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
-			// Invite is not paied by inviter
-			$result["redirect"] = true;
-			$result["url"] = APP_CTX . "/widget/following/problem";
-		}
+		$this->inviteManager->update($invite);
 		
-		$this->_helper->json->sendJson($result);
+		$email = $this->emailManager->findDeclineEmail($_SESSION["inviteInx"]);
+		$this->sendDeclineEmail($email);
+
+		$this->view->assign("name", $email["inviterName"]);
+		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	private function inviteExpired($expHour, $inviteTime) {
@@ -173,7 +165,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function sendAcceptEmail($email) {
-		$titleParam = array (
+		$subjectParam = array (
 			$email["fromEmail"] 
 		);
 		$contentParam = array (
@@ -181,7 +173,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
 		);
 		
-		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $titleParam);
+		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $subjectParam);
 		$content = MultiLang::replaceParams($email["acceptEmailBody"], $contentParam);
 		
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
@@ -192,18 +184,17 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	private function sendDeclineEmail($email) {
-		$titleParam = array (
+		$subjectParam = array (
 			$email["fromEmail"] 
 		);
 		$contentParam = array (
-			$email["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
+			$email["fromEmail"]
 		);
 		
-		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $titleParam);
+		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $subjectParam);
 		$content = MultiLang::replaceParams($email["declineEmailBody"], $contentParam);
 		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
+		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["toEmail"] . "]");
 		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
 		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
 		

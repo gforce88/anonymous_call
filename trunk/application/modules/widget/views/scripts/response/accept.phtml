@@ -1,7 +1,7 @@
 <script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <form id="acceptFrom" action="<?php echo APP_CTX?>/widget/notification/refresh-response" method="post">
-	Accept Screen
+	Accept to <?php echo $this->name?>
 </form>
 <script type="text/javascript">
 var timerRefresh = window.setInterval(refreshPage, 5000);
