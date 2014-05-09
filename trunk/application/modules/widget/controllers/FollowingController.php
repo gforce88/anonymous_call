@@ -121,19 +121,19 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		if (count($invalidFields) == 0) {
 			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 				$user = array (
-					"inx" => $_SESSION["inviterInx"]
+					"inx" => $_SESSION["inviterInx"] 
 				);
 			} else {
 				$user = array (
-						"inx" => $_SESSION["inviteeInx"]
+					"inx" => $_SESSION["inviteeInx"] 
 				);
 			}
 			$user["paypalTomek"] = $paypalToken;
 			$this->userManager->update($user);
 			
 			$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
-			$this->sendThanksEmail($email);
-						
+			EmailSender::sendThanksEmail($email);
+			
 			$result = array (
 				"redirect" => true,
 				"url" => APP_CTX . "/widget/following/thanks" 
@@ -187,26 +187,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	private function sendThanksEmail($email) {
-		$subjectParam = array (
-				$email["fromEmail"]
-		);
-		$contentParam = array (
-				$email["fromEmail"]
-		);
-	
-		$subject = MultiLang::replaceParams($email["thanksEmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["thanksEmailBody"], $contentParam);
-	
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending thanks email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
-	
-		return $sendResult;
-	}
-	
-	
-	public function test() {
+	private function test() {
 		// Dispatch
 		if (count($invalidFields) == 0) {
 			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
