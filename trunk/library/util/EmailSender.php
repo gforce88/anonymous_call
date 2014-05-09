@@ -10,12 +10,14 @@ class EmailSender {
 
 	public static function sendInviteEmail($email) {
 		$email = self::adjustEmail($email, true);
-		return self::sendEmail($email, "invite");
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		return self::sendEmail($email, "invite", $url);
 	}
 
 	public static function sendAcceptEmail($email) {
 		$email = self::adjustEmail($email, false);
-		return self::sendEmail($email, "accept");
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		return self::sendEmail($email, "accept", url);
 	}
 
 	public static function sendDeclineEmail($email) {
@@ -48,11 +50,11 @@ class EmailSender {
 		$contentParam = array (
 			$email["fromEmail"] 
 		);
-		$message = "Sending thanks email to: [" . $email["toEmail"] . "]";
+		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
 		
 		if ($url != null) {
 			$contentParam["url"] = $url;
-			$message .= " with URL: $url";
+			$message .= " with URL: [$url]";
 		}
 		
 		$subject = MultiLang::replaceParams($email["$emailType.EmailSubject"], $subjectParam);
