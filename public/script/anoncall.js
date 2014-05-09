@@ -4,9 +4,9 @@ function submiteAnonCall(formId) {
 			window.location.replace(result.url);
 		} else {
 			$(result.validFields).each(function(index, element){
-				$("#"+element).attr("style", "display:none");
+				$("#"+element).attr("style", "color:#FFF");
 			});$(result.invalidFields).each(function(index, element){
-				$("#"+element).attr("style", "display:block");
+				$("#"+element).attr("style", "color:#F00");
 			});
 		}
 	});
@@ -39,6 +39,6 @@ function checkAgree(agreeCheckbox, agreeButton) {
 	if ($(agreeCheckbox).is(':checked')) {
 		$(agreeButton).removeAttr("disabled");
 	} else {
-		$(agreeButton).addAttr("disabled");
+		$(agreeButton).attr("disabled", true);
 	}
 }

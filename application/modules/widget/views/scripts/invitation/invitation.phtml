@@ -1,25 +1,29 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" onsubmit="submiteAnonCall('#invitationFrom'); return false;">
-	<div>
-		<input value="imddl137@gmail.com" type="text" name="inviterEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
-		<small id="inviterEmailInvalid" style="display:none">
-			<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-		</small>
-	</div>
-	<div>
-		<input value="17023580286" type="text" name="inviterPhoneNumber" onkeypress="inputCheck('[0-9]', event)" placeholder="<?php echo MultiLang::getText("Phone_number", $country)?>" tabindex="1" />
-		<small id="inviterPhoneNumberInvalid" style="display:none">
-			<?php echo MultiLang::getText("Phone_number", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-		</small>
-	</div>
-	<div>
-		<input value="imddl4g@gmail.com" type="text" name="inviteeEmail" placeholder="<?php echo MultiLang::getText("Email_address", $country)?>" tabindex="1" />
-		<small id="inviteeEmailInvalid" style="display:none">
-			<?php echo MultiLang::getText("Email_address", $country)?><?php echo MultiLang::getText("is_invalid", $country)?>
-		</small>
-	</div><br>
-	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("CONTINUE", $country)?>" />
-	</div>
+	<p style="margin-top: 10px; margin-bottom: 16px"><span class="h1"><?php echo MultiLang::getText("Invitation_1", $country)?></span></p>
+	
+	<p style="margin-bottom: 8px"><span class="h2"><?php echo MultiLang::getText("Invitation_2", $country)?></span></p>
+	<p><span class="form"><?php echo MultiLang::getText("Invitation_3", $country)?></span></p>
+	<input value="imddl137@gmail.com" type="text" name="inviterEmail" tabindex="1" />
+	<small id="inviterEmailInvalid">
+		<?php echo MultiLang::getText("Message_1", $country)?>
+	</small>
+
+	<p style="margin-bottom: 8px"><span class="h2"><?php echo MultiLang::getText("Invitation_4", $country)?></span></p>
+	<p><span class="form"><?php echo MultiLang::getText("Invitation_5", $country)?></span></p>
+	<input value="17023580286" type="text" name="inviterPhoneNumber" onkeypress="inputCheck('[0-9]', event)" tabindex="1" />
+	<p><span class="form"><?php echo MultiLang::getText("Invitation_6", $country)?></span></p>
+	<small id="inviterPhoneNumberInvalid">
+		<?php echo MultiLang::getText("Message_2", $country)?>
+	</small>
+		
+	<p style="margin-bottom: 8px"><span class="h2"><?php echo MultiLang::getText("Invitation_7", $country)?></span></p>
+	<p><span class="form"><?php echo MultiLang::getText("Invitation_8", $country)?></span></p>
+	<p><span class="form"><?php echo MultiLang::getText("Invitation_9", $country)?></span></p>
+	<input value="imddl4g@gmail.com" type="text" name="inviteeEmail" tabindex="1" />
+	<small id="inviteeEmailInvalid">
+		<?php echo MultiLang::getText("Message_1", $country)?>
+	</small>
+
+	<input style="margin-top: 8px" type="submit" value="<?php echo MultiLang::getText("Invitation_10", $country)?>" />
 </form>

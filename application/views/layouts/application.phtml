@@ -2,10 +2,10 @@
 <html>
 	<?php echo $this->render('inc/meta.phtml')?>
 <body>
-	<div class="content">
-		<article>
-			<?php echo $this->layout()->content?>
-		</article>
-	</div>
+	<article>
+		<?php echo $this->render('inc/header.phtml')?>
+		<?php echo $this->render('inc/content.phtml')?>
+		<?php echo $this->render('inc/footer.phtml')?>
+	</article>
 </body>
 </html>
