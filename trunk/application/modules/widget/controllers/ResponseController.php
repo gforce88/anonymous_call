@@ -36,7 +36,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		if ($invite == null || $partner == null) {
 			// The URL is invalid
-			$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
+			$this->view->assign("country", $_REQUEST["country"]);
 			return $this->renderScript("/notification/wrong.phtml");
 		}
 		
@@ -175,7 +175,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		);
 		$contentParam = array (
 			$email["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"] 
 		);
 		
 		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $subjectParam);

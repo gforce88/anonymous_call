@@ -5,7 +5,7 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_INVITE_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name partnerName, partners.emailAddr partnerEmail, partners.inviteEmailSubject, partners.inviteEmailBody,
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.inviteEmailSubject, partners.inviteEmailBody, partners.country,
 			       inviter.email fromEmail, invitee.email toEmail, invitee.email inviteeName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx
@@ -15,7 +15,7 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_ACCEPT_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name partnerName, partners.emailAddr partnerEmail, partners.acceptEmailSubject, partners.acceptEmailBody,
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.acceptEmailSubject, partners.acceptEmailBody, partners.country,
 			       inviter.email toEmail, invitee.email fromEmail, inviter.email inviterName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx
@@ -25,7 +25,7 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_DECLINE_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name partnerName, partners.emailAddr partnerEmail, partners.declineEmailSubject, partners.declineEmailBody,
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.declineEmailSubject, partners.declineEmailBody, partners.country,
 			       inviter.email toEmail, invitee.email fromEmail, inviter.email inviterName
 			  from invites, users inviter, users invitee, partners
 			 where invites.inviterInx = inviter.inx

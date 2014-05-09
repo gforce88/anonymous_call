@@ -18,11 +18,30 @@ class MultiLang {
 		
 		return $msg;
 	}
-	
+
+	public static function getText2($key, $language, $param1, $param2) {
+		$params = array (
+			$param1,
+			$param2 
+		);
+		return self::getText($key, $language, $params);
+	}
+
+	public static function getText3($key, $language, $param1, $param2, $param3) {
+		$params = array (
+			$param1,
+			$param2,
+			$param3 
+		);
+		return self::getText($key, $language, $params);
+	}
+
 	public static function replaceParams($msg, $params) {
 		$i = 1;
 		if (!is_array($params)) {
-			$params = array($params);
+			$params = array (
+				$params 
+			);
 		}
 		foreach ($params as $param) {
 			$msg = str_replace("%" . $i . "s", $param, $msg);

@@ -1,18 +1,14 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
-	<div>Accpetance</div>
-	<div>Send to <?php echo $this->name?></div>
-	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
-	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
-	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
-	<div>
-		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" disabled />
-	</div>
-	<div>
-		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')"/>I agree
-		<small id="agreementInvalid" style="display:none">
-			agreement invalid
-		</small>
-	</div>
-</form>
+	<p style="margin-top: 30px; margin-bottom: 40px" class="wrape"><span class="h2"><?php echo MultiLang::getText("Acceptance_1", $country)?></span></p>
+	<p class="wrape"><span class="h2"><?php echo MultiLang::getText2("Acceptance_2", $country, $this->name, $this->freeCallDur)?></span></p>
+	<p style="margin-top: 20px" class="wrape"><span class="h2"><?php echo MultiLang::getText("Acceptance_3", $country)?></span></p>
+	<p class="wrape"><span class="h2"><?php echo MultiLang::getText("Acceptance_4", $country, $this->freeCallDur)?></span></p>
+	<p style="margin-top: 8px" class="wrape_thin"><span class="form"><?php echo MultiLang::getText3("Acceptance_5", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>
+
+<div class="bottom">
+	<form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
+		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" disabled /><br>
+		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')" />
+		<?php echo MultiLang::getText("General_2", $country)?>
+	</form>
+</div>

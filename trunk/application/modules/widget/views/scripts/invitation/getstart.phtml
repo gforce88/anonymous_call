@@ -1,7 +1,27 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <form action="<?php echo APP_CTX?>/widget/invitation/invitation" method="post">
-	<div>
-		<input type="submit" value="<?php echo MultiLang::getText("GET_STARTED", $country)?>" />
+	<p style="margin-top: 30px"><span class="h1"><?php echo MultiLang::getText("GetStart_1", $country)?></span></p>
+	<p><span class="paragraph"><?php echo MultiLang::getText("GetStart_2", $country)?></span></p>
+	
+	<p style="margin-top: 30px"><span class="h1"><?php echo MultiLang::getText("GetStart_3", $country)?></span></p>
+	<p><span class="paragraph"><?php echo MultiLang::getText("GetStart_4", $country)?></span></p>
+	<p><span class="paragraph"><?php echo MultiLang::getText("GetStart_5", $country)?></span></p>
+	<p><span class="paragraph"><?php echo MultiLang::getText("GetStart_6", $country)?></span></p>
+	
+	<input style="margin-top: 30px" type="submit" value="<?php echo MultiLang::getText("GetStart_7", $country)?>" />
+	
+	<div style="margin-top: 40px" class="_idGenObjectLayout-1">
+		<div class="_idGenPageitem-4">
+			<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
+		</div>
+		<div class="_idGenPageitem-6">
+			<p><span class="caption_cloud_small"><?php echo MultiLang::getText("GetStart_8", $country)?></span>
+			<p><span class="caption_cloud_small"><?php echo MultiLang::getText("GetStart_9", $country)?></span>
+			<p><span class="caption_cloud_small"><?php echo MultiLang::getText("GetStart_10", $country)?>e</span>
+			<p><span class="caption_cloud_small"><?php echo MultiLang::getText("GetStart_11", $country)?></span>
+		</div>
+		<div class="_idGenPageitem-4">
+			<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
+		</div>
 	</div>
 </form>

@@ -123,7 +123,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
-			$this->view->assign("freeCallDur", $partner["freeCallDur"]);
+			$this->view->assign("freeCallDur", round($partner["freeCallDur"] / 60));
 			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
 			
@@ -153,7 +153,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		);
 		$contentParam = array (
 			$email["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] 
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"] 
 		);
 		
 		$subject = MultiLang::replaceParams($email["inviteEmailSubject"], $subjectParam);

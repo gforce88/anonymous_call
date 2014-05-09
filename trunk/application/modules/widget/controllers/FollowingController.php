@@ -29,26 +29,42 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		if ($_SESSION["inviteInx"] == null) {
-			$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
-			$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
-			if ($invite == null || $partner == null) {
-				// The URL is invalid
-				$this->view->assign("invalidReason", MultiLang::getText("This_link_is_invalid", $_REQUEST["country"]));
-				return $this->renderScript("/response/invalid.phtml");
-			}
-			
-			$_SESSION["inviteInx"] = $invite["inviteInx"];
-			$_SESSION["inviteType"] = $invite["inviteType"];
-			$_SESSION["partnerInx"] = $invite["partnerInx"];
-			$_SESSION["inviterInx"] = $invite["inviterInx"];
-			$_SESSION["inviteeInx"] = $invite["inviteeInx"];
-			$_SESSION["country"] = $partner["country"];
-		}
+		$this->notificationAction();
 	}
 
-	public function readyAction() {
+	public function notificationAction() {
+		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
+		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
+		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
+		if ($invite == null || $partner == null) {
+			// The URL is invalid
+			$this->view->assign("country", $_REQUEST["country"]);
+			return $this->renderScript("/notification/wrong.phtml");
+		} else if ($this->inviteExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || $this->callCompleted($calls)) {
+			// The URL is expired or the call is already completed. It can NOT be inited again
+			$this->view->assign("country", $_REQUEST["country"]);
+			return $this->renderScript("/notification/expired.phtml");
+		}
+		
+		$_SESSION["inviteInx"] = $invite["inx"];
+		$_SESSION["inviteType"] = $invite["inviteType"];
+		$_SESSION["partnerInx"] = $invite["partnerInx"];
+		$_SESSION["inviterInx"] = $invite["inviterInx"];
+		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
+		$_SESSION["country"] = $partner["country"];
+		
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		$this->view->assign("name", $invitee["name"]);
 		$this->view->assign("country", $_SESSION["country"]);
+		$this->view->assign("freeCallDur", $partner["freeCallDur"]);
+		$this->view->assign("chargeAmount", $partner["chargeAmount"]);
+		$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
+		
+		$this->renderScript("/following/notification.phtml");
+	}
+	
+	public function paypalAction() {
+		
 	}
 
 	public function problemAction() {
