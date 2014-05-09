@@ -6,11 +6,12 @@ class EmailManager extends BaseManager {
 	const SQL_FIND_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
 			       partners.name partnerName, partners.emailAddr partnerEmail, partners.@emailType@EmailSubject, partners.@emailType@EmailBody, partners.country,
-			       inviter.email fromEmail, invitee.email toEmail, invitee.email inviteeName
-			  from invites, users inviter, users invitee, partners
-			 where invites.inviterInx = inviter.inx
+			       inviter.email inviterEmail, inviter.email inviterName, 
+			       invitee.email inviteeEmail, invitee.email inviteeName
+			  from invites, partners, users inviter, users invitee
+			 where invites.partnerInx = partners.inx
+			   and invites.inviterInx = inviter.inx
 			   and invites.inviteeInx = invitee.inx
-			   and invites.partnerInx = partners.inx
 			   and invites.inx = :inx";
 
 	public function findInviteEmail($inx) {
@@ -25,6 +26,10 @@ class EmailManager extends BaseManager {
 		return $this->findEmail($inx, "decline");
 	}
 
+	public function findReadyEmail($inx) {
+		return $this->findEmail($inx, "ready");
+	}
+
 	public function findSorryEmail($inx) {
 		return $this->findEmail($inx, "sorry");
 	}
@@ -33,7 +38,7 @@ class EmailManager extends BaseManager {
 		return $this->findEmail($inx, "retry");
 	}
 
-	public function findThanksEmail($inx) {
+	public function findThanksEmail($inx, $inviteType) {
 		return $this->findEmail($inx, "thanks");
 	}
 

@@ -141,29 +141,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$this->inviteManager->update($invite);
 		
 		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
-		$this->sendInviteEmail($email);
+		EmailSender::sendInviteEmail($email);
 		
 		$this->view->assign("name", $email["inviteeName"]);
 		$this->view->assign("country", $_SESSION["country"]);
-	}
-
-	private function sendInviteEmail($email) {
-		$subjectParam = array (
-			$email["fromEmail"] 
-		);
-		$contentParam = array (
-			$email["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"] 
-		);
-		
-		$subject = MultiLang::replaceParams($email["inviteEmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["inviteEmailBody"], $contentParam);
-		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending invitation email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
-		
-		return $sendResult;
 	}
 
 }

@@ -130,8 +130,14 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function acceptAction() {
+		$invite = array (
+				"inx" => $_SESSION["inviteInx"],
+				"inviteResult" => INVITE_RESULT_ACCEPT
+		);
+		$this->inviteManager->update($invite);
+		
 		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
-		$this->sendAcceptEmail($email);
+		EmailSender::sendAcceptEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
 		$this->view->assign("country", $_SESSION["country"]);
@@ -145,47 +151,10 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$this->inviteManager->update($invite);
 		
 		$email = $this->emailManager->findDeclineEmail($_SESSION["inviteInx"]);
-		$this->sendDeclineEmail($email);
+		EmailSender::sendDeclineEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
 		$this->view->assign("country", $_SESSION["country"]);
-	}
-
-	private function sendAcceptEmail($email) {
-		$subjectParam = array (
-			$email["fromEmail"] 
-		);
-		$contentParam = array (
-			$email["fromEmail"],
-			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"] 
-		);
-		
-		$subject = MultiLang::replaceParams($email["acceptEmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["acceptEmailBody"], $contentParam);
-		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending accept email to: [" . $email["toEmail"] . "] with URL: [$contentParam[1]]");
-		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
-		
-		return $sendResult;
-	}
-
-	private function sendDeclineEmail($email) {
-		$subjectParam = array (
-			$email["fromEmail"] 
-		);
-		$contentParam = array (
-			$email["fromEmail"] 
-		);
-		
-		$subject = MultiLang::replaceParams($email["declineEmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["declineEmailBody"], $contentParam);
-		
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Sending decline email to: [" . $email["toEmail"] . "]");
-		$sendResult = EmailSender::sendHtmlEmail($email["partnerName"], $email["emailAddr"], "", $email["toEmail"], $subject, $content);
-		$this->logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
-		
-		return $sendResult;
 	}
 
 }
