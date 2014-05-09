@@ -1,0 +1,37 @@
+<?php $country = $this->country?>
+<form id="paypalFrom" action="<?php echo APP_CTX?>/widget/following/validate" method="post" onsubmit="submiteAnonCall('#paypalFrom'); return false;">
+	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_1", $country)?></span></p>
+	<input value="firstName" type="text" name="firstName" tabindex="1" />
+	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_2", $country)?></span></p>
+	<input value="lsstName" type="text" name="lsstName" tabindex="1" />
+	
+	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_3", $country)?></span></p>
+	<select id="cardType" name="cardType" tabindex="1">
+		<option value="visa">Visa</option>
+		<option value="mastercard">MasterCard</option>
+		<option value="discover">Discover</option>
+		<option value="amex">AMEX</option>
+	</select>
+	
+	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_4", $country)?></span></p>
+	<input type="text" name="cardNumber" onkeypress="inputCheck('[0-9]', event)" maxlength="16" tabindex="1" />
+	<p class="message">
+		<small id="cardNumberInvalid" ><?php echo MultiLang::getText("Message_3", $country)?></small>
+	</p>
+	
+	<p> <span class="form oneThird"><?php echo MultiLang::getText("PaypalForm_5", $country)?></span>
+		<span class="form twoThird"><?php echo MultiLang::getText("PaypalForm_6", $country)?></span>
+	</p>
+	<input type="text" class="oneThird" name="cvv" onkeypress="inputCheck('[0-9]', event)" maxlength="3" tabindex="1" />
+	<input type="text" class="oneThird" name="expMonth" onkeypress="inputCheck('[0-9]', event)" maxlength="2" tabindex="1" />
+	<input type="text" class="oneThird" name="expYear" onkeypress="inputCheck('[0-9]', event)" maxlength="4" tabindex="1" />
+	<p class="message">
+		<small id="cvvInvalid" ><?php echo MultiLang::getText("Message_5", $country)?></small>
+		<small id="expDateInvalid" ><?php echo MultiLang::getText("Message_4", $country)?></small>
+		<small id="creditCardInvalid" ><?php echo MultiLang::getText("Message_6", $country)?></small>
+	</p>
+	
+</form>
+<script type="text/javascript">
+$("#cardType").prop("selectedIndex", -1);
+</script>

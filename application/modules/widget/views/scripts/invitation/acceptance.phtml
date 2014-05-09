@@ -7,6 +7,6 @@
 	<form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
 		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("Acceptance_4", $country)?>" disabled /><br>
 		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')" />
-		<?php echo MultiLang::getText("General_2", $country)?>
+		<span class="form"><?php echo MultiLang::getText("General_2", $country)?></span>
 	</form>
 </div>
