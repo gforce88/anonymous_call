@@ -53,6 +53,13 @@ div.bottom {
 	right: 0;
 }
 
+div.low {
+	position: fixed;
+	bottom: 80px;
+	left: 0;
+	right: 0;
+}
+
 #footer {
 	position: fixed;
 	bottom: 16px;
