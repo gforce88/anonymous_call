@@ -1,4 +1,5 @@
 <?php
+require_once 'util/MultiLang.php';
 require_once 'models/InviteManager.php';
 require_once 'models/UserManager.php';
 
