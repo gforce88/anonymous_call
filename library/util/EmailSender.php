@@ -9,20 +9,35 @@ class EmailSender {
 	}
 
 	public static function sendInviteEmail($email) {
-		$email = self::adjustEmail($email, true);
+		$email = self::adjustEmail($email, false);
 		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "invite", $url);
 	}
 
 	public static function sendAcceptEmail($email) {
-		$email = self::adjustEmail($email, false);
+		$email = self::adjustEmail($email, true);
 		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "accept", url);
 	}
 
 	public static function sendDeclineEmail($email) {
-		$email = self::adjustEmail($email, false);
+		$email = self::adjustEmail($email, true);
 		return self::sendEmail($email, "decline");
+	}
+
+	public static function sendReadyEmail($email, $toInviter) {
+		$email = self::adjustEmail($email, $toInviter);
+		return self::sendEmail($email, "ready");
+	}
+
+	public static function sendSorryEmail($email, $toInviter) {
+		$email = self::adjustEmail($email, $toInviter);
+		return self::sendEmail($email, "sorry");
+	}
+
+	public static function sendRetryEmail($email, $toInviter) {
+		$email = self::adjustEmail($email, $toInviter);
+		return self::sendEmail($email, "retry");
 	}
 
 	public static function sendThanksEmail($email, $toInviter) {
@@ -57,8 +72,8 @@ class EmailSender {
 			$message .= " with URL: [$url]";
 		}
 		
-		$subject = MultiLang::replaceParams($email["$emailType.EmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["$emailType.EmailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($email["emailSubject"], $subjectParam);
+		$content = MultiLang::replaceParams($email["emailBody"], $contentParam);
 		self::$logger->logInfo($email["partnerInx"], $email["inx"], $message);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["emailAddr"] . "> \n";

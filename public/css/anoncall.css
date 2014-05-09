@@ -92,6 +92,14 @@ p.message {
 	font-style: normal;
 }
 
+p.message {
+	height: 60px;
+	color: #F00;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+}
+
 small {
 	display: none;
 }

@@ -119,20 +119,22 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
+			$toInviter = false;
 			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 				$user = array (
 					"inx" => $_SESSION["inviterInx"] 
 				);
 			} else {
+				$toInviter = true;
 				$user = array (
 					"inx" => $_SESSION["inviteeInx"] 
 				);
 			}
 			$user["paypalTomek"] = $paypalToken;
-			$this->userManager->update($user);
+			$this->userManager->update($user, $toInviter);
 			
 			$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
-			EmailSender::sendThanksEmail($email);
+			EmailSender::sendReadyEmail($email);
 			
 			$result = array (
 				"redirect" => true,
