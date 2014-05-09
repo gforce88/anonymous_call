@@ -17,7 +17,7 @@ class EmailSender {
 	public static function sendAcceptEmail($email) {
 		$email = self::adjustEmail($email, true);
 		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
-		return self::sendEmail($email, "accept", url);
+		return self::sendEmail($email, "accept", $url);
 	}
 
 	public static function sendDeclineEmail($email) {
