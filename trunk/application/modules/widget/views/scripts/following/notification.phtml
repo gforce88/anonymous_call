@@ -1,17 +1,9 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
-<form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
-	<div>Accpet from <?php echo $this->name?></div>
-	<div>Free Call Dur: <?php echo $this->freeCallDur?></div>
-	<div>Charge Amount: <?php echo $this->chargeAmount?></div>
-	<div>Min Call Blk Dur: <?php echo $this->minCallBlkDur?></div>
-	<div>
-		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" disabled />
-	</div>
-	<div>
-		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')"/>I agree
-		<small id="agreementInvalid" style="display:none">
-			agreement invalid
-		</small>
-	</div>
-</form>
+	<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("Notification_1", $country, $this->name)?></span></p>
+	<p style="margin-top: 40px"><span class="h2"><?php echo MultiLang::getText("Notification_2", $country, $this->freeCallDur)?></span></p>
+	<p style="margin-top: 10px"><span class="form"><?php echo MultiLang::getText3("Notification_3", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>
+<div class="bottom">
+	<form id="notificationFrom" action="<?php echo APP_CTX?>/widget/following/paypal" method="post">
+		<input type="submit" class="twolines" value="<?php echo MultiLang::getText("Notification_4", $country)?>" />
+	</form>
+</div>

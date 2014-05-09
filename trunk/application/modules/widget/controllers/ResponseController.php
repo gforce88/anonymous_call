@@ -47,8 +47,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
 		$_SESSION["country"] = $partner["country"];
 		
-		$inviter = $this->userManager->findUserByInx($invite["inviterInx"]);
-		$this->view->assign("inviter", $inviter["email"]);
+		$inviter = $this->userManager->findInviterByInviteInx($invite["inx"]);
+		$this->view->assign("name", $inviter["name"]);
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$this->view->assign("inviterPay", "block");
 			$this->view->assign("inviteePay", "none");
@@ -72,7 +72,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
 		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
-		if ($this->inviteExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || $this->callCompleted($calls)) {
+		if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
 			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 				$_SESSION["inviteType"] = INVITE_TYPE_INVITEE_PAY;
@@ -149,24 +149,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		
 		$this->view->assign("name", $email["inviterName"]);
 		$this->view->assign("country", $_SESSION["country"]);
-	}
-
-	private function inviteExpired($expHour, $inviteTime) {
-		$interval = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($inviteTime);
-		if ($interval > $expHour * 3600) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private function callCompleted($calls) {
-		foreach ($calls as $call) {
-			if ($call["callResult"] >= CALL_RESULT_2NDLEG_ANSWERED) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private function sendAcceptEmail($email) {

@@ -25,4 +25,38 @@ class Validator {
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
+	public static function isValidCreditCard($creditCard) {
+		return size($creditCard) >= 13 && size($creditCard) <= 16;
+	}
+
+	public static function isValidMonth($month) {
+		return $month >= 1 && $month <= 12;
+	}
+
+	public static function isValidYear($year) {
+		return $year >= 2014;
+	}
+
+	public static function isValidCvv($cvv) {
+		return size($cvv) == 3;
+	}
+
+	public static function isExpired($expHour, $time) {
+		$interval = strtotime((new DateTime())->format("Y-m-d H:i:s")) - strtotime($time);
+		if ($interval > $expHour * 3600) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static function isCompleted($calls) {
+		foreach ($calls as $call) {
+			if ($call["callResult"] >= CALL_RESULT_2NDLEG_ANSWERED) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

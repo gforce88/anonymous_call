@@ -17,20 +17,17 @@ class PaypalService {
 		$this->logger = LoggerFactory::getSysLogger();
 	}
 
-	public function regist($ccNumber, $ccType, $ccExp, $ccCvc, $firstName, $lastName) {
-		return "test_payapl_token"; // For testing only
+	public function regist($param) {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
-		$ccExpArr = explode("/", $ccExp);
-		
 		$card = new CreditCard();
-		$card->setNumber($ccNumber);
-		$card->setType($ccType);
-		$card->setExpire_month($ccExpArr[0]);
-		$card->setExpire_year($ccExpArr[1]);
-		$card->setCvv2($ccCvc);
-		$card->setFirst_name($firstName);
-		$card->setLast_name($lastName);
+		$card->setFirst_name($param["firstName"]);
+		$card->setLast_name($param["lastName"]);
+		$card->setType($param["cardType"]);
+		$card->setNumber($param["cardNumber"]);
+		$card->setCvv2($param["cvv"]);
+		$card->setExpire_month($param["expMonth"]);
+		$card->setExpire_year($param["expYear"]);
 		
 		try {
 			$card->create($paypalApiCtx);

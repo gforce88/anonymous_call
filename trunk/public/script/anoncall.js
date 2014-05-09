@@ -4,9 +4,9 @@ function submiteAnonCall(formId) {
 			window.location.replace(result.url);
 		} else {
 			$(result.validFields).each(function(index, element){
-				$("#"+element).attr("style", "color:#FFF");
+				$("#"+element).attr("style", "display:none");
 			});$(result.invalidFields).each(function(index, element){
-				$("#"+element).attr("style", "color:#F00");
+				$("#"+element).attr("style", "display:block");
 			});
 		}
 	});

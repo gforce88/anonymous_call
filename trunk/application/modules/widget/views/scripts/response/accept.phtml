@@ -1,7 +1,6 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <form id="acceptFrom" action="<?php echo APP_CTX?>/widget/notification/refresh-response" method="post">
-	Accept to <?php echo $this->name?>
+	<p style="margin-top: 80px"><span class="notification_text"><?php echo MultiLang::getText("ResponseAccept_1", $country, $this->name)?></span></p>
 </form>
 <script type="text/javascript">
 var timerRefresh = window.setInterval(refreshPage, 5000);
