@@ -5,7 +5,7 @@ class EmailManager extends BaseManager {
 
 	const SQL_FIND_EMAIL = "
 			select invites.inx, invites.partnerInx, invites.inviteToken,
-			       partners.name partnerName, partners.emailAddr partnerEmail, partners.@emailType@EmailSubject, partners.@emailType@EmailBody, partners.country,
+			       partners.name partnerName, partners.emailAddr partnerEmail, partners.@emailType@EmailSubject emailSubject, partners.@emailType@EmailBody emailBody, partners.country,
 			       inviter.email inviterEmail, inviter.email inviterName, 
 			       invitee.email inviteeEmail, invitee.email inviteeName
 			  from invites, partners, users inviter, users invitee
