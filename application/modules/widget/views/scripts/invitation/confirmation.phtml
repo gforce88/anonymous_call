@@ -1,7 +1,8 @@
-<script src="<?php echo APP_CTX?>/script/anoncall.js"></script>
 <?php $country = $this->country?>
 <form id="confirmationFrom" action="<?php echo APP_CTX?>/widget/notification/refresh-invitation" method="post">
-	Invitation sent to <?php echo $this->name?>
+	<p style="margin-top: 80px"><span class="notification_text"><?php echo MultiLang::getText("Confirmation_1", $country)?></span></p>
+	<p style="margin-top: 60px"><span class="form"><?php echo MultiLang::getText("Confirmation_2", $country, $this->name)?></span></p>
+	<p style="margin-top: 40px"><span class="form"><?php echo MultiLang::getText("Confirmation_3", $country)?></span></p>
 </form>
 <script type="text/javascript">
 var timerRefresh = window.setInterval(refreshPage, 5000);

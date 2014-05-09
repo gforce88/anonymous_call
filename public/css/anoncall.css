@@ -46,15 +46,6 @@ article div {
 }
 
 /******************** frame ********************/
-div.middle {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
 div.bottom {
 	position: fixed;
 	bottom: 64px;
@@ -128,6 +119,11 @@ small {
 	margin-bottom: 10px;
 	border-style: none;
 	padding: 0;
+}
+
+b {
+	font-size: 22px;
+	font-weight: normal;
 }
 
 /******************** span ********************/
