@@ -74,26 +74,18 @@ div.low {
 }
 
 /******************** main ********************/
-p.wrape {
+p.wrap {
 	margin-left: 10%;
 	margin-right: 10%;
 }
 
-p.wrape_thin {
+p.wrap_thin {
 	margin-left: 20%;
 	margin-right: 20%;
 }
 
 p.message {
 	height: 16px;
-	color: #F00;
-	font-family: Arial, sans-serif;
-	font-size: 12px;
-	font-style: normal;
-}
-
-p.messages {
-	height: 60px;
 	color: #F00;
 	font-family: Arial, sans-serif;
 	font-size: 12px;

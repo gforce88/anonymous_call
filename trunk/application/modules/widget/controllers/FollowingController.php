@@ -85,7 +85,12 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		// Validation
 		$validFields = array ();
 		$invalidFields = array ();
-		if (Validator::isValidCreditCard($creditCard["cardNumber"])) {
+		if ($creditCard["cardType"] != null) {
+			array_push($validFields, "cardTypeInvalid");
+		} else {
+			array_push($invalidFields, "cardTypeInvalid");
+		}
+		if (Validator::isValidCardNumber($creditCard["cardNumber"])) {
 			array_push($validFields, "cardNumberInvalid");
 		} else {
 			array_push($invalidFields, "cardNumberInvalid");

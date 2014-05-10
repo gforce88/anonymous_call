@@ -25,8 +25,8 @@ class Validator {
 		return filter_var($email, FILTER_VALIDATE_EMAIL);
 	}
 
-	public static function isValidCreditCard($creditCard) {
-		return size($creditCard) >= 13 && size($creditCard) <= 16;
+	public static function isValidCardNumber($cardNumber) {
+		return strlen($cardNumber) >= 13 && strlen($cardNumber) <= 16;
 	}
 
 	public static function isValidMonth($month) {
@@ -38,7 +38,7 @@ class Validator {
 	}
 
 	public static function isValidCvv($cvv) {
-		return size($cvv) == 3;
+		return strlen($cvv) == 3;
 	}
 
 	public static function isExpired($expHour, $time) {
