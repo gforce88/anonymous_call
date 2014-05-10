@@ -45,6 +45,7 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$_SESSION["inviterInx"] = $invite["inviterInx"];
 		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
 		$_SESSION["country"] = $partner["country"];
+		$_SESSION["retry"] = 0;
 		
 		$inviter = $this->userManager->findInviterByInviteInx($invite["inx"]);
 		$this->view->assign("name", $inviter["name"]);

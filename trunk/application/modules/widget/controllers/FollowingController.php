@@ -3,6 +3,7 @@ require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'util/Validator.php';
+require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/CallManager.php';
@@ -54,6 +55,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$_SESSION["inviterInx"] = $invite["inviterInx"];
 		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
 		$_SESSION["country"] = $partner["country"];
+		$_SESSION["retry"] = 0;
 		
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
@@ -113,7 +115,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
-			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
+			$paypalToken = PaypalService::regist($creditCard);
 			if ($paypalToken != null) {
 				$toInviter = false;
 				if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
@@ -127,7 +129,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 					);
 				}
 				
-				$user["paypalTomek"] = $paypalToken;
+				$user["paypalToken"] = $paypalToken;
 				$this->userManager->update($user, $toInviter);
 				
 				$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
@@ -138,7 +140,6 @@ class Widget_FollowingController extends Zend_Controller_Action {
 					"url" => APP_CTX . "/widget/following/thankyou" 
 				);
 			} else {
-				$_SESSION["retry"] = 0;
 				$result = array (
 					"redirect" => true,
 					"url" => APP_CTX . "/widget/following/retry" 
@@ -155,8 +156,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function thankyouAction() {
-	}
+	public function thankyouAction() {}
 
 	public function retryAction() {
 		$_SESSION["retry"] += 1;
