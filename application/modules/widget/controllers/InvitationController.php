@@ -35,6 +35,7 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$_SESSION["partnerInx"] = $partner["inx"];
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["inviteType"] = $_REQUEST["type"];
+		$_SESSION["retry"] = 0;
 		
 		$this->renderScript("/invitation/getstart.phtml");
 	}

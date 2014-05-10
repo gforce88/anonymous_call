@@ -9,6 +9,7 @@ use PayPal\Api\Payment;
 use PayPal\Api\Transaction;
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Exception\PPConnectionException;
 
 class PaypalService {
 	private $logger;
@@ -31,9 +32,9 @@ class PaypalService {
 		
 		try {
 			$card->create($paypalApiCtx);
-		} catch (\PPConnectionException $ex) {
+		} catch (PPConnectionException $ex) {
 			$this->logger->logError("PaypalService", "regist", $ex->getMessage());
-			return false;
+			return null;
 		}
 		
 		return $card->getId();
