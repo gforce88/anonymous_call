@@ -1,4 +1,4 @@
-<?php $country = $this->country?>
+<?php $country = $_SESSION["country"]?>
 <form id="acceptFrom" action="<?php echo APP_CTX?>/widget/notification/refresh-response" method="post">
 	<p style="margin-top: 80px"><span class="notification_text"><?php echo MultiLang::getText("ResponseAccept_1", $country, $this->name)?></span></p>
 </form>

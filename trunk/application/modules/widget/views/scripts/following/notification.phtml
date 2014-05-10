@@ -1,4 +1,4 @@
-<?php $country = $this->country?>
+<?php $country = $_SESSION["country"]?>
 	<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("Notification_1", $country, $this->name)?></span></p>
 	<p style="margin-top: 40px"><span class="h2"><?php echo MultiLang::getText("Notification_2", $country, $this->freeCallDur)?></span></p>
 	<p style="margin-top: 10px"><span class="form"><?php echo MultiLang::getText3("Notification_3", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>

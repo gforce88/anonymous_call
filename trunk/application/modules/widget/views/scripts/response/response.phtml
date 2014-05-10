@@ -1,4 +1,4 @@
-<?php $country = $this->country?>
+<?php $country = $_SESSION["country"]?>
 <form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom'); return false;">
 	<p><span class="AVC_tagline"><?php echo MultiLang::getText("Response_1", $country, $this->name)?></span></p>
 	<div class="_idGenObjectLayout-1">

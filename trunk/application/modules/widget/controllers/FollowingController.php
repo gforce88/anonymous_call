@@ -42,11 +42,9 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
 		if ($invite == null || $partner == null) {
 			// The URL is invalid
-			$this->view->assign("country", $_REQUEST["country"]);
 			return $this->renderScript("/notification/wrong.phtml");
 		} else if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
-			$this->view->assign("country", $_REQUEST["country"]);
 			return $this->renderScript("/notification/expired.phtml");
 		}
 		
@@ -59,7 +57,6 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
-		$this->view->assign("country", $_SESSION["country"]);
 		$this->view->assign("freeCallDur", round($partner["freeCallDur"] / 60));
 		$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 		$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
@@ -68,7 +65,6 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	}
 
 	public function paypalAction() {
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	public function validateAction() {
@@ -110,36 +106,39 @@ class Widget_FollowingController extends Zend_Controller_Action {
 			array_push($invalidFields, "expDateInvalid");
 		}
 		
-		$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
-		if ($paypalToken != null) {
-			array_push($validFields, "creditCardInvalid");
-		} else {
-			array_push($invalidFields, "creditCardInvalid");
-		}
-		
 		// Dispatch
 		if (count($invalidFields) == 0) {
-			$toInviter = false;
-			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-				$user = array (
-					"inx" => $_SESSION["inviterInx"] 
+			$paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
+			if ($paypalToken != null) {
+				$toInviter = false;
+				if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+					$user = array (
+						"inx" => $_SESSION["inviterInx"] 
+					);
+				} else {
+					$toInviter = true;
+					$user = array (
+						"inx" => $_SESSION["inviteeInx"] 
+					);
+				}
+				
+				$user["paypalTomek"] = $paypalToken;
+				$this->userManager->update($user, $toInviter);
+				
+				$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
+				EmailSender::sendReadyEmail($email);
+				
+				$result = array (
+					"redirect" => true,
+					"url" => APP_CTX . "/widget/following/thankyou" 
 				);
 			} else {
-				$toInviter = true;
-				$user = array (
-					"inx" => $_SESSION["inviteeInx"] 
+				$_SESSION["retry"] = 0;
+				$result = array (
+					"redirect" => true,
+					"url" => APP_CTX . "/widget/following/retry" 
 				);
 			}
-			$user["paypalTomek"] = $paypalToken;
-			$this->userManager->update($user, $toInviter);
-			
-			$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
-			EmailSender::sendReadyEmail($email);
-			
-			$result = array (
-				"redirect" => true,
-				"url" => APP_CTX . "/widget/following/thanks" 
-			);
 		} else {
 			$result = array (
 				"redirect" => false,
@@ -151,12 +150,14 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function thanksAction() {
-		$this->view->assign("country", $_SESSION["country"]);
+	public function thankyouAction() {
 	}
 
-	public function problemAction() {
-		$this->view->assign("country", $_SESSION["country"]);
+	public function retryAction() {
+		$_SESSION["retry"] += 1;
+		if ($_SESSION["retry"] > 3) {
+			$this->renderScript("/following/problem.phtml");
+		}
 	}
 
 	public function refreshAction() {
