@@ -1,4 +1,4 @@
-<?php $country = $this->country?>
+<?php $country = $_SESSION["country"]?>
 <form id="invitationFrom" action="<?php echo APP_CTX?>/widget/invitation/validate" method="post" onsubmit="submiteAnonCall('#invitationFrom'); return false;">
 	<p style="margin-top: 10px; margin-bottom: 16px"><span class="h1"><?php echo MultiLang::getText("Invitation_1", $country)?></span></p>
 	

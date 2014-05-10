@@ -1,4 +1,4 @@
-<?php $country = $this->country?>
+<?php $country = $_SESSION["country"]?>
 <form id="paypalFrom" action="<?php echo APP_CTX?>/widget/following/validate" method="post" onsubmit="submiteAnonCall('#paypalFrom'); return false;">
 	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_1", $country)?></span></p>
 	<input value="firstName" type="text" name="firstName" tabindex="1" />
@@ -26,11 +26,13 @@
 	<input type="text" class="oneThird" name="expMonth" onkeypress="inputCheck('[0-9]', event)" maxlength="2" tabindex="1" />
 	<input type="text" class="oneThird" name="expYear" onkeypress="inputCheck('[0-9]', event)" maxlength="4" tabindex="1" />
 	<p class="messages">
-		<small id="cvvInvalid" ><?php echo MultiLang::getText("Message_5", $country)?></small>
 		<small id="expDateInvalid" ><?php echo MultiLang::getText("Message_4", $country)?></small>
-		<small id="creditCardInvalid" ><?php echo MultiLang::getText("Message_6", $country)?></small>
+		<small id="cvvInvalid" ><?php echo MultiLang::getText("Message_5", $country)?></small>
 	</p>
-	
+	sss
+	<div class="bottom">
+		<input type="submit" value="<?php echo MultiLang::getText("PaypalForm_7", $country)?>" />
+	</div>
 </form>
 <script type="text/javascript">
 $("#cardType").prop("selectedIndex", -1);

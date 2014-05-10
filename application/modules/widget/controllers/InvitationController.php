@@ -36,12 +36,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["inviteType"] = $_REQUEST["type"];
 		
-		$this->view->assign("country", $_SESSION["country"]);
 		$this->renderScript("/invitation/getstart.phtml");
 	}
 
 	public function invitationAction() {
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	public function validateAction() {
@@ -119,7 +117,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	public function agreementAction() {
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
-		$this->view->assign("country", $_SESSION["country"]);
 		
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
@@ -144,7 +141,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		EmailSender::sendInviteEmail($email);
 		
 		$this->view->assign("name", $email["inviteeName"]);
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 }

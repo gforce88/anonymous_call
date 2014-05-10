@@ -78,7 +78,6 @@ class Widget_NotificationController extends Zend_Controller_Action {
 	}
 	
 	public function expiredAction() {
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	public function declineAction() {
@@ -96,7 +95,6 @@ class Widget_NotificationController extends Zend_Controller_Action {
 	private function prepareScreen() {
 		$user = $this->getUser();
 		$this->view->assign("name", $user["name"]);
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	private function getUser() {

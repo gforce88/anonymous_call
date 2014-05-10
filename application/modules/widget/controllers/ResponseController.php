@@ -36,7 +36,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		if ($invite == null || $partner == null) {
 			// The URL is invalid
-			$this->view->assign("country", $_REQUEST["country"]);
 			return $this->renderScript("/notification/wrong.phtml");
 		}
 		
@@ -140,7 +139,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		EmailSender::sendAcceptEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 	public function declineAction() {
@@ -154,7 +152,6 @@ class Widget_ResponseController extends Zend_Controller_Action {
 		EmailSender::sendDeclineEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
-		$this->view->assign("country", $_SESSION["country"]);
 	}
 
 }
