@@ -67,6 +67,7 @@ CREATE TABLE `users` (
   `inx`                 int(11)         NOT NULL    AUTO_INCREMENT  COMMENT 'primary key',
   `phoneNum`            varchar(25)                 DEFAULT NULL    COMMENT 'user phone number',
   `email`               varchar(256)                DEFAULT NULL    COMMENT 'user email',
+  `profileUrl`          varchar(256)                DEFAULT NULL    COMMENT 'url of user profile',
   `paypalToken`         varchar(256)                DEFAULT NULL    COMMENT 'paypal token for the user',
   `createTime`          timestamp       NOT NULL                    COMMENT 'time this user record was created',
   PRIMARY KEY (`inx`,`phoneNum`)

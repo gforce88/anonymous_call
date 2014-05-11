@@ -1,0 +1,8 @@
+<?php $country = $_SESSION["country"]?>
+<p style="margin-top: 30px"><span class="notification_text"><?php echo MultiLang::getText("Retry_1", $country)?></span></p>
+<p style="margin-top: 30px"><span class="notification_text"><?php echo MultiLang::getText("Retry_2", $country)?></span></p>
+<div class="bottom">
+	<form id="paypalFrom" action="<?php echo APP_CTX?>/widget/following/paypal" method="post">
+		<input type="<?php echo $this->buttonType?>" value="<?php echo MultiLang::getText("Retry_3", $country)?>" />
+	</form>
+</div>

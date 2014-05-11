@@ -134,6 +134,12 @@ input.oneThird {
 	width: 75px;
 }
 
+input.half {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .redline {
 	background-color: #F03;
 	width: 85%;
@@ -157,9 +163,14 @@ span.oneThird {
 
 span.twoThird {
 	display: inline-block;
-	padding-left: 4px; width : 150px;
+	padding-left: 4px;
 	text-align: left;
 	width: 150px;
+}
+
+span.half {
+	display: inline-block;
+	width: 140px;
 }
 
 span.AVC_tagline {
@@ -209,7 +220,7 @@ span.footer_terms {
 
 span.form {
 	font-family: Arial, sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	font-style: normal;
 	font-weight: normal;
 }
@@ -231,13 +242,6 @@ span.h2 {
 span.notification_text {
 	font-family: Arial, sans-serif;
 	font-size: 22px;
-	font-style: normal;
-	font-weight: normal;
-}
-
-span.paragraph {
-	font-family: Arial, sans-serif;
-	font-size: 14px;
 	font-style: normal;
 	font-weight: normal;
 }

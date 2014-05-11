@@ -34,13 +34,13 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		
 		$_SESSION["partnerInx"] = $partner["inx"];
 		$_SESSION["country"] = $partner["country"];
-		$_SESSION["inviteType"] = $_REQUEST["type"];
 		$_SESSION["retry"] = 0;
 		
 		$this->renderScript("/invitation/getstart.phtml");
 	}
 
 	public function invitationAction() {
+		$_SESSION["inviteType"] = $_POST["inviteType"];
 	}
 
 	public function validateAction() {
@@ -98,7 +98,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 				"inviteTime" => (new DateTime())->format("Y-m-d H:i:s") 
 			);
 			$invite = $this->inviteManager->insert($invite);
+			
 			$_SESSION["inviteInx"] = $invite["inx"];
+			$_SESSION["inviterInx"] = $inviter["inx"];
+			$_SESSION["inviteeInx"] = $invitee["inx"];
 			
 			$result = array (
 				"redirect" => true,
@@ -124,10 +127,11 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			$this->view->assign("freeCallDur", round($partner["freeCallDur"] / 60));
 			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
-			
-			$this->renderScript("/invitation/acceptance.phtml");
+			$this->view->assign("inviterPay", "block");
+			$this->view->assign("inviteePay", "none");
 		} else {
-			$this->renderScript("/invitation/acknowlegment.phtml");
+			$this->view->assign("inviteePay", "block");
+			$this->view->assign("inviterPay", "none");
 		}
 	}
 
@@ -137,6 +141,12 @@ class Widget_InvitationController extends Zend_Controller_Action {
 			"inviteResult" => INVITE_RESULT_INVITE 
 		);
 		$this->inviteManager->update($invite);
+		
+		$inviter = array (
+			"inx" => $_SESSION["inviterInx"],
+			"profileUrl" => $_POST["inviterProfile"] 
+		);
+		$this->userManager->update($inviter);
 		
 		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
 		EmailSender::sendInviteEmail($email);

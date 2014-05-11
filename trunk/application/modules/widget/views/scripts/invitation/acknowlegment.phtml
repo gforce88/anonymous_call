@@ -1,9 +1,0 @@
-<?php $country = $_SESSION["country"]?>
-	<p style="margin-top: 40px; margin-bottom: 40px"><span class="h2"><?php echo MultiLang::getText("Acknowlegment_1", $country)?></span></p>
-	<p><span class="h2"><?php echo MultiLang::getText2("Acknowlegment_2", $country, $this->name, $this->freeCallDur)?></span></p>
-<div class="bottom">
-	<form id="AcknowlegmentFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post">
-		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("SEND_INVITATION", $country)?>" /><br>
-	</form>
-</div>
-	
