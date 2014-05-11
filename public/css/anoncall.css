@@ -386,9 +386,10 @@ img._idGenPageitem-9 {
 
 div._idGenPageitem-10 {
 	display: inline-block;
-	height: 223px;
 	overflow: hidden;
+	background: url(../image/cloud_lg.png) no-repeat;
 	width: 194px;
+	height: 233px;
 }
 
 div._idGenObjectLayout-1 {
