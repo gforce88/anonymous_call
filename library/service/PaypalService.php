@@ -33,11 +33,13 @@ class PaypalService {
 		try {
 			$card->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError("PaypalService", "regist", $ex->getMessage());
+			$this->logger->logInfo("PaypalService", "regist", $ex->getMessage());
 			return null;
 		}
 		
-		return $card->getId();
+		$paypalToken = $card->getId();
+		$this->logger->logInfo("PaypalService", "regist", $paypalToken);
+		return $paypalToken;
 	}
 
 	public function charge($paypalToken, $chargeAmount) {

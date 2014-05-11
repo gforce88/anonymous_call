@@ -7,6 +7,7 @@ class UserManager extends BaseManager {
 		"userAlias" => null,
 		"phoneNum" => null,
 		"email" => null,
+		"profileUrl" => null,
 		"paypalToken" => null,
 		"createTime" => null 
 	);

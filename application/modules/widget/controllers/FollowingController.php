@@ -13,8 +13,6 @@ require_once 'models/EmailManager.php';
 
 class Widget_FollowingController extends Zend_Controller_Action {
 	private $logger;
-	private $paypalService;
-	private $tropoService;
 	private $partnerManager;
 	private $callManager;
 	private $inviteManager;
@@ -23,8 +21,6 @@ class Widget_FollowingController extends Zend_Controller_Action {
 
 	public function init() {
 		$this->logger = LoggerFactory::getSysLogger();
-		$this->paypalService = new PaypalService();
-		$this->tropoService = new TropoService();
 		$this->partnerManager = new PartnerManager();
 		$this->callManager = new CallManager();
 		$this->inviteManager = new InviteManager();
@@ -115,7 +111,8 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
-			$paypalToken = PaypalService::regist($creditCard);
+			$paypalService = new PaypalService();
+			$paypalToken = $paypalService->regist($creditCard);
 			if ($paypalToken != null) {
 				$toInviter = false;
 				if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
@@ -133,7 +130,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 				$this->userManager->update($user, $toInviter);
 				
 				$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
-				EmailSender::sendReadyEmail($email);
+				EmailSender::sendReadyEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
 				
 				$result = array (
 					"redirect" => true,
@@ -161,7 +158,15 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	public function retryAction() {
 		$_SESSION["retry"] += 1;
 		if ($_SESSION["retry"] > 3) {
-			$this->renderScript("/following/problem.phtml");
+			// Ask payer to retry
+			$email = $this->emailManager->findSorryEmail($_SESSION["inviteInx"]);
+			EmailSender::sendSorryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
+			$this->view->assign("buttonType", "hidden");
+		} else {
+			// Inform the other guy of sorry
+			$email = $this->emailManager->findRetryEmail($_SESSION["inviteInx"]);
+			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
+			$this->view->assign("buttonType", "submit");
 		}
 	}
 

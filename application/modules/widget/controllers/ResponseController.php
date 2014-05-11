@@ -131,8 +131,8 @@ class Widget_ResponseController extends Zend_Controller_Action {
 
 	public function acceptAction() {
 		$invite = array (
-				"inx" => $_SESSION["inviteInx"],
-				"inviteResult" => INVITE_RESULT_ACCEPT
+			"inx" => $_SESSION["inviteInx"],
+			"inviteResult" => INVITE_RESULT_ACCEPT 
 		);
 		$this->inviteManager->update($invite);
 		
