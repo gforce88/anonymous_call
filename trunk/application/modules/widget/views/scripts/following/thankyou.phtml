@@ -1,2 +1,17 @@
 <?php $country = $_SESSION["country"]?>
-Thank You
+<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("ThankYou_1", $country)?></span></p>
+<form style="margin-top: 20px" id="paypalFrom" action="<?php echo APP_CTX?>/widget/following/connecting" method="post">
+	<input type="submit" value="<?php echo MultiLang::getText("ThankYou_2", $country)?>" />
+</form>
+<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("ThankYou_3", $country, $this->name)?></span></p>
+<div style="margin-top: 40px" class="_idGenObjectLayout-1 low">
+	<div class="_idGenPageitem-4">
+		<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
+	</div>
+	<div class="_idGenPageitem-6">
+		<p><span class="caption_cloud_small"><?php echo MultiLang::getText("ThankYou_4", $country)?></span></p>
+	</div>
+	<div class="_idGenPageitem-4">
+		<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
+	</div>
+</div>

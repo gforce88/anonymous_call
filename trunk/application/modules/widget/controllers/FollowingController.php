@@ -62,8 +62,7 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->renderScript("/following/notification.phtml");
 	}
 
-	public function paypalAction() {
-	}
+	public function paypalAction() {}
 
 	public function validateAction() {
 		// Disable layout for return json
@@ -153,7 +152,14 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function thankyouAction() {}
+	public function thankyouAction() {
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$user = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		} else {
+			$user = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		}
+		$this->view->assign("name", $user["name"]);
+	}
 
 	public function retryAction() {
 		$_SESSION["retry"] += 1;
@@ -170,6 +176,46 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		}
 	}
 
+	public function connectingAction() {
+		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
+		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		
+		$call = array (
+			"inviteInx" => $_SESSION["inviteInx"] 
+		);
+		$paramArr = array (
+			"partnerInx" => $partner["inx"],
+			"maxRingDur" => $partner["maxRingDur"],
+			"inviteInx" => $_SESSION["inviteInx"],
+			"partnerNumber" => $partner["phoneNum"],
+			"country" => $partner["country"] 
+		);
+		
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			// Pay by Inviter, first call inviter
+			$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
+			$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
+			$paramArr["1stLegNumber"] = $inviter["phoneNum"];
+			$paramArr["2ndLegNumber"] = $invitee["phoneNum"];
+		} else {
+			// Pay by Invitee, first call invitee
+			$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
+			$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
+			$paramArr["1stLegNumber"] = $invitee["phoneNum"];
+			$paramArr["2ndLegNumber"] = $inviter["phoneNum"];
+		}
+		$call = $this->callManager->insert($call);
+		$paramArr["callInx"] = $call["inx"];
+		
+		// Init a Tropo call
+		$tropoService = new TropoService();
+		$tropoService->initCall($paramArr);
+	}
+
+	/**
+	 * ***************************************useless*************************************************
+	 */
 	public function refreshAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
