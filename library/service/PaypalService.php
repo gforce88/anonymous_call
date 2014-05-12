@@ -37,7 +37,7 @@ class PaypalService {
 		try {
 			$card->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to regist Paypal token: " . $ex->getMessage());
+			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to regist Paypal token: " . $ex->getData());
 			return null;
 		}
 		
@@ -48,8 +48,6 @@ class PaypalService {
 
 	public function charge($paypalToken, $chargeAmount, $chargeCurrency) {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
-		
-		$this->logger->logError($this->partnerInx, $this->inviteInx, $chargeAmount . $chargeCurrency);
 		
 		$creditCardToken = new CreditCardToken();
 		$creditCardToken->setCredit_card_id($paypalToken);
@@ -66,7 +64,7 @@ class PaypalService {
 		
 		$amount = new Amount();
 		$amount->setCurrency($chargeCurrency);
-		$amount->setTotal($chargeAmount);
+		$amount->setTotal(getValidAmount($chargeAmount, $chargeCurrency));
 		
 		$transaction = new Transaction();
 		$transaction->setAmount($amount);
@@ -82,7 +80,7 @@ class PaypalService {
 		try {
 			$payment->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: ". $ex->getMessage());
+			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: " . $ex->getData());
 			return false;
 		}
 		
@@ -92,6 +90,16 @@ class PaypalService {
 		} else {
 			$this->logger->logWarn($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; State: " . $payment->getState());
 			return false;
+		}
+	}
+
+	private function getValidAmount($chargeAmount, $chargeCurrency) {
+		// Check all the possible of currency in partners table.
+		switch ($chargeCurrency) {
+			case "JPY" :
+				return round($chargeAmount);
+			default :
+				return round($chargeAmount, 2);
 		}
 	}
 
