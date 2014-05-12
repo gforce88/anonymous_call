@@ -1,6 +1,7 @@
 <?php
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
+require_once 'util/EmailSender.php';
 require_once 'models/UserManager.php';
 require_once 'BaseTropoController.php';
 
@@ -181,8 +182,6 @@ class Tropo_FirstlegController extends BaseTropoController {
 		
 		// Send thanks email
 		$email = $this->userManager->findEmail($_GET["inviteInx"]);
-		if ($email != null) $this->log($email);
-		else $this->log("email is null");
 		EmailSender::sendThanksEmail($email, $email["inviteType"] == INVITE_TYPE_INVITER_PAY);
 		
 		// Charge Paypal
