@@ -3,7 +3,7 @@ require_once 'log/LoggerFactory.php';
 require_once 'util/MultiLang.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
-require_once 'models/CallManager.php';
+require_once 'models/userManager.php';
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
 use PayPal\Api\FundingInstrument;
@@ -21,7 +21,8 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$result = MultiLang::replaceParams("thanksEmailSubject", array("imddl137"));
+		$userManager = new UserManager();
+		$result = $userManager->findTokenByInvite(1);
 		echo $result;
 		phpinfo();
 		$this->renderScript("/empty.phtml");
