@@ -37,16 +37,21 @@ class MultiLang {
 	}
 
 	public static function replaceParams($msg, $params) {
-		$i = 1;
+		$logger = LoggerFactory::getSysLogger();
 		if (!is_array($params)) {
 			$params = array (
 				$params 
 			);
 		}
+		
+		$logger->logInfo("<><><><1>");
+		$i = 1;
 		foreach ($params as $param) {
+			$logger->logInfo("<><><><2>", $i);
 			$msg = str_replace("%" . $i . "s", $param, $msg);
 			$i++;
 		}
+		$logger->logInfo("<><><><3>");
 		return $msg;
 	}
 
