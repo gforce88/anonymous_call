@@ -34,8 +34,8 @@ class UserManager extends BaseManager {
 			  from users, invites
 			 where users.inx = case invites.inviteType
 			            when 1 then invites.inviterInx 
-			             else invites.inviteeInx 
-			              end
+			                   else invites.inviteeInx 
+			                    end
 			   and invites.inx = :inviteInx";
 
 	const SQL_FIND_EMAIL = "
