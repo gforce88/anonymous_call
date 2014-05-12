@@ -1,5 +1,6 @@
 <?php
 require_once 'service/IvrService.php';
+require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'util/EmailSender.php';
 require_once 'models/UserManager.php';
