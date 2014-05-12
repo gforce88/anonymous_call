@@ -5,7 +5,6 @@ require_once 'models/UserManager.php';
 require_once 'BaseTropoController.php';
 
 class Tropo_FirstlegController extends BaseTropoController {
-	
 	private $userManager;
 
 	public function init() {
@@ -183,7 +182,8 @@ class Tropo_FirstlegController extends BaseTropoController {
 		// Send thanks email
 		$email = $this->userManager->findEmail($_GET["inviteInx"]);
 		EmailSender::sendThanksEmail($email, $email["inviteType"] == INVITE_TYPE_INVITER_PAY);
-		$this->log($email);
+		if ($email != null) $this->log($email);
+		else $this->log("email is null");
 		
 		// Charge Paypal
 		$paypalToken = $this->userManager->findTokenByInvite($_GET["inviteInx"]);
