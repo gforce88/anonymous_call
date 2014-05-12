@@ -76,7 +76,7 @@ class EmailSender {
 		$content = MultiLang::replaceParams($email["emailBody"], $contentParam);
 		self::$logger->logInfo($email["partnerInx"], $email["inx"], $message);
 		
-		$headers = "From: " . $email["partnerName"] . "<" . $email["emailAddr"] . "> \n";
+		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
 		self::$logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
