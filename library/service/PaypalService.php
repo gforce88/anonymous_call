@@ -49,7 +49,7 @@ class PaypalService {
 	public function charge($paypalToken, $chargeAmount, $chargeCurrency) {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
-		$this->logger->logError($this->partnerInx, $this->inviteInx, $chargeAmount + $chargeCurrency);
+		$this->logger->logError($this->partnerInx, $this->inviteInx, $chargeAmount . $chargeCurrency);
 		
 		$creditCardToken = new CreditCardToken();
 		$creditCardToken->setCredit_card_id($paypalToken);
