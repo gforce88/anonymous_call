@@ -10,16 +10,16 @@ class PartnerManager extends BaseManager {
 
 	const SQL_FIND_PARTNER_BY_INVITE = "
 			select *
+			  from partners, invites
+			 where partners.inx = invites.partnerInx
+			   and invites.inx = :inviteInx";
+
+	const SQL_FIND_PARTNER_BY_CALL = "
+			select *
 			  from partners, invites, calls
 			 where partners.inx = invites.partnerInx
 			   and invites.inx = calls.inviteInx
 			   and calls.inx = :callInx";
-
-	const SQL_FIND_PARTNER_BY_CALL = "
-			select *
-			  from partners, invites
-			 where partners.inx = invites.partnerInx
-			   and invites.inx = :inviteInx";
 
 	public function insert($partner) {
 		$this->db->insert("partners", array_intersect_key($partner, self::$empty));
