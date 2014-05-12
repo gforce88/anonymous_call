@@ -34,11 +34,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropo = $this->initTropo($parameters);
 		
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		if ($_GET["callType"] == CALL_TYPE_FIRST_CALL_INVITER) {
-			$sentences = $ivrService->promptInviterGreeting() . " ";
-		} else {
-			$sentences = $ivrService->promptInviteeGreeting() . " ";
-		}
+		$sentences = $ivrService->promptGreeting() . " ";
 		
 		$callOptions = array (
 			"from" => $_GET["partnerNumber"],

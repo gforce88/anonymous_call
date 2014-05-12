@@ -48,9 +48,11 @@ class EmailSender {
 
 	private static function adjustEmail($email, $toInviter) {
 		if ($toInviter) {
+			$email["fromName"] = $email["inviteeName"];
 			$email["fromEmail"] = $email["inviteeEmail"];
 			$email["toEmail"] = $email["inviterEmail"];
 		} else {
+			$email["fromName"] = $email["inviterName"];
 			$email["fromEmail"] = $email["inviterEmail"];
 			$email["toEmail"] = $email["inviteeEmail"];
 		}
@@ -61,10 +63,10 @@ class EmailSender {
 		self::initLogger();
 		
 		$subjectParam = array (
-			$email["fromEmail"] 
+			$email["fromName"] 
 		);
 		$contentParam = array (
-			$email["fromEmail"] 
+			$email["fromName"] 
 		);
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
 		
@@ -73,8 +75,8 @@ class EmailSender {
 			$message .= " with URL: [$url]";
 		}
 		
-		$subject = MultiLang::replaceParams($email["emailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email["emailBody"], $contentParam);
+		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
+		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
 		self::$logger->logInfo($email["partnerInx"], $email["inx"], $message);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";

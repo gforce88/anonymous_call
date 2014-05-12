@@ -2,7 +2,7 @@
 
 class Validator {
 
-	public static function isValidPhoneNumber($phoneNumber) {
+	public static function isValidPhoneNumber(&$phoneNumber) {
 		$phoneNumber = preg_replace("/[^\d]/", "", $phoneNumber);
 		
 		$patternUS = "/^(0){0,4}(1){1}[0-9]{10}$/";
@@ -15,6 +15,7 @@ class Validator {
 		}
 		$patternUSwithoutCode = "/^[0-9]{10}$/";
 		if (preg_match($patternUSwithoutCode, $phoneNumber)) {
+			$phoneNumber = "1" . $phoneNumber;
 			return true;
 		}
 		

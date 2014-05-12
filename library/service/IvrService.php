@@ -18,13 +18,12 @@ class IvrService {
 		$this->ivrLocation = $this->config["rootlocation"] . "$country/";
 	}
 	
-	public function promptInviterGreeting() {
-		return $this->getIvrAudio("inviter_greeting");
+	public function promptGreeting() {
+		return $this->getIvrAudio("greeting");
 	}
 	
-	public function promptInviteeGreeting() {
-		// TODO: invitee greeting should be combined with a couple of audios
-		return $this->getIvrAudio("invitee_greeting");
+	public function promptReinform() {
+		return $this->getIvrAudio("reinform");
 	}
 
 	private function getIvrAudio($key) {

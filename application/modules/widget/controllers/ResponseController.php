@@ -6,7 +6,6 @@ require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
 require_once 'models/CallManager.php';
-require_once 'models/EmailManager.php';
 require_once 'BaseController.php';
 
 class Widget_ResponseController extends BaseController {
@@ -14,7 +13,6 @@ class Widget_ResponseController extends BaseController {
 	private $userManager;
 	private $inviteManager;
 	private $callManager;
-	private $emailManager;
 
 	public function init() {
 		parent::init();
@@ -22,7 +20,6 @@ class Widget_ResponseController extends BaseController {
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
 		$this->callManager = new CallManager();
-		$this->emailManager = new EmailManager();
 	}
 
 	public function indexAction() {
@@ -138,7 +135,7 @@ class Widget_ResponseController extends BaseController {
 		);
 		$this->inviteManager->update($invite);
 		
-		$email = $this->emailManager->findAcceptEmail($_SESSION["inviteInx"]);
+		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 		EmailSender::sendAcceptEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
@@ -155,7 +152,7 @@ class Widget_ResponseController extends BaseController {
 		);
 		$this->inviteManager->update($invite);
 		
-		$email = $this->emailManager->findDeclineEmail($_SESSION["inviteInx"]);
+		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 		EmailSender::sendDeclineEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);

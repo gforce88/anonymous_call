@@ -258,6 +258,6 @@ INSERT `partners` (
           'Retry URL: <a href="%2s">%2s</a>',
           'thanksEmailSubject',
           'thanksEmailBody',
-          '地址1',
-          '地址2',
+          'Address1',
+          'Address2',
           'JP');
