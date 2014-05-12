@@ -9,6 +9,7 @@ require_once 'models/CallManager.php';
 require_once 'models/InviteManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/EmailManager.php';
+require_once 'BaseController.php';
 
 class Widget_FollowingController extends BaseController {
 	private $partnerManager;
