@@ -1,5 +1,6 @@
 <?php
 require_once 'log/LoggerFactory.php';
+require_once 'service/PaypalService.php';
 require_once 'util/MultiLang.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
@@ -21,9 +22,9 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$userManager = new UserManager();
-		$result = $userManager->findTokenByInvite(1);
-		echo $result;
+		$paypalService = new PaypalService($_GET["partnerInx"], $_GET["inviteInx"]);
+		$paypalToken = $paypalService->charge("CARD-05N57635TV839990SKNYNG6I", 10.12, "JPY");
+		
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
