@@ -173,20 +173,12 @@ class Widget_FollowingController extends BaseController {
 		if ($_SESSION["retry"] > 3) {
 			// Ask payer to retry
 			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
-			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY) {
-				EmailSender::sendSorryEmail($email, true);
-			} else {
-				EmailSender::sendSorryEmail($email, false);
-			}
+			EmailSender::sendSorryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
 			$this->view->assign("buttonType", "hidden");
 		} else {
 			// Inform the other guy of sorry
 			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
-			if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-				EmailSender::sendRetryEmail($email, true);
-			} else {
-				EmailSender::sendRetryEmail($email, false);
-			}
+			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
 			$this->view->assign("buttonType", "submit");
 		}
 	}

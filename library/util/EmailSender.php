@@ -26,8 +26,6 @@ class EmailSender {
 	}
 
 	public static function sendReadyEmail($email, $toInviter) {
-		self::initLogger();
-		self::$logger->logInfo("EmailSender", "sendReadyEmail", "toInviter: " .  $toInviter);
 		$email = self::adjustEmail($email, $toInviter);
 		return self::sendEmail($email, "ready");
 	}
@@ -44,8 +42,6 @@ class EmailSender {
 	}
 
 	public static function sendThanksEmail($email, $toInviter) {
-		self::initLogger();
-		self::$logger->logInfo("EmailSender", "sendThanksEmail", "toInviter: " .  $toInviter);
 		$email = self::adjustEmail($email, $toInviter);
 		return self::sendEmail($email, "thanks");
 	}
@@ -65,6 +61,7 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		self::initLogger();
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $email);
 		
 		$subjectParam = array (
 			$email["fromName"] 
