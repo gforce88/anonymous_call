@@ -56,8 +56,6 @@ class EmailSender {
 	}
 
 	private static function sendEmail($email, $emailType, $url = null) {
-		self::initLogger();
-		
 		$subjectParam = array (
 			$email["fromName"] 
 		);
