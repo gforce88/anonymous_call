@@ -183,7 +183,11 @@ class Tropo_FirstlegController extends BaseTropoController {
 		// Send thanks email
 		$email = $this->userManager->findEmail($_GET["inviteInx"]);
 		$this->log($email["inviteType"]);
-		EmailSender::sendThanksEmail($email, $email["inviteType"] == INVITE_TYPE_INVITER_PAY ? true : false);
+		if ($email["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			EmailSender::sendThanksEmail($email, true);
+		} else {
+			EmailSender::sendThanksEmail($email, false);
+		}
 		
 		// Charge Paypal
 		$paypalToken = $this->userManager->findTokenByInvite($_GET["inviteInx"]);
