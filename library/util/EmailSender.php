@@ -10,13 +10,13 @@ class EmailSender {
 
 	public static function sendInviteEmail($email) {
 		$email = self::adjustEmail($email, false);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "invite", $url);
 	}
 
 	public static function sendAcceptEmail($email) {
 		$email = self::adjustEmail($email, true);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "accept", $url);
 	}
 
@@ -37,7 +37,7 @@ class EmailSender {
 
 	public static function sendRetryEmail($email, $toInviter) {
 		$email = self::adjustEmail($email, $toInviter);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "retry", $url);
 	}
 
@@ -77,12 +77,12 @@ class EmailSender {
 		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
-		self::$logger->logInfo($email["partnerInx"], $email["inx"], $message);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $message);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
-		self::$logger->logInfo($email["partnerInx"], $email["inx"], "Email sent result: [$sendResult]");
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "Email sent result: [$sendResult]");
 		
 		return $sendResult;
 	}

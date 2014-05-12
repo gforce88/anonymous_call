@@ -39,7 +39,7 @@ class UserManager extends BaseManager {
 			   and invites.inx = :inviteInx";
 
 	const SQL_FIND_EMAIL = "
-			select invites.inx, invites.partnerInx, invites.inviteToken, invites.inviteType,
+			select invites.inx inviteInx, invites.partnerInx, invites.inviteToken, invites.inviteType,
 			       partners.name partnerName, partners.emailAddr partnerEmail, partners.country,
 			       partners.inviteEmailSubject, partners.inviteEmailBody,
 			       partners.acceptEmailSubject, partners.acceptEmailBody,
