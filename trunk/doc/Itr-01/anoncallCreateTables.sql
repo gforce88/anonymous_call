@@ -198,8 +198,8 @@ INSERT `partners` (
           'sorryEmailBody',
           'retryEmailSubject',
           'Retry URL: <a href="%2s">%2s</a>',
-          'thankEmailSubject',
-          'thankEmailBody',
+          'thanksEmailSubject',
+          'thanksEmailBody',
           'address1',
           'address2',
           'US');
@@ -256,8 +256,8 @@ INSERT `partners` (
           'sorryEmailBody',
           'retryEmailSubject',
           'Retry URL: <a href="%2s">%2s</a>',
-          'thankEmailSubject',
-          'thankEmailBody',
+          'thanksEmailSubject',
+          'thanksEmailBody',
           '地址1',
           '地址2',
           'JP');
