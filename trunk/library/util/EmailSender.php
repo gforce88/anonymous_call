@@ -61,7 +61,6 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		self::initLogger();
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $email);
 		
 		$subjectParam = array (
 			$email["fromName"] 
@@ -70,24 +69,24 @@ class EmailSender {
 			$email["fromName"] 
 		);
 
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><0>");
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><1>");
 		if ($url != null) {
 			$contentParam["url"] = $url;
-			$message .= " with URL: [$url]";
+			$message .= " URL: [$url]";
 		}
 
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><2>");
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $emailType);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $email[$emailType . "EmailSubject"]);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $subjectParam);
+		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><3>");
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
 		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $message);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "Email sent result: [$sendResult]");
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
 		
 		return $sendResult;
 	}
