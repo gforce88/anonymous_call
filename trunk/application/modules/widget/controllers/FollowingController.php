@@ -109,7 +109,7 @@ class Widget_FollowingController extends BaseController {
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
-			$paypalService = new PaypalService();
+			$paypalService = new PaypalService($_SESSION["partnerInx"], $_SESSION["inviteInx"]);
 			$paypalToken = $paypalService->regist($creditCard);
 			if ($paypalToken != null) {
 				$toInviter = false;
