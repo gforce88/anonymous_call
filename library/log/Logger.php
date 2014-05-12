@@ -14,12 +14,12 @@ class Logger {
 
 	public function logWarn($class, $function, $info) {
 		$message = $this->formatMessage("WARN ", $class, $function, $info);
-		$this->logger->warn($message);
+		$this->logger->info($message);
 	}
 
 	public function logError($class, $function, $info) {
 		$message = $this->formatMessage("ERROR", $class, $function, $info);
-		$this->logger->error($message);
+		$this->logger->info($message);
 	}
 
 	private function formatMessage($type, $class, $function, $info) {
