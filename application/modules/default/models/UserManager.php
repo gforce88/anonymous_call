@@ -85,7 +85,7 @@ class UserManager extends BaseManager {
 	}
 
 	public function findTokenByInvite($inviteInx) {
-		return $this->db->fetchRow(self::SQL_FIND_TOKEN_BY_INVITE, array (
+		return $this->db->fetchOne(self::SQL_FIND_TOKEN_BY_INVITE, array (
 			"inviteInx" => $inviteInx 
 		));
 	}
