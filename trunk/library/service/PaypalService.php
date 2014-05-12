@@ -79,7 +79,7 @@ class PaypalService {
 		
 		try {
 			$payment->create($paypalApiCtx);
-		} catch (\PPConnectionException $ex) {
+		} catch (PPConnectionException $ex) {
 			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: $ex->getMessage()");
 			return false;
 		}

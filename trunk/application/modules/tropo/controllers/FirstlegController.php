@@ -178,16 +178,18 @@ class Tropo_FirstlegController extends BaseTropoController {
 		}
 		$this->log("Call Duration: $callDuration");
 		$this->log("Billalbe Duration: $billableDuration");
+		$this->log($_GET);
 		
 		// Send thanks email
 		$email = $this->userManager->findEmail($_GET["inviteInx"]);
 		EmailSender::sendThanksEmail($email, $email["inviteType"] == INVITE_TYPE_INVITER_PAY);
+		$this->log($email);
 		
 		// Charge Paypal
 		$paypalToken = $this->userManager->findTokenByInvite($_GET["inviteInx"]);
-		if ($billableDuration > 0) {
+		if ($callDuration > 0) {
 			$paypalService = new PaypalService();
-			$paypalToken = $paypalService->charge($paypalToken, $partner["chargeAmount"], $partner["chargeCurrency"]);
+			$paypalToken = $paypalService->charge($paypalToken, $partner["chargeAmount"] * $callDuration / 60, $partner["chargeCurrency"]);
 		}
 		
 		$this->exitAction();
