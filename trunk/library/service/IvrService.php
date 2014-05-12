@@ -22,8 +22,8 @@ class IvrService {
 		return $this->getIvrAudio("greeting");
 	}
 	
-	public function promptReinform() {
-		return $this->getIvrAudio("reinform");
+	public function promptRemind() {
+		return $this->getIvrAudio("remind");
 	}
 
 	private function getIvrAudio($key) {
