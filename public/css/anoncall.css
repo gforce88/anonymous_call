@@ -88,11 +88,11 @@ p.message {
 	height: 16px;
 	color: #F00;
 	font-family: Arial, sans-serif;
-	font-size: 12px;
+	font-size: 11px;
 	font-style: normal;
 }
 
-small {
+p.message span {
 	display: none;
 }
 
@@ -266,6 +266,7 @@ span.CharOverride-3 {
 	font-style: normal;
 	font-weight: normal;
 	-o-transform: scale(1);
+	-webkit-transform: scale(0.75);
 }
 
 span.CharOverride-4 {

@@ -30,7 +30,7 @@ class Validator {
 	}
 
 	public static function isValidMonth($month) {
-		return $month >= 1 && $month <= 12;
+		return strlen($month) == 2 && $month >= 1 && $month <= 12;
 	}
 
 	public static function isValidYear($year) {
