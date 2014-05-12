@@ -1,7 +1,6 @@
 <?php
 require_once 'tropo/tropo.class.php';
 require_once 'log/LoggerFactory.php';
-require_once 'service/IvrService.php';
 require_once 'models/CallManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'data/NextTime.php';
