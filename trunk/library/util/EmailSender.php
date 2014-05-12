@@ -69,14 +69,18 @@ class EmailSender {
 		$contentParam = array (
 			$email["fromName"] 
 		);
+
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><0>");
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
-		
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><1>");
 		if ($url != null) {
 			$contentParam["url"] = $url;
 			$message .= " with URL: [$url]";
 		}
-		
+
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><2>");
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "<><><><3>");
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
 		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $message);
 		
