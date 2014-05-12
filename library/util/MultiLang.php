@@ -5,7 +5,7 @@ class MultiLang {
 	public static function getText($key, $language, $params = null) {
 		$language = strtoupper($language);
 		switch ($language) {
-			case "JP" :
+			case COUNTRY_JP :
 				$msg = self::getJapaneseText($key);
 				break;
 			default :
