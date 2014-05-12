@@ -1,12 +1,8 @@
 <?php
 require_once 'log/LoggerFactory.php';
+require_once 'util/MultiLang.php';
 
 class EmailSender {
-	private static $logger;
-
-	private static function initLogger() {
-		self::$logger = LoggerFactory::getSysLogger();
-	}
 
 	public static function sendInviteEmail($email) {
 		$email = self::adjustEmail($email, false);
@@ -68,26 +64,22 @@ class EmailSender {
 		$contentParam = array (
 			$email["fromName"] 
 		);
-
+		
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
 		if ($url != null) {
 			$contentParam["url"] = $url;
 			$message .= " URL: [$url]";
 		}
-
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $emailType);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $email[$emailType . "EmailSubject"]);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $subjectParam);
 		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $subject);
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $content);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
+		
+		$logger = LoggerFactory::getSysLogger();
+		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
 		
 		return $sendResult;
 	}
