@@ -29,8 +29,17 @@ class UserManager extends BaseManager {
 			 where users.inx = invites.inviteeInx
 			   and invites.inx=:inviteInx";
 
+	const SQL_FIND_TOKEN_BY_INVITE = "
+			select users.paypalToken
+			  from users, invites
+			 where users.inx = case invites.inviteType
+			            when 1 then invites.inviterInx 
+			             else invites.inviteeInx 
+			              end
+			   and invites.inx = :inviteInx";
+
 	const SQL_FIND_EMAIL = "
-			select invites.inx, invites.partnerInx, invites.inviteToken,
+			select invites.inx, invites.partnerInx, invites.inviteToken, invites.inviteType,
 			       partners.name partnerName, partners.emailAddr partnerEmail, partners.country,
 			       partners.inviteEmailSubject, partners.inviteEmailBody,
 			       partners.acceptEmailSubject, partners.acceptEmailBody,
@@ -71,6 +80,12 @@ class UserManager extends BaseManager {
 
 	public function findInviteeByInviteInx($inviteInx) {
 		return $this->db->fetchRow(self::SQL_FIND_INVITEE_BY_INVITE_INX, array (
+			"inviteInx" => $inviteInx 
+		));
+	}
+
+	public function findTokenByInvite($inviteInx) {
+		return $this->db->fetchRow(self::SQL_FIND_TOKEN_BY_INVITE, array (
 			"inviteInx" => $inviteInx 
 		));
 	}

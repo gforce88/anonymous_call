@@ -21,8 +21,6 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$logger = LoggerFactory::getIvrLogger();
-		$logger->logInfo(1, 2, 3);
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}

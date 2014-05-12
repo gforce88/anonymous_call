@@ -1,13 +1,17 @@
 <?php
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
+require_once 'models/UserManager.php';
 require_once 'BaseTropoController.php';
 
 class Tropo_FirstlegController extends BaseTropoController {
+	
+	private $userManager;
 
 	public function init() {
 		parent::init();
 		$this->indicator = "1stLeg";
+		$this->userManager = new UserManager();
 	}
 
 	public function indexAction() {
@@ -165,9 +169,27 @@ class Tropo_FirstlegController extends BaseTropoController {
 			$tropoService->exit2ndLeg($call["secondLegSession"]);
 		}
 		
-		// TODO: charge Paypal & send thanks email
+		// Calculate call duration & billable duration
+		$partner = $this->partnerManager->findPartnerByInx($_GET["partnerInx"]);
+		$callDuration = strtotime($call["callEndTime"]) - strtotime($call["callStartTime"]);
+		$billableDuration = $callDuration - $partner["freeCallDur"];
+		if ($billableDuration < 0) {
+			$billableDuration = 0;
+		}
+		$this->log("Call Duration: $callDuration");
+		$this->log("Billalbe Duration: $billableDuration");
 		
-		$this->log($_GET);
+		// Send thanks email
+		$email = $this->userManager->findEmail($_GET["inviteInx"]);
+		EmailSender::sendThanksEmail($email, $email["inviteType"] == INVITE_TYPE_INVITER_PAY);
+		
+		// Charge Paypal
+		$paypalToken = $this->userManager->findTokenByInvite($_GET["inviteInx"]);
+		if ($billableDuration > 0) {
+			$paypalService = new PaypalService();
+			$paypalToken = $paypalService->charge($paypalToken, $partner["chargeAmount"], $partner["chargeCurrency"]);
+		}
+		
 		$this->exitAction();
 	}
 
