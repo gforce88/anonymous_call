@@ -5,6 +5,9 @@ require_once 'models/UserManager.php';
 require_once 'BaseController.php';
 
 class Widget_NotificationController extends BaseController {
+	private static final $INVITATION = 1;
+	private static final $RESPONSE = 2;
+	
 	private $inviteManager;
 	private $userManager;
 
@@ -19,7 +22,7 @@ class Widget_NotificationController extends BaseController {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
-		$_SESSION["notificationType"] = NOTIFICATION_TYPE_INVITATION;
+		$_SESSION["notificationType"] = self::$INVITATION;
 		$result = array (
 			"redirect" => false 
 		);
@@ -59,7 +62,7 @@ class Widget_NotificationController extends BaseController {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNeverRender();
 		
-		$_SESSION["notificationType"] = NOTIFICATION_TYPE_RESPONSE;
+		$_SESSION["notificationType"] = self::$RESPONSE;
 		$result = array (
 			"redirect" => false 
 		);
@@ -99,7 +102,7 @@ class Widget_NotificationController extends BaseController {
 	}
 
 	private function getUser() {
-		if ($_SESSION["notificationType"] == NOTIFICATION_TYPE_INVITATION) {
+		if ($_SESSION["notificationType"] == self::$INVITATION) {
 			return $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		} else {
 			return $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);

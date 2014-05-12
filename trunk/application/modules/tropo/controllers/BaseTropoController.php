@@ -25,7 +25,6 @@ class BaseTropoController extends Zend_Controller_Action {
 		$paramArr = array ();
 		$paramArr["session_id"] = $session->getId();
 		$paramArr["callInx"] = $session->getParameters("callInx");
-		$paramArr["callType"] = $session->getParameters("callType");
 		$paramArr["partnerInx"] = $session->getParameters("partnerInx");
 		$paramArr["inviteInx"] = $session->getParameters("inviteInx");
 		$paramArr["partnerNumber"] = $session->getParameters("partnerNumber");

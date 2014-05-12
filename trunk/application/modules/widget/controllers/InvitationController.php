@@ -6,21 +6,18 @@ require_once 'util/Validator.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
-require_once 'models/EmailManager.php';
 require_once 'BaseController.php';
 
 class Widget_InvitationController extends BaseController {
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
-	private $emailManager;
 
 	public function init() {
 		parent::init();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
-		$this->emailManager = new EmailManager();
 	}
 
 	public function indexAction() {
@@ -151,7 +148,7 @@ class Widget_InvitationController extends BaseController {
 		);
 		$this->userManager->update($inviter);
 		
-		$email = $this->emailManager->findInviteEmail($_SESSION["inviteInx"]);
+		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 		EmailSender::sendInviteEmail($email);
 		
 		$this->view->assign("name", $email["inviteeName"]);

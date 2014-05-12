@@ -8,7 +8,6 @@ require_once 'models/PartnerManager.php';
 require_once 'models/CallManager.php';
 require_once 'models/InviteManager.php';
 require_once 'models/UserManager.php';
-require_once 'models/EmailManager.php';
 require_once 'BaseController.php';
 
 class Widget_FollowingController extends BaseController {
@@ -16,7 +15,6 @@ class Widget_FollowingController extends BaseController {
 	private $callManager;
 	private $inviteManager;
 	private $userManager;
-	private $emailManager;
 
 	public function init() {
 		parent::init();
@@ -24,7 +22,6 @@ class Widget_FollowingController extends BaseController {
 		$this->callManager = new CallManager();
 		$this->inviteManager = new InviteManager();
 		$this->userManager = new UserManager();
-		$this->emailManager = new EmailManager();
 	}
 
 	public function indexAction() {
@@ -130,7 +127,7 @@ class Widget_FollowingController extends BaseController {
 				$user["paypalToken"] = $paypalToken;
 				$this->userManager->update($user, $toInviter);
 				
-				$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
+				$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 				EmailSender::sendReadyEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
 				
 				$result = array (
@@ -175,12 +172,12 @@ class Widget_FollowingController extends BaseController {
 		$_SESSION["retry"] += 1;
 		if ($_SESSION["retry"] > 3) {
 			// Ask payer to retry
-			$email = $this->emailManager->findSorryEmail($_SESSION["inviteInx"]);
+			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 			EmailSender::sendSorryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
 			$this->view->assign("buttonType", "hidden");
 		} else {
 			// Inform the other guy of sorry
-			$email = $this->emailManager->findRetryEmail($_SESSION["inviteInx"]);
+			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
 			$this->view->assign("buttonType", "submit");
 		}
@@ -206,16 +203,13 @@ class Widget_FollowingController extends BaseController {
 			"country" => $partner["country"] 
 		);
 		
+		$call["callType"] = $_SESSION["inviteType"];
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			// Pay by Inviter, first call inviter
-			$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
-			$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
 			$paramArr["1stLegNumber"] = $inviter["phoneNum"];
 			$paramArr["2ndLegNumber"] = $invitee["phoneNum"];
 		} else {
 			// Pay by Invitee, first call invitee
-			$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
-			$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
 			$paramArr["1stLegNumber"] = $invitee["phoneNum"];
 			$paramArr["2ndLegNumber"] = $inviter["phoneNum"];
 		}
