@@ -80,8 +80,9 @@ class EmailSender {
 		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $subjectParam);
 		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $subject);
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
-		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $message);
+		self::$logger->logInfo($email["partnerInx"], $email["inviteInx"], $content);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";

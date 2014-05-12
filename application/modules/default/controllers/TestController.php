@@ -21,6 +21,8 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		$result = MultiLang::replaceParams("thanksEmailSubject", array("imddl137"));
+		echo $result;
 		phpinfo();
 		$this->renderScript("/empty.phtml");
 	}
