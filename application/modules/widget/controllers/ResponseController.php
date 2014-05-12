@@ -1,5 +1,4 @@
 <?php
-require_once 'log/LoggerFactory.php';
 require_once 'util/Validator.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -8,9 +7,9 @@ require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
 require_once 'models/CallManager.php';
 require_once 'models/EmailManager.php';
+require_once 'BaseController.php';
 
-class Widget_ResponseController extends Zend_Controller_Action {
-	private $logger;
+class Widget_ResponseController extends BaseController {
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
@@ -18,13 +17,12 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	private $emailManager;
 
 	public function init() {
-		$this->logger = LoggerFactory::getSysLogger();
+		parent::init();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
 		$this->callManager = new CallManager();
 		$this->emailManager = new EmailManager();
-		session_start();
 	}
 
 	public function indexAction() {
@@ -130,6 +128,10 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function acceptAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$invite = array (
 			"inx" => $_SESSION["inviteInx"],
 			"inviteResult" => INVITE_RESULT_ACCEPT 
@@ -143,6 +145,10 @@ class Widget_ResponseController extends Zend_Controller_Action {
 	}
 
 	public function declineAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$invite = array (
 			"inx" => $_SESSION["inviteInx"],
 			"inviteResult" => INVITE_RESULT_DECLINE 

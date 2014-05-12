@@ -1,5 +1,4 @@
 <?php
-require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'util/Validator.php';
@@ -11,8 +10,7 @@ require_once 'models/InviteManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/EmailManager.php';
 
-class Widget_FollowingController extends Zend_Controller_Action {
-	private $logger;
+class Widget_FollowingController extends BaseController {
 	private $partnerManager;
 	private $callManager;
 	private $inviteManager;
@@ -20,13 +18,12 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	private $emailManager;
 
 	public function init() {
-		$this->logger = LoggerFactory::getSysLogger();
+		parent::init();
 		$this->partnerManager = new PartnerManager();
 		$this->callManager = new CallManager();
 		$this->inviteManager = new InviteManager();
 		$this->userManager = new UserManager();
 		$this->emailManager = new EmailManager();
-		session_start();
 	}
 
 	public function indexAction() {
@@ -62,7 +59,11 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		$this->renderScript("/following/notification.phtml");
 	}
 
-	public function paypalAction() {}
+	public function paypalAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+	}
 
 	public function validateAction() {
 		// Disable layout for return json
@@ -153,6 +154,10 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	}
 
 	public function thankyouAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$user = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		} else {
@@ -162,6 +167,10 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	}
 
 	public function retryAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$_SESSION["retry"] += 1;
 		if ($_SESSION["retry"] > 3) {
 			// Ask payer to retry
@@ -177,6 +186,10 @@ class Widget_FollowingController extends Zend_Controller_Action {
 	}
 
 	public function connectingAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
@@ -211,94 +224,6 @@ class Widget_FollowingController extends Zend_Controller_Action {
 		// Init a Tropo call
 		$tropoService = new TropoService();
 		$tropoService->initCall($paramArr);
-	}
-
-	/**
-	 * ***************************************useless*************************************************
-	 */
-	public function refreshAction() {
-		// Disable layout for return json
-		$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNeverRender();
-		
-		$call = $this->callManager->findCallByInx($_POST["callInx"]);
-		$callConnectTime = strtotime($call["callConnectTime"]);
-		$callEndTime = strtotime($call["callEndTime"]);
-		if ($callConnectTime <= 0) {
-			// Call is not started
-			$result = array (
-				"status" => 0 
-			);
-		} else if ($callEndTime <= 0) {
-			// Call is connected but not completed
-			$result = array (
-				"status" => 1,
-				"totalTime" => time() - $callConnectTime 
-			);
-		} else {
-			// Call is completed
-			$result = array (
-				"status" => 2,
-				"totalTime" => $callEndTime - $callConnectTime 
-			);
-		}
-		
-		$this->_helper->json->sendJson($result);
-	}
-
-	private function test() {
-		// Dispatch
-		if (count($invalidFields) == 0) {
-			$partner = $this->partnerManager->findPartnerByInx($_POST["partnerInx"]);
-			$inviter = $this->userManager->findUserByInx($_POST["inviterInx"]);
-			$invitee = $this->userManager->findUserByInx($_POST["inviteeInx"]);
-			$invitee["phoneNum"] = $_POST["inviteePhoneNumber"];
-			$invitee["paypalToken"] = $paypalToken;
-			$this->userManager->update($invitee);
-			
-			$call = array (
-				"inviteInx" => $_POST["inviteInx"] 
-			);
-			$paramArr = array (
-				"partnerInx" => $partner["inx"],
-				"maxRingDur" => $partner["maxRingDur"],
-				"inviteInx" => $call["inviteInx"],
-				"partnerNumber" => $partner["phoneNum"],
-				"country" => $partner["country"] 
-			);
-			
-			if ($paypalToken == null) {
-				// Pay by Inviter, first call inviter
-				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
-				$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITER;
-				$paramArr["1stLegNumber"] = $inviter["phoneNum"];
-				$paramArr["2ndLegNumber"] = $invitee["phoneNum"];
-			} else {
-				// Pay by Invitee, first call invitee
-				$call["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
-				$paramArr["callType"] = CALL_TYPE_FIRST_CALL_INVITEE;
-				$paramArr["1stLegNumber"] = $invitee["phoneNum"];
-				$paramArr["2ndLegNumber"] = $inviter["phoneNum"];
-			}
-			$call = $this->callManager->insert($call);
-			$paramArr["callInx"] = $call["inx"];
-			
-			// Init a Tropo call
-			$this->tropoService->initCall($paramArr);
-			
-			$result = array (
-				"redirect" => true,
-				"url" => APP_CTX . "/widget/following?callInx=" . $call["inx"] 
-			);
-		} else {
-			$result = array (
-				"redirect" => false,
-				"validFields" => $validFields,
-				"invalidFields" => $invalidFields 
-			);
-		}
-		
-		$this->_helper->json->sendJson($result);
 	}
 
 }
