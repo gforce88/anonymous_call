@@ -37,7 +37,7 @@ class PaypalService {
 		try {
 			$card->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to regist Paypal token: $ex->getMessage()");
+			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to regist Paypal token: " . $ex->getMessage());
 			return null;
 		}
 		
@@ -80,7 +80,7 @@ class PaypalService {
 		try {
 			$payment->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: $ex->getMessage()");
+			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: ". $ex->getMessage());
 			return false;
 		}
 		
@@ -88,7 +88,7 @@ class PaypalService {
 			$this->logger->logInfo($this->partnerInx, $this->inviteInx, "Charged $chargeAmount $chargeCurrency with token: $paypalToken");
 			return true;
 		} else {
-			$this->logger->logWarn($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; State: $payment->getState()");
+			$this->logger->logWarn($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; State: " . $payment->getState());
 			return false;
 		}
 	}
