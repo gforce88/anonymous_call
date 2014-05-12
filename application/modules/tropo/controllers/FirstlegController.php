@@ -190,7 +190,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$this->log("Paypal token: $paypalToken");
 		if ($callDuration > 0) {
 			$paypalService = new PaypalService($_GET["partnerInx"], $_GET["inviteInx"]);
-			$paypalToken = $paypalService->charge($paypalToken, round($partner["chargeAmount"] * $callDuration / 60, 2), $partner["chargeCurrency"]);
+			$paypalService->charge($paypalToken, $partner["chargeAmount"] * $callDuration / 60, $partner["chargeCurrency"]);
 		}
 		
 		$this->exitAction();
