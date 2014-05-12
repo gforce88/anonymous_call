@@ -3,12 +3,10 @@ rm -rf /root/workspace/AnonCall/public
 rm -rf /root/workspace/AnonCall/application
 rm -rf /root/workspace/AnonCall/library
 rm -rf /root/workspace/AnonCall/shell
-rm -rf /root/workspace/AnonCall/vendor
 cp -rf /root/workspace/dist/public      /root/workspace/AnonCall/
 cp -rf /root/workspace/dist/application /root/workspace/AnonCall/
 cp -rf /root/workspace/dist/library     /root/workspace/AnonCall/
 cp -rf /root/workspace/dist/shell       /root/workspace/AnonCall/
-cp -rf /root/workspace/dist/vendor      /root/workspace/AnonCall/
 rm -f /root/workspace/AnonCall/application/configs/application.ini
 cp -f /root/workspace/AnonCall/application/configs/application_Production.ini /root/workspace/AnonCall/application/configs/application.ini
 rm -f /root/workspace/AnonCall/application/configs/ivr.ini
