@@ -1,5 +1,4 @@
 <?php
-require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
 require_once 'util/EmailSender.php';
 require_once 'util/MultiLang.php';
@@ -8,21 +7,20 @@ require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 require_once 'models/InviteManager.php';
 require_once 'models/EmailManager.php';
+require_once 'BaseController.php';
 
-class Widget_InvitationController extends Zend_Controller_Action {
-	private $logger;
+class Widget_InvitationController extends BaseController {
 	private $partnerManager;
 	private $userManager;
 	private $inviteManager;
 	private $emailManager;
 
 	public function init() {
-		$this->logger = LoggerFactory::getSysLogger();
+		parent::init();
 		$this->partnerManager = new PartnerManager();
 		$this->userManager = new UserManager();
 		$this->inviteManager = new InviteManager();
 		$this->emailManager = new EmailManager();
-		session_start();
 	}
 
 	public function indexAction() {
@@ -40,6 +38,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function invitationAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$_SESSION["inviteType"] = $_POST["inviteType"];
 	}
 
@@ -77,13 +79,6 @@ class Widget_InvitationController extends Zend_Controller_Action {
 		} else {
 			array_push($invalidFields, "inviteeEmailInvalid");
 		}
-		// $paypalToken = PaypalService::regist($_POST["creditCardNumber"], $_POST["creditCardExp"], $_POST["creditCardCvc"]);
-		// if ($paypalToken != null) {
-		// $inviter["paypalToken"] = $paypalToken;
-		// array_push($validFields, "creditCardInfoInvalid");
-		// } else {
-		// array_push($invalidFields, "creditCardInfoInvalid");
-		// }
 		
 		// Dispatch
 		if (count($invalidFields) == 0) {
@@ -119,6 +114,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function agreementAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
 		
@@ -136,6 +135,10 @@ class Widget_InvitationController extends Zend_Controller_Action {
 	}
 
 	public function confirmationAction() {
+		if (!$this->isSessionValid()) {
+			return;
+		}
+		
 		$invite = array (
 			"inx" => $_SESSION["inviteInx"],
 			"inviteResult" => INVITE_RESULT_INVITE 

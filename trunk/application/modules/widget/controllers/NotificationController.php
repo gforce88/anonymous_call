@@ -2,15 +2,16 @@
 require_once 'util/MultiLang.php';
 require_once 'models/InviteManager.php';
 require_once 'models/UserManager.php';
+require_once 'BaseController.php';
 
-class Widget_NotificationController extends Zend_Controller_Action {
+class Widget_NotificationController extends BaseController {
 	private $inviteManager;
 	private $userManager;
 
 	public function init() {
+		parent::init();
 		$this->inviteManager = new InviteManager();
 		$this->userManager = new UserManager();
-		session_start();
 	}
 
 	public function refreshInvitationAction() {
