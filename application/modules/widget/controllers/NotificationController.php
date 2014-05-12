@@ -5,8 +5,8 @@ require_once 'models/UserManager.php';
 require_once 'BaseController.php';
 
 class Widget_NotificationController extends BaseController {
-	private static final $INVITATION = 1;
-	private static final $RESPONSE = 2;
+	private static $INVITATION = 1;
+	private static $RESPONSE = 2;
 	
 	private $inviteManager;
 	private $userManager;
