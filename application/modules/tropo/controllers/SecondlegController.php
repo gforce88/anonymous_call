@@ -1,5 +1,4 @@
 <?php
-require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
 require_once 'BaseTropoController.php';
 

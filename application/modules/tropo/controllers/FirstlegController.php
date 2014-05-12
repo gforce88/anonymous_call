@@ -133,7 +133,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 
 	public function playremindAction() {
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $ivrService->promptInviterGreeting() . " ";
+		$sentences = $ivrService->promptRemind() . " ";
 		$this->log("$this->indicator play remind audio " . $sentences);
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
@@ -164,6 +164,8 @@ class Tropo_FirstlegController extends BaseTropoController {
 			$tropoService = new TropoService();
 			$tropoService->exit2ndLeg($call["secondLegSession"]);
 		}
+		
+		// TODO: charge Paypal & send thanks email
 		
 		$this->log($_GET);
 		$this->exitAction();
