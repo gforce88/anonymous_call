@@ -131,7 +131,7 @@ class Widget_FollowingController extends BaseController {
 				$this->userManager->update($user, $toInviter);
 				
 				$email = $this->emailManager->findThanksEmail($_SESSION["inviteInx"]);
-				EmailSender::sendReadyEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
+				EmailSender::sendReadyEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
 				
 				$result = array (
 					"redirect" => true,
