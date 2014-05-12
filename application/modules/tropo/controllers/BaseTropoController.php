@@ -9,7 +9,7 @@ class BaseTropoController extends Zend_Controller_Action {
 	protected $logger;
 	protected $indicator;
 	protected $callManager;
-	private $partnerManager;
+	protected $partnerManager;
 
 	public function init() {
 		$this->logger = LoggerFactory::getIvrLogger();
@@ -50,8 +50,6 @@ class BaseTropoController extends Zend_Controller_Action {
 
 	public function errorAction() {
 		$this->log("System error with below parameters:");
-		$this->updateCallResult($_GET["callInx"], CALL_RESULT_ERROR, null, null, new DateTime());
-		
 		foreach ($_GET as $k => $v) {
 			$$k = $v;
 			$this->log("$k = $v");
@@ -100,7 +98,7 @@ class BaseTropoController extends Zend_Controller_Action {
 			$call["callStartTime"] = $call["callStartTime"]->format("Y-m-d H:i:s");
 		}
 		if ($call["callConnectTime"] != null) {
-			$partner = $this->partnerManager->findPartnerByCall($call["inx"]);
+			$partner = $this->partnerManager->findPartnerByInx($_GET["partnerInx"]);
 			$nextTime = new NextTime($call["callConnectTime"], $partner);
 			
 			$call["callConnectTime"] = $call["callConnectTime"]->format("Y-m-d H:i:s");

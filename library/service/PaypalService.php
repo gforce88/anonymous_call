@@ -42,7 +42,7 @@ class PaypalService {
 		return $paypalToken;
 	}
 
-	public function charge($paypalToken, $chargeAmount) {
+	public function charge($paypalToken, $chargeAmount, $chargeCurrency) {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$creditCardToken = new CreditCardToken();
@@ -59,7 +59,7 @@ class PaypalService {
 		));
 		
 		$amount = new Amount();
-		$amount->setCurrency("USD");
+		$amount->setCurrency($chargeCurrency);
 		$amount->setTotal($chargeAmount);
 		
 		$transaction = new Transaction();

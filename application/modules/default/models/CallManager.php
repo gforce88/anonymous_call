@@ -5,7 +5,6 @@ class CallManager extends BaseManager {
 	private static $empty = array (
 		"inx" => null,
 		"inviteInx" => null,
-		"callType" => null,
 		"callResult" => null,
 		"paypalToken" => null,
 		"firstLegSession" => null,
@@ -42,10 +41,10 @@ class CallManager extends BaseManager {
 			  from calls, invites, partners, users
 			 where calls.inviteInx = invites.inx
 			   and invites.partnerInx = partners.inx
-			   and users.inx = case calls.callType
-                        when 0 then invites.inviterInx 
-                               else invites.inviteeInx 
-                                end
+			   and users.inx = case invites.inviteType
+			            when 1 then invites.inviterInx 
+			                   else invites.inviteeInx 
+			                    end
 			   and calls.callEndTime = 0
 			   and calls.nextChargeTime != 0
 			   and calls.nextChargeTime < :now";
