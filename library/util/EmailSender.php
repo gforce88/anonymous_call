@@ -26,6 +26,7 @@ class EmailSender {
 	}
 
 	public static function sendReadyEmail($email, $toInviter) {
+		self::$logger->logInfo(EmailSender, sendReadyEmail, "toInviter: " .  $toInviter);
 		$email = self::adjustEmail($email, $toInviter);
 		return self::sendEmail($email, "ready");
 	}
