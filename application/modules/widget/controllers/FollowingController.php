@@ -201,6 +201,12 @@ class Widget_FollowingController extends BaseController {
 			return;
 		}
 		
+		// If the user click the history back button then click the call now button, the application should not raise a new call
+		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
+		if (Validator::isCompleted($calls)) {
+			return $this->renderScript("/notification/expired.phtml");
+		}
+		
 		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
