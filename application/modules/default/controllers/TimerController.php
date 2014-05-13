@@ -1,9 +1,7 @@
 <?php
 require_once 'log/LoggerFactory.php';
-require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'models/CallManager.php';
-require_once 'data/NextTime.php';
 
 class TimerController extends Zend_Controller_Action {
 	private $logger;
@@ -29,23 +27,17 @@ class TimerController extends Zend_Controller_Action {
 		$now = new DateTime();
 		$nowStr = $now->format("Y-m-d H:i:s");
 		$reminds = $this->callManager->findNextReminds($nowStr);
-//		$charges = $this->callManager->findNextCharges($nowStr);
 		
-		// 1. Update database to avoid duplicate fire by the nest timer
+		// 1. Update database to avoid duplicate fire by the next timer
 		if ($reminds != null) {
 			$this->logger->logInfo("Timer", "reminds", $reminds);
 			foreach ($reminds as $remind) {
-				$nextTime = new NextTime($now, $remind);
-				$remind["nextRemindTime"] = date("Y-m-d H:i:s", $nextTime->nextRemindTime);
+				$remind["nextRemindTime"] = 0;
 				$this->callManager->update($remind);
 			}
 		}
-// 		if ($charges != null) {
-// 			$this->logger->logInfo("Timer", "charges", $charges);
-// 			$this->callManager->updateCharges($nowStr);
-// 		}
 		
-		// 2. Invoke Tropo service for conference call
+		// 2. Invoke Tropo service to remind conference call
 		foreach ($reminds as $remind) {
 			$paramArr = array (
 				"callInx" => $remind["inx"],
@@ -55,11 +47,6 @@ class TimerController extends Zend_Controller_Action {
 			);
 			$this->tropoService->playRemind($remind["firstLegSession"], $remind["secondLegSession"], $paramArr);
 		}
-		
-// 		// 3. Invoke Paypal service for charge
-// 		foreach ($charges as $charge) {
-// 			$this->paypalService->charge($charge["paypalToken"], $charge["chargeAmount"]);
-// 		}
 	}
 
 }
