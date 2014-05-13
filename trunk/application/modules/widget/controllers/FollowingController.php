@@ -127,6 +127,12 @@ class Widget_FollowingController extends BaseController {
 				$user["paypalToken"] = $paypalToken;
 				$this->userManager->update($user, $toInviter);
 				
+				$invite = array (
+					"inx" => $_SESSION["inviteInx"],
+					"inviteResult" => INVITE_RESULT_PAYED 
+				);
+				$this->inviteManager->update($invite);
+				
 				$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 				EmailSender::sendReadyEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
 				
@@ -179,6 +185,13 @@ class Widget_FollowingController extends BaseController {
 			// Inform the other guy of sorry
 			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
+			
+			$invite = array (
+				"inx" => $_SESSION["inviteInx"],
+				"inviteResult" => INVITE_RESULT_NOPAY 
+			);
+			$this->inviteManager->update($invite);
+			
 			$this->view->assign("buttonType", "submit");
 		}
 	}
