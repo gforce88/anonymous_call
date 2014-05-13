@@ -16,7 +16,7 @@ class PaypalService {
 	private $partnerInx;
 	private $inviteInx;
 
-	public function __construct($partnerInx, $inviteInx) {
+	public function __construct($partnerInx = null, $inviteInx = null) {
 		$this->logger = LoggerFactory::getSysLogger();
 		$this->partnerInx = $partnerInx;
 		$this->inviteInx = $inviteInx;
@@ -64,7 +64,7 @@ class PaypalService {
 		
 		$amount = new Amount();
 		$amount->setCurrency($chargeCurrency);
-		$amount->setTotal(getValidAmount($chargeAmount, $chargeCurrency));
+		$amount->setTotal($this->getValidAmount($chargeAmount, $chargeCurrency));
 		
 		$transaction = new Transaction();
 		$transaction->setAmount($amount);
