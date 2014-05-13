@@ -25,11 +25,13 @@ class Widget_InvitationController extends BaseController {
 	}
 
 	public function getstartAction() {
-		$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
-		
-		$_SESSION["partnerInx"] = $partner["inx"];
-		$_SESSION["country"] = $partner["country"];
 		$_SESSION["retry"] = 0;
+		
+		if ($_SESSION["country"] == null) {
+			$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
+			$_SESSION["partnerInx"] = $partner["inx"];
+			$_SESSION["country"] = $partner["country"];
+		}
 		
 		$this->renderScript("/invitation/getstart.phtml");
 	}
