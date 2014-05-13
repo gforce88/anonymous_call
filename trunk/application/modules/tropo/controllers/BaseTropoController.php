@@ -39,7 +39,7 @@ class BaseTropoController extends Zend_Controller_Action {
 	public function playremindAction() {
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		$sentences = $ivrService->promptRemind() . " ";
-		$this->log($this->indicator . " play remind audio " . $sentences);
+		$this->log("Play remind audio $sentences");
 		
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
@@ -56,7 +56,7 @@ class BaseTropoController extends Zend_Controller_Action {
 	}
 
 	public function exitAction() {
-		$this->log("$this->indicator exit the confrence call");
+		$this->log("Exit the confrence call");
 		$this->hangupAction();
 	}
 
