@@ -13,8 +13,7 @@ class CallManager extends BaseManager {
 		"callStartTime" => null,
 		"callConnectTime" => null,
 		"callEndTime" => null,
-		"nextRemindTime" => null,
-		"nextChargeTime" => null 
+		"nextRemindTime" => null 
 	);
 
 	const SQL_FIND_CALL_BY_INX = "
@@ -35,19 +34,6 @@ class CallManager extends BaseManager {
 			   and callEndTime = 0
 			   and nextRemindTime != 0
 			   and nextRemindTime < :now";
-
-	const SQL_FIND_CHARGES = "
-			select users.paypalToken, partners.chargeAmount
-			  from calls, invites, partners, users
-			 where calls.inviteInx = invites.inx
-			   and invites.partnerInx = partners.inx
-			   and users.inx = case invites.inviteType
-			            when 1 then invites.inviterInx 
-			                   else invites.inviteeInx 
-			                    end
-			   and calls.callEndTime = 0
-			   and calls.nextChargeTime != 0
-			   and calls.nextChargeTime < :now";
 
 	const SQL_COUNT_TOTAL_CALL = "
 			select count(inx) as result
@@ -73,20 +59,6 @@ class CallManager extends BaseManager {
 
 	public function update($call) {
 		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('inx = ?', $call['inx']));
-	}
-
-	public function updateReminds($nextRremindTime, $now) {
-		$call = array (
-			"nextRemindTime" => $nextRremindTime 
-		);
-		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('callEndTime = 0 and nextRemindTime != 0 and nextChargeTime < ?', $now));
-	}
-
-	public function updateCharges($now) {
-		$call = array (
-			"nextChargeTime" => '00:00:00' 
-		);
-		return $this->db->update('calls', array_intersect_key($call, self::$empty), $this->db->quoteInto('callEndTime = 0 and nextChargeTime != 0 and nextChargeTime < ?', $now));
 	}
 
 	public function findCallByInx($inx) {
