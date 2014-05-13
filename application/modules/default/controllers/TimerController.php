@@ -5,7 +5,6 @@ require_once 'models/CallManager.php';
 
 class TimerController extends Zend_Controller_Action {
 	private $logger;
-	private $paypalService;
 	private $tropoService;
 	private $callManager;
 
@@ -15,7 +14,6 @@ class TimerController extends Zend_Controller_Action {
 		$this->_helper->viewRenderer->setNeverRender();
 		
 		$this->logger = LoggerFactory::getSysLogger();
-		$this->paypalService = new PaypalService();
 		$this->tropoService = new TropoService();
 		$this->callManager = new CallManager();
 	}
