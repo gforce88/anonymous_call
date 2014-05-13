@@ -1,8 +1,8 @@
 <?php
 
 class NextTime {
-	public $nextRemindTime;
-	public $nextChargeTime;
+	public $nextRemindTime = 0;
+	public $nextChargeTime = 0;
 
 	// Charge chargeAmount every minCallBlkDur
 	// Remind callRemindOffset before every minCallBlkDur
