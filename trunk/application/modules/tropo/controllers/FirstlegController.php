@@ -1,5 +1,4 @@
 <?php
-require_once 'service/IvrService.php';
 require_once 'service/PaypalService.php';
 require_once 'service/TropoService.php';
 require_once 'util/EmailSender.php';
@@ -134,25 +133,6 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
-	}
-
-	public function playremindAction() {
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $ivrService->promptRemind() . " ";
-		$this->log("$this->indicator play remind audio " . $sentences);
-		
-		$parameters = $this->generateInteractiveParameters($_GET);
-		$tropo = $this->initTropo($parameters, false);
-		
-		$sayOptions = array (
-			"allowSignals" => "" 
-		);
-		$tropo->say($sentences, $sayOptions);
-		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
-		$this->setEvent($tropo, $parameters, "hangup", "complete");
-		$this->setEvent($tropo, $parameters, "error");
-		$tropo->RenderJson();
 	}
 
 	public function completeAction() {

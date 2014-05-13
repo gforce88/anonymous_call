@@ -33,7 +33,7 @@ class TropoService {
 
 	public function playRemind($firstLegSessionId, $secondLegSessionId, $paramArr) {
 		$this->sendSignal($firstLegSessionId, $this->setting["firstleg"]["token"], "playremind", $paramArr);
-		$this->sendSignal($secondLegSessionId, $this->setting["secondleg"]["token"], "joinconf", $paramArr);
+		$this->sendSignal($secondLegSessionId, $this->setting["secondleg"]["token"], "playremind", $paramArr);
 	}
 
 	public function exit1stLeg($sessionId) {
