@@ -105,7 +105,6 @@ CREATE TABLE `calls` (
   `callConnectTime`     timestamp                   DEFAULT 0       COMMENT 'call connect time',
   `callEndTime`         timestamp                   DEFAULT 0       COMMENT 'call end time',
   `nextRemindTime`      timestamp                   DEFAULT 0       COMMENT 'next remind time',
-  `nextChargeTime`      timestamp                   DEFAULT 0       COMMENT 'next charge time',
   PRIMARY KEY (`inx`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
