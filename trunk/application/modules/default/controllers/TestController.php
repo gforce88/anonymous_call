@@ -22,7 +22,7 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$paypalService = new PaypalService($_GET["partnerInx"], $_GET["inviteInx"]);
+		$paypalService = new PaypalService();
 		$paypalToken = $paypalService->charge("CARD-05N57635TV839990SKNYNG6I", 10.12, "JPY");
 		
 		phpinfo();
