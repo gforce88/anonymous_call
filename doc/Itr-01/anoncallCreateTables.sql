@@ -200,7 +200,7 @@ INSERT `partners` (
           'retryEmailSubject',
           'Retry URL: <a href="%2s">%2s</a>',
           'thanksEmailSubject',
-          'thanksEmailBody<br>Call Duration: %2s<br>Billable Duration: %3s<br>Charge Amount: %4s $5s',
+          'thanksEmailBody<br>Call Duration: %2s<br>Billable Duration: %3s<br>Charge Amount: %4s %5s',
           'address1',
           'address2',
           'US');
@@ -260,7 +260,7 @@ INSERT `partners` (
           'retryEmailSubject',
           'Retry URL: <a href="%2s">%2s</a>',
           'thanksEmailSubject',
-          'thanksEmailBody<br>Call Duration: %1s<br>Billable Duration: %2s<br>Charge Amount: %3s $4s',
+          'thanksEmailBody<br>Call Duration: %2s<br>Billable Duration: %3s<br>Charge Amount: %4s %5s',
           'Address1',
           'Address2',
           'JP');
