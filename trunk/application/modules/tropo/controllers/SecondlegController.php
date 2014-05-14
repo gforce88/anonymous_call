@@ -82,14 +82,14 @@ class Tropo_SecondlegController extends BaseTropoController {
 			"id" => "CONF." . $call["firstLegSession"],
 			"mute" => false,
 			"allowSignals" => array (
-				"joinconf",
+				"playremind",
 				"exit" 
 			) 
 		);
 		$tropo->conference(null, $conference);
 		
-		$this->setEvent($tropo, $parameters, "joinconf");
-		$this->setEvent($tropo, $parameters, "exit");
+		$this->setEvent($tropo, $parameters, "playremind");
+		$this->setEvent($tropo, $parameters, "exit", "complete");
 		$this->setEvent($tropo, $parameters, "hangup", "complete");
 		$this->setEvent($tropo, $parameters, "error");
 		$tropo->renderJson();
