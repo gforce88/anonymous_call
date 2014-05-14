@@ -12,8 +12,8 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Exception\PPConnectionException;
 
 class PaypalService {
-	private static final $CURRENCY_USD = "USD";
-	private static final $CURRENCY_JPY = "JPY";
+	private static $CURRENCY_USD = "USD";
+	private static $CURRENCY_JPY = "JPY";
 	private $logger;
 	private $partnerInx;
 	private $inviteInx;
