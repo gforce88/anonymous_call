@@ -5,7 +5,6 @@ Source Database: anoncall
 Target Host: localhost
 Target Database: anoncall
 Date: 3/16/2014 1:05:46 PM
-source /root/workspace/dist/doc/Itr-01/anoncallCreateTables.sql;
 */
 
 SET FOREIGN_KEY_CHECKS=0;
