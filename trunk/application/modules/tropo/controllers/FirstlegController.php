@@ -164,6 +164,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$email = $this->userManager->findEmail($_GET["inviteInx"]);
 		$email["callDuration"] = $callDuration;
 		$email["billableDuration"] = $billableDuration;
+		$email["chargeCurrency"] = $partner["chargeCurrency"];
 		
 		// Charge Paypal
 		if ($billableDuration > 0) {
@@ -176,6 +177,8 @@ class Tropo_FirstlegController extends BaseTropoController {
 			$email["chargeAmount"] = $chargeAmount;
 			
 			$paypalService->charge($paypalToken, $chargeAmount, $partner["chargeCurrency"]);
+		} else {
+			$email["chargeAmount"] = 0;
 		}
 		
 		// Send thanks email
