@@ -1,9 +1,9 @@
 <?php
 require_once 'log/LoggerFactory.php';
 require_once 'service/PaypalService.php';
-require_once 'util/MultiLang.php';
 require_once 'service/IvrService.php';
 require_once 'service/TropoService.php';
+require_once 'util/MultiLang.php';
 require_once 'models/userManager.php';
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;

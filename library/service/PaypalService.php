@@ -12,6 +12,8 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Exception\PPConnectionException;
 
 class PaypalService {
+	private static final $CURRENCY_USD = "USD";
+	private static final $CURRENCY_JPY = "JPY";
 	private $logger;
 	private $partnerInx;
 	private $inviteInx;
@@ -80,15 +82,15 @@ class PaypalService {
 		try {
 			$payment->create($paypalApiCtx);
 		} catch (PPConnectionException $ex) {
-			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; Message: " . $ex->getData());
+			$this->logger->logError($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken Message: " . $ex->getData());
 			return false;
 		}
 		
-		if ($payment->getState() == "approved") {
+		if ($payment->getState() == "approved" || $payment->getState() == "pending") {
 			$this->logger->logInfo($this->partnerInx, $this->inviteInx, "Charged $chargeAmount $chargeCurrency with token: $paypalToken");
 			return true;
 		} else {
-			$this->logger->logWarn($this->partnerInx, $this->inviteInx, "Failed to charge Paypal with token: $paypalToken ; State: " . $payment->getState());
+			$this->logger->logWarn($this->partnerInx, $this->inviteInx, "Probably failed to charge Paypal with token: $paypalToken State: " . $payment->getState());
 			return false;
 		}
 	}
@@ -96,7 +98,7 @@ class PaypalService {
 	private function getValidAmount($chargeAmount, $chargeCurrency) {
 		// Check all the possible of currency in partners table.
 		switch ($chargeCurrency) {
-			case "JPY" :
+			case self::$CURRENCY_JPY :
 				return round($chargeAmount);
 			default :
 				return round($chargeAmount, 2);
