@@ -71,7 +71,7 @@ class EmailSender {
 		if ($emailType == "thanks") {
 			$contentParam["callDuration"] = $email["callDuration"];
 			$contentParam["billableDuration"] = $email["billableDuration"];
-			$contentParam["chargeAmount"] = $email["chargeAmount"] == null ? 0 : $email["chargeAmount"];
+			$contentParam["chargeAmount"] = $email["chargeAmount"];
 			$contentParam["chargeCurrency"] = $email["chargeCurrency"];
 		}
 		
