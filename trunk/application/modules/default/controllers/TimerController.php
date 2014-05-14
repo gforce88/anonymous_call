@@ -22,7 +22,6 @@ class TimerController extends Zend_Controller_Action {
 	 * This function is called by shell Timer.php
 	 */
 	public function fireAction() {
-		$this->logger->logInfo("Timer", "fireAction", "is triggered");
 		$now = new DateTime();
 		$nowStr = $now->format("Y-m-d H:i:s");
 		$reminds = $this->callManager->findNextReminds($nowStr);
