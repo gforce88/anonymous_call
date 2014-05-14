@@ -68,6 +68,12 @@ class EmailSender {
 			$contentParam["url"] = $url;
 			$message .= " URL: [$url]";
 		}
+		if ($emailType == "thanks") {
+			$contentParam["callDuration"] = $email["callDuration"];
+			$contentParam["billableDuration"] = $email["billableDuration"];
+			$contentParam["chargeAmount"] = $email["chargeAmount"] == null ? 0 : $email["chargeAmount"];
+			$contentParam["chargeCurrency"] = $email["chargeCurrency"];
+		}
 		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
 		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
