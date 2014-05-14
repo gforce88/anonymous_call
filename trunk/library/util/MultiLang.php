@@ -44,8 +44,9 @@ class MultiLang {
 		}
 		
 		$i = 1;
-		foreach ($params as $param) {
-			$msg = str_replace("%" . $i . "s", $param, $msg);
+		foreach ($params as $key => $value) {
+			$msg = str_replace("%" . $i . "s", $value, $msg);
+			$msg = str_replace("[$key]", $value, $msg);
 			$i++;
 		}
 		return $msg;
