@@ -33,7 +33,7 @@ function doHTTPCall($URL, $HOST) {
 		echo "<><><><1>";
 		$ch = curl_init("http://" . $HOST . $URL);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POST, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$response = curl_exec($ch);
 		curl_close($ch);
