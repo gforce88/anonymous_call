@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/opt/local/bin/php
 
 <?php
 /*
@@ -30,6 +30,7 @@ function _checkBasicFunctions($functionList) {
  */
 function doHTTPCall($URL, $HOST) {
 	if (_checkBasicFunctions("curl_init,curl_setopt,curl_exec,curl_close")) {
+		echo "<><><><1>";
 		$ch = curl_init("http://" . $HOST . $URL);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -37,6 +38,7 @@ function doHTTPCall($URL, $HOST) {
 		$response = curl_exec($ch);
 		curl_close($ch);
 	} else if (_checkBasicFunctions("fsockopen,fputs,feof,fread,fgets,fclose")) {
+		echo "<><><><2>";
 		$fsock = fsockopen($HOST, 80, $errno, $errstr, 30);
 		if (!$fsock) {
 			echo "Error! $errno - $errstr";
