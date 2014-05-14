@@ -27,7 +27,7 @@ class Widget_InvitationController extends BaseController {
 	public function getstartAction() {
 		$_SESSION["retry"] = 0;
 		
-		if ($_SESSION["country"] == null) {
+		if ($_REQUEST["inx"] != null) {
 			$partner = $this->partnerManager->findPartnerByInx($_REQUEST["inx"]);
 			$_SESSION["partnerInx"] = $partner["inx"];
 			$_SESSION["country"] = $partner["country"];
