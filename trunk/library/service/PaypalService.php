@@ -66,7 +66,7 @@ class PaypalService {
 		
 		$amount = new Amount();
 		$amount->setCurrency($chargeCurrency);
-		$amount->setTotal($this->getValidAmount($chargeAmount, $chargeCurrency));
+		$amount->setTotal($chargeAmount);
 		
 		$transaction = new Transaction();
 		$transaction->setAmount($amount);
@@ -95,7 +95,7 @@ class PaypalService {
 		}
 	}
 
-	private function getValidAmount($chargeAmount, $chargeCurrency) {
+	public function adjustAmount($chargeAmount, $chargeCurrency) {
 		// Check all the possible of currency in partners table.
 		switch ($chargeCurrency) {
 			case self::$CURRENCY_JPY :
