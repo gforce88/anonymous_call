@@ -15,3 +15,5 @@ rm -f /root/workspace/AnonCall/application/configs/sdk_config.ini
 cp -f /root/workspace/AnonCall/application/configs/sdk_config_Staging.ini /root/workspace/AnonCall/application/configs/sdk_config.ini
 
 cp -rf /usr/local/ZendFramework-1.12.5-minimal/library/Zend /root/workspace/AnonCall/library
+
+chmod 777 /root/workspace/AnonCall/shell -R
