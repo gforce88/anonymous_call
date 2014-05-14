@@ -57,10 +57,10 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		$subjectParam = array (
-			$email["fromName"] 
+			"name" => $email["fromName"] 
 		);
 		$contentParam = array (
-			$email["fromName"] 
+			"name" => $email["fromName"] 
 		);
 		
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
