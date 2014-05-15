@@ -1,5 +1,19 @@
 function submiteAnonCall(formId) {
-	$(formId).ajaxSubmit(function(result) {
+	var data = {};
+	var arr = $(formId).serializeArray();
+	
+	$.each(arr, function() {
+		if (data[this.name] !== undefined) {
+			if (!data[this.name].push) {
+				data[this.name] = [ data[this.name] ];
+			}
+			data[this.name].push(this.value || '');
+		} else {
+			data[this.name] = this.value || '';
+		}
+	});
+
+	$.post($(formId).attr("action"), data, function(result) {
 		if (result.redirect == true) {
 			window.location.replace(result.url);
 		} else {
