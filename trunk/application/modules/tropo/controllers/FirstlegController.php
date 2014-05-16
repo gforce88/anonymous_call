@@ -39,6 +39,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		
 		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
 		$sentences = $ivrService->promptGreeting() . " ";
+		$this->log("Play audio: " . $sentences);
 		
 		$callOptions = array (
 			"from" => $_GET["partnerNumber"],
