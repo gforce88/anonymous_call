@@ -19,13 +19,14 @@
 			<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
 		</div>
 	</div>
+
+	<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("GetStart_7", $country)?></span></p>
+	<p style="margin-top: 4px">
+		<span class="form half"><?php echo MultiLang::getText("GetStart_8", $country)?></span>
+		<span class="form half"><?php echo MultiLang::getText("GetStart_9", $country)?></span>
+	</p>
 	
 	<div class="bottom">
-		<p><span class="h2"><?php echo MultiLang::getText("GetStart_7", $country)?></span></p>
-		<p style="margin-top: 4px">
-			<span class="form half"><?php echo MultiLang::getText("GetStart_8", $country)?></span>
-			<span class="form half"><?php echo MultiLang::getText("GetStart_9", $country)?></span>
-		</p>
 		<input style="margin-top: 8px" class="half" type="submit" value="<?php echo MultiLang::getText("GetStart_10", $country)?>" onclick="setInviteType(2)" />
 		<input class="half" type="submit" value="<?php echo MultiLang::getText("GetStart_10", $country)?>" onclick="setInviteType(1)" />
 		<input type="hidden" id="inviteType" name="inviteType" />
