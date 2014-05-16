@@ -15,7 +15,14 @@ table {
 }
 
 body {
+	width: 322px;
+	height: 566px;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	border-width: 2px;
 	-epub-hyphens: auto;
+	border-width: 2px;
 }
 
 article {
@@ -55,21 +62,25 @@ input,select,textarea {
 /******************** frame ********************/
 div.bottom {
 	position: fixed;
-	bottom: 64px;
+	top: 460px;
+	width: 322px;
 	left: 0;
 	right: 0;
+	left: 0;
 }
 
 div.low {
 	position: fixed;
-	bottom: 80px;
+	top: 100px;
+	width: 322px;
 	left: 0;
 	right: 0;
 }
 
 #footer {
 	position: fixed;
-	bottom: 16px;
+	top: 524px;
+	width: 322px;
 	left: 0;
 	right: 0;
 }
