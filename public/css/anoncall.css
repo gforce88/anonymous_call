@@ -141,15 +141,24 @@ input[type=submit].twolines {
 	height: 36px;
 }
 
-input.oneThird {
-	display: inline-block;
-	width: 75px;
-}
-
 input.half {
 	display: inline-block;
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+input.oneThird {
+	display: inline-block;
+	margin-top: 2px;
+	width: 75px;
+	height: 30px;
+}
+
+select.oneThird {
+	display: inline-block;
+	margin-top: 2px;
+	width: 75px;
+	height: 30px;
 }
 
 .redline {
