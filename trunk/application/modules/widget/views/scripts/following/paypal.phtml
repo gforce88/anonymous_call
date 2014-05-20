@@ -17,7 +17,7 @@
 	</p>
 	
 	<p><span class="form"><?php echo MultiLang::getText("PaypalForm_4", $country)?></span></p>
-	<input type="text" name="cardNumber" class="numbersOnly" maxlength="16" tabindex="1" />
+	<input type="text" name="cardNumber" onkeypress="inputCheck('[0-9]', event)" maxlength="16" tabindex="1" />
 	<p class="message">
 		<span id="cardNumberInvalid" ><?php echo MultiLang::getText("Message_4", $country)?></span>
 	</p>
@@ -26,7 +26,7 @@
 		<span class="form twoThird"><?php echo MultiLang::getText("PaypalForm_6", $country)?></span>
 	</p>
 	
-	<input type="text" class="oneThird" name="cvv" class="numbersOnly" maxlength="3" tabindex="1" />
+	<input type="text" class="oneThird" name="cvv" onkeypress="inputCheck('[0-9]', event)" maxlength="3" tabindex="1" />
 	<select id="expMonth" name="expMonth" class="oneThird" tabindex="1">
 		<option value="01">01</option>
 		<option value="02">02</option>

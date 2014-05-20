@@ -1,11 +1,3 @@
-$(document).ready(function() {
-	$('.numbersOnly').keyup(function() {
-		if (this.value != this.value.replace(/[^0-9\.]/g, '')) {
-			this.value = this.value.replace(/[^0-9\.]/g, '');
-		}
-	});
-});
-
 function submiteAnonCall(formId) {
 	var data = {};
 	var arr = $(formId).serializeArray();
@@ -35,17 +27,17 @@ function submiteAnonCall(formId) {
 	});
 }
 
-//function inputCheck(keyWords, evt) {
-//	var theEvent = evt || window.event;
-//	var key = theEvent.keyCode || theEvent.which;
-//	key = String.fromCharCode(key);
-//	var regex = new RegExp(keyWords);
-//	if (!regex.test(key)) {
-//		theEvent.returnValue = false;
-//		if (theEvent.preventDefault)
-//			theEvent.preventDefault();
-//	}
-//}
+function inputCheck(keyWords, evt) {
+	var theEvent = evt || window.event;
+	var key = theEvent.keyCode || theEvent.which;
+	var keyStr = String.fromCharCode(key);
+	var regex = new RegExp(keyWords);
+	if (!regex.test(keyStr) && key != 8 && key != 46 && key != 37 && key != 39) {
+		theEvent.returnValue = false;
+		if (theEvent.preventDefault)
+			theEvent.preventDefault();
+	}
+}
 
 function timestamp2His(totalTime) {
 	second = totalTime % 60;
