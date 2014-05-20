@@ -101,11 +101,12 @@ p.message span {
 }
 
 input[type=text],input[type=password],select {
-	width: 230px;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #000;
 	padding: 5px;
+	width: 230px;
+	font-size: 14px;
 }
 
 input[type=submit] {
@@ -153,6 +154,15 @@ select.oneThird {
 	height: 30px;
 }
 
+b {
+	font-size: 22px;
+	font-weight: normal;
+}
+
+.phoneNumber {
+	text-align: center;
+}
+
 .redline {
 	background-color: #F03;
 	width: 85%;
@@ -161,11 +171,6 @@ select.oneThird {
 	margin-bottom: 10px;
 	border-style: none;
 	padding: 0;
-}
-
-b {
-	font-size: 22px;
-	font-weight: normal;
 }
 
 /******************** span ********************/
