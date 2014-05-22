@@ -32,9 +32,9 @@
 	</p>
 
 	<div class="bottom">
-		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("Response_8", $country)?>" disabled /><br>
 		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')" />
 		<label for="agreeCheckbox"><span class="form"><?php echo MultiLang::getText("General_2", $country)?></span></label><br>
+		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("Response_8", $country)?>" disabled /><br>
 		<p><span class="form">
 			<?php echo MultiLang::getText("Response_9", $country)?>
 			<a href="<?php echo APP_CTX?>/widget/response/decline"><?php echo MultiLang::getText("Response_10", $country)?></a>
