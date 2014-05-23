@@ -1,5 +1,5 @@
 <?php $country = $_SESSION["country"]?>
-<form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom'); return false;">
+<form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom', '#agreeCheckbox', '#agreeInvalid'); return false;">
 	<p><span class="AVC_tagline"><?php echo MultiLang::getText("Response_1", $country, $this->name)?></span></p>
 	<div class="_idGenObjectLayout-1">
 		<div class="_idGenPageitem-4">
@@ -31,10 +31,13 @@
 		<span id="inviteePhoneNumberInvalid"><?php echo MultiLang::getText("Message_2", $country)?></span>
 	</p>
 
-	<div class="bottom">
-		<input type="checkbox" id="agreeCheckbox" tabindex="1" onclick="checkAgree('#agreeCheckbox', '#agreeButton')" />
+	<div class="low">
+		<p class="message">
+			<span id="agreeInvalid"><?php echo MultiLang::getText("Message_11", $country)?></span>
+		</p>
+		<input type="checkbox" id="agreeCheckbox" tabindex="1" />
 		<label for="agreeCheckbox"><span class="form"><?php echo MultiLang::getText("General_2", $country)?></span></label><br>
-		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("Response_8", $country)?>" disabled /><br>
+		<input type="submit" id="agreeButton" value="<?php echo MultiLang::getText("Response_8", $country)?>" /><br>
 		<p><span class="form">
 			<?php echo MultiLang::getText("Response_9", $country)?>
 			<a href="<?php echo APP_CTX?>/widget/response/decline"><?php echo MultiLang::getText("Response_10", $country)?></a>
