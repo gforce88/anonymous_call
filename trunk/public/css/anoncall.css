@@ -59,11 +59,19 @@ input,select,textarea {
 	-webkit-box-sizing: border-box;
 }
 
-
 /******************** frame ********************/
 div.bottom {
 	position: fixed;
-	top: 456px;
+	top: 460px;
+	width: 318px;
+	left: 0;
+	right: 0;
+	left: 0;
+}
+
+div.low {
+	position: fixed;
+	top: 440px;
 	width: 318px;
 	left: 0;
 	right: 0;
