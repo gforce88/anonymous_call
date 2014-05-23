@@ -1,4 +1,17 @@
-function submiteAnonCall(formId) {
+function submiteAnonCall(formId, item, message) {
+	if (item != undefined) {
+		if ($(item).is(":checked")) {
+			$(message).attr("style", "display:none");
+		} else {
+			$(message).attr("style", "display:block");
+			return false;
+		}
+	}
+	
+	if (formId == "") {
+		return;
+	}
+	
 	var data = {};
 	var arr = $(formId).serializeArray();
 
@@ -7,9 +20,9 @@ function submiteAnonCall(formId) {
 			if (!data[this.name].push) {
 				data[this.name] = [ data[this.name] ];
 			}
-			data[this.name].push(this.value || '');
+			data[this.name].push(this.value || "");
 		} else {
-			data[this.name] = this.value || '';
+			data[this.name] = this.value || "";
 		}
 	});
 
@@ -54,7 +67,7 @@ function timestamp2His(totalTime) {
 }
 
 function checkAgree(agreeCheckbox, agreeButton) {
-	if ($(agreeCheckbox).is(':checked')) {
+	if ($(agreeCheckbox).is(":checked")) {
 		$(agreeButton).removeAttr("disabled");
 	} else {
 		$(agreeButton).attr("disabled", true);
