@@ -81,6 +81,16 @@ class Widget_FollowingController extends BaseController {
 		// Validation
 		$validFields = array ();
 		$invalidFields = array ();
+		if ($creditCard["firstName"] != null) {
+			array_push($validFields, "firstNameInvalid");
+		} else {
+			array_push($invalidFields, "firstNameInvalid");
+		}
+		if ($creditCard["lastName"] != null) {
+			array_push($validFields, "lastNameInvalid");
+		} else {
+			array_push($invalidFields, "lastNameInvalid");
+		}
 		if ($creditCard["cardType"] != null) {
 			array_push($validFields, "cardTypeInvalid");
 		} else {
@@ -180,7 +190,7 @@ class Widget_FollowingController extends BaseController {
 			// Inform the other guy of sorry
 			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 			EmailSender::sendSorryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITEE_PAY);
-
+			
 			$invite = array (
 				"inx" => $_SESSION["inviteInx"],
 				"inviteResult" => INVITE_RESULT_NOPAY 
