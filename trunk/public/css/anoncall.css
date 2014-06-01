@@ -1,3 +1,7 @@
+html {
+	height: 100%;
+}
+
 body,div,dl,dt,dd,h1,h2,h3,h4,h5,h6,p,pre,code,blockquote {
 	margin: 0;
 	padding: 0;
@@ -15,14 +19,27 @@ table {
 }
 
 body {
+	display: table;
+	margin: 0 auto;
+	height: 100%;
+}
+
+#midCent {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 100%;
+}
+
+#main {
+	z-index: 0;
 	width: 318px;
 	height: 566px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
 	border-style: solid;
 	border-width: 2px;
 	-epub-hyphens: auto;
-	border-width: 2px;
+	background-color: #FFFFFF;
 }
 
 article {
@@ -60,33 +77,40 @@ input,select,textarea {
 }
 
 /******************** frame ********************/
-div.bottom {
-	position: fixed;
-	top: 460px;
-	width: 318px;
-	left: 0;
-	right: 0;
-	left: 0;
+#content {
+	padding: 1px 0;
+	height: 390px;
 }
 
-div.low {
-	position: fixed;
-	top: 440px;
-	width: 318px;
-	left: 0;
-	right: 0;
-	left: 0;
+.topLong {
+	height: 340px;
 }
 
-#footer {
-	position: fixed;
-	top: 524px;
-	width: 318px;
-	left: 0;
-	right: 0;
+.topShort {
+	height: 300px;
 }
 
 /******************** main ********************/
+.bg-img,.bg-hue {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.bg-img {
+	z-index: -300;
+	background: url('../image/presentation-bg.jpg') center top no-repeat;
+	background-size: cover;
+}
+
+.bg-hue {
+	z-index: -200;
+	background-color: #2B2B2B;
+	opacity: 0.95;
+}
+
 p.wrap {
 	margin-left: 10%;
 	margin-right: 10%;

@@ -1,0 +1,14 @@
+<html>
+<head>
+<script src="<?php echo APP_CTX?>/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+function showAnonCall() {
+	$("#frame").load("http://localhost/anoncall/widget/invitation?inx=2");
+}
+</script>
+</head>
+<body>
+	<div style="width: 322px; height: 500px" id="frame"></div>
+	<input type="button" onclick="showAnonCall()" value="Yahoo Anonymous Connection"></input>
+</body>
+</html>
