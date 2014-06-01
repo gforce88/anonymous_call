@@ -1,9 +1,9 @@
 <?php $country = $_SESSION["country"]?>
+<div class="topLong">
 	<p style="margin-top: 20px"><span class="h2"><?php echo MultiLang::getText("Notification_1", $country, $this->name)?></span></p>
 	<p style="margin-top: 40px"><span class="h2"><?php echo MultiLang::getText("Notification_2", $country, $this->freeCallDur)?></span></p>
 	<p style="margin-top: 10px"><span class="form"><?php echo MultiLang::getText3("Notification_3", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>
-<div class="bottom">
-	<form id="notificationFrom" action="<?php echo APP_CTX?>/widget/following/paypal" method="post">
-		<input type="submit" class="twolines" value="<?php echo MultiLang::getText("Notification_4", $country)?>" />
-	</form>
 </div>
+<form id="notificationFrom" action="<?php echo APP_CTX?>/widget/following/paypal" method="post">
+	<input type="submit" class="twolines" value="<?php echo MultiLang::getText("Notification_4", $country)?>" />
+</form>
