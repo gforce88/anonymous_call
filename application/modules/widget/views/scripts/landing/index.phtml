@@ -2,26 +2,27 @@
 <head>
 <script src="<?php echo APP_CTX?>/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-function removePopup() {
-	$("#popScreen").css("display", "none");
-}
 function showAnonCall() {
 	$("#popScreen").css("display", "block");
+	$("#togleDisp").slideDown();
+}
+function removeAnonCall() {
+	$('#popScreen').fadeOut();
+	setTimeout("$('#togleDisp').css('display', 'none')", 1000);
 }
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/landing.css" />
 </head>
-<body onload="removePopup()">
-	<div>asfasfdasfasf</div>
-	<div>asfasfdasfasf</div>
-	<div>asfasfdasfasf</div>
-	<div>asfasfdasfasf</div>
-	<input type="button" onclick="showAnonCall()" value="Yahoo Anonymous Connection"></input>
+<body>
+	<input type="button" onclick="showAnonCall()" value="Show Yahoo Anonymous Connection"></input>
 	<div id="popScreen">
 		<div id="baseFrame">
 			<div id="midCentFrame">
-				<div id="mainFrame">
-					<iframe id="realFrame" src="<?php echo $this->src?>"></iframe>
+				<div id="togleDisp" style="display:none">
+					<div id="closeFrame"><img src="<?php echo APP_CTX?>/image/Close.png" onclick="removeAnonCall()"></img></div>
+					<div id="mainFrame">
+						<iframe id="realFrame" src="<?php echo $this->src?>"></iframe>
+					</div>
 				</div>
 			</div>
 		</div>
