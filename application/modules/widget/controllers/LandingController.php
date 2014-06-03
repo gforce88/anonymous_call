@@ -6,6 +6,13 @@ class Widget_LandingController extends BaseController {
 	public function indexAction() {
 		// Disable layout for return json
 		$this->_helper->layout->disableLayout();
+		
+		$inx = $_GET["inx"];
+		if ($inx == null) {
+			$inx = 1;
+		}
+		
+		$this->view->assign("src", APP_CTX . "/widget/invitation?inx=" . $inx);
 	}
 
 	public function continueAction() {
