@@ -1,8 +1,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/landing.css" />
+<script src="<?php echo APP_CTX?>/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+function showAnonCall() {
+	$("#popScreen").css("display", "none");
+}
+</script>
 </head>
-<body>
+<body onload="showAnonCall()">
 	<div class="bg-img"></div>
 	<div class="bg-hue"></div>
 	<div id="popScreen">

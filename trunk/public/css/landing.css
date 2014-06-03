@@ -2,8 +2,16 @@ body {
 	text-align: center;
 }
 
+#closeFrame {
+	float: right;
+	margin: 5px;
+	width: 24px;
+	heidht: 24px;
+}
+
 #popScreen {
 	position: fixed;
+	display: none;
 	margin: auto;
 	top: 0;
 	left: 0;
@@ -30,6 +38,8 @@ body {
 	margin: 0;
 	-epub-hyphens: auto;
 	background-color: #FFFFFF;
+	border-style: solid;
+	border-width: 2px;
 }
 
 #realFrame {
