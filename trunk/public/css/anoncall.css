@@ -79,7 +79,7 @@ input,select,textarea {
 /******************** frame ********************/
 #content {
 	padding: 1px 0;
-	height: 390px;
+	height: 400px;
 }
 
 .topLong {
@@ -91,25 +91,6 @@ input,select,textarea {
 }
 
 /******************** main ********************/
-.bg-img,.bg-hue {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-}
-
-.bg-img {
-	z-index: -300;
-	background: url('../image/presentation-bg.jpg') center top no-repeat;
-	background-size: cover;
-}
-
-.bg-hue {
-	z-index: -200;
-	background-color: #2B2B2B;
-	opacity: 0.95;
-}
 
 p.wrap {
 	margin-left: 10%;
