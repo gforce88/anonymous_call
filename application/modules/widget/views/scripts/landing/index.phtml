@@ -2,13 +2,29 @@
 <head>
 <script src="<?php echo APP_CTX?>/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
+function removePopup() {
+	$("#popScreen").css("display", "none");
+}
 function showAnonCall() {
-	$("#frame").load("http://localhost/anoncall/widget/invitation?inx=2");
+	$("#popScreen").css("display", "block");
 }
 </script>
+<link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/landing.css" />
 </head>
-<body>
-	<div style="width: 322px; height: 500px" id="frame"></div>
+<body onload="removePopup()">
+	<div>asfasfdasfasf</div>
+	<div>asfasfdasfasf</div>
+	<div>asfasfdasfasf</div>
+	<div>asfasfdasfasf</div>
 	<input type="button" onclick="showAnonCall()" value="Yahoo Anonymous Connection"></input>
+	<div id="popScreen">
+		<div id="baseFrame">
+			<div id="midCentFrame">
+				<div id="mainFrame">
+					<iframe id="realFrame" src="http://localhost/anoncall/widget/invitation?inx=2"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,0 +1,59 @@
+body {
+	text-align: center;
+}
+
+#popScreen {
+	position: fixed;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#baseFrame {
+	display: table;
+	margin: 0 auto;
+	height: 100%;
+}
+
+#midCentFrame {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 100%;
+}
+
+#mainFrame {
+	z-index: 0;
+	margin: 0;
+	-epub-hyphens: auto;
+	background-color: #FFFFFF;
+}
+
+#realFrame {
+	width: 323px;
+	height: 571px;
+	border: 0;
+}
+
+.bg-img,.bg-hue {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.bg-img {
+	z-index: -300;
+	background: url('../image/presentation-bg.jpg') center top no-repeat;
+	background-size: cover;
+}
+
+.bg-hue {
+	z-index: -200;
+	background-color: #2B2B2B;
+	opacity: 0.95;
+}
