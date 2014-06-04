@@ -18,10 +18,15 @@ function removeAnonCall() {
 	<div id="popScreen">
 		<div id="baseFrame">
 			<div id="midCentFrame">
-				<div id="togleDisp" style="display:none">
-					<div id="closeFrame"><img src="<?php echo APP_CTX?>/image/Close.png" onclick="removeAnonCall()"></img></div>
-					<div id="mainFrame">
-						<iframe id="realFrame" src="<?php echo $this->src?>"></iframe>
+				<div id="togleDisp" style="display: none">
+					<div id="closeFrame" class="inlineFrame"></div>
+					<div class="inlineFrame">
+						<div id="mainFrame">
+							<iframe id="realFrame" src="<?php echo $this->src?>"></iframe>
+						</div>
+					</div>
+					<div id="closeFrame" class="inlineFrame">
+						<a id=closeImg href="javascript:removeAnonCall();"></a>
 					</div>
 				</div>
 			</div>
