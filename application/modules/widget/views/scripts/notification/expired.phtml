@@ -1,8 +1,0 @@
-<?php $country = $_SESSION["country"]?>
-<div class="topLong">
-	<p style="margin-top: 20px"><span class="notification_text"><?php echo MultiLang::getText("Invalid_1", $country)?></span></p>
-	<p style="margin-top: 30px"><span class="notification_text"><?php echo MultiLang::getText("Invalid_2", $country)?></span></p>
-</div>
-<form id="invalidFrom" action="<?php echo APP_CTX?>/widget/invitation/getstart" method="post">
-	<input type="submit" value="<?php echo MultiLang::getText("Invalid_3", $country)?>" />
-</form>
