@@ -1,4 +1,5 @@
 body {
+	margin: 0;
 	text-align: center;
 }
 
@@ -37,7 +38,7 @@ body {
 
 #closeImg {
 	background: url('../image/Close.png') center top no-repeat;
-	padding: 0 12px 0 12px;
+	padding: 0 12px 8px 12px;
 }
 
 #closeImg:hover {
@@ -54,8 +55,8 @@ body {
 }
 
 #realFrame {
-	width: 323px;
-	height: 571px;
+	width: 322px;
+	height: 570px;
 	border: 0;
 }
 

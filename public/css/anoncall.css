@@ -32,11 +32,7 @@ article {
 	font-variant: normal;
 	font-weight: normal;
 	line-height: 1.2;
-	margin-bottom: 0;
-	margin-left: 0;
-	margin-right: 0;
-	margin-top: 0;
-	orphans: 1;
+	margin: 0;
 	page-break-after: auto;
 	page-break-before: auto;
 	text-align: left;
@@ -61,7 +57,7 @@ input,select,textarea {
 /******************** frame ********************/
 #content {
 	padding: 1px 0;
-	height: 400px;
+	height: 412px;
 }
 
 .topLong {
