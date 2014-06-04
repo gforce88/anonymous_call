@@ -1,7 +1,7 @@
 <?php $country = $_SESSION["country"]?>
 <form id="acceptanceFrom" action="<?php echo APP_CTX?>/widget/invitation/confirmation" method="post" onsubmit="return submiteAnonCall('', '#agreeCheckbox', '#agreeInvalid');">
 	<div class="topShort">
-		<p style="margin-top: 20px; margin-bottom: 30px"><span class="h2"><?php echo MultiLang::getText("Agreement_1", $country)?></span></p>
+		<p style="margin-top: 10px; margin-bottom: 30px"><span class="h2"><?php echo MultiLang::getText("Agreement_1", $country)?></span></p>
 		<div style="display:<?php echo $this->inviterPay?>">
 			<p><span class="h2"><?php echo MultiLang::getText2("Agreement_2", $country, $this->name, $this->freeCallDur)?></span></p>
 			<p style="margin-top: 8px"><span class="form"><?php echo MultiLang::getText3("Agreement_3", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>
