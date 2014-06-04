@@ -82,10 +82,6 @@ class Widget_NotificationController extends BaseController {
 
 	public function expiredAction() {}
 
-	public function declineAction() {
-		$this->prepareScreen();
-	}
-
 	public function readyAction() {
 		$this->prepareScreen();
 		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
@@ -98,6 +94,10 @@ class Widget_NotificationController extends BaseController {
 			$this->view->assign("woman", $inviter["name"]);
 			$this->view->assign("man", $invitee["name"]);
 		}
+	}
+
+	public function declineAction() {
+		$this->prepareScreen();
 	}
 
 	public function sorryAction() {

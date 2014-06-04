@@ -155,6 +155,11 @@ class Widget_ResponseController extends BaseController {
 		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
 		EmailSender::sendDeclineEmail($email);
 		
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$this->view->assign("img", APP_CTX . "/image/Phones_M2.png");
+		} else {
+			$this->view->assign("img", APP_CTX . "/image/Phones_W2.png");
+		}
 		$this->view->assign("name", $email["inviterName"]);
 	}
 
