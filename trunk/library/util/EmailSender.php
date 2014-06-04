@@ -6,13 +6,13 @@ class EmailSender {
 
 	public static function sendInviteEmail($email) {
 		$email = self::adjustEmail($email, false);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/response?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=response&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "invite", $url);
 	}
 
 	public static function sendAcceptEmail($email) {
 		$email = self::adjustEmail($email, true);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "accept", $url);
 	}
 
