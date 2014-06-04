@@ -80,10 +80,10 @@ class Widget_NotificationController extends BaseController {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function expiredAction() {}
+	public function invalidAction() {}
 
 	public function readyAction() {
-		$this->prepareScreen();
+		$this->prepareUser();
 		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
 		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
@@ -97,24 +97,38 @@ class Widget_NotificationController extends BaseController {
 	}
 
 	public function declineAction() {
-		$this->prepareScreen();
+		$this->prepareUser();
 	}
 
 	public function sorryAction() {
-		$this->prepareScreen();
+		$this->prepareUser();
 	}
 
-	private function prepareScreen() {
-		$user = $this->getUser();
+	private function prepareUser() {
+		if ($_SESSION["notificationType"] == self::$INVITATION) {
+			$user = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		} else {
+			$user = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		}
 		$this->view->assign("name", $user["name"]);
 	}
 
-	private function getUser() {
+	private function prepareImg($isSame = false) {
+		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
 		if ($_SESSION["notificationType"] == self::$INVITATION) {
-			return $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+			if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+				
+			} else {
+				
+			}
 		} else {
-			return $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+			if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			
+			} else {
+			
+			}
 		}
+		
 	}
 
 }

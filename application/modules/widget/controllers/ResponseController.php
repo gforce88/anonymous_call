@@ -76,7 +76,7 @@ class Widget_ResponseController extends BaseController {
 			}
 			$result = array (
 				"redirect" => true,
-				"url" => APP_CTX . "/widget/notification/expired?" 
+				"url" => APP_CTX . "/widget/notification/invalid?" 
 			);
 		} else {
 			// Validation
