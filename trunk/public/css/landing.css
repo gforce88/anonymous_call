@@ -1,6 +1,19 @@
 body {
 	margin: 0;
 	text-align: center;
+	background: url('../image/matchScreenCap_r1.png') left top no-repeat;
+}
+
+#bigButton {
+	position: fixed;
+	top: 635px;
+	left: 69px;
+	width: 119px;
+	height: 36px;
+}
+
+#bigButton:hover {
+	cursor: hand;
 }
 
 #popScreen {
