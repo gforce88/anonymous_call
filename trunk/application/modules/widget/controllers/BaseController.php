@@ -11,7 +11,7 @@ class BaseController extends Zend_Controller_Action {
 
 	protected function isSessionValid() {
 		if ($_SESSION["country"] == null) {
-			$this->renderScript("/notification/expired.phtml");
+			$this->renderScript("/notification/invalid.phtml");
 			return false;
 		} else {
 			return true;

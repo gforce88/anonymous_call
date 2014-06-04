@@ -37,7 +37,7 @@ class Widget_FollowingController extends BaseController {
 			return $this->renderScript("/notification/wrong.phtml");
 		} else if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
-			return $this->renderScript("/notification/expired.phtml");
+			return $this->renderScript("/notification/invalid.phtml");
 		}
 		
 		$_SESSION["inviteInx"] = $invite["inx"];
@@ -228,7 +228,7 @@ class Widget_FollowingController extends BaseController {
 		// If the user click the history back button then click the call now button, the application should not raise a new call
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
 		if (Validator::isCompleted($calls)) {
-			return $this->renderScript("/notification/expired.phtml");
+			return $this->renderScript("/notification/invalid.phtml");
 		}
 		
 		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
