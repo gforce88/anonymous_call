@@ -1,22 +1,17 @@
 <?php $country = $_SESSION["country"]?>
 <form id="responseFrom" action="<?php echo APP_CTX?>/widget/response/validate" method="post" onsubmit="submiteAnonCall('#responseFrom', '#agreeCheckbox', '#agreeInvalid'); return false;">
 	<div class="topShort">
-		<p><span class="AVC_tagline"><?php echo MultiLang::getText("Response_1", $country, $this->name)?></span></p>
-		<div class="_idGenObjectLayout-1">
-			<div class="_idGenPageitem-4">
-				<img class="_idGenPageitem-3" src="<?php echo APP_CTX?>/image/gmail_avatar.png" alt="" />
-			</div>
-		</div>
+		<p style="margin-top: 28px"><span class="AVC_tagline"><?php echo MultiLang::getText("Response_1", $country, $this->name)?></span></p>
 		
-		<div style="display:<?php echo $this->inviteePay?>">
+		<div style="margin-top: 30px; display:<?php echo $this->inviteePay?>">
 			<p><span class="h2"><?php echo MultiLang::getText("Response_2", $country, $this->freeCallDur)?></span></p>
 			<p><span class="form"><?php echo MultiLang::getText3("Response_3", $country, $this->chargeAmount, $this->minCallBlkDur, $this->freeCallDur)?></span></p>
 		</div>
-		<div style="margin-top: 10px; margin-bottom: 20px; display:<?php echo $this->inviterPay?>">
+		<div style="margin-top: 30px; margin-bottom: 20px; display:<?php echo $this->inviterPay?>">
 			<p><span class="form"><?php echo MultiLang::getText("Response_4", $country, $this->name)?></span></p>
 		</div>
 		
-		<p style="margin-top: 10px"><span class="h2"><?php echo MultiLang::getText("Response_5", $country)?></span></p>
+		<p style="margin-top: 40px"><span class="h2"><?php echo MultiLang::getText("Response_5", $country)?></span></p>
 		<p style="margin-top: 8px"><span class="form"><?php echo MultiLang::getText("Response_6", $country)?></span></p>
 		<div class="_idGenObjectLayout-1">
 			<div class="_idGenPageitem-8">
