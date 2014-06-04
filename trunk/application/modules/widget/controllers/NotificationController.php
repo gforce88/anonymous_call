@@ -7,7 +7,6 @@ require_once 'BaseController.php';
 class Widget_NotificationController extends BaseController {
 	private static $INVITATION = 1;
 	private static $RESPONSE = 2;
-	
 	private $inviteManager;
 	private $userManager;
 
@@ -80,9 +79,8 @@ class Widget_NotificationController extends BaseController {
 		
 		$this->_helper->json->sendJson($result);
 	}
-	
-	public function expiredAction() {
-	}
+
+	public function expiredAction() {}
 
 	public function declineAction() {
 		$this->prepareScreen();
@@ -90,12 +88,22 @@ class Widget_NotificationController extends BaseController {
 
 	public function readyAction() {
 		$this->prepareScreen();
+		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
+		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$this->view->assign("man", $inviter["name"]);
+			$this->view->assign("woman", $invitee["name"]);
+		} else {
+			$this->view->assign("woman", $inviter["name"]);
+			$this->view->assign("man", $invitee["name"]);
+		}
 	}
 
 	public function sorryAction() {
 		$this->prepareScreen();
 	}
-	
+
 	private function prepareScreen() {
 		$user = $this->getUser();
 		$this->view->assign("name", $user["name"]);

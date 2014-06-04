@@ -178,6 +178,17 @@ class Widget_FollowingController extends BaseController {
 			$user = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		}
 		$this->view->assign("name", $user["name"]);
+		
+		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
+		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
+		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$this->view->assign("man", $inviter["name"]);
+			$this->view->assign("woman", $invitee["name"]);
+		} else {
+			$this->view->assign("woman", $inviter["name"]);
+			$this->view->assign("man", $invitee["name"]);
+		}
 	}
 
 	public function retryAction() {
@@ -221,6 +232,12 @@ class Widget_FollowingController extends BaseController {
 		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
+		
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+			$this->view->assign("name", $invitee["name"]);
+		} else {
+			$this->view->assign("name", $inviter["name"]);
+		}
 		
 		$call = array (
 			"inviteInx" => $_SESSION["inviteInx"] 

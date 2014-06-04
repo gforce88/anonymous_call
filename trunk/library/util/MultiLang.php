@@ -16,6 +16,8 @@ class MultiLang {
 			$msg = self::replaceParams($msg, $params);
 		}
 		
+		$msg = self::replaceColor($msg);
+		
 		return $msg;
 	}
 
@@ -49,6 +51,13 @@ class MultiLang {
 			$msg = str_replace("[$key]", $value, $msg);
 			$i++;
 		}
+		return $msg;
+	}
+
+	private static function replaceColor($msg) {
+		$msg = str_replace("<red>", "<span class='red'>", $msg);
+		$msg = str_replace("</red>", "</span>", $msg);
+		
 		return $msg;
 	}
 
