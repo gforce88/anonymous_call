@@ -13,7 +13,7 @@ body {
 }
 
 #bigButton:hover {
-	cursor: hand;
+	cursor: pointer;
 }
 
 #popScreen {
