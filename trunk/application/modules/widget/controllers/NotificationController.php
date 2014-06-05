@@ -80,14 +80,15 @@ class Widget_NotificationController extends BaseController {
 		$this->_helper->json->sendJson($result);
 	}
 
-	public function invalidAction() {}
+	public function invalidAction() {
+		$this->prepareImg(true);
+	}
 
 	public function readyAction() {
 		$this->prepareUser();
-		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
 		$inviter = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
-		if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
+		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$this->view->assign("man", $inviter["name"]);
 			$this->view->assign("woman", $invitee["name"]);
 		} else {
@@ -98,10 +99,12 @@ class Widget_NotificationController extends BaseController {
 
 	public function declineAction() {
 		$this->prepareUser();
+		$this->prepareImg();
 	}
 
 	public function sorryAction() {
 		$this->prepareUser();
+		$this->prepareImg();
 	}
 
 	private function prepareUser() {
@@ -110,25 +113,24 @@ class Widget_NotificationController extends BaseController {
 		} else {
 			$user = $this->userManager->findInviterByInviteInx($_SESSION["inviteInx"]);
 		}
+		
 		$this->view->assign("name", $user["name"]);
 	}
 
-	private function prepareImg($isSame = false) {
-		$invite = $this->inviteManager->findInviteByInx($_SESSION["inviteInx"]);
-		if ($_SESSION["notificationType"] == self::$INVITATION) {
-			if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-				
-			} else {
-				
+	private function prepareImg($displayPinkIconForWoman = false) {
+		$img = APP_CTX . "/image/Phones_M2.png";
+		
+		if ($displayPinkIconForWoman) {
+			if ($_SESSION["currentUserSex"] == WOMAN) {
+				$img = APP_CTX . "/image/Phones_W2.png";
 			}
 		} else {
-			if ($invite["inviteType"] == INVITE_TYPE_INVITER_PAY) {
-			
-			} else {
-			
+			if ($_SESSION["currentUserSex"] == MAN) {
+				$img = APP_CTX . "/image/Phones_W2.png";
 			}
 		}
 		
+		$this->view->assign("img", $img);
 	}
 
 }

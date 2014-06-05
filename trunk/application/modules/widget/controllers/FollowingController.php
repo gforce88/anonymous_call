@@ -45,6 +45,7 @@ class Widget_FollowingController extends BaseController {
 		$_SESSION["partnerInx"] = $invite["partnerInx"];
 		$_SESSION["inviterInx"] = $invite["inviterInx"];
 		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
+		$_SESSION["currentUserSex"] = MAN;
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["retry"] = 0;
 		

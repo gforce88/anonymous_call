@@ -2,6 +2,9 @@
 define('INVITE_TYPE_INVITER_PAY', 1);
 define('INVITE_TYPE_INVITEE_PAY', 2);
 
+define('MAN', 1);
+define('WOMAN', 2);
+
 define('COUNTRY_US', "US");
 define('COUNTRY_JP', "JP");
 
