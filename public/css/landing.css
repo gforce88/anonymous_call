@@ -71,6 +71,11 @@ body {
 	width: 322px;
 	height: 570px;
 	border: 0;
+	scroll: no;
+}
+
+#realFrame::-webkit-scrollbar {
+	display: none;
 }
 
 .bg-img,.bg-hue {
