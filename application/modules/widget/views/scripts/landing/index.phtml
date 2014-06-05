@@ -2,13 +2,41 @@
 <head>
 <script src="<?php echo APP_CTX?>/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
+function getIEVersion() {
+	var rv = -1;
+	if (navigator.appName == 'Microsoft Internet Explorer') {
+		var ua = navigator.userAgent;
+		var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+		if (re.exec(ua) != null) {
+			rv = parseFloat( RegExp.$1 );
+		}
+	}
+	else if (navigator.appName == 'Netscape') {
+		var ua = navigator.userAgent;
+		var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+		if (re.exec(ua) != null) {
+			rv = parseFloat( RegExp.$1 );
+		}
+	}
+	return rv;
+}
+
 function showAnonCall() {
-	$("#popScreen").css("display", "block");
+	if (getIEVersion() >= 11) {
+		document.getElementById("popScreen").style.visibility = "";
+		document.getElementById("togleDisp").style.visibility = "";
+	}
+	$("#popScreen").show();
 	$("#togleDisp").slideDown();
 }
 function removeAnonCall() {
-	$('#popScreen').fadeOut();
-	setTimeout("$('#togleDisp').css('display', 'none')", 1000);
+	if (getIEVersion() >= 11) {
+		document.getElementById("popScreen").style.visibility = "hidden";
+		document.getElementById("togleDisp").style.visibility = "hidden";
+	} else {
+		$('#popScreen').fadeOut();
+		setTimeout("$('#togleDisp').hide()", 1000);
+	}
 }
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo APP_CTX?>/css/landing.css" />
