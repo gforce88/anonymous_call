@@ -42,6 +42,7 @@ class Widget_InvitationController extends BaseController {
 		}
 		
 		$_SESSION["inviteType"] = $_POST["inviteType"];
+		$_SESSION["currentUserSex"] = $_POST["inviteType"];
 	}
 
 	public function validateAction() {
