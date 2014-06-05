@@ -10,6 +10,7 @@ body {
 	left: 69px;
 	width: 119px;
 	height: 36px;
+	background: #F00;
 }
 
 #bigButton:hover {
