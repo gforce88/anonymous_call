@@ -142,6 +142,7 @@ class Widget_ResponseController extends BaseController {
 		EmailSender::sendAcceptEmail($email);
 		
 		$this->view->assign("name", $email["inviterName"]);
+		$this->view->assign("img", APP_CTX . "/image/Phones_M1.png");
 	}
 
 	public function declineAction() {
@@ -159,9 +160,9 @@ class Widget_ResponseController extends BaseController {
 		EmailSender::sendDeclineEmail($email);
 		
 		if ($_SESSION["currentUserSex"] == MAN) {
-			$this->view->assign("img", APP_CTX . "/image/Phones_M2.png");
-		} else {
 			$this->view->assign("img", APP_CTX . "/image/Phones_W2.png");
+		} else {
+			$this->view->assign("img", APP_CTX . "/image/Phones_M2.png");
 		}
 		$this->view->assign("name", $email["inviterName"]);
 	}
