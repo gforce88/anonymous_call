@@ -1,7 +1,14 @@
 <?php $country = $_SESSION["country"]?>
 <form id="acceptFrom" action="<?php echo APP_CTX?>/widget/notification/refresh-response" method="post">
-	<p style="margin-top: 80px"><span class="notification_text"><?php echo MultiLang::getText("ResponseAccept_1", $country, $this->name)?></span></p>
+	<p style="margin-top: 40px"><span class="notification_text"><?php echo MultiLang::getText("ResponseAccept_1", $country, $this->name)?></span></p>
 </form>
+
+<div style="margin-top: 60px" class="_idGenObjectLayout-1">
+	<div class="_idGenPageitem-4">
+		<img class="_idGenPageitem-3" src="<?php echo $this->img?>" alt="" />
+	</div>
+</div>
+
 <script type="text/javascript">
 var timerRefresh = window.setInterval(refreshPage, 5000);
 
