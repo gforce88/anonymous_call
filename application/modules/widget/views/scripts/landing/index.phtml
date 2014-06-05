@@ -22,6 +22,8 @@ function getIEVersion() {
 }
 
 function showAnonCall() {
+	$("#mainFrame").empty();
+	$("<iframe id='realFrame' src='<?php echo $this->src?>'></iframe>").appendTo($("#mainFrame"));
 	if (getIEVersion() >= 11) {
 		document.getElementById("popScreen").style.visibility = "";
 		document.getElementById("togleDisp").style.visibility = "";
@@ -29,6 +31,7 @@ function showAnonCall() {
 	$("#popScreen").show();
 	$("#togleDisp").slideDown();
 }
+
 function removeAnonCall() {
 	if (getIEVersion() >= 11) {
 		document.getElementById("popScreen").style.visibility = "hidden";
@@ -49,9 +52,7 @@ function removeAnonCall() {
 				<div id="togleDisp" style="display: none">
 					<div id="closeFrame" class="inlineFrame"></div>
 					<div class="inlineFrame">
-						<div id="mainFrame">
-							<iframe id="realFrame" src="<?php echo $this->src?>"></iframe>
-						</div>
+						<div id="mainFrame"></div>
 					</div>
 					<div id="closeFrame" class="inlineFrame">
 						<a id=closeImg href="javascript:removeAnonCall();"></a>
