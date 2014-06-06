@@ -55,8 +55,8 @@ class MultiLang {
 	}
 
 	private static function replaceColor($msg) {
-		$msg = str_replace("<red>", "<span class='red'>", $msg);
-		$msg = str_replace("</red>", "</span>", $msg);
+		$msg = str_replace("<name>", "<span class='name'>", $msg);
+		$msg = str_replace("</name>", "</span>", $msg);
 		
 		return $msg;
 	}
