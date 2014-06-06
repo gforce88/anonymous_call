@@ -266,8 +266,10 @@ span.h2 {
 	font-weight: normal;
 }
 
-span.red {
+span.name {
 	color: #F00;
+	font-size: +1;
+	font-style: bold;
 }
 
 span.notification_text {
