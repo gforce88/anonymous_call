@@ -268,8 +268,8 @@ span.h2 {
 
 span.name {
 	color: #F00;
-	font-size: +1;
-	font-style: bold;
+	font-size: 120%;
+	font-weight: bold;
 }
 
 span.notification_text {
