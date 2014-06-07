@@ -127,7 +127,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 				"exit" 
 			) 
 		);
-		$tropo->conference(null, $conference);
+		$tropo->conference(null, $confOptions);
 		$this->log("Conference call ID is " . $confOptions["id"]);
 		
 		$this->setEvent($tropo, $parameters, "playremind");
