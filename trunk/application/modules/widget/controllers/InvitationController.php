@@ -123,7 +123,7 @@ class Widget_InvitationController extends BaseController {
 		
 		if ($_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY) {
 			$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
-			$this->view->assign("freeCallDur", round($partner["freeCallDur"] / 60));
+			$this->view->assign("freeCallDur", $this->sec2min($partner["freeCallDur"]));
 			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
 			$this->view->assign("inviterPay", "block");

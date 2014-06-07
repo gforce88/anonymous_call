@@ -53,7 +53,7 @@ class Widget_ResponseController extends BaseController {
 			$_SESSION["currentUserSex"] = MAN;
 			$this->view->assign("inviteePay", "block");
 			$this->view->assign("inviterPay", "none");
-			$this->view->assign("freeCallDur", $partner["freeCallDur"]);
+			$this->view->assign("freeCallDur", $this->sec2min($partner["freeCallDur"]));
 			$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 			$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
 		}
