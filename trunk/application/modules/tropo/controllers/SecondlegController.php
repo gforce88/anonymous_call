@@ -78,7 +78,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
 		$confOptions = array (
-			"name" => "conference",
+			"name" => "CONF." . $call["firstLegSession"],
 			"id" => "CONF." . $call["firstLegSession"],
 			"mute" => false,
 			"allowSignals" => array (
