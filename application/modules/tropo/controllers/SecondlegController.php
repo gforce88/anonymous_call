@@ -78,7 +78,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 		
 		$call = $this->callManager->findCallByInx($_GET["callInx"]);
 		$confOptions = array (
-			"name" => "CONF." . $call["firstLegSession"],
+			"name" => "conference",
 			"id" => "CONF." . $call["firstLegSession"],
 			"mute" => false,
 			"allowSignals" => array (
@@ -87,6 +87,7 @@ class Tropo_SecondlegController extends BaseTropoController {
 			) 
 		);
 		$tropo->conference(null, $conference);
+		$this->log("Conference call ID is " . $confOptions["id"]);
 		
 		$this->setEvent($tropo, $parameters, "playremind");
 		$this->setEvent($tropo, $parameters, "exit", "complete");
