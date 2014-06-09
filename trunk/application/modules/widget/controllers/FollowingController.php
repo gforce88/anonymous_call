@@ -25,10 +25,6 @@ class Widget_FollowingController extends BaseController {
 	}
 
 	public function indexAction() {
-		$this->notificationAction();
-	}
-
-	public function notificationAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
@@ -49,9 +45,14 @@ class Widget_FollowingController extends BaseController {
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["retry"] = 0;
 		
+		$this->notificationAction();
+	}
+
+	public function notificationAction() {
+		$partner = $this->partnerManager->findPartnerByInx($_SESSION["partnerInx"]);
 		$invitee = $this->userManager->findInviteeByInviteInx($_SESSION["inviteInx"]);
 		$this->view->assign("name", $invitee["name"]);
-		$this->view->assign("freeCallDur", round($partner["freeCallDur"] / 60));
+		$this->view->assign("freeCallDur", $this->sec2min($partner["freeCallDur"]));
 		$this->view->assign("chargeAmount", $partner["chargeAmount"]);
 		$this->view->assign("minCallBlkDur", round($partner["minCallBlkDur"] / 60));
 		
