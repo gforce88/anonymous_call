@@ -19,7 +19,7 @@ class BaseController extends Zend_Controller_Action {
 	}
 
 	protected function sec2min($sec) {
-		$minute = round($sec / 60);
+		$minute = floor($sec / 60);
 		$second = $sec % 60;
 		if ($second == 0) {
 			return $minute;
