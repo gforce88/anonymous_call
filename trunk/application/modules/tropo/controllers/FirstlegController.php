@@ -157,7 +157,9 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$callDuration = strtotime($call["callEndTime"]) - strtotime($call["callStartTime"]);
 		$billableDuration = $callDuration - $partner["freeCallDur"];
 		if ($billableDuration < 0) {
-			$billableDuration = 0;
+			$chargeBlk = 0;
+		} else {
+			$chargeBlk = ceil($billableDuration / $partner["minCallBlkDur"]);
 		}
 		$this->log($_GET);
 		$this->log("Call Duration: $callDuration");
@@ -169,12 +171,13 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$email["chargeCurrency"] = $partner["chargeCurrency"];
 		
 		// Charge Paypal
-		if ($billableDuration > 0) {
+		if ($chargeBlk > 0) {
 			$paypalToken = $this->userManager->findTokenByInvite($_GET["inviteInx"]);
 			$this->log("Paypal token: $paypalToken");
 			
 			$paypalService = new PaypalService($_GET["partnerInx"], $_GET["inviteInx"]);
-			$chargeAmount = $paypalService->adjustAmount($partner["chargeAmount"] * $billableDuration / 60, $partner["chargeCurrency"]);
+			
+			$chargeAmount = $paypalService->adjustAmount($partner["chargeAmount"] * $chargeBlk, $partner["chargeCurrency"]);
 			$this->log("Charge Amount: $chargeAmount");
 			$email["chargeAmount"] = $chargeAmount;
 			
