@@ -35,7 +35,7 @@ class Widget_NotificationController extends BaseController {
 			} else if ($invite["inviteResult"] == INVITE_RESULT_ACCEPT) {
 				// Invite is accepted by invitee
 				$result["redirect"] = true;
-				$result["url"] = APP_CTX . "/widget/following/paypal";
+				$result["url"] = APP_CTX . "/widget/following/notification";
 			}
 		} else {
 			if ($invite["inviteResult"] == INVITE_RESULT_DECLINE) {
