@@ -183,6 +183,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 			
 			$paypalService->charge($paypalToken, $chargeAmount, $partner["chargeCurrency"]);
 		} else {
+			$email["billableDuration"] = 0;
 			$email["chargeAmount"] = 0;
 		}
 		
