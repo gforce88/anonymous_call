@@ -10,7 +10,6 @@ require_once 'models/InviteManager.php';
 require_once 'models/PartnerManager.php';
 require_once 'models/UserManager.php';
 
-
 class TestController extends Zend_Controller_Action {
 
 	public function init() {
@@ -18,16 +17,13 @@ class TestController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
-		$partnerManager = new PartnerManager();
-		$partner = $partnerManager->findPartnerByInx(1);
-		$callDuration = 432;
-		$billableDuration = $callDuration - $partner["freeCallDur"];
-		if ($billableDuration < 0) {
-			$billableBlk = 0;
-		} else {
-			$billableBlk = ceil($billableDuration / $partner["minCallBlkDur"]);
-		}
-		$chargeAmount = $partner["chargeAmount"] * $billableBlk;
+		$emailContent = file_get_contents(APPLICATION_PATH . "/configs/emailTemplate/1/Invite.html");
+		$emailContent = MultiLang::replaceParams($emailContent, array (
+			"http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
+			"name",
+			"url" 
+		));
+		echo $emailContent;
 		
 		phpinfo();
 		$this->renderScript("/empty.phtml");
