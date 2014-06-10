@@ -56,10 +56,8 @@ class EmailSender {
 	}
 
 	private static function sendEmail($email, $emailType, $url = null) {
-		$subjectParam = array (
-			"name" => $email["fromName"] 
-		);
-		$contentParam = array (
+		$subjectParam = $contentParam = array (
+			"imgUrl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
 			"name" => $email["fromName"] 
 		);
 		
@@ -76,7 +74,7 @@ class EmailSender {
 		}
 		
 		$subject = MultiLang::replaceParams($email[$emailType . "EmailSubject"], $subjectParam);
-		$content = MultiLang::replaceParams($email[$emailType . "EmailBody"], $contentParam);
+		$content = MultiLang::replaceParams($email[$emailType . "EmailContent"], $contentParam);
 		
 		$headers = "From: " . $email["partnerName"] . "<" . $email["partnerEmail"] . "> \n";
 		$headers .= "Content-type: text/html; charset=utf-8 \n";
