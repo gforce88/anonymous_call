@@ -118,15 +118,15 @@ class Widget_NotificationController extends BaseController {
 	}
 
 	private function prepareImg($displayPinkIconForWoman = false) {
-		$img = APP_CTX . "/image/Phones_M2.png";
+		$img = APP_CTX . "/images/Phones_M2.png";
 		
 		if ($displayPinkIconForWoman) {
 			if ($_SESSION["currentUserSex"] == WOMAN) {
-				$img = APP_CTX . "/image/Phones_W2.png";
+				$img = APP_CTX . "/images/Phones_W2.png";
 			}
 		} else {
 			if ($_SESSION["currentUserSex"] == MAN) {
-				$img = APP_CTX . "/image/Phones_W2.png";
+				$img = APP_CTX . "/images/Phones_W2.png";
 			}
 		}
 		
