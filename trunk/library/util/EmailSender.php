@@ -63,7 +63,7 @@ class EmailSender {
 		
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
 		if ($url != null) {
-			$contentParam["url"] = $url;
+			$contentParam["btnUrl"] = $url;
 			$message .= " URL: [$url]";
 		}
 		if ($emailType == "thanks") {
@@ -81,6 +81,8 @@ class EmailSender {
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
 		
 		$logger = LoggerFactory::getSysLogger();
+		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "subject: [$subject]");
+		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "content: [$content]");
 		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
 		
 		return $sendResult;
