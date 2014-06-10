@@ -41,13 +41,13 @@ class UserManager extends BaseManager {
 	const SQL_FIND_EMAIL = "
 			select invites.inx inviteInx, invites.partnerInx, invites.inviteToken, invites.inviteType,
 			       partners.name partnerName, partners.emailAddr partnerEmail, partners.country,
-			       partners.inviteEmailSubject, partners.inviteEmailBody,
-			       partners.acceptEmailSubject, partners.acceptEmailBody,
-			       partners.declineEmailSubject, partners.declineEmailBody,
-			       partners.readyEmailSubject, partners.readyEmailBody,
-			       partners.sorryEmailSubject, partners.sorryEmailBody,
-			       partners.retryEmailSubject, partners.retryEmailBody,
-			       partners.thanksEmailSubject, partners.thanksEmailBody,
+			       partners.inviteEmailSubject, partners.inviteEmailContent,
+			       partners.acceptEmailSubject, partners.acceptEmailContent,
+			       partners.declineEmailSubject, partners.declineEmailContent,
+			       partners.readyEmailSubject, partners.readyEmailContent,
+			       partners.sorryEmailSubject, partners.sorryEmailContent,
+			       partners.retryEmailSubject, partners.retryEmailContent,
+			       partners.thanksEmailSubject, partners.thanksEmailContent,
 			       inviter.email inviterEmail, SUBSTRING_INDEX(inviter.email, '@', 1) inviterName,
 			       invitee.email inviteeEmail, SUBSTRING_INDEX(invitee.email, '@', 1) inviteeName
 			  from invites, partners, users inviter, users invitee
