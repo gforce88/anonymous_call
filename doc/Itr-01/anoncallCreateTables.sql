@@ -174,7 +174,7 @@ INSERT `partners` (
           `address2`,
           `country`)
         VALUES (
-          'EnTest',
+          'En Partner',
           12,
           120,
           2.99,
@@ -234,7 +234,7 @@ INSERT `partners` (
           `address2`,
           `country`)
         VALUES (
-          'JpTest',
+          'Jp Partner',
           12,
           120,
           12.34,
