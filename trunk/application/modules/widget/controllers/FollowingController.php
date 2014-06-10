@@ -219,7 +219,7 @@ class Widget_FollowingController extends BaseController {
 			$this->view->assign("buttonType", "submit");
 		}
 		
-		$this->view->assign("img", APP_CTX . "/image/Phones_M2.png");
+		$this->view->assign("img", APP_CTX . "/images/Phones_M2.png");
 	}
 
 	public function connectingAction() {
