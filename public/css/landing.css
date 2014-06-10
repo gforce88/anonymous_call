@@ -49,12 +49,12 @@ body {
 }
 
 #closeImg {
-	background: url('../image/Close.png') center top no-repeat;
+	background: url('../images/Close.png') center top no-repeat;
 	padding: 0 12px 8px 12px;
 }
 
 #closeImg:hover {
-	background: url('../image/CloseRed.png') center top no-repeat;
+	background: url('../images/CloseRed.png') center top no-repeat;
 }
 
 #mainFrame {
@@ -87,7 +87,7 @@ body {
 
 .bg-img {
 	z-index: -300;
-	background: url('../image/presentation-bg.jpg') center top no-repeat;
+	background: url('../images/presentation-bg.jpg') center top no-repeat;
 	background-size: cover;
 }
 
