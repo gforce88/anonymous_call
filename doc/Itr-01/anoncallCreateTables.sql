@@ -186,7 +186,7 @@ INSERT `partners` (
           'OutOfScopt',
           '10123456789',
           'EnPartner@email.com',
-          'You have been invited to a call [name]',
+          'You have been invited to call [name]',
           'You have been invited to call [name] using AnonCall.<br>Please click this link to continue <a href="[url]">[url]</a>',
           '[name] accept your invitation',
           '[name] accept your invitation.<br>Please click this link to continue <a href="[url]">[url]</a>',
