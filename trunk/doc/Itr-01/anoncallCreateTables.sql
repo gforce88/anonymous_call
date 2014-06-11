@@ -1,9 +1,9 @@
 /*
 MySQL Data Transfer
 Source Host: localhost
-Source Database: anoncall
+Source Database: Anonymous Voice Calling
 Target Host: localhost
-Target Database: anoncall
+Target Database: Anonymous Voice Calling
 Date: 3/16/2014 1:05:46 PM
 */
 
@@ -187,7 +187,7 @@ INSERT `partners` (
           '10123456789',
           'EnPartner@email.com',
           'You have been invited to call [name]',
-          'You have been invited to call [name] using AnonCall.<br>Please click this link to continue <a href="[url]">[url]</a>',
+          'You have been invited to call [name] using Anonymous Voice Calling.<br>Please click this link to continue <a href="[url]">[url]</a>',
           '[name] accept your invitation',
           '[name] accept your invitation.<br>Please click this link to continue <a href="[url]">[url]</a>',
           'Your invitation was declined by [name]',
@@ -198,8 +198,8 @@ INSERT `partners` (
           'Sorry,<br>[name] is not available to speak with you at this time.',
           'Please retry to checkout Paypal',
           'Oops.<br>Looks like something went wrong. Click below URL to retry to checkout Paypal:<br><a href="[url]">[url]</a>',
-          'Thanks for using AnonCall',
-          'Thanks for using AnonCall.<br>Call Duration: [callDuration]<br>Billable Duration: [billableDuration]<br>Charge Amount: [chargeAmount] [chargeCurrency]',
+          'Thanks for using Anonymous Voice Calling',
+          'Thanks for using Anonymous Voice Calling.<br>Call Duration: [callDuration]<br>Billable Duration: [billableDuration]<br>Charge Amount: [chargeAmount] [chargeCurrency]',
           'address1',
           'address2',
           'US');
@@ -247,7 +247,7 @@ INSERT `partners` (
           '810123456789',
           'JpPartner@email.com',
           'You have been invited to a call [name]',
-          'You have been invited to call [name] using AnonCall.<br>Please click this link to continue <a href="[url]">[url]</a>',
+          'You have been invited to call [name] using Anonymous Voice Calling.<br>Please click this link to continue <a href="[url]">[url]</a>',
           '[name] accept your invitation',
           '[name] accept your invitation.<br>Please click this link to continue <a href="[url]">[url]</a>',
           'Your invitation was declined by [name]',
@@ -258,8 +258,8 @@ INSERT `partners` (
           'Sorry,<br>[name] is not available to speak with you at this time.',
           'Please retry to checkout Paypal',
           'Oops.<br>Looks like something went wrong. Click below URL to retry to checkout Paypal:<br><a href="[url]">[url]</a>',
-          'Thanks for using AnonCall',
-          'Thanks for using AnonCall.<br>Call Duration: [callDuration]<br>Billable Duration: [billableDuration]<br>Charge Amount: [chargeAmount] [chargeCurrency]',
+          'Thanks for using Anonymous Voice Calling',
+          'Thanks for using Anonymous Voice Calling.<br>Call Duration: [callDuration]<br>Billable Duration: [billableDuration]<br>Charge Amount: [chargeAmount] [chargeCurrency]',
           'Address1',
           'Address2',
           'JP');
