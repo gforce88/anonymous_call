@@ -26,6 +26,17 @@ class Widget_FollowingController extends BaseController {
 
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
+		$_SESSION["inviteInx"] = $invite["inx"];
+		$_SESSION["inviteType"] = $invite["inviteType"];
+		$_SESSION["partnerInx"] = $invite["partnerInx"];
+		$_SESSION["inviterInx"] = $invite["inviterInx"];
+		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
+		$_SESSION["currentUserSex"] = MAN;
+		
+		if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
+			$this->retryAction();
+		}
+		
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
 		if ($invite == null || $partner == null) {
@@ -36,12 +47,6 @@ class Widget_FollowingController extends BaseController {
 			return $this->renderScript("/notification/invalid.phtml");
 		}
 		
-		$_SESSION["inviteInx"] = $invite["inx"];
-		$_SESSION["inviteType"] = $invite["inviteType"];
-		$_SESSION["partnerInx"] = $invite["partnerInx"];
-		$_SESSION["inviterInx"] = $invite["inviterInx"];
-		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
-		$_SESSION["currentUserSex"] = MAN;
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["retry"] = 0;
 		
@@ -199,10 +204,6 @@ class Widget_FollowingController extends BaseController {
 		}
 		
 		$_SESSION["retry"] += 1;
-		// Ask payer to retry
-		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
-		EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
-		
 		if ($_SESSION["retry"] > 3) {
 			$invite = array (
 				"inx" => $_SESSION["inviteInx"],
@@ -212,6 +213,10 @@ class Widget_FollowingController extends BaseController {
 			
 			$this->view->assign("buttonType", "hidden");
 		} else {
+			// Ask payer to retry
+			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
+			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
+			
 			$this->view->assign("buttonType", "submit");
 		}
 		
