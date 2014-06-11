@@ -296,30 +296,12 @@ table {
 		</table>
 		<!-- END OF TOP LINKS BLOCK-->
 		
-		<!-- START OF LOGO AND SOCIAL ICONS BLOCK-->
-			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
-				<tr>
-				
-					<!-- START OF LOGO HERE-->
-					<td class="logo" colspan="2" width="330" bgcolor="#ffffff" align="center" valign="top" style="padding: 30px; font-size:12px ; font-family: Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;">
-						<span>
-							<a href="#" style="color:#ffffff;">
-							<img src="%imgUrl%/images/Phones_AVC.png" alt="AVC logo" />
-							</a>
-						</span>
-					</td>
-					<!-- END OF LOGO HERE-->
-
-			  </tr>
-			</table>
-		<!-- END OF LOGO AND SOCIAL ICONS BLOCK-->
-		
 		<!-- START OF SUBJECT LINE AREA BLOCK-->
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							%name% <br />has accepted your invitation!
+							[username] <br />has accepted your invitation!
 						</span>
 					</td>
 				</tr>
@@ -337,7 +319,7 @@ Please click on the button below to continue and place your call</p>
 						<br />
 						
 						<p align="center">
-							<a href="%btnUrl%" style="color:#ffffff; text-transform: uppercase; background:#CC0000; font-style: normal; border-top: 10px solid #CC0000; border-right: 15px solid #CC0000; border-bottom: 10px solid #CC0000; border-left: 15px solid #CC0000;">
+							<a href="[clickurl]" style="color:#ffffff; text-transform: uppercase; background:#CC0000; font-style: normal; border-top: 10px solid #CC0000; border-right: 15px solid #CC0000; border-bottom: 10px solid #CC0000; border-left: 15px solid #CC0000;">
 							Continue
 							</a>
 						</p>
@@ -346,6 +328,24 @@ Please click on the button below to continue and place your call</p>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
+        
+        <!-- START OF LOGO AND SOCIAL ICONS BLOCK-->
+			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
+				<tr>
+				
+					<!-- START OF LOGO HERE-->
+					<td class="logo" colspan="2" width="330" bgcolor="#ffffff" align="center" valign="top" style="padding: 30px; font-size:12px ; font-family: Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;">
+						<span>
+							<a href="#" style="color:#ffffff;">
+							<img src="[imgurl]/images/Phones_AVC.png" alt="AVC logo" />
+							</a>
+						</span>
+					</td>
+					<!-- END OF LOGO HERE-->
+
+			  </tr>
+			</table>
+		<!-- END OF LOGO AND SOCIAL ICONS BLOCK-->
 	
 		<!-- START OF FOOTER AREA BLOCK-->
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ececec" style="padding:0; margin: 0; ">
@@ -359,7 +359,7 @@ Please click on the button below to continue and place your call</p>
 				<tr>
 					<td width="660" bgcolor="#f8f8f8" align="center" style="padding-bottom: 30px; line-height: 0 !important;">
 						<span>
-							<img class="img-radius" src="%imgUrl%/images/image-radius.jpg" alt="image radius" border="0" />
+							<img class="img-radius" src="[imgurl]/images/image-radius.jpg" alt="image radius" border="0" />
 						</span>
 					</td>
 				</tr>
