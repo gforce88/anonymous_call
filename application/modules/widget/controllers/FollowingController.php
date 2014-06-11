@@ -47,7 +47,7 @@ class Widget_FollowingController extends BaseController {
 		if ($_REQUEST["retry"] == null) {
 			$_SESSION["retry"] = 0;
 		} else {
-			$_SESSION["retry"] = Protection::decrypt(urldecode($_REQUEST["retry"]), "retry");
+			$_SESSION["retry"] = Protection::decrypt($_REQUEST["retry"], $invite["inx"]);
 			if ($_SESSION["retry"] >= 3) {
 				$_SESSION["retry"] = -1;
 				$this->retryAction();
