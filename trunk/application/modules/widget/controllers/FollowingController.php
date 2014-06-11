@@ -26,17 +26,6 @@ class Widget_FollowingController extends BaseController {
 
 	public function indexAction() {
 		$invite = $this->inviteManager->findInviteByInxToken($_REQUEST["inx"], $_REQUEST["token"]);
-		$_SESSION["inviteInx"] = $invite["inx"];
-		$_SESSION["inviteType"] = $invite["inviteType"];
-		$_SESSION["partnerInx"] = $invite["partnerInx"];
-		$_SESSION["inviterInx"] = $invite["inviterInx"];
-		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
-		$_SESSION["currentUserSex"] = MAN;
-		
-		if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
-			$this->retryAction();
-		}
-		
 		$partner = $this->partnerManager->findPartnerByInx($invite["partnerInx"]);
 		$calls = $this->callManager->findAllCallsByInvite($_SESSION["inviteInx"]);
 		if ($invite == null || $partner == null) {
@@ -45,8 +34,17 @@ class Widget_FollowingController extends BaseController {
 		} else if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
 			return $this->renderScript("/notification/invalid.phtml");
+		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
+			$_SESSION["retry"] = -1;
+			$this->retryAction();
 		}
 		
+		$_SESSION["inviteInx"] = $invite["inx"];
+		$_SESSION["inviteType"] = $invite["inviteType"];
+		$_SESSION["partnerInx"] = $invite["partnerInx"];
+		$_SESSION["inviterInx"] = $invite["inviterInx"];
+		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
+		$_SESSION["currentUserSex"] = MAN;
 		$_SESSION["country"] = $partner["country"];
 		$_SESSION["retry"] = 0;
 		
@@ -203,21 +201,25 @@ class Widget_FollowingController extends BaseController {
 			return;
 		}
 		
-		$_SESSION["retry"] += 1;
-		if ($_SESSION["retry"] > 3) {
-			$invite = array (
-				"inx" => $_SESSION["inviteInx"],
-				"inviteResult" => INVITE_RESULT_NOPAY 
-			);
-			$this->inviteManager->update($invite);
-			
+		if ($_SESSION["retry"] == -1) { // from retry email
 			$this->view->assign("buttonType", "hidden");
 		} else {
-			// Ask payer to retry
-			$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
-			EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
-			
-			$this->view->assign("buttonType", "submit");
+			$_SESSION["retry"] += 1;
+			if ($_SESSION["retry"] > 3) {
+				$invite = array (
+					"inx" => $_SESSION["inviteInx"],
+					"inviteResult" => INVITE_RESULT_NOPAY 
+				);
+				$this->inviteManager->update($invite);
+				
+				$this->view->assign("buttonType", "hidden");
+			} else {
+				// Ask payer to retry
+				$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
+				EmailSender::sendRetryEmail($email, $_SESSION["inviteType"] == INVITE_TYPE_INVITER_PAY);
+				
+				$this->view->assign("buttonType", "submit");
+			}
 		}
 		
 		$this->view->assign("img", APP_CTX . "/images/Phones_M2.png");
