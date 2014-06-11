@@ -57,13 +57,13 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		$subjectParam = $contentParam = array (
-			"imgUrl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
-			"name" => $email["fromName"] 
+			"imgurl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
+			"username" => $email["fromName"] 
 		);
 		
 		$message = "Sending $emailType email to: [" . $email["toEmail"] . "]";
 		if ($url != null) {
-			$contentParam["btnUrl"] = $url;
+			$contentParam["clickurl"] = $url;
 			$message .= " URL: [$url]";
 		}
 		if ($emailType == "thanks") {
