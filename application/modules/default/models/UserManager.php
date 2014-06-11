@@ -45,7 +45,6 @@ class UserManager extends BaseManager {
 			       partners.acceptEmailSubject, partners.acceptEmailContent,
 			       partners.declineEmailSubject, partners.declineEmailContent,
 			       partners.readyEmailSubject, partners.readyEmailContent,
-			       partners.sorryEmailSubject, partners.sorryEmailContent,
 			       partners.retryEmailSubject, partners.retryEmailContent,
 			       partners.thanksEmailSubject, partners.thanksEmailContent,
 			       inviter.email inviterEmail, SUBSTRING_INDEX(inviter.email, '@', 1) inviterName,

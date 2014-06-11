@@ -1,6 +1,6 @@
 update partners set
-`declineEmailSubject` = 'You have been declined to a call %name%',
-`declineEmailContent` = '
+`thanksEmailSubject` = 'Thanks for using Anonymous Voice Calling',
+`thanksEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
@@ -303,7 +303,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							Sorry<br />
+							thank you!<br />
 					  </span>
 					</td>
 				</tr>
@@ -314,9 +314,12 @@ table {
 		<!-- START OF INTRO TEXT AREA BLOCK-->
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
-					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-					  <p><span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username] </span>					  </p>
-			      <p>is not ready to speak with you yet</p></td>
+					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>Thanks for using Anonymous Voice Calling.<br />
+				      </p>
+					  <p>&nbsp;</p>
+					  <p>Call Duration: [callDuration] <br />
+Billable Duration: [billableDuration] <br />
+Charge Amount: [chargeAmount] [chargeCurrency] </p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->

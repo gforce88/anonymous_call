@@ -296,23 +296,7 @@ table {
 		</table>
 		<!-- END OF TOP LINKS BLOCK-->
 		
-		<!-- START OF LOGO AND SOCIAL ICONS BLOCK-->
-			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
-				<tr>
-				
-					<!-- START OF LOGO HERE-->
-					<td class="logo" colspan="2" width="330" bgcolor="#ffffff" align="center" valign="top" style="padding: 30px; font-size:12px ; font-family: Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;">
-						<span>
-							<a href="#" style="color:#ffffff;">
-							<img src=""%imgUrl%/images/Phones_AVC.png" alt="AVC logo" />
-							</a>
-						</span>
-					</td>
-					<!-- END OF LOGO HERE-->
-
-			  </tr>
-			</table>
-		<!-- END OF LOGO AND SOCIAL ICONS BLOCK-->
+		
 		
 		<!-- START OF SUBJECT LINE AREA BLOCK-->
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
@@ -332,11 +316,29 @@ table {
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
 					  <p>We will be connecting you with </p>
-						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">%name%</span>
+						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username] </span>
 				  <p>momentarily!</p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
+        
+        <!-- START OF LOGO AND SOCIAL ICONS BLOCK-->
+			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
+				<tr>
+				
+					<!-- START OF LOGO HERE-->
+					<td class="logo" colspan="2" width="330" bgcolor="#ffffff" align="center" valign="top" style="padding: 30px; font-size:12px ; font-family: Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;">
+						<span>
+							<a href="#" style="color:#ffffff;">
+							<img src="[imgurl]/images/Phones_AVC.png" alt="AVC logo" />
+							</a>
+						</span>
+					</td>
+					<!-- END OF LOGO HERE-->
+
+			  </tr>
+			</table>
+		<!-- END OF LOGO AND SOCIAL ICONS BLOCK-->
 	
 		<!-- START OF FOOTER AREA BLOCK-->
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ececec" style="padding:0; margin: 0; ">
@@ -350,7 +352,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#f8f8f8" align="center" style="padding-bottom: 30px; line-height: 0 !important;">
 						<span>
-							<img class="img-radius" src="%imgUrl%//images/image-radius.jpg" alt="image radius" border="0" />
+							<img class="img-radius" src="[imgurl]/images/image-radius.jpg" alt="image radius" border="0" />
 						</span>
 					</td>
 				</tr>
