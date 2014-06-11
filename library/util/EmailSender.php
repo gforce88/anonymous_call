@@ -33,7 +33,8 @@ class EmailSender {
 
 	public static function sendRetryEmail($email, $toInviter) {
 		$email = self::adjustEmail($email, $toInviter);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$encryptedRetryValue = urlencode(Protection::encrypt($_SESSION["retry"], "retry"));
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&retry=" . $encryptedRetryValue . "&country=" . $email["country"];
 		return self::sendEmail($email, "retry", $url);
 	}
 
@@ -57,7 +58,8 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		$subjectParam = $contentParam = array (
-			"imgurl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
+			"imgurl" => "
+		http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/",
 			"username" => $email["fromName"] 
 		);
 		

@@ -34,9 +34,6 @@ class Widget_FollowingController extends BaseController {
 		} else if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
 			return $this->renderScript("/notification/invalid.phtml");
-		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
-			$_SESSION["retry"] = -1;
-			$this->retryAction();
 		}
 		
 		$_SESSION["inviteInx"] = $invite["inx"];
@@ -46,7 +43,16 @@ class Widget_FollowingController extends BaseController {
 		$_SESSION["inviteeInx"] = $invite["inviteeInx"];
 		$_SESSION["currentUserSex"] = MAN;
 		$_SESSION["country"] = $partner["country"];
-		$_SESSION["retry"] = 0;
+		
+		if ($_REQUEST["retry"] == null) {
+			$_SESSION["retry"] = 0;
+		} else {
+			$_SESSION["retry"] = Protection::decrypt(urldecode($_REQUEST["retry"]), "retry");
+			if ($_SESSION["retry"] >= 3) {
+				$_SESSION["retry"] = -1;
+				$this->retryAction();
+			}
+		}
 		
 		$this->notificationAction();
 	}
@@ -205,7 +211,7 @@ class Widget_FollowingController extends BaseController {
 			$this->view->assign("buttonType", "hidden");
 		} else {
 			$_SESSION["retry"] += 1;
-			if ($_SESSION["retry"] > 3) {
+			if ($_SESSION["retry"] >= 3) {
 				$invite = array (
 					"inx" => $_SESSION["inviteInx"],
 					"inviteResult" => INVITE_RESULT_NOPAY 
