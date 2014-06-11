@@ -1,6 +1,7 @@
 <?php
 require_once 'log/LoggerFactory.php';
 require_once 'util/MultiLang.php';
+require_once 'util/Protection.php';
 
 class EmailSender {
 
@@ -33,7 +34,7 @@ class EmailSender {
 
 	public static function sendRetryEmail($email, $toInviter) {
 		$email = self::adjustEmail($email, $toInviter);
-		$encryptedRetryValue = urlencode(Protection::encrypt($_SESSION["retry"], "retry"));
+		$encryptedRetryValue = urlencode(Protection::encrypt(strval($_SESSION["retry"]), $email["inviteInx"]));
 		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&retry=" . $encryptedRetryValue . "&country=" . $email["country"];
 		return self::sendEmail($email, "retry", $url);
 	}
@@ -83,8 +84,6 @@ class EmailSender {
 		$sendResult = mail($email["toEmail"], $subject, $content, $headers);
 		
 		$logger = LoggerFactory::getSysLogger();
-		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "subject: [$subject]");
-		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "content: [$content]");
 		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
 		
 		return $sendResult;

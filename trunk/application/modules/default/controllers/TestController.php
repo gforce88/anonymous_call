@@ -20,9 +20,9 @@ class TestController extends Zend_Controller_Action {
 	public function indexAction() {
 		$data = "test";
 		$key = "retry";
-		$encryptedData = urlencode(Protection::encrypt($data, $key));
+		$encryptedData = urlencode(Protection::encrypt("1", 6));
 		echo $encryptedData . "<br>";
-		$decryptedData = Protection::decrypt(urldecode($encryptedData), $key);
+		$decryptedData = Protection::decrypt(urldecode($encryptedData), 6);
 		echo $decryptedData . "<br>";
 		
 		phpinfo();
