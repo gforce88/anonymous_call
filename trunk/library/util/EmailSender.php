@@ -33,7 +33,7 @@ class EmailSender {
 
 	public static function sendRetryEmail($email, $toInviter) {
 		$email = self::adjustEmail($email, $toInviter);
-		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/widget/following?inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
+		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&country=" . $email["country"];
 		return self::sendEmail($email, "retry", $url);
 	}
 
