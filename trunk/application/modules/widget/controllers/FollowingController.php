@@ -34,6 +34,9 @@ class Widget_FollowingController extends BaseController {
 		} else if (Validator::isExpired($partner["inviteExpireDur"], $invite["inviteTime"]) || Validator::isCompleted($calls)) {
 			// The URL is expired or the call is already completed. It can NOT be inited again
 			return $this->renderScript("/notification/invalid.phtml");
+		} else if ($invite["inviteResult"] == INVITE_RESULT_NOPAY) {
+			$_SESSION["retry"] = -1;
+			$this->retryAction();
 		}
 		
 		$_SESSION["inviteInx"] = $invite["inx"];
