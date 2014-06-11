@@ -34,7 +34,7 @@ class EmailSender {
 
 	public static function sendRetryEmail($email, $toInviter) {
 		$email = self::adjustEmail($email, $toInviter);
-		$encryptedRetryValue = urlencode(Protection::encrypt(strval($_SESSION["retry"]), $email["inviteInx"]));
+		$encryptedRetryValue = urlencode(Protection::encrypt(strval($_SESSION["retry"]), strval($email["inviteInx"])));
 		$url = "http://" . $_SERVER["HTTP_HOST"] . APP_CTX . "/continue?action=following&inx=" . $email["inviteInx"] . "&token=" . $email["inviteToken"] . "&retry=" . $encryptedRetryValue . "&country=" . $email["country"];
 		return self::sendEmail($email, "retry", $url);
 	}
