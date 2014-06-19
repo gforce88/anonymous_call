@@ -119,7 +119,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropo = $this->initTropo($parameters, false);
 		
 		$confOptions = array (
-			"name" => "CONF." . $_GET["session_id"],
+			"name" => "conference",
 			"id" => "CONF." . $_GET["session_id"],
 			"mute" => false,
 			"allowSignals" => array (
