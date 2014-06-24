@@ -143,6 +143,16 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters, false);
 		
+		$call = array (
+			"inx" => $_GET["callInx"],
+			"callResult" => CALL_RESULT_1STLEG_ANSWERED,
+			"callStartTime" => new DateTime() 
+		);
+		$this->updateCallResult($call);
+		
+		$tropoService = new TropoService();
+		$tropoService->initConfCall($_GET);
+		
 		$confOptions = array (
 			"name" => "conference",
 			"id" => "CONF." . $_GET["session_id"],
