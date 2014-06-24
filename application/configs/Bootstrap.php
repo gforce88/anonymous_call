@@ -91,6 +91,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		Zend_Registry::set("IVR_SETTING", $ivr_setting);
 		$tropo_setting = $this->getOption("tropo");
 		Zend_Registry::set("TROPO_SETTING", $tropo_setting);
+		$cpa_setting = $this->getOption("cpa");
+		Zend_Registry::set("CPA_SETTING", $cpa_setting);
 	}
 	
 	// Init PayPal app context
