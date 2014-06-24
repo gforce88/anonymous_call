@@ -12,6 +12,8 @@ class Tropo_FirstlegController extends BaseTropoController {
 		parent::init();
 		$this->indicator = "1stLeg";
 		$this->userManager = new UserManager();
+		
+		$this->setting = Zend_Registry::get("CPA_SETTING");
 	}
 
 	public function indexAction() {
@@ -37,20 +39,25 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$parameters = $this->generateInteractiveParameters($_GET);
 		$tropo = $this->initTropo($parameters);
 		
-		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
-		$sentences = $ivrService->promptGreeting() . " ";
-		$this->log("Play audio: " . $sentences);
-		
 		$callOptions = array (
 			"from" => $_GET["partnerNumber"],
 			"allowSignals" => "",
-			"timeout" => floatval($_GET["maxRingDur"]),
-			"machineDetection" => $sentences 
+			"timeout" => floatval($_GET["maxRingDur"]) 
 		);
-		$tropo->call($_GET["1stLegNumber"], $callOptions);
 		
-		$this->setEvent($tropo, $parameters, "continue", "cpadetect");
+		if ($this->setting["enabled"] == "true") {
+			$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+			$sentences = $ivrService->promptGreeting() . " ";
+			$this->log("CPA play audio: " . $sentences);
+			
+			$callOptions["machineDetection"] = $sentences;
+			$this->setEvent($tropo, $parameters, "continue", "cpadetect");
+		} else {
+			$this->setEvent($tropo, $parameters, "continue", "welcome");
+		}
 		$this->setEvent($tropo, $parameters, "incomplete", "failedconnect");
+		
+		$tropo->call($_GET["1stLegNumber"], $callOptions);
 		$tropo->renderJSON();
 	}
 
@@ -110,6 +117,24 @@ class Tropo_FirstlegController extends BaseTropoController {
 				$this->joinconfAction();
 			}
 		}
+	}
+
+	public function welcomeAction() {
+		$this->log("Start welcome");
+		
+		$parameters = $this->generateInteractiveParameters($_GET);
+		$tropo = $this->initTropo($parameters, false);
+		
+		$sayOptions = array (
+			"allowSignals" => "" 
+		);
+		$ivrService = new IvrService($_GET["partnerInx"], $_GET["country"]);
+		$sentences = $ivrService->promptGreeting() . " ";
+		$tropo->say($sentences, $sayOptions);
+		$this->log("Play audio: " . $sentences);
+		
+		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$tropo->renderJson();
 	}
 
 	public function joinconfAction() {
