@@ -5,7 +5,7 @@
 		
 		<p style="margin-bottom: 4px"><span class="h2 red"><?php echo MultiLang::getText("Invitation_2", $country)?></span></p>
 		<p><span class="form"><?php echo MultiLang::getText("Invitation_3", $country)?></span></p>
-		<input type="text" name="inviterEmail" tabindex="1" />
+		<input type="email" name="inviterEmail" tabindex="1" />
 		<p class="message">
 			<span id="inviterEmailInvalid"><?php echo MultiLang::getText("Message_1", $country)?></span>
 		</p>
@@ -16,7 +16,7 @@
 			<div class="_idGenPageitem-8">
 				<img class="_idGenPageitem-7" src="<?php echo APP_CTX?>/images/Lock.png" alt="" />
 			</div>
-			<input type="text" name="inviterPhoneNumber" class="phoneNumber" onkeypress="inputCheck('[0-9-]', event)" placeholder="<?php echo MultiLang::getText("General_6", $country)?>" tabindex="1" />
+			<input type="tel" name="inviterPhoneNumber" class="phoneNumber" onkeypress="inputCheck('[0-9-]', event)" placeholder="<?php echo MultiLang::getText("General_6", $country)?>" tabindex="1" />
 			<div class="_idGenPageitem-8">
 				<img class="_idGenPageitem-7" src="<?php echo APP_CTX?>/images/Lock.png" alt="" />
 			</div>
@@ -29,7 +29,7 @@
 		<p style="margin-bottom: 4px"><span class="h2 red"><?php echo MultiLang::getText("Invitation_7", $country)?></span></p>
 		<p><span class="form"><?php echo MultiLang::getText("Invitation_8", $country)?></span></p>
 		<p><span class="form"><?php echo MultiLang::getText("Invitation_9", $country)?></span></p>
-		<input type="text" name="inviteeEmail" tabindex="1" />
+		<input type="email" name="inviteeEmail" tabindex="1" />
 		<p class="message">
 			<span id="inviteeEmailInvalid"><?php echo MultiLang::getText("Message_1", $country)?></span>
 		</p>
