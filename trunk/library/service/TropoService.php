@@ -13,12 +13,12 @@ class TropoService {
 		$this->setting = Zend_Registry::get("TROPO_SETTING");
 	}
 
-	public function initCall($paramArr) {
+	public function call1stLeg($paramArr) {
 		$params = "action=create&token=" . $this->setting["firstleg"]["token"] . "&" . http_build_query($paramArr);
 		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}
 
-	public function initConfCall($paramArr) {
+	public function call2ndLeg($paramArr) {
 		$params = "action=create&token=" . $this->setting["secondleg"]["token"] . "&" . http_build_query($paramArr);
 		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}

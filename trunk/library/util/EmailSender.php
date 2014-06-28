@@ -59,8 +59,7 @@ class EmailSender {
 
 	private static function sendEmail($email, $emailType, $url = null) {
 		$subjectParam = $contentParam = array (
-			"imgurl" => "
-		http://" . $_SERVER["HTTP_HOST"] . APP_CTX,
+			"imgurl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX,
 			"username" => $email["fromName"] 
 		);
 		
