@@ -104,17 +104,7 @@ class Tropo_FirstlegController extends BaseTropoController {
 				$this->hangupAction();
 			} else {
 				// Call started
-				$call = array (
-					"inx" => $_GET["callInx"],
-					"callResult" => CALL_RESULT_1STLEG_ANSWERED,
-					"callStartTime" => new DateTime() 
-				);
-				$this->updateCallResult($call);
-				
-				$tropoService = new TropoService();
-				$tropoService->initConfCall($_GET);
-				
-				$this->joinconfAction();
+				$this->call2ndlegAction();
 			}
 		}
 	}
@@ -133,8 +123,24 @@ class Tropo_FirstlegController extends BaseTropoController {
 		$tropo->say($sentences, $sayOptions);
 		$this->log("Play audio: " . $sentences);
 		
-		$this->setEvent($tropo, $parameters, "continue", "joinconf");
+		$this->setEvent($tropo, $parameters, "continue", "call2ndleg");
 		$tropo->renderJson();
+	}
+
+	public function call2ndlegAction() {
+		$this->log("Call 2nd leg");
+		
+		$call = array (
+			"inx" => $_GET["callInx"],
+			"callResult" => CALL_RESULT_1STLEG_ANSWERED,
+			"callStartTime" => new DateTime() 
+		);
+		$this->updateCallResult($call);
+		
+		$tropoService = new TropoService();
+		$tropoService->call2ndLeg($_GET);
+		
+		$this->joinconfAction();
 	}
 
 	public function joinconfAction() {
@@ -149,9 +155,6 @@ class Tropo_FirstlegController extends BaseTropoController {
 			"callStartTime" => new DateTime() 
 		);
 		$this->updateCallResult($call);
-		
-		$tropoService = new TropoService();
-		$tropoService->initConfCall($_GET);
 		
 		$confOptions = array (
 			"name" => "conference",
