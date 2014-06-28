@@ -281,7 +281,7 @@ class Widget_FollowingController extends BaseController {
 		
 		// Init a Tropo call
 		$tropoService = new TropoService();
-		$tropoService->initCall($paramArr);
+		$tropoService->call1stLeg($paramArr);
 	}
 
 }
