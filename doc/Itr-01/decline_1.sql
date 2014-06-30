@@ -329,7 +329,7 @@ table {
 					<td class="logo" colspan="2" width="330" bgcolor="#ffffff" align="center" valign="top" style="padding: 30px; font-size:12px ; font-family: Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;">
 						<span>
 							<a href="#" style="color:#ffffff;">
-							<img src="[imgurl]/images/Phones_AVC.png" alt="AVC logo" />
+							<img src="[imgurl]/images/[graphic].png" alt="AVC logo" />
 							</a>
 						</span>
 					</td>

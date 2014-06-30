@@ -157,11 +157,11 @@ class Widget_ResponseController extends BaseController {
 		$this->inviteManager->update($invite);
 		
 		$email = $this->userManager->findEmail($_SESSION["inviteInx"]);
-		EmailSender::sendDeclineEmail($email);
-		
 		if ($_SESSION["currentUserSex"] == MAN) {
+			EmailSender::sendDeclineEmail($email, "Phones_M2");
 			$this->view->assign("img", APP_CTX . "/images/Phones_W2.png");
 		} else {
+			EmailSender::sendDeclineEmail($email, "Phones_W2");
 			$this->view->assign("img", APP_CTX . "/images/Phones_M2.png");
 		}
 		$this->view->assign("name", $email["inviterName"]);
