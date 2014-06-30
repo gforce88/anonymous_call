@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/retry_1.sql;
+ */
 update partners set
 `retryEmailSubject` = 'Please retry to checkout Paypal',
 `retryEmailContent` = '

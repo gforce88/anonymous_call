@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/thanks_1.sql;
+ */
 update partners set
 `thanksEmailSubject` = 'Thanks for using Anonymous Voice Calling',
 `thanksEmailContent` = '

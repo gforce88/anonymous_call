@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/decline_1.sql;
+ */
 update partners set
 `declineEmailSubject` = 'You have been declined to a call [username]',
 `declineEmailContent` = '
