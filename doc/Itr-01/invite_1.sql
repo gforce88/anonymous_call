@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/invite_1.sql;
+ */
 update partners set
 `inviteEmailSubject` = 'You have been invited to call [username]',
 `inviteEmailContent` = '

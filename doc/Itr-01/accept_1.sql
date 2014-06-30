@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/accept_1.sql;
+ */
 update partners set
 `acceptEmailSubject` = '[username] accepted your invitation',
 `acceptEmailContent` = '

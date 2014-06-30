@@ -1,3 +1,6 @@
+/*
+source /root/workspace/dist/doc/Itr-01/ready_1.sql;
+ */
 update partners set
 `readyEmailSubject` = 'Your invitation was accepted by [username]',
 `readyEmailContent` = '
