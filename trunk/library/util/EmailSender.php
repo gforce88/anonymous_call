@@ -17,9 +17,9 @@ class EmailSender {
 		return self::sendEmail($email, "accept", $url);
 	}
 
-	public static function sendDeclineEmail($email) {
+	public static function sendDeclineEmail($email, $graphic) {
 		$email = self::adjustEmail($email, true);
-		return self::sendEmail($email, "decline");
+		return self::sendEmail($email, "decline", null, $graphic);
 	}
 
 	public static function sendReadyEmail($email, $toInviter) {
@@ -57,7 +57,7 @@ class EmailSender {
 		return $email;
 	}
 
-	private static function sendEmail($email, $emailType, $url = null) {
+	private static function sendEmail($email, $emailType, $url = null, $graphic = null) {
 		$subjectParam = $contentParam = array (
 			"imgurl" => "http://" . $_SERVER["HTTP_HOST"] . APP_CTX,
 			"username" => $email["fromName"] 
@@ -67,6 +67,9 @@ class EmailSender {
 		if ($url != null) {
 			$contentParam["clickurl"] = $url;
 			$message .= " URL: [$url]";
+		}
+		if ($graphic != null) {
+			$contentParam["graphic"] = $graphic;
 		}
 		if ($emailType == "thanks") {
 			$contentParam["callDuration"] = $email["callDuration"];
@@ -84,6 +87,9 @@ class EmailSender {
 		
 		$logger = LoggerFactory::getSysLogger();
 		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
+		
+		// This line is only used for testing. Comment out it before promotion.
+		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "Content: [$content]");
 		
 		return $sendResult;
 	}
