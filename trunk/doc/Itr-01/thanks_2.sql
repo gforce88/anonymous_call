@@ -1,9 +1,9 @@
 /*
-source /root/workspace/dist/doc/Itr-01/ready_1.sql;
+source /root/workspace/dist/doc/Itr-01/thanks_2.sql;
  */
 update partners set
-`readyEmailSubject` = '[username] will be calling you, get your phone ready',
-`readyEmailContent` = '
+`thanksEmailSubject` = '匿名電話サービスをご利用いただき、ありがとうございました',
+`thanksEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
@@ -299,14 +299,14 @@ table {
 		</table>
 		<!-- END OF TOP LINKS BLOCK-->
 		
-		
+	
 		
 		<!-- START OF SUBJECT LINE AREA BLOCK-->
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							Get your phone ready!<br />
+							通話完了<br />
 					  </span>
 					</td>
 				</tr>
@@ -317,10 +317,12 @@ table {
 		<!-- START OF INTRO TEXT AREA BLOCK-->
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
-					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-					  <p>We will be connecting you with </p>
-						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username] </span>
-				  <p>momentarily!</p></td>
+					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>匿名電話サービスをご利用いただき、ありがとうございました<br />
+				      </p>
+					  <p>&nbsp;</p>
+					  <p>通話期間: [callDuration] <br />
+						通信料期間: [billableDuration] <br />
+						通信料: [chargeAmount] [chargeCurrency] </p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
@@ -366,4 +368,4 @@ table {
 </table>
 </body>
 </html>
-' where inx = 1;
+' where inx = 2;

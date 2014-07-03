@@ -1,8 +1,8 @@
 /*
-source /root/workspace/dist/doc/Itr-01/ready_1.sql;
+source /root/workspace/dist/doc/Itr-01/ready_2.sql;
  */
 update partners set
-`readyEmailSubject` = '[username] will be calling you, get your phone ready',
+`readyEmailSubject` = '[username]さんから今にも電話が来ます，携帯電話を準備してください',
 `readyEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
@@ -306,7 +306,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							Get your phone ready!<br />
+							携帯電話を準備してください！<br />
 					  </span>
 					</td>
 				</tr>
@@ -318,9 +318,9 @@ table {
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-					  <p>We will be connecting you with </p>
-						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username] </span>
-				  <p>momentarily!</p></td>
+					  <p>まもなく</p>
+						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username]</span>さんとの
+				  <p>電話が始まります</p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
@@ -366,4 +366,4 @@ table {
 </table>
 </body>
 </html>
-' where inx = 1;
+' where inx = 2;

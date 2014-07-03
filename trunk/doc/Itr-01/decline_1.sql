@@ -2,7 +2,7 @@
 source /root/workspace/dist/doc/Itr-01/decline_1.sql;
  */
 update partners set
-`declineEmailSubject` = 'You have been declined to a call [username]',
+`declineEmailSubject` = 'Sorry, [username] is not ready to speak',
 `declineEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 

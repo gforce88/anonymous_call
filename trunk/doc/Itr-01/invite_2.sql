@@ -1,9 +1,9 @@
 /*
-source /root/workspace/dist/doc/Itr-01/ready_1.sql;
+source /root/workspace/dist/doc/Itr-01/invite_2.sql;
  */
 update partners set
-`readyEmailSubject` = '[username] will be calling you, get your phone ready',
-`readyEmailContent` = '
+`inviteEmailSubject` = '[username]さんからの通話招待が届いています',
+`inviteEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head> 
@@ -305,9 +305,7 @@ table {
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
-						<span>
-							Get your phone ready!<br />
-					  </span>
+						<span>[username]さんからの<br />通話招待が届いています</span>
 					</td>
 				</tr>
 			</table>
@@ -318,9 +316,19 @@ table {
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-					  <p>We will be connecting you with </p>
-						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username] </span>
-				  <p>momentarily!</p></td>
+						<p>
+匿名電話サービスで<br />
+続けるには下のボタンを押してください</p>
+						
+					  <br />
+						
+						<p align="center">
+							<a href="[clickurl]" style="color:#ffffff; text-transform: uppercase; background:#CC0000; font-style: normal; border-top: 10px solid #CC0000; border-right: 15px solid #CC0000; border-bottom: 10px solid #CC0000; border-left: 15px solid #CC0000;">
+							次へ
+							</a>
+						</p>
+						
+					</td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
@@ -366,4 +374,4 @@ table {
 </table>
 </body>
 </html>
-' where inx = 1;
+' where inx = 2;
