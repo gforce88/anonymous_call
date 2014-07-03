@@ -2,7 +2,7 @@
 source /root/workspace/dist/doc/Itr-01/invite_1.sql;
  */
 update partners set
-`inviteEmailSubject` = 'You have been invited to call [username]',
+`inviteEmailSubject` = '[username] has invited you to a call',
 `inviteEmailContent` = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"> 
@@ -305,9 +305,7 @@ table {
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
-						<span>
-							You have been invited to call<br />
-						[username]</span>
+						<span>You have been invited to call<br />[username]</span>
 					</td>
 				</tr>
 			</table>

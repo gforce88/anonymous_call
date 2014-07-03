@@ -317,12 +317,12 @@ table {
 		<!-- START OF INTRO TEXT AREA BLOCK-->
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
-					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>Thanks for using Anonymous Voice Calling.<br />
+					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>Thanks for using Anonymous Voice Calling<br />
 				      </p>
 					  <p>&nbsp;</p>
 					  <p>Call Duration: [callDuration] <br />
-Billable Duration: [billableDuration] <br />
-Charge Amount: [chargeAmount] [chargeCurrency] </p></td>
+						Billable Duration: [billableDuration] <br />
+						Amount: [chargeAmount] [chargeCurrency] </p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
