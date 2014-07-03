@@ -89,7 +89,7 @@ class EmailSender {
 		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "$message Result: [$sendResult]");
 		
 		// This line is only used for testing. Comment out it before promotion.
-		$logger->logInfo($email["partnerInx"], $email["inviteInx"], "Content: [$content]");
+		// $logger->logInfo($email["partnerInx"], $email["inviteInx"], "Content: [$content]");
 		
 		return $sendResult;
 	}
