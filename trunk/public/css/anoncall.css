@@ -35,12 +35,11 @@ article {
 	margin: 0;
 	page-break-after: auto;
 	page-break-before: auto;
-	text-align: left;
+	text-align: center;
 	text-decoration: none;
 	text-indent: 0;
 	text-transform: none;
 	widows: 1;
-	text-align: center;
 }
 
 article div {
