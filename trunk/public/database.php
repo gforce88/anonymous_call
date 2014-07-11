@@ -426,12 +426,12 @@ header("Content-Type: text/html");
 	<form id="TestServerForm" action="#" onSubmit="return false;">
 	<input type=hidden id="actn" value="C">
 	<table>
-		<tr class="mysql"><td width="35%">Hostname/IP Address:</td><td><input type=text id="host" placeholder="localhost"></td></tr>
-		<tr class="mysql"><td>Port:</td><td><input type=text id="port" placeholder="3306"></td></tr>
-		<tr class="pgsql"><td>Initial Database:</td><td><input type=text id="db" placeholder="template1"></td></tr>
-		<tr class="mysql"><td>Username:</td><td><input type=text id="login" placeholder="root"></td></tr>
-		<tr class="mysql"><td>Password:</td><td><input type=password id="password" placeholder=""></td></tr>
-		<tr class="sqlite"><td>Database File:</td><td><input type=text id="dbfile" placeholder="sqlite.db"></td></tr>
+		<tr class="mysql"><td width="35%">Hostname/IP Address:</td><td><input type=text id="host"></td></tr>
+		<tr class="mysql"><td>Port:</td><td><input type=text id="port"></td></tr>
+		<tr class="pgsql"><td>Initial Database:</td><td><input type=text id="db"></td></tr>
+		<tr class="mysql"><td>Username:</td><td><input type=text id="login"></td></tr>
+		<tr class="mysql"><td>Password:</td><td><input type=password id="password"></td></tr>
+		<tr class="sqlite"><td>Database File:</td><td><input type=text id="dbfile"></td></tr>
 		<tr><td></td><td><br><input id="TestButton" type="submit" value="Test Connection" onClick="doServerTest()"></td></tr>
 	</table>
 	</form>
