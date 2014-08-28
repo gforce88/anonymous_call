@@ -306,7 +306,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							通話完了<br />
+							ありがとうございました。<br />
 					  </span>
 					</td>
 				</tr>
@@ -317,12 +317,12 @@ table {
 		<!-- START OF INTRO TEXT AREA BLOCK-->
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
-					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>匿名電話サービスをご利用いただき、ありがとうございました<br />
+					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>匿名通話をご利用いただきありがとうございました。<br />
 				      </p>
 					  <p>&nbsp;</p>
-					  <p>通話期間: [callDuration] <br />
-						通信料期間: [billableDuration] <br />
-						通信料: [chargeAmount] [chargeCurrency] </p></td>
+					  <p>通話時間: [callDuration] <br />
+						課金通話時間: [billableDuration] <br />
+						ご利用金額: [chargeAmount] [chargeCurrency] </p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->

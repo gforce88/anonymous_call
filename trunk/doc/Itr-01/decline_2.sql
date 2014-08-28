@@ -306,7 +306,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							通話招待失敗<br />
+							申し訳ありません<br />
 					  </span>
 					</td>
 				</tr>
@@ -319,7 +319,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
 					  <p><span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username]</span>さんの</p>
-			      <p>招待に失敗しました</p></td>
+			      <p>まだ通話の準備ができていません。</p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->

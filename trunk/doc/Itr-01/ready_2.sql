@@ -306,7 +306,7 @@ table {
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
 						<span>
-							携帯電話を準備してください！<br />
+							電話を準備してください。<br />
 					  </span>
 					</td>
 				</tr>
@@ -318,9 +318,7 @@ table {
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-					  <p>まもなく</p>
-						<span align="center" valign="top" style="padding: 30px; font-size:28px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#CC0000; text-transform: uppercase;">[username]</span>さんとの
-				  <p>電話が始まります</p></td>
+					  <p>すぐに通話を開始します。</p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
