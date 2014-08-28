@@ -305,7 +305,7 @@ table {
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
-						<span>問題が出ます</span>
+						<span>申し訳ありません</span>
 					</td>
 				</tr>
 			</table>
@@ -316,15 +316,15 @@ table {
 	  <table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
-						<p>クレジットカードの処理に失敗しました</p>
+						<p>クレジットカードの処理に失敗しました。</p>
 						<p>&nbsp;</p>
-						<p>下のボタンを押して再度実行して下さい</p>
+						<p>下のボタンをクリックして再度実行お願いします。</p>
 						
 					  <br />
 						
 						<p align="center">
 							<a href="[clickurl]" style="color:#ffffff; text-transform: uppercase; background:#CC0000; font-style: normal; border-top: 10px solid #CC0000; border-right: 15px solid #CC0000; border-bottom: 10px solid #CC0000; border-left: 15px solid #CC0000;">
-							もう一度
+							再実行
 							</a>
 						</p>
 						

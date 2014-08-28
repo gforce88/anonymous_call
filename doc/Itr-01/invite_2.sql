@@ -305,7 +305,7 @@ table {
 			<table class="table-660" width="660" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#CC0000" style="padding:0; margin: 0; ">
 				<tr>
 					<td width="660" bgcolor="#CC0000" align="center" valign="top" style="padding: 30px; font-size:32px ; font-family: Helvetica, Arial, sans-serif; line-height: 42px; color:#ffffff; text-transform: uppercase;">
-						<span>[username]さんからの<br />通話招待が届いています</span>
+						<span>あなたへ通話の招待が届いています</span>
 					</td>
 				</tr>
 			</table>
@@ -317,14 +317,14 @@ table {
 				<tr>
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;">
 						<p>
-匿名電話サービスで<br />
-続けるには下のボタンを押してください</p>
+匿名通話を続けるには<br />
+下のボタンをクリックしてください。</p>
 						
 					  <br />
 						
 						<p align="center">
 							<a href="[clickurl]" style="color:#ffffff; text-transform: uppercase; background:#CC0000; font-style: normal; border-top: 10px solid #CC0000; border-right: 15px solid #CC0000; border-bottom: 10px solid #CC0000; border-left: 15px solid #CC0000;">
-							次へ
+							続く
 							</a>
 						</p>
 						
