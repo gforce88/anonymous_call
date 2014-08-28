@@ -320,9 +320,9 @@ table {
 					<td width="660" bgcolor="#ffffff" align="center" style="padding: 40px 30px; font-size:18px; font-family: Helvetica, Arial, sans-serif; line-height: 26px; color:#000;"><p>匿名通話をご利用いただきありがとうございました。<br />
 				      </p>
 					  <p>&nbsp;</p>
-					  <p>通話時間: [callDuration] <br />
-						課金通話時間: [billableDuration] <br />
-						ご利用金額: [chargeAmount] [chargeCurrency] </p></td>
+					  <p>通話時間: [callDuration] 秒<br />
+						課金通話時間: [billableDuration] 秒<br />
+						ご利用金額: [chargeAmount] 円</p></td>
 				</tr>
 			</table>
 		<!-- END OF INTRO TEXT BLOCK-->
