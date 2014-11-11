@@ -11,7 +11,7 @@
 require __DIR__ . '/../bootstrap.php';
 use PayPal\Api\Payment;
 
-$paymentId = "PAY-0XL713371A312273YKE2GCNI";
+$paymentId = "PAY-2AH507590P6615624KRCTUSY";
 
 // ### Retrieve payment
 // Retrieve the payment object by calling the
@@ -21,16 +21,19 @@ $paymentId = "PAY-0XL713371A312273YKE2GCNI";
 // (See bootstrap.php for more on `ApiContext`)
 try {
 	$payment = Payment::get($paymentId, $apiContext);
-} catch (\PPConnectionException $ex) {
+} catch (PayPal\Exception\PPConnectionException $ex) {
 	echo "Exception:" . $ex->getMessage() . PHP_EOL;
 	var_dump($ex->getData());
 	exit(1);
 }
 ?>
 <html>
+<head>
+	<title>Lookup a payment</title>
+</head>
 <body>
 	<div>Retrieving Payment ID: <?php echo $paymentId;?></div>
-	<pre><?php var_dump($payment->toArray());?></pre>
+	<pre><?php echo $payment->toJSON(128);?></pre>
 	<a href='../index.html'>Back</a>
 </body>
 </html>
