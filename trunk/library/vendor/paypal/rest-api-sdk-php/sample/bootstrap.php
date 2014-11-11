@@ -4,54 +4,81 @@
  */
 
 // Include the composer autoloader
-if(!file_exists(__DIR__ .'/vendor/autoload.php')) {
-	echo "The 'vendor' folder is missing. You must run 'composer update' to resolve application dependencies.\nPlease see the README for more information.\n";
-	exit(1);
+// The location of your project's vendor autoloader.
+$composerAutoload = dirname(dirname(dirname(__DIR__))) . '/autoload.php';
+if (!file_exists($composerAutoload)) {
+    //If the project is used as its own project, it would use rest-api-sdk-php composer autoloader.
+    $composerAutoload = dirname(__DIR__) . '/vendor/autoload.php';
+
+
+    if (!file_exists($composerAutoload)) {
+        echo "The 'vendor' folder is missing. You must run 'composer update' to resolve application dependencies.\nPlease see the README for more information.\n";
+        exit(1);
+    }
 }
-require __DIR__ . '/vendor/autoload.php';
-define("PP_CONFIG_PATH", __DIR__);
+require $composerAutoload;
+require __DIR__ . '/common.php';
 
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 
-// ### Api Context
-// Pass in a `PayPal\Rest\ApiContext` object to authenticate 
-// the call. You can also send a unique request id 
-// (that ensures idempotency). The SDK generates
-// a request id if you do not pass one explicitly. 
-$apiContext = new ApiContext(new OAuthTokenCredential(
-		'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-		'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'));
-// Uncomment this step if you want to use per request 
-// dynamic configuration instead of using sdk_config.ini
-/*
-$apiContext->setConfig(array(
-	'mode' => 'sandbox',
-	'http.ConnectionTimeOut' => 30,
-	'log.LogEnabled' => true,
-	'log.FileName' => '../PayPal.log',
-	'log.LogLevel' => 'FINE'
-));
-*/
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
+// Replace these values by entering your own ClientId and Secret by visiting https://developer.paypal.com/webapps/developer/applications/myapps
+$clientId = 'AYSq3RDGsmBLJE-otTkBtM-jBRd1TCQwFf9RGfwddNXWz0uFU9ztymylOhRS';
+$clientSecret = 'EGnHDxD_qRPdaLdZz8iCr8N7_MzF-YHPTkjs6NKYQvQSBngp4PTTVWkPZRbL';
+
+/** @var \Paypal\Rest\ApiContext $apiContext */
+$apiContext = getApiContext($clientId, $clientSecret);
+
+return $apiContext;
 /**
- * ### getBaseUrl function
- * // utility function that returns base url for
- * // determining return/cancel urls
- * @return string
+ * Helper method for getting an APIContext for all calls
+ *
+ * @return PayPal\Rest\ApiContext
  */
-function getBaseUrl() {
+function getApiContext($clientId, $clientSecret)
+{
 
-	$protocol = 'http';
-	if ($_SERVER['SERVER_PORT'] == 443 || (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on')) {
-		$protocol .= 's';
-		$protocol_port = $_SERVER['SERVER_PORT'];
-	} else {
-		$protocol_port = 80;
-	}
+    // ### Api context
+    // Use an ApiContext object to authenticate
+    // API calls. The clientId and clientSecret for the
+    // OAuthTokenCredential class can be retrieved from
+    // developer.paypal.com
 
-	$host = $_SERVER['HTTP_HOST'];
-	$port = $_SERVER['SERVER_PORT'];
-	$request = $_SERVER['PHP_SELF'];
-	return dirname($protocol . '://' . $host . ($port == $protocol_port ? '' : ':' . $port) . $request);
+    $apiContext = new ApiContext(
+        new OAuthTokenCredential(
+            $clientId,
+            $clientSecret
+        )
+    );
+
+
+    // #### SDK configuration
+
+    // Comment this line out and uncomment the PP_CONFIG_PATH
+    // 'define' block if you want to use static file
+    // based configuration
+
+    $apiContext->setConfig(
+        array(
+            'mode' => 'sandbox',
+            'http.ConnectionTimeOut' => 30,
+            'log.LogEnabled' => true,
+            'log.FileName' => '../PayPal.log',
+            'log.LogLevel' => 'FINE',
+            'validation.level' => 'log'
+        )
+    );
+
+    /*
+    // Register the sdk_config.ini file in current directory
+    // as the configuration source.
+    if(!defined("PP_CONFIG_PATH")) {
+        define("PP_CONFIG_PATH", __DIR__);
+    }
+    */
+
+    return $apiContext;
 }
