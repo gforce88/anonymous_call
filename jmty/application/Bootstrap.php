@@ -29,5 +29,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$tropo_setting = $this->getOption("tropo");
 		Zend_Registry::set("TROPO_SETTING", $tropo_setting);
 	}
+	
+	protected function _initSpecialist() {
+		$specialist_setting = $this->getOption("specialist");
+		Zend_Registry::set("SPECIALIST_SETTING", $specialist_setting);
+	}
 }
 
