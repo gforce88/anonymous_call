@@ -97,11 +97,11 @@ class CallspecialistController extends Zend_Controller_Action {
 	
 		$tropo->on ( array (
 				"event" => "hangup",
-				"next" =>$this->app["ctx"]. "/callpatient/hangup"
+				"next" =>$this->app["ctx"]. "/callspecialist/hangup"
 		) );
 		$tropo->on ( array (
 				"event" => "continue",
-				"next" =>$this->app["ctx"]. "/callpatient/conference"
+				"next" =>$this->app["ctx"]. "/callspecialist/conference"
 		) );
 		$tropo->conference ( null, $confOptions );
 		$tropo->renderJSON ();
@@ -113,9 +113,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "hangup message: " . $tropoJson );
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
-		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time start");
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
-		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time end");
 		$this->sendNotificationWhenCallOver($row->inx);
 	}
 	
