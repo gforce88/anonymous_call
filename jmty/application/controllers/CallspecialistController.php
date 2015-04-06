@@ -113,9 +113,9 @@ class CallspecialistController extends Zend_Controller_Action {
 		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "hangup message: " . $tropoJson );
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
-		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time start");
+		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time start");
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
-		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time end");
+		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time end");
 		$this->sendNotificationWhenCallOver($row->inx);
 	}
 	
