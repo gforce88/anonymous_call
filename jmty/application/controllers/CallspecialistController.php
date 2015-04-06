@@ -110,16 +110,18 @@ class CallspecialistController extends Zend_Controller_Action {
 	
 	public function hangupAction() {
 		$tropoJson = file_get_contents ( "php://input" );
-		$this->tropologger->logInfo ( "CallpatientController", "hangupAction", "hangup message: " . $tropoJson );
+		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "hangup message: " . $tropoJson );
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
+		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time start");
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
+		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "update grp call end time end");
 		$this->sendNotificationWhenCallOver($row->inx);
 	}
 	
 	public function conferenceAction() {
 		$tropoJson = file_get_contents ( "php://input" );
-		$this->tropologger->logInfo ( "CallpatientController", "conferenceAction", "conferenceAction message: " . $tropoJson );
+		$this->tropologger->logInfo ( "CallspecialistController", "conferenceAction", "conferenceAction message: " . $tropoJson );
 	}
 	
 	// TODO 等客户完成发送EMAIL方法，

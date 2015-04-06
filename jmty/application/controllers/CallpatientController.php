@@ -114,7 +114,7 @@ class CallpatientController extends Zend_Controller_Action {
 		$this->tropologger->logInfo ( "CallpatientController", "specialistnoanswerAction", "specialist not answer : " . $tropoJson );
 		$tropo = new Tropo ();
 		//$tropo->say($this->app["hostip"].$this->app["ctx"]."/sound/03_no_answer_student.mp3");
-		$tropo->say("specialist not answer, the conference is end");
+		$tropo->say("specialist did not answer, the conference is end");
 		$tropo->renderJSON ();
 	
 	}
