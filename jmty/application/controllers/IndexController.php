@@ -18,7 +18,7 @@ class IndexController extends Zend_Controller_Action {
 		
 		$params = array ();
 		$params ["patientName"] = "xuweiming";
-		$params ["patientNumber"] = "+14159925388";
+		$params ["patientNumber"] = "+12176507163";
 		$params ["patientCreditNumber"] = "0393939kejjuudu";
 		$params ["patientEmail"] = "1274263@qq.com";
 		$params ["trytimes"] = "1";
