@@ -1,4 +1,10 @@
 <?php
+
+require_once "vendor/autoload.php";
+
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 	protected function _initApplication() {
 		// Set default timezone
@@ -34,5 +40,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$specialist_setting = $this->getOption("specialist");
 		Zend_Registry::set("SPECIALIST_SETTING", $specialist_setting);
 	}
+
+    // Init PayPal app context
+    protected function _initPayPalAppContext() {
+        $paypalSetting = $this->getOption("paypal");
+        $paypalApiCtx = new ApiContext(new OAuthTokenCredential($paypalSetting["client_id"], $paypalSetting["security"]));
+        Zend_Registry::set('PAYPAL_API_CTX', $paypalApiCtx);
+    }
+
 }
 

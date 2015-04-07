@@ -1,69 +1,103 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta http-equiv="Content-style-Type" content="text/html; charset=utf-8">
-	<title>ã‚¸ãƒ¢ãƒ†ã‚£ãƒ¼é›»è©±ç›¸è«‡ã‚µãƒ¼ãƒ“ã‚¹</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+	<meta http-equiv="Content-style-Type" content="text/html; charset=Shift_JIS">
+	<title>ƒWƒ‚ƒeƒB[“d˜b‘Š’kƒT[ƒrƒX</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/components/library/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/components/library/jquery/messages_ja.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        $.validator.addMethod("jpphone", function(value, element) {
+            /* commentted by Huan for Feathre #118
+             return this.optional(element) || /^\+(0){0,4}(81){1}[0-9]{9,11}$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(1){1}[0-9]{10}[ ]*$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(65){1}[0-9]{8}[ ]*$/.test(value);
+             */
+
+            return this.optional(element) || /^\+\d{3,18}$/.test(value) || /^\d{3,18}$/.test(value);
+
+            //return true;
+        }, "—LŒø‚È“d˜b”Ô†‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B");
+
+        $().ready(function() {
+            var validator = $('#pcsteponeForm').validate();
+
+            $('#submitLink').click(function() {
+                if (validator.form()) {
+                    $('#pcsteponeForm').submit();
+                } else {
+                    alert("fail");
+                }
+            });
+        });
+    </script>
 	</head>
 	<body>
     <div class="container">
       <div id="header"> </div>
       <div class="container_inner" style="width:1000px; background-image:none !important;">
         <div class="clearfix c_both" id="logo">
-          <div class="header_logo"> <img alt="ã‚¸ãƒ¢ãƒ†ã‚£ãƒ¼" height="33" src="images/jmty_thin.png" style="float:left" width="120"> <br class="c_both">
+          <div class="header_logo"> <img alt="ƒWƒ‚ƒeƒB[" height="33" src="images/jmty_thin.png" style="float:left" width="120"> <br class="c_both">
           </div>
           <br class="c_both">
         </div>
         <div class="clearfix" id="breadcrumbs"> <span>
-          <div> å¿…è¦é …ç›®å…¥åŠ› </div>
-          </span> <span> &nbsp;&gt;&nbsp; </span> <span> å…¥åŠ›å†…å®¹ç¢ºèª </span> <span> &nbsp;&gt;&nbsp; </span> <span> ç™»éŒ²å®Œäº† </span> <br class="c-both">
+          <div> •K—v€–Ú“ü—Í </div>
+          </span> <span> &nbsp;&gt;&nbsp; </span> <span> “ü—Í“à—eŠm”F </span> <span> &nbsp;&gt;&nbsp; </span> <span> “o˜^Š®—¹ </span> <br class="c-both">
         </div>
         <div class="page_content">
-                          <div class="text01">é›»è©±ç›¸è«‡ã‚µãƒ¼ãƒ“ã‚¹ã”åˆ©ç”¨ã«ã¯ã€ã”é€£çµ¡å…ˆã‚„ãŠæ”¯æ‰•ã„æƒ…å ±ã®å…¥åŠ›ãŒå¿…è¦ã§ã™ã€‚<br>
-                ç™»éŒ²å®Œäº†ã—ã¾ã—ãŸã‚‰é€šè©±ã‚’é–‹å§‹ã§ãã¾ã™ã€‚</div>
+                          <div class="text01">“d˜b‘Š’kƒT[ƒrƒX‚²—˜—p‚É‚ÍA‚²˜A—æ‚â‚¨x•¥‚¢î•ñ‚Ì“ü—Í‚ª•K—v‚Å‚·B<br>
+                “o˜^Š®—¹‚µ‚Ü‚µ‚½‚ç’Ê˜b‚ğŠJn‚Å‚«‚Ü‚·B</div>
             <div class="section">
               <div class="section_title">
                 <div class="section_title_inner">
-                  <h2> <span class="p"> å¿…è¦é …ç›®å…¥åŠ› </span> </h2>
+                  <h2> <span class="p"> •K—v€–Ú“ü—Í </span> </h2>
                 </div>
               </div>
               <div class="section_content">
+                <form id="pcsteponeForm" action="steptwo" method="post">
                 <table class="tabular table_two_line table_two_piece" summary="credit_1" id="credit">
                   <tbody>
                     <tr>
-                      <th>é›»è©±ç•ªå·</th>
-                      <td><input name="phone" type="text" id="phone" value="" class="code" maxlength="16" style="width:200px;"/><br><span>â€»ã“ã¡ã‚‰ã®ç•ªå·å®›ã«ç€ä¿¡ã•ã‚Œã¾ã™</span></td>
+                      <th>“d˜b”Ô†</th>
+                      <td><input name="phone" type="text" id="phone" value="" class="code required jpphone" maxlength="16" style="width:200px;"/><br><span>¦‚±‚¿‚ç‚Ì”Ô†ˆ¶‚É’…M‚³‚ê‚Ü‚·</span></td>
                     </tr>
                     <tr>
-                      <th>ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹</th>
-                      <td><input name="email" type="text" id="email" value="" class="code" maxlength="255" style="width:300px;"/></td>
+                      <th>ƒ[ƒ‹ƒAƒhƒŒƒX</th>
+                      <td><input name="email" type="text" id="email" value="" class="code required email" maxlength="255" style="width:300px;"/></td>
                     </tr>
                     <tr>
-                      <th>ã‚«ãƒ¼ãƒ‰ç¨®é¡</th>
-                      <td><select name="CardType">
+                      <th>ƒJ[ƒhí—Ş</th>
+                      <td><select name="CardType" class="required">
                           <option value="01">master</option>
                           <option value="02">visa</option>
-                          <option value="03">ã‚«ãƒ¼ãƒ‰ä¼šç¤¾</option>
+                          <option value="03">ƒJ[ƒh‰ïĞ</option>
                         </select></td>
                     </tr>
                     <tr>
-                      <th>ã‚«ãƒ¼ãƒ‰åç¾©äºº<br/>ï¼ˆåŠè§’ãƒ­ãƒ¼ãƒå­—ï¼‰</th>
-                      <td> å
-                        <input name="fname" type="text" id="fname" value="" class="code" maxlength="16" style="width:140px;"/>
-                        ã€€å§“
-                        <input name="lname" type="text" id="lname" value="" class="code" maxlength="16"  style="width:140px;"/></td>
+                      <th>ƒJ[ƒh–¼‹`l<br/>i”¼Špƒ[ƒ}šj</th>
+                      <td> –¼
+                        <input name="fname" type="text" id="fname" value="" class="code required" maxlength="16" style="width:140px;"/>
+                        @©
+                        <input name="lname" type="text" id="lname" value="" class="code required" maxlength="16"  style="width:140px;"/></td>
                     </tr>
                     <tr>
-                      <th>ã‚«ãƒ¼ãƒ‰ç•ªå·<br>
+                      <th>ƒJ[ƒh”Ô†<br>
                       </th>
-                      <td><input name="CardNo" type="text" id="Name" value="" class="code" maxlength="16" style="width:300px;"/><br/>
-                        <span>â€»ãƒã‚¤ãƒ•ãƒ³ç„¡ã—ã€‚æ•°å­—ã®ã¿</span></td>
+                      <td><input name="CardNo" type="text" id="Name" value="" class="code required number" maxlength="16" style="width:300px;"/><br/>
+                        <span>¦ƒnƒCƒtƒ“–³‚µB”š‚Ì‚İ</span></td>
                     </tr>
                     <tr>
-                      <th>ã‚«ãƒ¼ãƒ‰æœ‰åŠ¹æœŸé™</th>
-                      <td><select name="ExpireMonth">
+                      <th>ƒJ[ƒh—LŒøŠúŒÀ</th>
+                      <td><select name="ExpireMonth" class="required">
                           <option value="01">01</option>
                           <option value="02">02</option>
                           <option value="03">03</option>
@@ -77,8 +111,8 @@
                           <option value="11">11</option>
                           <option value="12">12</option>
                         </select>
-                        æœˆ
-                        <select name="ExpireYear">
+                        Œ
+                        <select name="ExpireYear" class="required">
                           <option value="15">15</option>
                           <option value="16">16</option>
                           <option value="17">17</option>
@@ -100,20 +134,21 @@
                           <option value="33">33</option>
                           <option value="34">34</option>
                         </select>
-                        å¹´ </td>
+                        ”N </td>
                     </tr>
                     <tr>
-                      <th>ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚³ãƒ¼ãƒ‰</th>
-                      <td><input name="cvv" type="text" id="cvv" value="" class="code" maxlength="4" size="6"></td>
+                      <th>ƒZƒLƒ…ƒŠƒeƒBƒR[ƒh</th>
+                      <td><input name="cvv" type="text" id="cvv" value="" class="code required number" maxlength="4" size="6"></td>
                     </tr>
                   </tbody>
                 </table>
 
                 <!-- MemberCardArray -->
 
-                <div class="btn"> <a href="pc_credit_2.html">
-                  <div>å…¥åŠ›å†…å®¹ã‚’ç¢ºèª</div>
+                <div class="btn"> <a id="submitLink">
+                  <div>“ü—Í“à—e‚ğŠm”F</div>
                   </a> </div>
+                </form>
               </div>
             </div>
             <br class="clear">
@@ -122,6 +157,6 @@
       <div id="footer">
         <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED. </div>
       </div>
-      ãƒ» </div>
+      E </div>
 </body>
 </html>
