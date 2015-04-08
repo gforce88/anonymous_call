@@ -53,7 +53,7 @@
     <div id="header"></div>
     <div class="container_inner" style="width:1000px; background-image:none !important;">
         <div class="clearfix c_both" id="logo">
-            <div class="header_logo"><img alt="ジモティー" height="33" src="images/jmty_thin.png" style="float:left"
+            <div class="header_logo"><img alt="ジモティー" height="33" src="<?php echo APP_CTX ?>/pc/images/jmty_thin.png" style="float:left"
                                           width="120"> <br class="c_both">
             </div>
             <br class="c_both">
@@ -64,7 +64,7 @@
             <span> 登録完了 </span> <br class="c-both">
         </div>
         <div class="page_content">
-            <form id="pcsteponeForm" action="steptwo" method="post">
+            <form id="pcsteponeForm" action="<?php echo APP_CTX ?>/pc/steptwo" method="post">
                 <div class="text01">電話相談サービスご利用には、ご連絡先やお支払い情報の入力が必要です。<br>
                     登録完了しましたら通話を開始できます。
                 </div>
@@ -166,15 +166,17 @@
                         <div class="btn"><a id="submitLink">
                                 <div>入力内容を確認</div>
                             </a></div>
+
+                    </div>
+                </div>
             </form>
+            <br class="clear">
         </div>
     </div>
-    <br class="clear">
+    <div id="footer">
+        <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED.</div>
+    </div>
+    ・
 </div>
-</div>
-<div id="footer">
-    <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED.</div>
-</div>
-・ </div>
 </body>
 </html>
