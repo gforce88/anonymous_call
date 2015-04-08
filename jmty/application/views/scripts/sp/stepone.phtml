@@ -1,29 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-61531837-1', 'auto');
-  ga('send', 'pageview');
-
-  Object.defineProperty(window.navigator, 'userAgent', {
-    get: function () {
-      return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
-    }
-  });
-  Object.defineProperty(window.navigator, 'vendor', {
-    get: function () {
-      return 'Apple, Inc.';
-    }
-  });
-  Object.defineProperty(window.navigator, 'platform', {
-    get: function () {
-      return 'iPhone';
-    }
-  });</script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta content="index,follow" name="robots">
@@ -31,9 +8,59 @@
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
         name="viewport">
   <meta content="telephone=no" name="format-detection">
-  <link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
+  <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo APP_CTX ?>/components/library/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/messages_ja.js"></script>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
 
+        Object.defineProperty(window.navigator, 'userAgent', {
+            get: function () {
+                return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
+            }
+        });
+        Object.defineProperty(window.navigator, 'vendor', {
+            get: function () {
+                return 'Apple, Inc.';
+            }
+        });
+        Object.defineProperty(window.navigator, 'platform', {
+            get: function () {
+                return 'iPhone';
+            }
+        });
+
+        $.validator.addMethod("jpphone", function (value, element) {
+            /* commentted by Huan for Feathre #118
+             return this.optional(element) || /^\+(0){0,4}(81){1}[0-9]{9,11}$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(1){1}[0-9]{10}[ ]*$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(65){1}[0-9]{8}[ ]*$/.test(value);
+             */
+
+            return this.optional(element) || /^\+\d{3,18}$/.test(value) || /^\d{3,18}$/.test(value);
+
+            //return true;
+        }, "有効な電話番号を入力してください。");
+
+        $().ready(function () {
+            var validator = $('#steponeForm').validate();
+
+            $('#submitLink').click(function () {
+                if (validator.form()) {
+                    $('#steponeForm').submit();
+                } else {
+                    alert("fail");
+                }
+            });
+        });
+    </script>
+</head>
 <body>
 <div id="container">
   <div id="main">
@@ -43,7 +70,7 @@
       </div>
       <div id="header_action">
         <div class="header_logo"><a href="https://jmty.jp/s">
-          <img alt="" height="40" src="images/header_logo.png" width="80"> </a></div>
+          <img alt="" height="40" src="<?php echo APP_CTX ?>/sp/images/header_logo.png" width="80"> </a></div>
         <br class="c-both">
       </div>
     </div>
@@ -53,7 +80,7 @@
     <div class="margin_top_5" id="breadcrumb_list"><span>必要項目の入力</span>&nbsp;&gt;&nbsp;入力内容確認&nbsp;&gt;&nbsp;登録完了</div>
 
     <div class="post_form">
-      <form action="credit_2.html">
+      <form action="<?php echo APP_CTX ?>/sp/steptwo" method="post" id="steponeForm">
         <div class="line">電話相談サービスご利用には、ご連絡先やお支払い情報の入力が必要です。<br>
           登録完了しましたら通話を開始できます。
         </div>
@@ -86,9 +113,9 @@
               <div class="form_select width96">
                 <div class="arrow">▼</div>
                 <select class="required" id="card_type" name="card_type">
-                  <option value="">-- 選択（必須） --</option>
-                  <option value="1" selected="selected">VISA</option>
-                  <option value="2">Master Card</option>
+                  <option value="01" selected="selected">Master Card</option>
+                  <option value="02">VISA</option>
+                  <option value="03">カード会社</option>
                 </select>
               </div>
             </div>
@@ -188,7 +215,7 @@
 
               <div class="form_submit_btn" id="post_submit">
                 <div class="input_box">
-                  <input class="prevent_double_submit submit_button" type="submit" value="入力内容を確認">
+                  <input class="prevent_double_submit submit_button" id="submitLink" type="button" value="入力内容を確認">
                 </div>
               </div>
             </div>

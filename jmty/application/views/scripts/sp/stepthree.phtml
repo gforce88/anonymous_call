@@ -1,29 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <script type="text/javascript">(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-61531837-1', 'auto');
-  ga('send', 'pageview');
-
-  Object.defineProperty(window.navigator, 'userAgent', {
-    get: function () {
-      return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
-    }
-  });
-  Object.defineProperty(window.navigator, 'vendor', {
-    get: function () {
-      return 'Apple, Inc.';
-    }
-  });
-  Object.defineProperty(window.navigator, 'platform', {
-    get: function () {
-      return 'iPhone';
-    }
-  });</script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="UTF-8">
   <meta content="index,follow" name="robots">
@@ -31,8 +8,40 @@
   <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
         name="viewport">
   <meta content="telephone=no" name="format-detection">
-  <link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        Object.defineProperty(window.navigator, 'userAgent', {
+            get: function () {
+                return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
+            }
+        });
+        Object.defineProperty(window.navigator, 'vendor', {
+            get: function () {
+                return 'Apple, Inc.';
+            }
+        });
+        Object.defineProperty(window.navigator, 'platform', {
+            get: function () {
+                return 'iPhone';
+            }
+        });
+
+        $().ready(function(){
+            $('#callAction').click(function() {
+                $('#stepthree').submit();
+            })
+        });
+    </script>
+</head>
 
 <body>
 <div id="container">
@@ -66,7 +75,18 @@
 
       <div class="form_submit_btn" id="post_submit">
         <div class="input_box">
-          <input class="prevent_double_submit submit_button" type="submit" value="すぐに通話を開始">
+            <form action="<?php echo APP_CTX ?>/sp/call" method="post" id="stepthree">
+                <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
+                <input type="hidden" name="email" value="<?php echo $this->formValue->email; ?>">
+                <input type="hidden" name="CardType" value="<?php echo $this->formValue->CardType ?>">
+                <input type="hidden" name="fname" value="<?php echo $this->formValue->fname ?>">
+                <input type="hidden" name="lname" value="<?php echo $this->formValue->lname ?>">
+                <input type="hidden" name="CardNo" value="<?php echo $this->formValue->CardNo ?>">
+                <input type="hidden" name="ExpireMonth" value="<?php echo $this->formValue->ExpireMonth ?>">
+                <input type="hidden" name="ExpireYear" value="<?php echo $this->formValue->ExpireYear ?>">
+                <input type="hidden" name="cvv" value="<?php echo $this->formValue->cvv ?>">
+                <input id="callAction" class="prevent_double_submit submit_button" type="button" value="すぐに通話を開始">
+            </form>
         </div>
       </div>
 
