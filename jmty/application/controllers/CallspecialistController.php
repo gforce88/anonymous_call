@@ -54,7 +54,8 @@ class CallspecialistController extends Zend_Controller_Action {
 		$tropo->on ( array (
 				"event" => "continue",
 				"next" => $this->app ["ctx"] . "/callspecialist/welcome",
-				"say" => "Welcome to jmty Application! Please hold on for joining the conference."
+				//"say" => "Welcome to jmty Application! Please hold on for joining the conference."
+				"say" => $this->app["hostip"].$this->app["ctx"]."/sound/voice_3.mp3"
 		) );
 		$tropo->on ( array (
 				"event" => "incomplete",
@@ -114,6 +115,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
+		
 		$this->sendNotificationWhenCallOver($row->inx);
 	}
 	

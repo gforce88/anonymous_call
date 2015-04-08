@@ -40,7 +40,8 @@ class CallpatientController extends Zend_Controller_Action {
 			$tropo->on ( array (
 					"event" => "continue",
 					"next" => $this->app ["ctx"] . "/callpatient/welcome",
-					"say" => "Welcome to jmty Application! Please hold on for joining the conference." 
+					//"say" => "Welcome to jmty Application! Please hold on for joining the conference."
+					"say" => $this->app["hostip"].$this->app["ctx"]."/sound/voice_1.mp3" 
 			) );
 			$tropo->on ( array (
 					"event" => "incomplete",
@@ -113,8 +114,8 @@ class CallpatientController extends Zend_Controller_Action {
 		$tropoJson = file_get_contents ( "php://input" );
 		$this->tropologger->logInfo ( "CallpatientController", "specialistnoanswerAction", "specialist not answer : " . $tropoJson );
 		$tropo = new Tropo ();
-		//$tropo->say($this->app["hostip"].$this->app["ctx"]."/sound/03_no_answer_student.mp3");
-		$tropo->say("specialist did not answer, the conference is end");
+		$tropo->say($this->app["hostip"].$this->app["ctx"]."/sound/voice_2.mp3");
+		//$tropo->say("specialist did not answer, the conference is end");
 		$tropo->renderJSON ();
 	
 	}
