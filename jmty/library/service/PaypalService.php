@@ -1,15 +1,26 @@
 <?php
 require_once 'log/LoggerFactory.php';
+//use PayPal\Api\CreditCard;
+//use PayPal\Api\CreditCardToken;
+//use PayPal\Api\FundingInstrument;
+//use PayPal\Api\Amount;
+//use PayPal\Api\Payer;
+//use PayPal\Api\Payment;
+//use PayPal\Api\Transaction;
+//use PayPal\Rest\ApiContext;
+//use PayPal\Auth\OAuthTokenCredential;
+//use PayPal\Exception\PPConnectionException;
+
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
-use PayPal\Api\FundingInstrument;
-use PayPal\Api\Amount;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
+use PayPal\Api\FundingInstrument;
 use PayPal\Api\Transaction;
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Exception\PPConnectionException;
 
 class PaypalService {
 	private static $CURRENCY_USD = "USD";
@@ -28,13 +39,17 @@ class PaypalService {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$card = new CreditCard();
-		$card->setFirst_name($param["firstName"]);
-		$card->setLast_name($param["lastName"]);
+		//$card->setFirst_name($param["firstName"]);
+		//$card->setLast_name($param["lastName"]);
+        $card->setFirstName($param["firstName"]);
+        $card->setLastName($param["lastName"]);
 		$card->setType($param["cardType"]);
 		$card->setNumber($param["cardNumber"]);
 		$card->setCvv2($param["cvv"]);
-		$card->setExpire_month($param["expMonth"]);
-		$card->setExpire_year($param["expYear"]);
+		//$card->setExpire_month($param["expMonth"]);
+		//$card->setExpire_year($param["expYear"]);
+        $card->setExpireMonth($param["expMonth"]);
+        $card->setExpireYear($param["expYear"]);
 		
 		try {
 			$card->create($paypalApiCtx);
@@ -56,13 +71,14 @@ class PaypalService {
 		
 		// create function instrument
 		$fi = new FundingInstrument();
-		$fi->setCredit_card_token($creditCardToken);
+		//$fi->setCredit_card_token($creditCardToken);
+        $fi->setCreditCardToken($creditCardToken);
 		
 		$payer = new Payer();
-		$payer->setPayment_method("credit_card");
-		$payer->setFunding_instruments(array (
-			$fi 
-		));
+		//$payer->setPayment_method("credit_card");
+        $payer->setPaymentMethod("credit_card");
+		//$payer->setFunding_instruments(array (
+        $payer->setFundingInstruments(array($fi));
 		
 		$amount = new Amount();
 		$amount->setCurrency($chargeCurrency);
@@ -75,9 +91,7 @@ class PaypalService {
 		$payment = new Payment();
 		$payment->setIntent("sale");
 		$payment->setPayer($payer);
-		$payment->setTransactions(array (
-			$transaction 
-		));
+		$payment->setTransactions(array ($transaction));
 		
 		try {
 			$payment->create($paypalApiCtx);
