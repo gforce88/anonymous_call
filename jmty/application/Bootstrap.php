@@ -43,8 +43,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
     // Init PayPal app context
     protected function _initPayPalAppContext() {
+        $logSetting = $this->getOption("log");
         $paypalSetting = $this->getOption("paypal");
-        $paypalApiCtx = new ApiContext(new OAuthTokenCredential($paypalSetting["client_id"], $paypalSetting["security"]));
+        $paypalApiCtx = new ApiContext(new OAuthTokenCredential($paypalSetting["client_id"], $paypalSetting["secret"]));
+        $paypalApiCtx->setConfig(array(
+            'mode' => 'sandbox',
+            'http.ConnectionTimeOut' => 30,
+            'log.LogEnabled' => true,
+            'log.FileName' => '../log/paypal.log',
+            'log.LogLevel' => 'FINE',
+            'validation.level' => 'log'
+        ));
         Zend_Registry::set('PAYPAL_API_CTX', $paypalApiCtx);
     }
 
