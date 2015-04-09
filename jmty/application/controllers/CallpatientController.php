@@ -41,7 +41,7 @@ class CallpatientController extends Zend_Controller_Action {
 					"to" => $patientNumber,
 					"timeout" => "20"
 			);
-			$tropo->call ( null, $callOptions);
+			$tropo->call ( $patientNumber, $callOptions);
 			$tropo->on ( array (
 					"event" => "continue",
 					"next" => $this->app ["ctx"] . "/callpatient/welcome",
