@@ -18,11 +18,17 @@ class IndexController extends Zend_Controller_Action {
 		$call = new Application_Model_Call ();
 		
 		$params = array ();
-		$params ["patientName"] = "xuweiming";
+		$params ["lastName"] = "xu";
+		$params ["firstName"] = "weiming";
+		$params ["firstName"] = "weiming";
 		$params ["patientNumber"] = "+12176507163";
 		$params ["patientCreditNumber"] = "0393939kejjuudu";
 		$params ["patientEmail"] = "1274263@qq.com";
 		$params ["trytimes"] = "1";
+		$params["cardType"] = "visa";
+		$params["expYear"] = "03";
+		$params["expMonth"] = "01";
+		$params["cvv"] = "332";
 		
 		$params ["inx"] = $call->createCall ( $params );
 		
