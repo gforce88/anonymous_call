@@ -10,7 +10,7 @@ class PcController extends Zend_Controller_Action {
     private static $__CardType = array(
         "01" => "master",
         "02" => "visa",
-        "03" => "カード会社",
+        "03" => "AMEX",
     );
 
 	public function init() {
