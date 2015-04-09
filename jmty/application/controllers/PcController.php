@@ -4,6 +4,7 @@ require_once 'tropo/tropo.class.php';
 require_once 'util/HttpUtil.php';
 require_once 'service/TropoService.php';
 require_once 'service/EmailService.php';
+require_once "service/PaypalService.php";
 
 class PcController extends Zend_Controller_Action {
 
@@ -84,9 +85,15 @@ class PcController extends Zend_Controller_Action {
 
         $params = array ();
         $params ["patientName"] = $formValue["Name"];
+        $params ["lastName"] = $formValue["lname"];
+        $params ["firstName"] = $formValue["fname"];
         $params ["patientNumber"] = $formValue["phone"];
         $params ["patientCreditNumber"] = $formValue["CardNo"];
         $params ["patientEmail"] = $formValue["email"];
+        $params ["cardType"] = $formValue["CardTypeName"];
+        $params ["expMonth"] = $formValue["ExpireMonth"];
+        $params ["expYear"] = $formValue["ExpireYear"];
+        $params ["cvv"] = $formValue["cvv"];
         $params ["trytimes"] = "1";
 
         $params ["inx"] = $call->createCall ( $params );
@@ -97,6 +104,25 @@ class PcController extends Zend_Controller_Action {
         $troposervice = new TropoService ();
         $troposervice->callpatient ( $arr );
     }
+
+    /*
+    public function payAction() {
+        $paypalService = new PaypalService();
+        $creditCard = array (
+            "firstName" => "xu",
+            "lastName" => "weiming",
+            "cardType" => "visa",
+            "cardNumber" => "4417119669820331",
+            "cvv" => "111",
+            "expMonth" => "12",
+            "expYear" => "2015"
+        );
+        $paypalToken = $paypalService->regist($creditCard);
+        $paypalService->charge($paypalToken, "1.00", "USD");
+
+        echo "test payment";
+    }
+    */
 
 }
 

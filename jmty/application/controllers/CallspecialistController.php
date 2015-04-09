@@ -3,6 +3,7 @@ require_once 'log/LoggerFactory.php';
 require_once 'tropo/tropo.class.php';
 require_once 'util/HttpUtil.php';
 require_once 'service/TropoService.php';
+require_once "service/PaypalService.php";
 class CallspecialistController extends Zend_Controller_Action {
 	public function init() {
 		$this->tropologger = LoggerFactory::getTropoLogger ();
@@ -115,7 +116,13 @@ class CallspecialistController extends Zend_Controller_Action {
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
-		
+
+        if ($this->doPayPalPayment($row)) {
+            //TODO 支付成功
+        } else {
+            //TODO 支付失败
+        }
+
 		$this->sendNotificationWhenCallOver($row->inx);
 	}
 	
@@ -135,5 +142,29 @@ class CallspecialistController extends Zend_Controller_Action {
 	private function sendEmailWhenSpecialistNotOnline($call){
 		$this->syslogger->logInfo ( "CallspecialistController", "sendEmailWhenSpecialistNotOnline", "specialist A,B didn't pick the call");
 	}
+
+    private function doPayPalPayment($call) {
+        $paypalService = new PaypalService();
+        $paypalService = new PaypalService();
+        $creditCard = array (
+            "firstName" => $call["firstName"],
+            "lastName" => $call["lastName"],
+            "cardType" => $call["cardType"],
+            "cardNumber" => $call["patientCreditNumber"],
+            "cvv" => $call["cvv"],
+            "expMonth" => $call["expMonth"],
+            "expYear" => $call["expYear"]
+        );
+        $paypalToken = $paypalService->regist($creditCard);
+        $roundAmount = $paypalService->adjustAmount($this->calculateAmount($call["specialistCallTime"], $call["grpCallEndTime"]), "JPY");
+        return $paypalService->charge($paypalToken, $roundAmount, "JPY");
+    }
+
+    private function calculateAmount($beginTime, $endTime) {
+        $timeDiffSec = $endTime - $beginTime;
+        $duringMin = mod($timeDiffSec, 60);
+        $amount = $this->specialistsetting["cost"] * $duringMin;
+        return $amount;
+    }
 }
 
