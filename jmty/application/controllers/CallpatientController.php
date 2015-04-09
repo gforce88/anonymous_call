@@ -36,7 +36,12 @@ class CallpatientController extends Zend_Controller_Action {
 		} else {
 			// 拨病人电话
 			$tropo = new Tropo ();
-			$tropo->call ( $patientNumber );
+// 			$tropo->call ( $patientNumber );
+			$callOptions = array (
+					"to" => $patientNumber,
+					"timeout" => "20"
+			);
+			$tropo->call ( null, $callOptions);
 			$tropo->on ( array (
 					"event" => "continue",
 					"next" => $this->app ["ctx"] . "/callpatient/welcome",
