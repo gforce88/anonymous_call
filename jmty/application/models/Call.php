@@ -11,10 +11,15 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 	public function createCall($params = array()) {
 		$this->logger->logInfo("Application_Model_Call","createCall","create call record");
 		$newrow = $this->createRow ();
-		$newrow->patientName = $params["patientName"];
+		$newrow->firstName = $params["firstName"];
+		$newrow->lastName = $params["lastName"];
 		$newrow->patientNumber = $params["patientNumber"];
 		$newrow->patientCreditNumber = $params["patientCreditNumber"];
 		$newrow->patientEmail = $params["patientEmail"];
+		$newrow->cardType = $params["cardType"];
+		$newrow->expYear = $params["expYear"];
+		$newrow->expMonth = $params["expMonth"];
+		$newrow->cvv = $params["cvv"];
 		$newrow->save();
 		return $newrow->inx;
 	}
