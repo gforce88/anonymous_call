@@ -38,7 +38,7 @@ class CallpatientController extends Zend_Controller_Action {
 			$tropo = new Tropo ();
 // 			$tropo->call ( $patientNumber );
 			$callOptions = array (
-					"timeout" => "10"
+					"timeout" => floatval("10.0")
 			);
 			$tropo->call ( $patientNumber, $callOptions);
 			$tropo->on ( array (
