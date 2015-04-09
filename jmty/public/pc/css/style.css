@@ -440,3 +440,8 @@ background: linear-gradient(top, #FFB779, #F88A2A);
 	font-size:11px;
 	color:#666;
 }
+
+label.normal { background-position: 4px -197px; color: #999999;}
+label.error { background-position: 4px -253px;color: red;display: block;clear: both; }
+label.valid { background-position: 4px 3px;color: #2666AF; }
+label.focus { background-position: 4px -365px; color: #999999; }
