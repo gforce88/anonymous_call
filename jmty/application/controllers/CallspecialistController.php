@@ -38,7 +38,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$tropo->on ( array (
 				"event" => "continue",
 				"next" => $this->app ["ctx"] . "/callspecialist/welcome",
-				"say" => "Welcome to jmty Application! Please hold on for joining the conference." 
+				"say" => $this->app["hostip"].$this->app["ctx"]."/sound/voice_3L.mp3"
 		) );
 		$tropo->on ( array (
 				"event" => "incomplete",
