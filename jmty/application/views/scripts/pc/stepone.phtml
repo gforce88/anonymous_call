@@ -64,10 +64,15 @@
             <span> 登録完了 </span> <br class="c-both">
         </div>
         <div class="page_content">
-            <form id="pcsteponeForm" action="<?php echo APP_CTX ?>/pc/steptwo" method="post">
+            <form id="pcsteponeForm" action="<?php echo APP_CTX ?>/pc/validatecreditcard" method="post">
                 <div class="text01">電話相談サービスご利用には、ご連絡先やお支払い情報の入力が必要です。<br>
                     登録完了しましたら通話を開始できます。
                 </div>
+                    <?php
+                    if (!$this->formValue->validate) {
+                        echo "<div class='text01'>Invalid credit card information. Please check and reenter.</div>";
+                    }
+                    ?>
                 <div class="section">
                     <div class="section_title">
                         <div class="section_title_inner">
@@ -79,84 +84,84 @@
                             <tbody>
                             <tr>
                                 <th>電話番号</th>
-                                <td><input name="phone" type="text" id="phone" value="" class="code required jpphone"
+                                <td><input name="phone" type="text" id="phone" value="<?php echo $this->formValue->phone ?>" class="code required jpphone"
                                            maxlength="16" style="width:200px;"/><br><span>※こちらの番号宛に着信されます</span></td>
                             </tr>
                             <tr>
                                 <th>メールアドレス</th>
-                                <td><input name="email" type="text" id="email" value="" class="code required email"
+                                <td><input name="email" type="text" id="email" value="<?php echo $this->formValue->email ?>" class="code required email"
                                            maxlength="255" style="width:300px;"/></td>
                             </tr>
                             <tr>
                                 <th>カード種類</th>
                                 <td><select name="CardType" class="required">
-                                        <option value="01">master</option>
-                                        <option value="02">visa</option>
-                                        <option value="03">AMEX</option>
+                                        <option value="01" <?php if ($this->formValue->CardType=="01") {echo "selected='selected'";} ?>>master</option>
+                                        <option value="02" <?php if ($this->formValue->CardType=="02") {echo "selected='selected'";} ?>>visa</option>
+                                        <option value="03" <?php if ($this->formValue->CardType=="03") {echo "selected='selected'";} ?>>AMEX</option>
                                     </select></td>
                             </tr>
                             <tr>
                                 <th>カード名義人<br/>（半角ローマ字）</th>
                                 <td> 名
-                                    <input name="fname" type="text" id="fname" value="" class="code required"
+                                    <input name="fname" type="text" id="fname" value="<?php echo $this->formValue->fname ?>" class="code required"
                                            maxlength="16" style="width:140px;"/>
                                     　姓
-                                    <input name="lname" type="text" id="lname" value="" class="code required"
+                                    <input name="lname" type="text" id="lname" value="<?php echo $this->formValue->lname ?>" class="code required"
                                            maxlength="16" style="width:140px;"/></td>
                             </tr>
                             <tr>
                                 <th>カード番号<br>
                                 </th>
-                                <td><input name="CardNo" type="text" id="Name" value="" class="code required number"
+                                <td><input name="CardNo" type="text" id="Name" value="<?php echo $this->formValue->CardNo ?>" class="code required number"
                                            maxlength="16" style="width:300px;"/><br/>
                                     <span>※ハイフン無し。数字のみ</span></td>
                             </tr>
                             <tr>
                                 <th>カード有効期限</th>
                                 <td><select name="ExpireMonth" class="required">
-                                        <option value="01">01</option>
-                                        <option value="02">02</option>
-                                        <option value="03">03</option>
-                                        <option value="04">04</option>
-                                        <option value="05">05</option>
-                                        <option value="06">06</option>
-                                        <option value="07">07</option>
-                                        <option value="08">08</option>
-                                        <option value="09">09</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+                                        <option value="01" <?php if ($this->formValue->ExpireMonth=="01") {echo "selected='selected'";} ?>>01</option>
+                                        <option value="02" <?php if ($this->formValue->ExpireMonth=="02") {echo "selected='selected'";} ?>>02</option>
+                                        <option value="03" <?php if ($this->formValue->ExpireMonth=="03") {echo "selected='selected'";} ?>>03</option>
+                                        <option value="04" <?php if ($this->formValue->ExpireMonth=="04") {echo "selected='selected'";} ?>>04</option>
+                                        <option value="05" <?php if ($this->formValue->ExpireMonth=="05") {echo "selected='selected'";} ?>>05</option>
+                                        <option value="06" <?php if ($this->formValue->ExpireMonth=="06") {echo "selected='selected'";} ?>>06</option>
+                                        <option value="07" <?php if ($this->formValue->ExpireMonth=="07") {echo "selected='selected'";} ?>>07</option>
+                                        <option value="08" <?php if ($this->formValue->ExpireMonth=="08") {echo "selected='selected'";} ?>>08</option>
+                                        <option value="09" <?php if ($this->formValue->ExpireMonth=="09") {echo "selected='selected'";} ?>>09</option>
+                                        <option value="10" <?php if ($this->formValue->ExpireMonth=="10") {echo "selected='selected'";} ?>>10</option>
+                                        <option value="11" <?php if ($this->formValue->ExpireMonth=="11") {echo "selected='selected'";} ?>>11</option>
+                                        <option value="12" <?php if ($this->formValue->ExpireMonth=="12") {echo "selected='selected'";} ?>>12</option>
                                     </select>
                                     月
                                     <select name="ExpireYear" class="required">
-                                        <option value="15">15</option>
-                                        <option value="16">16</option>
-                                        <option value="17">17</option>
-                                        <option value="18">18</option>
-                                        <option value="19">19</option>
-                                        <option value="20">20</option>
-                                        <option value="21">21</option>
-                                        <option value="22">22</option>
-                                        <option value="23">23</option>
-                                        <option value="24">24</option>
-                                        <option value="25">25</option>
-                                        <option value="26">26</option>
-                                        <option value="27">27</option>
-                                        <option value="28">28</option>
-                                        <option value="29">29</option>
-                                        <option value="30">30</option>
-                                        <option value="31">31</option>
-                                        <option value="32">32</option>
-                                        <option value="33">33</option>
-                                        <option value="34">34</option>
+                                        <option value="2015" <?php if ($this->formValue->ExpireYear=="2015") {echo "selected='selected'";} ?>>2015</option>
+                                        <option value="2016" <?php if ($this->formValue->ExpireYear=="2016") {echo "selected='selected'";} ?>>2016</option>
+                                        <option value="2017" <?php if ($this->formValue->ExpireYear=="2017") {echo "selected='selected'";} ?>>2017</option>
+                                        <option value="2018" <?php if ($this->formValue->ExpireYear=="2018") {echo "selected='selected'";} ?>>2018</option>
+                                        <option value="2019" <?php if ($this->formValue->ExpireYear=="2019") {echo "selected='selected'";} ?>>2019</option>
+                                        <option value="2020" <?php if ($this->formValue->ExpireYear=="2020") {echo "selected='selected'";} ?>>2020</option>
+                                        <option value="2021" <?php if ($this->formValue->ExpireYear=="2021") {echo "selected='selected'";} ?>>2021</option>
+                                        <option value="2022" <?php if ($this->formValue->ExpireYear=="2022") {echo "selected='selected'";} ?>>2022</option>
+                                        <option value="2023" <?php if ($this->formValue->ExpireYear=="2023") {echo "selected='selected'";} ?>>2023</option>
+                                        <option value="2024" <?php if ($this->formValue->ExpireYear=="2024") {echo "selected='selected'";} ?>>2024</option>
+                                        <option value="2025" <?php if ($this->formValue->ExpireYear=="2025") {echo "selected='selected'";} ?>>2025</option>
+                                        <option value="2026" <?php if ($this->formValue->ExpireYear=="2026") {echo "selected='selected'";} ?>>2026</option>
+                                        <option value="2027" <?php if ($this->formValue->ExpireYear=="2027") {echo "selected='selected'";} ?>>2027</option>
+                                        <option value="2028" <?php if ($this->formValue->ExpireYear=="2028") {echo "selected='selected'";} ?>>2028</option>
+                                        <option value="2029" <?php if ($this->formValue->ExpireYear=="2029") {echo "selected='selected'";} ?>>2029</option>
+                                        <option value="2030" <?php if ($this->formValue->ExpireYear=="2030") {echo "selected='selected'";} ?>>2030</option>
+                                        <option value="2031" <?php if ($this->formValue->ExpireYear=="2031") {echo "selected='selected'";} ?>>2031</option>
+                                        <option value="2032" <?php if ($this->formValue->ExpireYear=="2032") {echo "selected='selected'";} ?>>2032</option>
+                                        <option value="2033" <?php if ($this->formValue->ExpireYear=="2033") {echo "selected='selected'";} ?>>2033</option>
+                                        <option value="2034" <?php if ($this->formValue->ExpireYear=="2034") {echo "selected='selected'";} ?>>2034</option>
                                     </select>
                                     年
                                 </td>
                             </tr>
                             <tr>
                                 <th>セキュリティコード</th>
-                                <td><input name="cvv" type="text" id="cvv" value="" class="code required number"
-                                           maxlength="4" size="6"></td>
+                                <td><input name="cvv" type="text" id="cvv" value="<?php echo $this->formValue->cvv ?>" class="code required number"
+                                           minlength="3" maxlength="4" size="6"></td>
                             </tr>
                             </tbody>
                         </table>

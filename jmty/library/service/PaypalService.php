@@ -9,18 +9,18 @@ require_once 'log/LoggerFactory.php';
 //use PayPal\Api\Transaction;
 //use PayPal\Rest\ApiContext;
 //use PayPal\Auth\OAuthTokenCredential;
-//use PayPal\Exception\PPConnectionException;
 
 use PayPal\Api\Amount;
-use PayPal\Api\Details;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
+//use PayPal\Api\Details;
+//use PayPal\Api\Item;
+//use PayPal\Api\ItemList;
 use PayPal\Api\CreditCard;
 use PayPal\Api\CreditCardToken;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
 use PayPal\Api\FundingInstrument;
 use PayPal\Api\Transaction;
+use PayPal\Exception\PPConnectionException;
 
 class PaypalService {
 	private static $CURRENCY_USD = "USD";
@@ -67,7 +67,8 @@ class PaypalService {
 		$paypalApiCtx = Zend_Registry::get("PAYPAL_API_CTX");
 		
 		$creditCardToken = new CreditCardToken();
-		$creditCardToken->setCredit_card_id($paypalToken);
+		//$creditCardToken->setCredit_card_id($paypalToken);
+        $creditCardToken->setCreditCardId($paypalToken);
 		
 		// create function instrument
 		$fi = new FundingInstrument();
