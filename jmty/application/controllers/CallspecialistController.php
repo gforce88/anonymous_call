@@ -152,10 +152,10 @@ class CallspecialistController extends Zend_Controller_Action {
 		$callModel = new Application_Model_Call ();
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
 
-		$port = $this->specialistsetting["port"];
-		$host = $this->specialistsetting["host"];
-		$username = $this->specialistsetting["username"];
-		$password = $this->specialistsetting["password"];
+		$port = $this->emailsetting["port"];
+		$host = $this->emailsetting["host"];
+		$username = $this->emailsetting["username"];
+		$password = $this->emailsetting["password"];
 		$appEmails = new AppEmails ($host,$port,$username,$password);
 		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "conference over , go paypal for pay ");
         if ($this->doPayPalPayment($row)) {
@@ -191,10 +191,10 @@ class CallspecialistController extends Zend_Controller_Action {
 	// 专家A,B都没接电话
 	private function sendEmailWhenSpecialistNotOnline($call){
 		$this->syslogger->logInfo ( "CallspecialistController", "sendEmailWhenSpecialistNotOnline", "TherapistNotAvail");
-		$port = $this->specialistsetting["port"];
-		$host = $this->specialistsetting["host"];
-		$username = $this->specialistsetting["username"];
-		$password = $this->specialistsetting["password"];
+		$port = $this->emailsetting["port"];
+		$host = $this->emailsetting["host"];
+		$username = $this->emailsetting["username"];
+		$password = $this->emailsetting["password"];
 		$appEmails = new AppEmails ($host,$port,$username,$password);
 		$appEmails->sendTherapistNotAvailEmail($call->patientEmail);
 	}
