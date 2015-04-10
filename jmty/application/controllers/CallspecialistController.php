@@ -129,7 +129,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$username = $this->specialistsetting["username"];
 		$password = $this->specialistsetting["password"];
 		$appEmails = new AppEmails ($host,$port,$username,$password);
-		
+		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "conference over , go paypal for pay ");
         if ($this->doPayPalPayment($row)) {
             // 支付成功
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay ok ,and send billing info to user");
