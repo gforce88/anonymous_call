@@ -11,7 +11,8 @@ class IndexController extends Zend_Controller_Action {
 	}
 	public function indexAction() {
 		// action body
-		echo "test index page";
+		$data =  "test index page";
+		$this->_helper->json ( $data, true, false, true );
 
 	}
 	
@@ -25,18 +26,17 @@ class IndexController extends Zend_Controller_Action {
 		$params ["patientNumber"] = "+12176507163";
 		$params ["patientCreditNumber"] = "0393939kejjuudu";
 		$params ["patientEmail"] = "1274263@qq.com";
-		$params ["trytimes"] = 1;
 		$params["cardType"] = "visa";
 		$params["expYear"] = "03";
 		$params["expMonth"] = "01";
 		$params["cvv"] = "332";
 		
 		$params = $call->createCall ( $params );
-// 		echo $params["inx"];
-// 		$arr = array();
-// 		$arr["inx"] = $params ["inx"];
-// 		$arr["patientNumber"] = $params ["patientNumber"];
-// 		$troposervice = new TropoService ();
-// 		$troposervice->callpatient ( $arr );
+		echo $params["inx"];
+		$arr = array();
+		$arr["inx"] = $params ["inx"];
+		$arr["patientNumber"] = $params ["patientNumber"];
+		$troposervice = new TropoService ();
+		$troposervice->callpatient ( $arr );
 	}
 }
