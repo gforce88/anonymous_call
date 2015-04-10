@@ -19,6 +19,12 @@ class TropoService {
 		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
 	}
 	
+	//拨专家b电话
+	public function callspecialistb($paramArr) {
+		$params = "action=create&token=" . $this->setting["specialistb"]["token"] . "&" . http_build_query($paramArr);
+		$response = $this->httpUtil->doHTTPPOST($this->setting["url"], $params);
+	}
+	
 	//拨病人电话
 	public function callpatient($paramArr) {
 		$params = "action=create&token=" . $this->setting["patient"]["token"] . "&" . http_build_query($paramArr);

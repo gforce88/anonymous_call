@@ -50,19 +50,47 @@ class CallspecialistController extends Zend_Controller_Action {
 	// 专家A 没接电话，再次拨号 专家B
 	public function callbAction() {
 		$tropoJson = file_get_contents ( "php://input" );
-		$this->tropologger->logInfo ( "CallpatientController", "callbAction", "callbAction message: " . $tropoJson );
-		$this->syslogger->logInfo ( "CallpatientController", "callbAction", "specialist A  is not pick the call ,will call specialist B" );
+		$this->tropologger->logInfo ( "CallspecialistController", "callbAction", "callbAction message: " . $tropoJson );
+		$this->syslogger->logInfo ( "CallspecialistController", "callbAction", "specialist A  is not pick the call ,will call specialist B" );
 
-		// 拨专家B电话
+		$result = new Result ( $tropoJson );
+		
+		$callModel = new Application_Model_Call ();
+		
+		$row = $callModel->findCallBySpecialistSessionId($result->getSessionId ());
+		
+		$arr = array();
+		$arr["inx"] = $row ["inx"];
+		$arr["specialistbnumber"] = $this->specialistsetting["b"]["phone"];
+		$troposervice = new TropoService ();
+		$troposervice->callspecialistb ( $arr );
+	}
+	
+	
+	//拨b专家的电话，接收方法
+	public function bAction(){
+		$tropoJson = file_get_contents ( "php://input" );
+		$this->tropologger->logInfo ( "CallspecialistController", "bAction", "receive message from tropo callpatient app, message is :" . $tropoJson );
+		
+		$session = new Session ( $tropoJson );
+		$inx = $session->getParameters ( "inx" );
+		$specialistbnumber = $session->getParameters ( "specialistbnumber" );
+		$specialistSessionId = $session->getId ();
+		$this->syslogger->logInfo ( "CallspecialistController", "bAction", "session  is: " . $specialistSessionId );
+		
+		$callModel = new Application_Model_Call ();
+		// 更新专家的tropo sessionId
+		$callModel->updateSpecialistSessionId ( $inx, $specialistSessionId );
+		
+		// 拨专家A电话
 		$tropo = new Tropo ();
 		$callOptions = array (
 				"timeout" => floatval("20.0")
 		);
-		$tropo->call ( $this->specialistsetting["b"]["phone"],$callOptions );
+		$tropo->call ( $specialistbnumber, $callOptions);
 		$tropo->on ( array (
 				"event" => "continue",
 				"next" => $this->app ["ctx"] . "/callspecialist/welcome",
-				//"say" => "Welcome to jmty Application! Please hold on for joining the conference."
 				"say" => $this->app["hostip"].$this->app["ctx"]."/sound/voice_3L.mp3"
 		) );
 		$tropo->on ( array (
