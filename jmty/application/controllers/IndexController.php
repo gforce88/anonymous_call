@@ -14,9 +14,10 @@ class IndexController extends Zend_Controller_Action {
 		echo "test index page";
 
 	}
+	
+	
 	public function testAction() {
 		$call = new Application_Model_Call ();
-		
 		$params = array ();
 		$params ["lastName"] = "xu";
 		$params ["firstName"] = "weiming";
@@ -30,12 +31,12 @@ class IndexController extends Zend_Controller_Action {
 		$params["expMonth"] = "01";
 		$params["cvv"] = "332";
 		
-		$params ["inx"] = $call->createCall ( $params );
-		
-		$arr = array();
-		$arr["inx"] = $params ["inx"];
-		$arr["patientNumber"] = $params ["patientNumber"];
-		$troposervice = new TropoService ();
-		$troposervice->callpatient ( $arr );
+		$params = $call->createCall ( $params );
+// 		echo $params["inx"];
+// 		$arr = array();
+// 		$arr["inx"] = $params ["inx"];
+// 		$arr["patientNumber"] = $params ["patientNumber"];
+// 		$troposervice = new TropoService ();
+// 		$troposervice->callpatient ( $arr );
 	}
 }

@@ -40,6 +40,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$specialist_setting = $this->getOption("specialist");
 		Zend_Registry::set("SPECIALIST_SETTING", $specialist_setting);
 	}
+	
+	protected function _initEmail() {
+		$email_setting = $this->getOption("mail");
+		Zend_Registry::set("EMAIL_SETTING", $email_setting);
+	}
+	
 
     // Init PayPal app context
     protected function _initPayPalAppContext() {

@@ -21,7 +21,7 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 		$newrow->expMonth = $params["expMonth"];
 		$newrow->cvv = $params["cvv"];
 		$newrow->save();
-		return $newrow->inx;
+		return $newrow;
 	}
 	
 	//更新病人的tropo sessionId

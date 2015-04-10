@@ -13,6 +13,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$this->app = Zend_Registry::get ( "APP_SETTING" );
 		$this->_helper->viewRenderer->setNeverRender ();
 		$this->specialistsetting = Zend_Registry::get ( "SPECIALIST_SETTING" );
+		$this->emailsetting = Zend_Registry::get ( "EMAIL_SETTING" );
 	}
 	public function indexAction() {
 		$tropoJson = file_get_contents ( "php://input" );
@@ -117,13 +118,34 @@ class CallspecialistController extends Zend_Controller_Action {
 		$callModel = new Application_Model_Call ();
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
 
+		$port = $this->specialistsetting["port"];
+		$host = $this->specialistsetting["host"];
+		$username = $this->specialistsetting["username"];
+		$password = $this->specialistsetting["password"];
+		$appEmails = new AppEmails ($host,$port,$username,$password);
+		
         if ($this->doPayPalPayment($row)) {
-            //TODO 支付成功
+            // 支付成功
+        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay ok ,and send billing info to user");
+        	$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+        	$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
+        	$appEmails->sendThankYouEmail($row->patientEmail, $usedmins, $chargeAmt);
         } else {
-            //TODO 支付失败
+            //支付失败
+        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay fail ,and send carderr info to user");
+        	$appEmails->sendCardErrEmail($row->patientEmail);
         }
 
-		$this->sendNotificationWhenCallOver($row->inx);
+	}
+	
+	public function testAction(){
+		$callModel = new Application_Model_Call ();
+		$row = $callModel->find("21")->current();
+		$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+		$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
+		echo $usedmins;
+		echo "<br/>";
+		echo $chargeAmt;
 	}
 	
 	public function conferenceAction() {
@@ -131,16 +153,16 @@ class CallspecialistController extends Zend_Controller_Action {
 		$this->tropologger->logInfo ( "CallspecialistController", "conferenceAction", "conferenceAction message: " . $tropoJson );
 	}
 	
-	// TODO 等客户完成发送EMAIL方法，
-	// 会议结束，发详细扣款邮件给病人
-	private function sendNotificationWhenCallOver($inx = null) {
-		$this->syslogger->logInfo ( "CallspecialistController", "sendNotificationWhenCallOver", "call is over, sending email to patient");
-	}
 	
-	//TODO TODO 等客户完成发送EMAIL方法，
 	// 专家A,B都没接电话
 	private function sendEmailWhenSpecialistNotOnline($call){
-		$this->syslogger->logInfo ( "CallspecialistController", "sendEmailWhenSpecialistNotOnline", "specialist A,B didn't pick the call");
+		$this->syslogger->logInfo ( "CallspecialistController", "sendEmailWhenSpecialistNotOnline", "TherapistNotAvail");
+		$port = $this->specialistsetting["port"];
+		$host = $this->specialistsetting["host"];
+		$username = $this->specialistsetting["username"];
+		$password = $this->specialistsetting["password"];
+		$appEmails = new AppEmails ($host,$port,$username,$password);
+		$appEmails->sendTherapistNotAvailEmail($call->patientEmail);
 	}
 
     private function doPayPalPayment($call) {
@@ -161,8 +183,7 @@ class CallspecialistController extends Zend_Controller_Action {
     }
 
     private function calculateAmount($beginTime, $endTime) {
-        $timeDiffSec = $endTime - $beginTime;
-        $duringMin = mod($timeDiffSec, 60);
+    	$duringMin = ceil ( (strtotime ( $endTime ) - strtotime ($beginTime )) / 60 );
         $amount = $this->specialistsetting["cost"] * $duringMin;
         return $amount;
     }
