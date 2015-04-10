@@ -31,7 +31,10 @@ class CallspecialistController extends Zend_Controller_Action {
 		
 		// 拨专家A电话
 		$tropo = new Tropo ();
-		$tropo->call ( $specialistanumber );
+		$callOptions = array (
+				"timeout" => floatval("20.0")
+		);
+		$tropo->call ( $specialistanumber, $callOptions);
 		$tropo->on ( array (
 				"event" => "continue",
 				"next" => $this->app ["ctx"] . "/callspecialist/welcome",
@@ -52,7 +55,10 @@ class CallspecialistController extends Zend_Controller_Action {
 
 		// 拨专家B电话
 		$tropo = new Tropo ();
-		$tropo->call ( $this->specialistsetting["b"]["phone"] );
+		$callOptions = array (
+				"timeout" => floatval("20.0")
+		);
+		$tropo->call ( $this->specialistsetting["b"]["phone"],$callOptions );
 		$tropo->on ( array (
 				"event" => "continue",
 				"next" => $this->app ["ctx"] . "/callspecialist/welcome",
