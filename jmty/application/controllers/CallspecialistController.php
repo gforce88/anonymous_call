@@ -4,6 +4,7 @@ require_once 'tropo/tropo.class.php';
 require_once 'util/HttpUtil.php';
 require_once 'service/TropoService.php';
 require_once "service/PaypalService.php";
+require_once 'emailLib/AppEmail.php';
 class CallspecialistController extends Zend_Controller_Action {
 	public function init() {
 		$this->tropologger = LoggerFactory::getTropoLogger ();
