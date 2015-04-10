@@ -20,6 +20,7 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 		$newrow->expYear = $params["expYear"];
 		$newrow->expMonth = $params["expMonth"];
 		$newrow->cvv = $params["cvv"];
+		$newrow->trytimes = 1;
 		$newrow->save();
 		return $newrow;
 	}

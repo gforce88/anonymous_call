@@ -29,7 +29,7 @@ class CallpatientController extends Zend_Controller_Action {
 		// 检查病人的拨号次数
 		$times = $callModel->checkCallTimes ( $inx );
 		
-		if ($times >= 3) {
+		if ($times > 3) {
 			$this->tropologger->logInfo ( "CallpatientController", "indexAction", "patient didn't pickup the call for 3 times. send email to notify" );
 			// 病人三次不接电话,发送邮件通知
 			$this->sendNotification ( $inx );
