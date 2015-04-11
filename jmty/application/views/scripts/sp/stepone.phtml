@@ -111,7 +111,7 @@
                 <div>
                     <div class="post_form title"><label for="phone">電話番号</label></div>
                     <div class="line">
-                        <input class="input_text required form_text_field width96" id="phone" maxlength="16"
+                        <input class="input_text jpphone required form_text_field width96" id="phone" maxlength="16"
                                name="phone" size="45" type="tel" value="<?php echo $this->formValue->phone ?>">
 
                         <div>※こちらの番号宛に着信されます</div>
@@ -130,15 +130,15 @@
                                 <select class="required" id="card_type" name="card_type">
                                     <option value="01" <?php if ($this->formValue->CardType == "01") {
                                         echo "selected='selected'";
-                                    } ?>>Master Card
+                                    } ?>>master
                                     </option>
                                     <option value="02" <?php if ($this->formValue->CardType == "02") {
                                         echo "selected='selected'";
-                                    } ?>>VISA
+                                    } ?>>visa
                                     </option>
                                     <option value="03" <?php if ($this->formValue->CardType == "03") {
                                         echo "selected='selected'";
-                                    } ?>>カード会社
+                                    } ?>>amex
                                     </option>
                                 </select>
                             </div>
