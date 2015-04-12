@@ -80,39 +80,45 @@ class SpController extends Zend_Controller_Action {
     public function callAction() {
         $this->_helper->viewRenderer->setNeverRender ();
         $formValue = array(
-            "fname" => $_POST["fname"],
-            "lname" => $_POST["lname"],
-            "Name" => $_POST["fname"] . " " . $_POST["lname"],
-            "CardNo" => $_POST["CardNo"],
-            "CardNoMask" => substr_replace($_POST["CardNo"], str_repeat("*", strlen($_POST["CardNo"]) - 4), 4),
-            "phone" => $_POST["phone"],
-            "email" => $_POST["email"],
-            "CardType" => $_POST["CardType"],
-            "CardTypeName" => self::$__CardType[$_POST["CardType"]],
-            "ExpireMonth" => $_POST["ExpireMonth"],
-            "ExpireYear" => $_POST["ExpireYear"],
-            "ExpireDate" => $_POST["ExpireMonth"] . "月" . $_POST["ExpireYear"] . "年",
-            "cvv" => $_POST["cvv"],
-            "cvvmask" => "****"
+            "fname" => $this->_getParam("fname"),
+            "lname" => $this->_getParam("lname"),
+            "Name" => $this->_getParam("fname") . " " . $this->_getParam("lname"),
+            "CardNo" => $this->_getParam("CardNo"),
+            "CardNoMask" => substr_replace($this->_getParam("CardNo"), str_repeat("*", strlen($this->_getParam("CardNo")) - 4), 4),
+            "phone" => $this->_getParam("phone"),
+            "email" => $this->_getParam("email"),
+            "CardType" => $this->_getParam("CardType"),
+            "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
+            "ExpireMonth" => $this->_getParam("ExpireMonth"),
+            "ExpireYear" => $this->_getParam("ExpireYear"),
+            "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
+            "cvv" => $this->_getParam("cvv"),
+            "cvvmask" => str_repeat("*", strlen($this->_getParam("cvv")))
         );
 
         $call = new Application_Model_Call ();
 
         $params = array ();
         $params ["patientName"] = $formValue["Name"];
+        $params ["lastName"] = $formValue["lname"];
+        $params ["firstName"] = $formValue["fname"];
         $params ["patientNumber"] = $formValue["phone"];
         $params ["patientCreditNumber"] = $formValue["CardNo"];
         $params ["patientEmail"] = $formValue["email"];
+        $params ["cardType"] = $formValue["CardTypeName"];
+        $params ["expMonth"] = $formValue["ExpireMonth"];
+        $params ["expYear"] = $formValue["ExpireYear"];
+        $params ["cvv"] = $formValue["cvv"];
         $params ["trytimes"] = "1";
 
-        $params ["inx"] = $call->createCall ( $params );
+        $params = $call->createCall ( $params );
 
         $arr = array();
         $arr["inx"] = $params ["inx"];
         $arr["patientNumber"] = $params ["patientNumber"];
         $troposervice = new TropoService ();
         $troposervice->callpatient ( $arr );
-        echo "0";
+        echo "0"; //这里如果直接返回字符 譬如 staring call. 前台无法得到，只能返回数字，然后前台再处理
     }
 
     public function validatecreditcardAction() {
