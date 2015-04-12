@@ -10,6 +10,7 @@
   <meta content="telephone=no" name="format-detection">
     <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.form.min.js"></script>
     <script type="text/javascript">
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -38,10 +39,31 @@
         */
 
         $().ready(function(){
+
+            var options = {
+                beforeSubmit:  showRequest,  //提交前处理
+                success:       showResponse,  //处理完成
+                resetForm: true,
+                dataType:  'json'
+            };
+
             $('#callAction').click(function() {
-                $('#stepthree').submit();
+                $('#stepthree').ajaxSubmit(options);
             })
         });
+
+        function showRequest(responseText, statusText)  {
+            $('#callAction').unbind("click");
+            $('#callAction').removeClass("submit_button").addClass("gray");
+        }
+        function showResponse(responseText, statusText)  {
+            if(responseText==0){
+                alert("starting call");
+            };
+            $('#callAction').click(function() {
+                alert("call has started!");
+            })
+        }
     </script>
 </head>
 

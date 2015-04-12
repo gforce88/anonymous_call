@@ -284,6 +284,46 @@ a{
   font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,Osaka,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
 }
 
+.gray div.input_box {
+    border: 1px solid #F27306;
+    width: 200px;
+    height: 44px;
+    display: inline-block;
+    background-color: #F27306;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    text-decoration: none;
+    padding: 0;
+    margin: 5px 0 0;
+}
+.gray div.input_box input {
+    margin: 0;
+    display: inline-block;
+    border: 1px solid #FFA559;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+    background: -webkit-linear-gradient(top, gray, gray);
+    background: -moz-linear-gradient(top, gray, gray);
+    background: -ms-linear-gradient(top, gray, gray);
+    background: -o-linear-gradient(top, gray, gray);
+    background: linear-gradient(top, gray, gray);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+    width: 200px;
+    height: 44px;
+    line-height: 33px;
+    font-weight: bold;
+    font-size: 17px;
+    color: #FFF;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,Osaka,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+
 
 
 

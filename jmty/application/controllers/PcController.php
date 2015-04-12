@@ -172,13 +172,12 @@ class PcController extends Zend_Controller_Action {
 
     }
 
-    /*
     public function payAction() {
         $paypalService = new PaypalService();
         $creditCard = array (
             "firstName" => "xu",
             "lastName" => "weiming",
-            "cardType" => "visa",
+            "cardType" => "master",
             "cardNumber" => "4417119669820331",
             "cvv" => "111",
             "expMonth" => "12",
@@ -189,7 +188,5 @@ class PcController extends Zend_Controller_Action {
 
         echo "test payment";
     }
-    */
-
 }
 
