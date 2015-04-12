@@ -422,8 +422,6 @@ body{
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
 }
 
-
-
 .btn a div:hover{
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB779), color-stop(100%, #F88A2A));
 background: -webkit-linear-gradient(top, #FFB779, #F88A2A);
@@ -431,6 +429,52 @@ background: -moz-linear-gradient(top, #FFB779, #F88A2A);
 background: -ms-linear-gradient(top, #FFB779, #F88A2A);
 background: -o-linear-gradient(top, #FFB779, #F88A2A);
 background: linear-gradient(top, #FFB779, #F88A2A);
+	transition: all .3s;
+}
+
+
+.gray a div{
+  height: 58px;
+  line-height: 2.5;
+  font-size: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  border: gray 1px solid;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+  background: -webkit-linear-gradient(top, gray, gray);
+  background: -moz-linear-gradient(top, gray, gray);
+  background: -ms-linear-gradient(top, gray, gray);
+  background: -o-linear-gradient(top, gray, gray);
+  background: linear-gradient(top, gray, gray);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+}
+
+.gray a {
+  border: #F27306 1px solid;
+  width: 300px;
+  height: 60px;
+  margin:20px 0 40px 0;
+  display: inline-block;
+  background-color: #F27306;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: #CCC 2px 2px 1px;
+}
+
+.gray a div:hover{
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB779), color-stop(100%, #F88A2A));
+background: -webkit-linear-gradient(top, gray, gray);
+background: -moz-linear-gradient(top, gray, gray);
+background: -ms-linear-gradient(top, gray, gray);
+background: -o-linear-gradient(top, gray, gray);
+background: linear-gradient(top, gray, gray);
 	transition: all .3s;
 }
 

@@ -18,11 +18,7 @@ class IndexController extends Zend_Controller_Action {
 	}
 	
 	public function aaAction(){
-		$appEmails = new AppEmails ("smtp.gmail.com",465,"jmty-notifications@incognitosys.com","jjmmyy*913");
-		echo "123";
-		$appEmails->sendTherapistNotAvailEmail ('1274263@qq.com');
-		
-		echo "222";
+		echo "0";
 		//$appEmails->sendThankYouEmail ('1274263@qq.com',60,5000);
 		
 		//$appEmails->sendCardErrEmail ('1274263@qq.com');

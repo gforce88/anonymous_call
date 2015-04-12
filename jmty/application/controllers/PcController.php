@@ -118,7 +118,7 @@ class PcController extends Zend_Controller_Action {
         $arr["patientNumber"] = $params ["patientNumber"];
         $troposervice = new TropoService ();
         $troposervice->callpatient ( $arr );
-        echo "starting call...";
+       	echo "0"; //这里如果直接返回字符 譬如 staring call. 前台无法得到，只能返回数字，然后前台再处理
     }
 
     public function validatecreditcardAction() {
