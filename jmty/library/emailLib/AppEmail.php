@@ -69,7 +69,7 @@ PCから<br/>
 ';
 
 
-genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,'emailTemplate.html' );
+genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,APPLICATION_PATH."/configs/emailTemplate.html" );
 	
 }
 
@@ -99,7 +99,7 @@ PCから<br/>
 ';
 
 
-genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,'emailTemplate.html' );
+genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,APPLICATION_PATH."/configs/emailTemplate.html" );
 	
 }
 }
