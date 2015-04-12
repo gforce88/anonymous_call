@@ -111,7 +111,7 @@ class PcController extends Zend_Controller_Action {
         $params ["cvv"] = $formValue["cvv"];
         $params ["trytimes"] = "1";
 
-        $params ["inx"] = $call->createCall ( $params );
+        $params = $call->createCall ( $params );
 
         $arr = array();
         $arr["inx"] = $params ["inx"];
