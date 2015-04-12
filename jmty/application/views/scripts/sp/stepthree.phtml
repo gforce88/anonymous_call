@@ -54,7 +54,7 @@
 
         function showRequest(responseText, statusText)  {
             $('#callAction').unbind("click");
-            $('#callAction').removeClass("submit_button").addClass("gray");
+            $('#post_submit').removeClass("form_submit_btn").addClass("form_submit_btn_disable");
         }
         function showResponse(responseText, statusText)  {
             if(responseText==0){
@@ -99,6 +99,7 @@
 
       <div class="form_submit_btn" id="post_submit">
         <div class="input_box">
+            <input id="callAction" class="prevent_double_submit submit_button" type="button" value="すぐに通話を開始">
             <form action="<?php echo APP_CTX ?>/sp/call" method="post" id="stepthree">
                 <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
                 <input type="hidden" name="email" value="<?php echo $this->formValue->email; ?>">
@@ -109,7 +110,6 @@
                 <input type="hidden" name="ExpireMonth" value="<?php echo $this->formValue->ExpireMonth ?>">
                 <input type="hidden" name="ExpireYear" value="<?php echo $this->formValue->ExpireYear ?>">
                 <input type="hidden" name="cvv" value="<?php echo $this->formValue->cvv ?>">
-                <input id="callAction" class="prevent_double_submit submit_button" type="button" value="すぐに通話を開始">
             </form>
         </div>
       </div>
