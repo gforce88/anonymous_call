@@ -78,6 +78,7 @@ class PcController extends Zend_Controller_Action {
 	}
 
     public function callAction() {
+    	$this->_helper->viewRenderer->setNeverRender ();
         $formValue = array(
             "fname" => $this->_getParam("fname"),
             "lname" => $this->_getParam("lname"),
@@ -117,6 +118,7 @@ class PcController extends Zend_Controller_Action {
         $arr["patientNumber"] = $params ["patientNumber"];
         $troposervice = new TropoService ();
         $troposervice->callpatient ( $arr );
+        echo "starting call...";
     }
 
     public function validatecreditcardAction() {
