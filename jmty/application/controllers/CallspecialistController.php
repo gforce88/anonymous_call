@@ -170,12 +170,12 @@ class CallspecialistController extends Zend_Controller_Action {
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "mail has send to admin");
         } else {
             //支付失败
-        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay fail ,and send carderr info to user");
+        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay fail ,and send carderr info to admins");
         	$appEmails->sendCardErrEmail("ge.szeto@gmail.com");
         	$appEmails->sendCardErrEmail("gwu@incognitosys.com");
         	$appEmails->sendCardErrEmail("wkrogmann@incognitosys.com");
         	$appEmails->sendCardErrEmail("daihuan@topmoon.com.cn");
-        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "mail has send to ".$row->patientEmail);
+        	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "mail has send to admins");
         }
 
 	}
