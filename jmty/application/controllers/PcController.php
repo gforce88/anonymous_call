@@ -14,6 +14,12 @@ class PcController extends Zend_Controller_Action {
         "03" => "AMEX",
     );
 
+    private static $__PayCardType = array(
+        "01" => "mastercard",
+        "02" => "visa",
+        "03" => "amex",
+    );
+
 	public function init() {
         $this->specialistsetting = Zend_Registry::get ( "SPECIALIST_SETTING" );
         $this->app = Zend_Registry::get ( "APP_SETTING" );
@@ -88,7 +94,7 @@ class PcController extends Zend_Controller_Action {
             "phone" => $this->_getParam("phone"),
             "email" => $this->_getParam("email"),
             "CardType" => $this->_getParam("CardType"),
-            "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
+            "CardTypeName" => self::$__PayCardType[$this->_getParam("CardType")],
             "ExpireMonth" => $this->_getParam("ExpireMonth"),
             "ExpireYear" => $this->_getParam("ExpireYear"),
             "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
@@ -126,7 +132,7 @@ class PcController extends Zend_Controller_Action {
         $creditCard = array (
             "firstName" => $this->_getParam("fname"),
             "lastName" => $this->_getParam("lname"),
-            "cardType" => self::$__CardType[$this->_getParam("CardType")],
+            "cardType" => self::$__PayCardType[$this->_getParam("CardType")],
             "cardNumber" => $this->_getParam("CardNo"),
             "cvv" => $this->_getParam("cvv"),
             "expMonth" => $this->_getParam("ExpireMonth"),
@@ -177,14 +183,14 @@ class PcController extends Zend_Controller_Action {
         $creditCard = array (
             "firstName" => "xu",
             "lastName" => "weiming",
-            "cardType" => "master",
+            "cardType" => "visa",
             "cardNumber" => "4417119669820331",
             "cvv" => "111",
             "expMonth" => "12",
             "expYear" => "2015"
         );
         $paypalToken = $paypalService->regist($creditCard);
-        $paypalService->charge($paypalToken, "1.00", "USD");
+        $paypalService->charge($paypalToken, 0, "USD");
 
         echo "test payment";
     }

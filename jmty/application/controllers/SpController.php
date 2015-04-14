@@ -14,6 +14,12 @@ class SpController extends Zend_Controller_Action {
         "03" => "AMEX",
     );
 
+    private static $__PayCardType = array(
+        "01" => "mastercard",
+        "02" => "visa",
+        "03" => "amex",
+    );
+
 	public function init() {
         $this->specialistsetting = Zend_Registry::get ( "SPECIALIST_SETTING" );
 	}
@@ -88,7 +94,7 @@ class SpController extends Zend_Controller_Action {
             "phone" => $this->_getParam("phone"),
             "email" => $this->_getParam("email"),
             "CardType" => $this->_getParam("CardType"),
-            "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
+            "CardTypeName" => self::$__PayCardType[$this->_getParam("CardType")],
             "ExpireMonth" => $this->_getParam("ExpireMonth"),
             "ExpireYear" => $this->_getParam("ExpireYear"),
             "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
@@ -126,7 +132,7 @@ class SpController extends Zend_Controller_Action {
         $creditCard = array (
             "firstName" => $this->_getParam("fname"),
             "lastName" => $this->_getParam("lname"),
-            "cardType" => self::$__CardType[$this->_getParam("card_type")],
+            "cardType" => self::$__PayCardType[$this->_getParam("card_type")],
             "cardNumber" => $this->_getParam("card_number"),
             "cvv" => $this->_getParam("card_cvv"),
             "expMonth" => $this->_getParam("ExpireMonth"),
