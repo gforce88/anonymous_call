@@ -18,10 +18,18 @@ class IndexController extends Zend_Controller_Action {
 	}
 	
 	public function aaAction(){
-		echo "0";
-		//$appEmails->sendThankYouEmail ('1274263@qq.com',60,5000);
-		
-		//$appEmails->sendCardErrEmail ('1274263@qq.com');
+		date_default_timezone_set('Asia/Tokyo');
+		$currenthour = (int)date("H",time());
+		echo $currenthour;
+		if($currenthour>7&&$currenthour<17){
+			echo "7-17";
+		}else{
+			echo "out";
+		}
+	}
+	
+	public function sorryAction(){
+		echo "We're sorry, this service is not available now, please try back tomorrow at 9am";
 	}
 	
 	public function testAction() {
