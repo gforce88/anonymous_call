@@ -1,10 +1,11 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 require_once 'genericEmail.php';
 
 class AppEmails {
 	private $emailSrvParams = array();
+	
 
 	public function __construct($emailHost,$emailPort,$userName,$password) {
 		
@@ -96,6 +97,23 @@ PCから<br/>
 スマートフォンから<br/>
 <a href="http://www.yahoo.com">電話相談する</a>
 <br>
+';
+
+
+genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,APPLICATION_PATH."/configs/emailTemplate.html" );
+	
+}
+
+public function sendAdminCardErrEmail($emailAddr,$userEmailAddr,$min,$chargeAmt) {
+	
+$emailSubject = "[FAILED TO CHARGE CREDIT CARD]";
+
+$mailcontent = '
+<br>'.
+'User email: '.$userEmailAddr.'<br>'.
+'Mins used: '.$min.'<br>'.
+'Failed charge amt: '.$chargeAmt.
+'<br><br>
 ';
 
 

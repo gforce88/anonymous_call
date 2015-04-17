@@ -14,12 +14,8 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 		$newrow->firstName = $params["firstName"];
 		$newrow->lastName = $params["lastName"];
 		$newrow->patientNumber = $params["patientNumber"];
-		$newrow->patientCreditNumber = $params["patientCreditNumber"];
 		$newrow->patientEmail = $params["patientEmail"];
-		$newrow->cardType = $params["cardType"];
-		$newrow->expYear = $params["expYear"];
-		$newrow->expMonth = $params["expMonth"];
-		$newrow->cvv = $params["cvv"];
+		$newrow->paypaltoken = $params["paypaltoken"];
 		$newrow->trytimes = 1;
 		$newrow->save();
 		return $newrow;

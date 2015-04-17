@@ -149,6 +149,7 @@ class CallspecialistController extends Zend_Controller_Action {
 	public function hangupAction() {
 		$tropoJson = file_get_contents ( "php://input" );
 		$this->tropologger->logInfo ( "CallspecialistController", "hangupAction", "hangup message: " . $tropoJson );
+		/*
 		$result = new Result ( $tropoJson );
 		$callModel = new Application_Model_Call ();
 		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
@@ -159,11 +160,13 @@ class CallspecialistController extends Zend_Controller_Action {
 		$password = $this->emailsetting["password"];
 		$appEmails = new AppEmails ($host,$port,$username,$password);
 		$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "conference over , go paypal for pay ");
+		$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+        $chargeAmt = $this->specialistsetting["cost"] * $usedmins;
         if ($this->doPayPalPayment($row)) {
             // 支付成功
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay ok ,and send billing info to user");
-        	$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
-        	$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
+        	//$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+        	//$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
         	$appEmails->sendThankYouEmail($row->patientEmail, $usedmins, $chargeAmt);
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "mail has send to".$row->patientEmail);
         	$appEmails->sendThankYouEmail ('incognito-info@unisrv.jp',$usedmins,$chargeAmt);
@@ -171,12 +174,13 @@ class CallspecialistController extends Zend_Controller_Action {
         } else {
             //支付失败
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "paypal pay fail ,and send carderr info to admins");
-        	$appEmails->sendCardErrEmail("ge.szeto@gmail.com");
-        	$appEmails->sendCardErrEmail("gwu@incognitosys.com");
-        	$appEmails->sendCardErrEmail("wkrogmann@incognitosys.com");
-        	$appEmails->sendCardErrEmail("daihuan@topmoon.com.cn");
+        	$appEmails->sendAdminCardErrEmail("ge.szeto@gmail.com",$row->patientEmail, $usedmins, $chargeAmt);
+        	$appEmails->sendAdminCardErrEmail("gwu@incognitosys.com",$row->patientEmail, $usedmins, $chargeAmt);
+        	$appEmails->sendAdminCardErrEmail("wkrogmann@incognitosys.com",$row->patientEmail, $usedmins, $chargeAmt);
+        	$appEmails->sendAdminCardErrEmail("daihuan@topmoon.com.cn",$row->patientEmail, $usedmins, $chargeAmt);
         	$this->syslogger->logInfo ( "CallspecialistController", "hangupAction", "mail has send to admins");
         }
+        */
 
 	}
 	
@@ -207,22 +211,7 @@ class CallspecialistController extends Zend_Controller_Action {
 		$appEmails->sendTherapistNotAvailEmail($call->patientEmail);
 	}
 
-    private function doPayPalPayment($call) {
-        $paypalService = new PaypalService();
-        $paypalService = new PaypalService();
-        $creditCard = array (
-            "firstName" => $call["firstName"],
-            "lastName" => $call["lastName"],
-            "cardType" => $call["cardType"],
-            "cardNumber" => $call["patientCreditNumber"],
-            "cvv" => $call["cvv"],
-            "expMonth" => $call["expMonth"],
-            "expYear" => $call["expYear"]
-        );
-        $paypalToken = $paypalService->regist($creditCard);
-        $roundAmount = $paypalService->adjustAmount($this->calculateAmount($call["specialistCallTime"], $call["grpCallEndTime"]), "JPY");
-        return $paypalService->charge($paypalToken, $roundAmount, "JPY");
-    }
+    
 
     private function calculateAmount($beginTime, $endTime) {
     	$duringMin = ceil ( (strtotime ( $endTime ) - strtotime ($beginTime )) / 60 );

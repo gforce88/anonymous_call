@@ -128,6 +128,55 @@ class CallpatientController extends Zend_Controller_Action {
 	public function hangupAction() {
 		$tropoJson = file_get_contents ( "php://input" );
 		$this->tropologger->logInfo ( "CallpatientController", "hangupAction", "hangup message: " . $tropoJson );
+		
+		$result = new Result ( $tropoJson );
+		$callModel = new Application_Model_Call ();
+		$row = $callModel->updateGrpCallEndTime ( $result->getSessionId () );
+		
+		$port = $this->emailsetting["port"];
+		$host = $this->emailsetting["host"];
+		$username = $this->emailsetting["username"];
+		$password = $this->emailsetting["password"];
+		$appEmails = new AppEmails ($host,$port,$username,$password);
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "conference over , go paypal for pay ");
+		$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+		$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
+		if ($this->doPayPalPayment($row)) {
+		// 支付成功
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "paypal pay ok ,and send billing info to user");
+		//$usedmins = ceil ( (strtotime ( $row ["grpCallEndTime"] ) - strtotime ( $row ["specialistCallTime"] )) / 60 );
+		//$chargeAmt = $this->specialistsetting["cost"] * $usedmins;
+		$appEmails->sendThankYouEmail($row->patientEmail, $usedmins, $chargeAmt);
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "mail has send to".$row->patientEmail);
+		$appEmails->sendThankYouEmail ('incognito-info@unisrv.jp',$usedmins,$chargeAmt);
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "mail has send to admin");
+		} else {
+		//支付失败
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "paypal pay fail ,and send carderr info to admins");
+		$appEmails->sendAdminCardErrEmail("ge.szeto@gmail.com",$row->patientEmail, $usedmins, $chargeAmt);
+		$appEmails->sendAdminCardErrEmail("gwu@incognitosys.com",$row->patientEmail, $usedmins, $chargeAmt);
+		$appEmails->sendAdminCardErrEmail("wkrogmann@incognitosys.com",$row->patientEmail, $usedmins, $chargeAmt);
+		$appEmails->sendAdminCardErrEmail("daihuan@topmoon.com.cn",$row->patientEmail, $usedmins, $chargeAmt);
+		$this->syslogger->logInfo ( "CallpatientController", "hangupAction", "mail has send to admins");
+		}
+		
+	}
+	
+	private function doPayPalPayment($call) {
+		$paypalService = new PaypalService();
+		$paypalService = new PaypalService();
+		$creditCard = array (
+				"firstName" => $call["firstName"],
+				"lastName" => $call["lastName"],
+				"cardType" => $call["cardType"],
+				"cardNumber" => $call["patientCreditNumber"],
+				"cvv" => $call["cvv"],
+				"expMonth" => $call["expMonth"],
+				"expYear" => $call["expYear"]
+		);
+		$paypalToken = $call["paypaltoken"];
+		$roundAmount = $paypalService->adjustAmount($this->calculateAmount($call["specialistCallTime"], $call["grpCallEndTime"]), "JPY");
+		return $paypalService->charge($paypalToken, $roundAmount, "JPY");
 	}
 	
 	public function conferenceAction() {
