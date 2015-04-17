@@ -56,7 +56,8 @@ class SpController extends Zend_Controller_Action {
             "ExpireYear" => $this->_getParam("ExpireYear"),
             "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
             "cvv" => $this->_getParam("card_cvv"),
-            "cvvmask" => str_repeat("*", strlen($this->_getParam("card_cvv")))
+            "cvvmask" => str_repeat("*", strlen($this->_getParam("card_cvv"))),
+            "token" => $this->_getParam("token")
         );
 
         $this->view->formValue = (object) $formValue;
@@ -64,20 +65,8 @@ class SpController extends Zend_Controller_Action {
 
     public function stepthreeAction() {
         $formValue = array(
-            "fname" => $this->_getParam("fname"),
-            "lname" => $this->_getParam("lname"),
-            "Name" => $this->_getParam("fname") . " " . $this->_getParam("lname"),
-            "CardNo" => $this->_getParam("CardNo"),
-            "CardNoMask" => substr_replace($this->_getParam("CardNo"), str_repeat("*", strlen($this->_getParam("CardNo")) - 4), 4),
             "phone" => $this->_getParam("phone"),
-            "email" => $this->_getParam("email"),
-            "CardType" => $this->_getParam("CardType"),
-            "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
-            "ExpireMonth" => $this->_getParam("ExpireMonth"),
-            "ExpireYear" => $this->_getParam("ExpireYear"),
-            "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
-            "cvv" => $this->_getParam("cvv"),
-            "cvvmask" => str_repeat("*", strlen($this->_getParam("cvv")))
+            "token" => $this->_getParam("token")
         );
 
         $this->view->formValue = (object) $formValue;
@@ -85,43 +74,10 @@ class SpController extends Zend_Controller_Action {
 
     public function callAction() {
         $this->_helper->viewRenderer->setNeverRender ();
-        $formValue = array(
-            "fname" => $this->_getParam("fname"),
-            "lname" => $this->_getParam("lname"),
-            "Name" => $this->_getParam("fname") . " " . $this->_getParam("lname"),
-            "CardNo" => $this->_getParam("CardNo"),
-            "CardNoMask" => substr_replace($this->_getParam("CardNo"), str_repeat("*", strlen($this->_getParam("CardNo")) - 4), 4),
-            "phone" => $this->_getParam("phone"),
-            "email" => $this->_getParam("email"),
-            "CardType" => $this->_getParam("CardType"),
-            "CardTypeName" => self::$__PayCardType[$this->_getParam("CardType")],
-            "ExpireMonth" => $this->_getParam("ExpireMonth"),
-            "ExpireYear" => $this->_getParam("ExpireYear"),
-            "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
-            "cvv" => $this->_getParam("cvv"),
-            "cvvmask" => str_repeat("*", strlen($this->_getParam("cvv")))
-        );
-
-        $call = new Application_Model_Call ();
-
-        $params = array ();
-        $params ["patientName"] = $formValue["Name"];
-        $params ["lastName"] = $formValue["lname"];
-        $params ["firstName"] = $formValue["fname"];
-        $params ["patientNumber"] = $formValue["phone"];
-        $params ["patientCreditNumber"] = $formValue["CardNo"];
-        $params ["patientEmail"] = $formValue["email"];
-        $params ["cardType"] = $formValue["CardTypeName"];
-        $params ["expMonth"] = $formValue["ExpireMonth"];
-        $params ["expYear"] = $formValue["ExpireYear"];
-        $params ["cvv"] = $formValue["cvv"];
-        $params ["trytimes"] = "1";
-
-        $params = $call->createCall ( $params );
 
         $arr = array();
-        $arr["inx"] = $params ["inx"];
-        $arr["patientNumber"] = $params ["patientNumber"];
+        $arr["inx"] = $this->_getParam("token");
+        $arr["patientNumber"] = $this->_getParam("phone");
         $troposervice = new TropoService ();
         $troposervice->callpatient ( $arr );
         echo "0"; //这里如果直接返回字符 譬如 staring call. 前台无法得到，只能返回数字，然后前台再处理
@@ -170,6 +126,20 @@ class SpController extends Zend_Controller_Action {
             $param["validate"] = false;
             $this->forward("stepone", "sp", null, $param);
         } else {
+
+            $call = new Application_Model_Call ();
+
+            $params = array ();
+            $params ["patientName"] = $this->_getParam("fname") . $this->_getParam("lname");
+            $params ["lastName"] = $this->_getParam("lname");
+            $params ["firstName"] = $this->_getParam("fname");
+            $params ["patientNumber"] = $this->_getParam("phone");
+            $params ["patientEmail"] = $this->_getParam("email");
+            $params ["trytimes"] = "1";
+            $params ["paypaltoken"] = $paypalToken;
+
+            $row = $call->createCall ( $params );
+            $param["token"] = $row["inx"];
             $this->forward("steptwo", "sp", null, $param);
         }
 

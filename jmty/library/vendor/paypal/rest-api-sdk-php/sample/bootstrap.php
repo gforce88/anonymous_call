@@ -66,7 +66,7 @@ function getApiContext($clientId, $clientSecret)
             'mode' => 'sandbox',
             'http.ConnectionTimeOut' => 30,
             'log.LogEnabled' => true,
-            'log.FileName' => '../PayPal.log',
+            'log.FileName' => '../log/PayPal.log',
             'log.LogLevel' => 'FINE',
             'validation.level' => 'log'
         )

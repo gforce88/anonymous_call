@@ -101,15 +101,7 @@
                     </table>
                     <form action="<?php echo APP_CTX ?>/pc/stepthree" method="post" id="steptwoForm">
                         <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
-                        <input type="hidden" name="email" value="<?php echo $this->formValue->email; ?>">
-                        <input type="hidden" name="CardType" value="<?php echo $this->formValue->CardType ?>">
-                        <input type="hidden" name="fname" value="<?php echo $this->formValue->fname ?>">
-                        <input type="hidden" name="lname" value="<?php echo $this->formValue->lname ?>">
-                        <input type="hidden" name="CardNo" value="<?php echo $this->formValue->CardNo ?>">
-                        <input type="hidden" name="ExpireMonth" value="<?php echo $this->formValue->ExpireMonth ?>">
-                        <input type="hidden" name="ExpireYear" value="<?php echo $this->formValue->ExpireYear ?>">
-                        <input type="hidden" name="cvv" value="<?php echo $this->formValue->cvv ?>">
-
+                        <input type="hidden" name="token" value="<?php echo $this->formValue->token ?>">
                         <div class="section_content">
                             <div>必ず本利用規約をご一読の上、内容をご確認いただいた上でご登録ください。<br>
                                 <input id="agreementCheck" type="checkbox" name="#" value="#"><a href="<?php echo APP_CTX ?>/toc/JMTY AVC TOS ver1.0 revised.htm" target="new">利用規約</a>に同意する

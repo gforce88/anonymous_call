@@ -4,6 +4,7 @@ require_once 'tropo/tropo.class.php';
 require_once 'util/HttpUtil.php';
 require_once 'service/TropoService.php';
 require_once 'emailLib/AppEmail.php';
+require_once "service/PaypalService.php";
 class IndexController extends Zend_Controller_Action {
 	public function init() {
 		/* Initialize action controller here */
@@ -28,6 +29,7 @@ class IndexController extends Zend_Controller_Action {
 	}
 	
 	public function testAction() {
+
 		$call = new Application_Model_Call ();
 		$params = array ();
 		$params ["lastName"] = "xu";
@@ -49,4 +51,36 @@ class IndexController extends Zend_Controller_Action {
 		$troposervice = new TropoService ();
 		$troposervice->callpatient ( $arr );
 	}
+
+    public function validatecreditcardAction() {
+        /*
+        $creditCard = array (
+            "firstName" => $_POST["fname"],
+            "lastName" => $_POST["lname"],
+            "cardType" => self::$__CardType[$_POST["CardType"]],
+            "cardNumber" => $_POST["CardNo"],
+            "cvv" => $_POST["cvv"],
+            "expMonth" => $_POST["ExpireMonth"],
+            "expYear" => $_POST["ExpireYear"]
+        );
+        */
+
+        $creditCard = array (
+            "firstName" => "xu",
+            "lastName" => "weiming",
+            "cardType" => "visa",
+            "cardNumber" => "4417119669820331",
+            "cvv" => "111",
+            "expMonth" => "12",
+            "expYear" => "2015"
+        );
+
+        $paypalService = new PaypalService();
+        $paypalToken = $paypalService->regist($creditCard);
+
+        $ret = array();
+        $ret["validateResult"] = !is_null($paypalToken);
+
+        return $this->_helper->json($ret, true, false, true);
+    }
 }
