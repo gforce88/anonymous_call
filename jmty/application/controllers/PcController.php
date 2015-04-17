@@ -42,119 +42,134 @@ class PcController extends Zend_Controller_Action {
 	}
 	public function steptwoAction() {
 		// action body
-        $formValue = array(
-            "fname" => $this->_getParam("fname"),
-            "lname" => $this->_getParam("lname"),
-            "Name" => $this->_getParam("fname") . " " . $this->_getParam("lname"),
-            "CardNo" => $this->_getParam("CardNo"),
-            "CardNoMask" => substr_replace($this->_getParam("CardNo"), str_repeat("*", strlen($this->_getParam("CardNo")) - 4), 4),
-            "phone" => $this->_getParam("phone"),
-            "email" => $this->_getParam("email"),
-            "CardType" => $this->_getParam("CardType"),
-            "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
-            "ExpireMonth" => $this->_getParam("ExpireMonth"),
-            "ExpireYear" => $this->_getParam("ExpireYear"),
-            "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
-            "cvv" => $this->_getParam("cvv"),
-            "cvvmask" => str_repeat("*", strlen($this->_getParam("cvv"))),
-            "token" => $this->_getParam("token")
-        );
+        if ($this->getRequest()->isPost()) {
+            $formValue = array(
+                "fname" => $this->_getParam("fname"),
+                "lname" => $this->_getParam("lname"),
+                "Name" => $this->_getParam("fname") . " " . $this->_getParam("lname"),
+                "CardNo" => $this->_getParam("CardNo"),
+                "CardNoMask" => substr_replace($this->_getParam("CardNo"), str_repeat("*", strlen($this->_getParam("CardNo")) - 4), 4),
+                "phone" => $this->_getParam("phone"),
+                "email" => $this->_getParam("email"),
+                "CardType" => $this->_getParam("CardType"),
+                "CardTypeName" => self::$__CardType[$this->_getParam("CardType")],
+                "ExpireMonth" => $this->_getParam("ExpireMonth"),
+                "ExpireYear" => $this->_getParam("ExpireYear"),
+                "ExpireDate" => $this->_getParam("ExpireMonth") . "月" . $this->_getParam("ExpireYear") . "年",
+                "cvv" => $this->_getParam("cvv"),
+                "cvvmask" => str_repeat("*", strlen($this->_getParam("cvv"))),
+                "token" => $this->_getParam("token")
+            );
 
-        $this->view->formValue = (object) $formValue;
+            $this->view->formValue = (object)$formValue;
+        } else {
+            $this->redirect("/pc/stepone");
+        }
 	}
 
 	public function stepthreeAction() {
-        $formValue = array(
-            "phone" => $this->_getParam("phone"),
-            "token" => $this->_getParam("token"),
-        );
+        if ($this->getRequest()->isPost()) {
+            $formValue = array(
+                "phone" => $this->_getParam("phone"),
+                "token" => $this->_getParam("token"),
+            );
 
-        $this->view->formValue = (object) $formValue;
+            $this->view->formValue = (object)$formValue;
+        } else {
+            $this->redirect("/pc/stepone");
+        }
 	}
 
     public function callAction() {
-    	$this->_helper->viewRenderer->setNeverRender ();
+        if ($this->getRequest()->isPost()) {
+            $this->_helper->viewRenderer->setNeverRender();
 
-        $arr = array();
-        $arr["inx"] = $this->_getParam("token");
-        $arr["patientNumber"] = $this->_getParam("phone");
-        $troposervice = new TropoService ();
-        $troposervice->callpatient ( $arr );
-       	echo "0"; //这里如果直接返回字符 譬如 staring call. 前台无法得到，只能返回数字，然后前台再处理
+            $arr = array();
+            $arr["inx"] = $this->_getParam("token");
+            $arr["patientNumber"] = $this->_getParam("phone");
+            $troposervice = new TropoService ();
+            $troposervice->callpatient($arr);
+            echo "0"; //这里如果直接返回字符 譬如 staring call. 前台无法得到，只能返回数字，然后前台再处理
+        } else {
+            $this->redirect("/pc/stepone");
+        }
     }
 
     public function validatecreditcardAction() {
+        if ($this->getRequest()->isPost()) {
+            $creditCard = array (
+                "firstName" => $this->_getParam("fname"),
+                "lastName" => $this->_getParam("lname"),
+                "cardType" => self::$__PayCardType[$this->_getParam("CardType")],
+                "cardNumber" => $this->_getParam("CardNo"),
+                "cvv" => $this->_getParam("cvv"),
+                "expMonth" => $this->_getParam("ExpireMonth"),
+                "expYear" => $this->_getParam("ExpireYear")
+            );
 
-        $creditCard = array (
-            "firstName" => $this->_getParam("fname"),
-            "lastName" => $this->_getParam("lname"),
-            "cardType" => self::$__PayCardType[$this->_getParam("CardType")],
-            "cardNumber" => $this->_getParam("CardNo"),
-            "cvv" => $this->_getParam("cvv"),
-            "expMonth" => $this->_getParam("ExpireMonth"),
-            "expYear" => $this->_getParam("ExpireYear")
-        );
+            /*
+            $creditCard = array (
+                "firstName" => "xu",
+                "lastName" => "weiming",
+                "cardType" => "visa",
+                "cardNumber" => "4417119669820331",
+                "cvv" => "111",
+                "expMonth" => "12",
+                "expYear" => "2015"
+            );
+            */
 
-        /*
-        $creditCard = array (
-            "firstName" => "xu",
-            "lastName" => "weiming",
-            "cardType" => "visa",
-            "cardNumber" => "4417119669820331",
-            "cvv" => "111",
-            "expMonth" => "12",
-            "expYear" => "2015"
-        );
-        */
+            $paypalService = new PaypalService();
+            $paypalToken = $paypalService->regist($creditCard);
 
-        $paypalService = new PaypalService();
-        $paypalToken = $paypalService->regist($creditCard);
+            $param = array(
+                "fname" => $this->_getParam("fname"),
+                "lname" => $this->_getParam("lname"),
+                "CardNo" => $this->_getParam("CardNo"),
+                "phone" => $this->_getParam("phone"),
+                "email" => $this->_getParam("email"),
+                "CardType" => $this->_getParam("CardType"),
+                "ExpireMonth" => $this->_getParam("ExpireMonth"),
+                "ExpireYear" => $this->_getParam("ExpireYear"),
+                "cvv" => $this->_getParam("cvv"),
+            );
 
-        $param = array(
-            "fname" => $this->_getParam("fname"),
-            "lname" => $this->_getParam("lname"),
-            "CardNo" => $this->_getParam("CardNo"),
-            "phone" => $this->_getParam("phone"),
-            "email" => $this->_getParam("email"),
-            "CardType" => $this->_getParam("CardType"),
-            "ExpireMonth" => $this->_getParam("ExpireMonth"),
-            "ExpireYear" => $this->_getParam("ExpireYear"),
-            "cvv" => $this->_getParam("cvv"),
-        );
+            if (is_null($paypalToken)) {
+                $param["validate"] = false;
+                $this->forward("stepone", "pc", null, $param);
+                //$this->redirect($this->redirect("/pc/stepone", $param));
+            } else {
+                //$param["validate"] = true;
+                $params = array ();
+                $params ["patientName"] = $this->_getParam("fname") . " " . $this->_getParam("lname");
+                $params ["lastName"] = $this->_getParam("lname");
+                $params ["firstName"] = $this->_getParam("fname");
+                $params ["patientNumber"] = $this->_getParam("phone");
+                $params ["patientEmail"] = $this->_getParam("email");
+                $params ["paypaltoken"] = $paypalToken;
+                $params ["trytimes"] = "1";
 
-        if (is_null($paypalToken)) {
-            $param["validate"] = false;
-            $this->forward("stepone", "pc", null, $param);
-            //$this->redirect($this->redirect("/pc/stepone", $param));
+                $call = new Application_Model_Call ();
+
+                $row = $call->createCall ( $params );
+                $param["token"] = $row["inx"];
+                $this->forward("steptwo", "pc", null, $param);
+                //$this->redirect($this->redirect("/pc/steptwo", $param));
+            }
         } else {
-            //$param["validate"] = true;
-            $params = array ();
-            $params ["patientName"] = $this->_getParam("fname") . " " . $this->_getParam("lname");
-            $params ["lastName"] = $this->_getParam("lname");
-            $params ["firstName"] = $this->_getParam("fname");
-            $params ["patientNumber"] = $this->_getParam("phone");
-            $params ["patientEmail"] = $this->_getParam("email");
-            $params ["paypaltoken"] = $paypalToken;
-            $params ["trytimes"] = "1";
-
-            $call = new Application_Model_Call ();
-
-            $row = $call->createCall ( $params );
-            $param["token"] = $row["inx"];
-            $this->forward("steptwo", "pc", null, $param);
-            //$this->redirect($this->redirect("/pc/steptwo", $param));
+            $this->redirect("/pc/stepone");
         }
-
     }
 
+    /*
     public function payAction() {
         $paypalService = new PaypalService();
         $creditCard = array (
             "firstName" => "xu",
             "lastName" => "weiming",
-            "cardType" => "amex",
-            //"cardNumber" => "4417119669820331",
-            "cardNumber" => "371449635398431",
+            "cardType" => "visa",
+            "cardNumber" => "4417119669820331",
+            //"cardNumber" => "371449635398431",
             "cvv" => "111",
             "expMonth" => "12",
             "expYear" => "2015"
@@ -162,5 +177,6 @@ class PcController extends Zend_Controller_Action {
         $paypalToken = $paypalService->regist($creditCard);
         $paypalService->charge($paypalToken, 1, "USD");
     }
+    */
 }
 
