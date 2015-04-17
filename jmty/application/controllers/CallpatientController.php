@@ -3,6 +3,7 @@ require_once 'log/LoggerFactory.php';
 require_once 'tropo/tropo.class.php';
 require_once 'util/HttpUtil.php';
 require_once 'service/TropoService.php';
+require_once "service/PaypalService.php";
 require_once 'emailLib/AppEmail.php';
 class CallpatientController extends Zend_Controller_Action {
 	public function init() {
@@ -183,7 +184,15 @@ class CallpatientController extends Zend_Controller_Action {
 		
 	}
 	
+// 	public function aaAction(){
+// 		$paypalService = new PaypalService();
+// 		$roundAmount = $paypalService->adjustAmount($this->calculateAmount("", ""), "JPY");
+// 		echo $roundAmount;
+// 	}
+	
 	private function calculateAmount($beginTime, $endTime) {
+// 		$endTime = "2015-04-18 01:16:37";
+// 		$beginTime = "2015-04-18 01:16:22";
 		$duringMin = ceil ( (strtotime ( $endTime ) - strtotime ($beginTime )) / 60 );
 		$amount = $this->specialistsetting["cost"] * $duringMin;
 		return $amount;
