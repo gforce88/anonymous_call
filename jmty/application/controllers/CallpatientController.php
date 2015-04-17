@@ -182,5 +182,11 @@ class CallpatientController extends Zend_Controller_Action {
 		$this->syslogger->logInfo ( "CallpatientController", "sendNotification", "patient did not pick the call for 3 times, sending email to patient");
 		
 	}
+	
+	private function calculateAmount($beginTime, $endTime) {
+		$duringMin = ceil ( (strtotime ( $endTime ) - strtotime ($beginTime )) / 60 );
+		$amount = $this->specialistsetting["cost"] * $duringMin;
+		return $amount;
+	}
 }
 
