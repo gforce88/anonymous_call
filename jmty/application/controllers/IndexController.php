@@ -21,8 +21,12 @@ class IndexController extends Zend_Controller_Action {
 
 	}
 	
+	public function sorryAction(){
+		echo "We're sorry, this service is not available now, please try back tomorrow at 9am";
+	}
+	
 	public function aaAction(){
-		echo "0";
+		
 		//$appEmails->sendThankYouEmail ('1274263@qq.com',60,5000);
 		
 		//$appEmails->sendCardErrEmail ('1274263@qq.com');
