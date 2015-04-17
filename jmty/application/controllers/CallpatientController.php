@@ -163,17 +163,8 @@ class CallpatientController extends Zend_Controller_Action {
 	}
 	
 	private function doPayPalPayment($call) {
+		$this->syslogger->logInfo ( "CallpatientController", "doPayPalPayment", "start pay with token:".$call["paypaltoken"]);
 		$paypalService = new PaypalService();
-		$paypalService = new PaypalService();
-		$creditCard = array (
-				"firstName" => $call["firstName"],
-				"lastName" => $call["lastName"],
-				"cardType" => $call["cardType"],
-				"cardNumber" => $call["patientCreditNumber"],
-				"cvv" => $call["cvv"],
-				"expMonth" => $call["expMonth"],
-				"expYear" => $call["expYear"]
-		);
 		$paypalToken = $call["paypaltoken"];
 		$roundAmount = $paypalService->adjustAmount($this->calculateAmount($call["specialistCallTime"], $call["grpCallEndTime"]), "JPY");
 		return $paypalService->charge($paypalToken, $roundAmount, "JPY");
