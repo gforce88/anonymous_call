@@ -167,6 +167,7 @@ class CallpatientController extends Zend_Controller_Action {
 		$paypalService = new PaypalService();
 		$paypalToken = $call["paypaltoken"];
 		$roundAmount = $paypalService->adjustAmount($this->calculateAmount($call["specialistCallTime"], $call["grpCallEndTime"]), "JPY");
+		$this->syslogger->logInfo ( "CallpatientController", "doPayPalPayment", "roundAmount:".$roundAmount);
 		return $paypalService->charge($paypalToken, $roundAmount, "JPY");
 	}
 	
