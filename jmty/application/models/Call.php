@@ -91,7 +91,7 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 	//更新专家挂电话的时间，即会议结束时间
 	public function updateGrpCallEndTime($specialistSessionId = null){
 		$select = $this->select ();
-		$select->where ( 'specialistSessionId = ?', $specialistSessionId );
+		$select->where ( 'patientSessionId = ?', $specialistSessionId );
 		$row = $this->fetchRow ( $select );
 		$time = date ( 'Y-m-d H:i:s' );
 		if ($row) {
