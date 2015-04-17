@@ -14,6 +14,7 @@ class CallpatientController extends Zend_Controller_Action {
 		$this->app = Zend_Registry::get ( "APP_SETTING" );
 		$this->_helper->viewRenderer->setNeverRender ();
 		$this->specialistsetting = Zend_Registry::get("SPECIALIST_SETTING");
+		$this->emailsetting = Zend_Registry::get ( "EMAIL_SETTING" );
 	}
 	public function indexAction() {
 		$tropoJson = file_get_contents ( "php://input" );
