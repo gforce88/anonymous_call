@@ -28,14 +28,14 @@ class CallpatientController extends Zend_Controller_Action {
 		
 		$callModel = new Application_Model_Call ();
 		// 更新病人的tropo sessionId
-		$callModel->updatePatientSessionId ( $inx, $patientSessionId );
+		$row = $callModel->updatePatientSessionId ( $inx, $patientSessionId );
 		// 检查病人的拨号次数
 		$times = $callModel->checkCallTimes ( $inx );
 		
 		if ($times > 3) {
 			$this->tropologger->logInfo ( "CallpatientController", "indexAction", "patient didn't pickup the call for 3 times. send email to notify" );
 			// 病人三次不接电话,发送邮件通知
-			$this->sendNotification ( $inx );
+			$this->sendNotification ( $row );
 		} else {
 			// 拨病人电话
 			$tropo = new Tropo ();
@@ -180,9 +180,15 @@ class CallpatientController extends Zend_Controller_Action {
 	
 	// TODO 等客户完成发送EMAIL方法，
 	// 病人三次不接电话 发送邮件通知
-	private function sendNotification($inx = null) {
+	private function sendNotification($row = null) {
 		$this->syslogger->logInfo ( "CallpatientController", "sendNotification", "patient did not pick the call for 3 times, sending email to patient");
-		
+		$port = $this->emailsetting["port"];
+		$host = $this->emailsetting["host"];
+		$username = $this->emailsetting["username"];
+		$password = $this->emailsetting["password"];
+		$appEmails = new AppEmails ($host,$port,$username,$password);
+		$appEmails->sendUserDidNotAnswerEmail($row["patientEmail"]);
+		$this->syslogger->logInfo ( "CallpatientController", "sendNotification", "patient did not pick the call for 3 times,  email has send to  ".$row["patientEmail"]);
 	}
 	
 // 	public function aaAction(){

@@ -27,7 +27,7 @@ class Application_Model_Call extends Zend_Db_Table_Abstract {
 		if ($row) {
 			$row->patientSessionId = $callsessionId;
 			$row->save ();
-			return $row->inx;
+			return $row;
 		}
 	}
 	

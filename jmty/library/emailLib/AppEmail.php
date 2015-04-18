@@ -15,6 +15,32 @@ class AppEmails {
 		$this->emailSrvParams ['password'] = $password; 
 		
 	}
+
+public function sendUserDidNotAnswerEmail($emailAddr) {
+
+$emailSubject = "ジモティー電話相談サービスからのお知らせ";
+
+$mailcontent = '
+<p>ジモティー電話相談サービスをご利用いただきありがとうございます。</p>
+
+<p>大変申し訳ございませんが、電話をお繋ぎすることができなかったため、<br/>
+お申込みをキャンセルとさせていただきました。<br/>
+こちらのお電話については通話料金は発生いたしません。<br/>
+<br/>
+恐れ入りますが、下記ボタンより再度お申込みください。
+</p>
+<br/>
+PCから<br/>
+<a href="http://www.google.com">電話相談する</a>
+<br/>
+<br>
+スマートフォンから<br/>
+<a href="http://www.yahoo.com">電話相談する</a>
+<br>
+';
+
+genSendEmail ($this->emailSrvParams, $emailAddr, $emailSubject, $mailcontent,APPLICATION_PATH."/configs/emailTemplate.html");
+}
 	
 public function sendTherapistNotAvailEmail($emailAddr) {
 	
