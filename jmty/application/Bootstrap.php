@@ -56,7 +56,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $paypalApiCtx = new ApiContext(new OAuthTokenCredential($paypalSetting["client_id"], $paypalSetting["secret"]));
         $paypalApiCtx->setConfig(array(
             'mode' => $paypalSetting["mode"],
-            'http.ConnectionTimeOut' => $paypalSetting["mode"],
+            'http.ConnectionTimeOut' => $paypalSetting["connectionTimeOut"],
             'http.Retry' => $paypalSetting["retry"],
             'log.LogEnabled' => $paypalSetting["logEnabled"],
             'log.FileName' => $paypalSetting["logFileName"],
