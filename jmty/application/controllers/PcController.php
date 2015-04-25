@@ -107,18 +107,6 @@ class PcController extends Zend_Controller_Action {
                 "expYear" => $this->_getParam("ExpireYear")
             );
 
-            /*
-            $creditCard = array (
-                "firstName" => "xu",
-                "lastName" => "weiming",
-                "cardType" => "visa",
-                "cardNumber" => "4417119669820331",
-                "cvv" => "111",
-                "expMonth" => "12",
-                "expYear" => "2015"
-            );
-            */
-
             $paypalService = new PaypalService();
             $paypalToken = $paypalService->regist($creditCard);
 
@@ -137,9 +125,7 @@ class PcController extends Zend_Controller_Action {
             if (is_null($paypalToken)) {
                 $param["validate"] = false;
                 $this->forward("stepone", "pc", null, $param);
-                //$this->redirect($this->redirect("/pc/stepone", $param));
             } else {
-                //$param["validate"] = true;
                 $params = array ();
                 $params ["patientName"] = $this->_getParam("fname") . " " . $this->_getParam("lname");
                 $params ["lastName"] = $this->_getParam("lname");
@@ -154,11 +140,16 @@ class PcController extends Zend_Controller_Action {
                 $row = $call->createCall ( $params );
                 $param["token"] = $row["inx"];
                 $this->forward("steptwo", "pc", null, $param);
-                //$this->redirect($this->redirect("/pc/steptwo", $param));
             }
         } else {
             $this->redirect("/pc/stepone");
         }
+    }
+
+    public function thanksAction() {
+    }
+
+    public function closedAction() {
     }
 
     /*

@@ -31,7 +31,7 @@
         	        dataType:  'json'  
         	    };  
             $('#callAction').click(function() {
-	           	 $('#stepthree').ajaxSubmit(options);  
+	           	 $('#stepthree').ajaxSubmit(options);
             })
         });
 
@@ -42,10 +42,11 @@
         function showResponse(responseText, statusText)  { 
             if(responseText==0){
             	//alert("starting call");
-            };
+            }
             $('#callAction').click(function() {
 	           	 alert("call has started!");  
-          })
+          });
+            window.location.href="<?php echo APP_CTX ?>/pc/thanks";
         }  
     </script>
 </head>

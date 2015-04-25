@@ -160,5 +160,11 @@ class SpController extends Zend_Controller_Action {
 
     }
 
+    public function thanksAction() {
+    }
+
+    public function closedAction() {
+    }
+
 }
 

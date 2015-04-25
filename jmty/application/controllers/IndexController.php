@@ -22,7 +22,9 @@ class IndexController extends Zend_Controller_Action {
 	}
 	
 	public function sorryAction(){
-		echo "We're sorry, this service is not available now, please try back tomorrow at 9am";
+		//echo "We're sorry, this service is not available now, please try back tomorrow at 9am";
+		$r = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+		$r->gotoUrl('/pc/closed')->redirectAndExit();
 	}
 	
 	public function aaAction(){
