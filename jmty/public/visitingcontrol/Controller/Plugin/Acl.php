@@ -20,8 +20,14 @@ class visitingcontrol_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstr
                 $request->getActionName() == "closed") ){
 			
 		}else{
-			$request->setControllerName('index');
-			$request->setActionName('sorry');
+            if ($request->getControllerName() == "pc") {
+                $request->setControllerName('pc');
+                $request->setActionName('closed');
+            }
+            if ($request->getControllerName() == "sp") {
+                $request->setControllerName('sp');
+                $request->setActionName('closed');
+            }
 		}
 	
 	}
