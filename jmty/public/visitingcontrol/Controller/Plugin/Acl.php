@@ -14,8 +14,10 @@ class visitingcontrol_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstr
 		date_default_timezone_set($this->syssetting["timezone"]);
 		
 		$currenthour = (int)date("H",time());
-		
-		if($currenthour>$this->syssetting["onlinetime"]&&$currenthour<$this->syssetting["offlinetime"]){
+
+		if(($currenthour>$this->syssetting["onlinetime"]&&$currenthour<$this->syssetting["offlinetime"]) || ($request->getControllerName() == "pc" &&
+        $request->getActionName() != "closed") || ($request->getControllerName() == "sp" &&
+                $request->getActionName() != "closed") ){
 			
 		}else{
 			$request->setControllerName('index');
