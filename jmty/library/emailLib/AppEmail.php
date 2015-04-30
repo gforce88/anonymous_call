@@ -21,21 +21,25 @@ public function sendUserDidNotAnswerEmail($emailAddr) {
 $emailSubject = "ジモティー電話相談サービスからのお知らせ";
 
 $mailcontent = '
-<p>ジモティー電話相談サービスをご利用いただきありがとうございます。</p>
 
-<p>大変申し訳ございませんが、電話をお繋ぎすることができなかったため、<br/>
+<p>ジモティー電話相談サービスをご利用いただきありがとうございます。</p>
+<br>
+<br>
+大変申し訳ございませんが、電話をお繋ぎすることができなかったため<br/>
 お申込みをキャンセルとさせていただきました。<br/>
-こちらのお電話については通話料金は発生いたしません。<br/>
+こちらのお電話については通話料金は発生いたしません<br>
 <br/>
-恐れ入りますが、下記ボタンより再度お申込みください。
-</p>
+
+恐れ入りますが、下記ボタンより再度お申込みください。<br>
+お電話させていただいた電話番号は、発信専用のため折り返しいただいても繋がりません。<br>
+
 <br/>
 PCから<br/>
-<a href="http://www.google.com">電話相談する</a>
+<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://www.yahoo.com">電話相談する</a>
+<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
 <br>
 ';
 
@@ -47,19 +51,22 @@ public function sendTherapistNotAvailEmail($emailAddr) {
 $emailSubject = "ジモティー電話相談サービスからのお知らせ";
 
 $mailcontent = '
-<p>ジモティー電話相談サービスをご利用いただきありがとうございます。</p>
 
+<p>ジモティー電話相談サービスをご利用いただきありがとうございます。</p><br>
+<br>
 <p>大変申し訳ございませんが、電話が込み合っておりお繋ぎすることができませんでした。<br/>
-こちらのお電話については通話料金は発生いたしません。</p>
-
-<p>恐れ入りますが、下記ボタンより再度お申込みください。</p>
+こちらのお電話については通話料金は発生いたしません。</p><br>
+<br>
+<p>恐れ入りますが、下記ボタンより再度お申込みください。<br/>
+お電話させていただいた電話番号は、発信専用のため折り返しいただいても繋がりません。
+</p>
 
 PCから<br/>
-<a href="http://www.google.com">電話相談する</a>
+<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://www.yahoo.com">電話相談する</a>
+<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
 <br>
 ';
 
@@ -72,9 +79,9 @@ public function sendThankYouEmail($emailAddr,$min,$chargeAmt) {
 $emailSubject = "ジモティー電話相談サービス ご利用のお知らせ";
 
 $mailcontent = '
-<p>ジモティー電話相談サービスをご利用いただきありがとうございました。
+<p>ジモティー電話相談サービスをご利用いただきありがとうございました。<br>
 <br>
-<br>
+
 今回のご利用状況についてお知らせいたします。
 <br>
 <br>'.
@@ -83,15 +90,19 @@ $mailcontent = '
 '<br><br>
 またのご利用をお待ちしております。
 <br>
+<br>
+<p>※ 本サービスの支払い先は、弊社パートナーのWolfcomm Studioとなります。<br>
+※ お電話させていただいた電話番号は、発信専用のため折り返しいただいても繋がりません</p>
+<br><br>
 </p>
 
 
 PCから<br/>
-<a href="http://www.google.com">電話相談する</a>
+<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://www.yahoo.com">電話相談する</a>
+<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
 <br>
 ';
 
@@ -117,11 +128,11 @@ $mailcontent = '
 '<br>
 <br>
 PCから<br/>
-<a href="http://www.google.com">電話相談する</a>
+<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://www.yahoo.com">電話相談する</a>
+<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
 <br>
 ';
 
