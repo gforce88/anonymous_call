@@ -35,11 +35,11 @@ $mailcontent = '
 
 <br/>
 PCから<br/>
-<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/about/consultation">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/s/about/consultation">電話相談する</a>
 <br>
 ';
 
@@ -62,11 +62,11 @@ $mailcontent = '
 </p>
 
 PCから<br/>
-<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/about/consultation">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/s/about/consultation">電話相談する</a>
 <br>
 ';
 
@@ -86,7 +86,7 @@ $mailcontent = '
 <br>
 <br>'.
 'ご利用時間: '.$min.' 分<br>'.
-'ご利用金額: '.$chargeAmt.' 円'.
+'ご利用金額: '.$chargeAmt.' 円（税込み）'.
 '<br><br>
 またのご利用をお待ちしております。
 <br>
@@ -98,11 +98,11 @@ $mailcontent = '
 
 
 PCから<br/>
-<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/about/consultation">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/s/about/consultation">電話相談する</a>
 <br>
 ';
 
@@ -128,11 +128,11 @@ $mailcontent = '
 '<br>
 <br>
 PCから<br/>
-<a href="http://jmty.jp/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/about/consultation">電話相談する</a>
 <br/>
 <br>
 スマートフォンから<br/>
-<a href="http://jmty.jp/s/about/tell_talk">電話相談する</a>
+<a href="http://jmty.jp/s/about/consultation">電話相談する</a>
 <br>
 ';
 
