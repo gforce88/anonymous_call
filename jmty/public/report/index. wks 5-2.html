@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="Content-style-Type" content="text/html; charset=UTF-8">
+  <title>JMTY Reports</title>
+
+<link rel="stylesheet" type="text/css" href="../pc/css/style.css">
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.6/css/jquery.dataTables.css">
+<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	$('#report').dataTable( {
+		"language": {
+            "url": "http://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+        },
+		"processing": true,
+		"serverSide": true,
+		"ajax": "dbproc.php"
+	} );
+} );
+
+</script>
+
+</head>
+<body>
+<div class="container">
+  <div id="header"></div>
+  <div class="container_inner" style="width:1000px; background-image:none !important;">
+    <div class="clearfix c_both" id="logo">
+      <div class="header_logo"><img alt="ジモティー" height="33" src="../pc/images/jmty_thin.png" style="float:left" width="120">
+        <br class="c_both">
+      </div>
+      <br class="c_both">
+    </div>
+
+    <div class="page_content">
+      <div class="section">
+        <div class="section_title">
+          <div class="section_title_inner" align="center">
+            <h2><span class="p">Call Reports</span></h2>
+          </div>
+        </div>
+        
+        <div class="section_content">
+          <!--  Report  -->
+          <table id="report" class="display" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Namen</th>
+					<th>User Phone Number</th>
+					<th>User Email</th>
+					<th>Num calls to User</th>
+					<th>User Answer Time</th>
+					<th>Therapist Answer Time</th>
+					<th>Session Call End Time</th>
+				</tr>
+			</thead>
+	
+			<tfoot>
+				<tr>
+					<th>First Name</th>
+					<th>Last Namen</th>
+					<th>User Phone Number</th>
+					<th>User Email</th>
+					<th>Num calls to User</th>
+					<th>User Answer Time</th>
+					<th>Therapist Answer Time</th>
+					<th>Session Call End Time</th>
+				</tr>
+			</tfoot>
+		</table>
+          
+          
+          </div>
+        </div>
+        <br class="clear">
+
+      </div>
+    </div>
+    <div id="footer">
+      <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED.</div>
+    </div>
+    ・
+  </div>
+</body>
+</html>
