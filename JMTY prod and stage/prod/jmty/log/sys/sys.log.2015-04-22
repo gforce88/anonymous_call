@@ -1,0 +1,35 @@
+2015-04-22|04:09:43|INFO |||Regist Paypal token: CARD-9CU37144KG438140GKU3R6BY
+2015-04-22|04:09:43|INFO |Application_Model_Call|createCall|create call record
+2015-04-22|13:10:43|INFO |CallpatientController|indexAction|session  is: 1fc5150cf83f4a9f4be54f98bdb8373d
+2015-04-22|13:11:05|INFO |CallspecialistController|indexAction|session  is: 2d42ce00fa3177567b6ca95d03901e9a
+2015-04-22|13:11:58|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-22|13:11:58|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-9CU37144KG438140GKU3R6BY
+2015-04-22|13:11:58|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-22|04:12:27|INFO |||Charged 100 JPY with token: CARD-9CU37144KG438140GKU3R6BY
+2015-04-22|04:12:27|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-22|04:12:30|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-22|04:12:33|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-22|04:28:46|INFO |||Regist Paypal token: CARD-1KU58419KY355132AKU3SG7Q
+2015-04-22|04:28:46|INFO |Application_Model_Call|createCall|create call record
+2015-04-22|13:30:35|INFO |CallpatientController|indexAction|session  is: ed6d4d08e630e417a742b9145f03fd2a
+2015-04-22|13:30:47|INFO |CallspecialistController|indexAction|session  is: 7564d3a28f91e4a156ea27085acd7308
+2015-04-22|13:31:14|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-22|13:31:14|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-1KU58419KY355132AKU3SG7Q
+2015-04-22|13:31:14|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-22|04:31:42|INFO |||Charged 100 JPY with token: CARD-1KU58419KY355132AKU3SG7Q
+2015-04-22|04:31:42|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-22|04:31:45|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-04-22|04:31:48|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-22|07:33:06|INFO |||Regist Paypal token: CARD-81662094Y9827213EKU3U5MQ
+2015-04-22|07:33:06|INFO |Application_Model_Call|createCall|create call record
+2015-04-22|16:33:49|INFO |CallpatientController|indexAction|session  is: ce0a97ff70c27ef212d7f906cc61880d
+2015-04-22|16:34:05|INFO |CallspecialistController|indexAction|session  is: 8213f1638352b57ead5e541648399a02
+2015-04-22|16:34:25|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-22|16:34:26|INFO |CallspecialistController|bAction|session  is: 24d10b2a2ad3f49ea21defbfc2cd1501
+2015-04-22|16:34:47|INFO |TropoService|specialistnoanswer|Sent signal to : [https://tropo-gw01.unisrv.jp/sessions/ce0a97ff70c27ef212d7f906cc61880d/signals?action=signal&value=specialistnoanswer&token=4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675] > content: <signal><status>QUEUED</status></signal>
+2015-04-22|16:34:47|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-22|07:37:07|INFO |||Regist Paypal token: CARD-1FK352058U717083EKU3U7IY
+2015-04-22|07:37:07|INFO |Application_Model_Call|createCall|create call record
+2015-04-22|07:44:55|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"0bd778cbdf8df"}
+2015-04-22|07:45:04|INFO |||Regist Paypal token: CARD-5HW94356P2470691RKU3VDAA
+2015-04-22|07:45:04|INFO |Application_Model_Call|createCall|create call record

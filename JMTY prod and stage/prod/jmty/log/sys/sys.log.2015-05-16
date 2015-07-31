@@ -1,0 +1,30 @@
+2015-05-15|16:48:42|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-15|16:49:55|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-15|16:50:22|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-15|16:51:21|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-15|16:52:42|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-16|03:39:41|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-16|03:39:54|ERROR|||Failed to regist Paypal token: {"error":"invalid_client","error_description":"The client credentials are invalid"}
+2015-05-16|10:12:19|INFO |||Regist Paypal token: CARD-1XD86306WY327320UKVLRQAY
+2015-05-16|10:12:19|INFO |Application_Model_Call|createCall|create call record
+2015-05-16|19:12:34|INFO |CallpatientController|indexAction|session  is: bea2233e01149da113a9ae94d0cc1ddf
+2015-05-16|19:12:55|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-16|19:12:56|INFO |CallpatientController|indexAction|session  is: db65888b94862573e3fcbdf39ba87d6a
+2015-05-16|19:13:16|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-16|19:13:17|INFO |CallpatientController|indexAction|session  is: 0623ea74a5decb5d0fe231224cc0e451
+2015-05-16|19:13:43|INFO |CallspecialistController|indexAction|session  is: 09d0e2ef6967fc26cca80ec2fc5dc2bc
+2015-05-16|19:14:03|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-05-16|19:14:04|INFO |CallspecialistController|bAction|session  is: ad0330c5a71b2779a60707b740e350f5
+2015-05-16|19:14:25|INFO |TropoService|specialistnoanswer|Sent signal to : [https://tropo-gw01.unisrv.jp/sessions/0623ea74a5decb5d0fe231224cc0e451/signals?action=signal&value=specialistnoanswer&token=4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675] > content: <signal><status>QUEUED</status></signal>
+2015-05-16|19:14:25|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-05-16|10:17:29|INFO |||Regist Paypal token: CARD-58W778610Y552520UKVLRSOI
+2015-05-16|10:17:29|INFO |Application_Model_Call|createCall|create call record
+2015-05-16|19:17:38|INFO |CallpatientController|indexAction|session  is: 1327a5120028faa2bf104fbb222a4f5c
+2015-05-16|19:18:05|INFO |CallspecialistController|indexAction|session  is: e87f1160530909ea17690881671f67bb
+2015-05-16|19:19:13|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-05-16|19:19:13|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-58W778610Y552520UKVLRSOI
+2015-05-16|19:19:13|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-05-16|10:19:16|INFO |||Charged 108 JPY with token: CARD-58W778610Y552520UKVLRSOI
+2015-05-16|10:19:16|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-05-16|10:19:19|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-05-16|10:19:22|INFO |CallpatientController|hangupAction|mail has send to admin

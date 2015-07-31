@@ -1,0 +1,117 @@
+2015-04-14|04:37:11|INFO |||Regist Paypal token: CARD-2DL21605T99818706KUWJS5Y
+2015-04-14|04:37:27|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|04:37:27|INFO |CallpatientController|indexAction|session  is: 6a26a5f1011fc8ef613f28a4fd138f28
+2015-04-14|04:37:47|INFO |CallspecialistController|indexAction|session  is: 3b9c84a5730cd11742961008929964d1
+2015-04-14|04:38:18|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|04:38:19|INFO |||Regist Paypal token: CARD-44U9536865364340BKUWJTOY
+2015-04-14|04:38:49|ERROR|||Failed to charge Paypal with token: CARD-44U9536865364340BKUWJTOY Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"0d88f0109a1cd"}
+2015-04-14|04:38:49|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to user
+2015-04-14|04:38:53|INFO |CallspecialistController|hangupAction|mail has send to ge.szeto@gmail.com
+2015-04-14|04:48:27|INFO |||Regist Paypal token: CARD-82632194JB729620NKUWJYGY
+2015-04-14|04:48:35|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|04:48:35|INFO |CallpatientController|indexAction|session  is: 366ea6720a6c56da3604b5c58b090590
+2015-04-14|04:48:51|INFO |CallspecialistController|indexAction|session  is: a0ff864d4f9a8465e56347458204547e
+2015-04-14|04:49:11|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|04:49:12|INFO |CallspecialistController|bAction|session  is: 4aae66e4d718357d97b016f46627a494
+2015-04-14|04:51:10|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|04:51:10|INFO |||Regist Paypal token: CARD-6DK827730P003291MKUWJZPQ
+2015-04-14|04:51:41|ERROR|||Failed to charge Paypal with token: CARD-6DK827730P003291MKUWJZPQ Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"8a22d352579e1"}
+2015-04-14|04:51:41|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to user
+2015-04-14|04:51:44|INFO |CallspecialistController|hangupAction|mail has send to ge.szeto@gmail.com
+2015-04-14|04:53:21|INFO |||Regist Paypal token: CARD-8SM13585L07369308KUWJ2QI
+2015-04-14|04:53:26|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Required field missing"},{"field":"expire_year","issue":"Required field missing"},{"field":"expire_month","issue":"Required field missing"},{"field":"type","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"7c744e0a77098"}
+2015-04-14|05:01:13|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|05:01:13|INFO |CallpatientController|indexAction|session  is: 13ac8de4e666b2cdffcc7a94d7f52814
+2015-04-14|05:01:32|INFO |CallspecialistController|indexAction|session  is: 632dae23da7661d3b35d8a9d81147f30
+2015-04-14|05:01:52|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|05:01:53|INFO |CallspecialistController|bAction|session  is: 99650d82796f1a9bea0c52a5c3c78a52
+2015-04-14|05:02:13|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/13ac8de4e666b2cdffcc7a94d7f52814/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-14|05:02:13|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-14|05:04:15|INFO |||Regist Paypal token: CARD-56P407300C9304047KUWJ7TY
+2015-04-14|05:48:39|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|05:48:40|INFO |CallpatientController|indexAction|session  is: 9306e8293e4d15fba74db86fc032de66
+2015-04-14|05:48:57|INFO |CallspecialistController|indexAction|session  is: 0a6fdce808a251dc08cbc889c5809910
+2015-04-14|05:49:17|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|05:49:17|INFO |CallspecialistController|bAction|session  is: 037b4753e9c5eb3ee0b8e9d6b0308ff6
+2015-04-14|05:49:38|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/9306e8293e4d15fba74db86fc032de66/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-14|05:49:38|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-14|06:03:16|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:05:47|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:06:05|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:06:19|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:06:29|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:07:30|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:11:11|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:11:17|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:12:57|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:13:11|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:13:36|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:13:39|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:13:41|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:13:45|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:16:55|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:17:10|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:17:23|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:17:55|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:19:43|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:21:49|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:24:46|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:24:58|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:25:04|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:25:14|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:26:09|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:30:11|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:30:19|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:30:33|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:30:38|ERROR|||Failed to regist Paypal token: 
+2015-04-14|06:30:39|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:49:50|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:50:05|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:50:35|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:57:22|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:57:35|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:58:16|ERROR|||Failed to regist Paypal token: 
+2015-04-14|07:58:49|ERROR|||Failed to regist Paypal token: 
+2015-04-14|08:09:14|ERROR|||Failed to regist Paypal token: 
+2015-04-14|08:11:10|ERROR|||Failed to regist Paypal token: 
+2015-04-14|08:11:15|ERROR|||Failed to regist Paypal token: 
+2015-04-14|08:16:40|ERROR|||Failed to regist Paypal token: 
+2015-04-14|09:00:29|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type, cvv2","issue":"The cvv2 length is invalid for the specified credit card type"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"dcd9aeeb89f07"}
+2015-04-14|09:00:53|INFO |||Regist Paypal token: CARD-0TR24648LN175840UKUWNORI
+2015-04-14|09:04:12|INFO |||Regist Paypal token: CARD-6L092599752755606KUWNQDA
+2015-04-14|13:24:13|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"71d521f3949a4"}
+2015-04-14|13:28:30|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"52976fa4d5aaf"}
+2015-04-14|13:30:02|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"f5cb201afe39e"}
+2015-04-14|13:31:13|INFO |||Regist Paypal token: CARD-40842718AL457072UKUWRNII
+2015-04-14|13:33:18|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"5d52543b2f7f2"}
+2015-04-14|13:34:01|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"87e609e024f50"}
+2015-04-14|13:38:40|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"31d20155784f3"}
+2015-04-14|13:38:51|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"},{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"c3d0a11e7d77f"}
+2015-04-14|13:39:26|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"fa48085075354"}
+2015-04-14|13:39:59|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"c78d38f98d306"}
+2015-04-14|13:40:03|INFO |||Regist Paypal token: CARD-9LB18917FS985814KKUWRRMY
+2015-04-14|13:40:53|INFO |||Regist Paypal token: CARD-4X01794242046931XKUWRRZI
+2015-04-14|13:41:28|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|13:41:29|INFO |CallpatientController|indexAction|session  is: 3fa1e835b7b806c7821fab9f43cd9ce6
+2015-04-14|13:41:49|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-14|13:41:50|INFO |CallpatientController|indexAction|session  is: 3d6984292be1e70e1c8e269b1cf5a083
+2015-04-14|13:42:13|INFO |CallspecialistController|indexAction|session  is: 7609eba07fe3079f03eca98415910328
+2015-04-14|13:42:59|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|13:42:59|INFO |||Regist Paypal token: CARD-96M14178AN218142GKUWRSYY
+2015-04-14|13:43:30|ERROR|||Failed to charge Paypal with token: CARD-96M14178AN218142GKUWRSYY Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"ad0b531cbefe0"}
+2015-04-14|13:43:30|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to user
+2015-04-14|13:43:33|INFO |CallspecialistController|hangupAction|mail has send to daihuan@topmoon.com.cn
+2015-04-14|13:45:00|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"f91ac96bdbcfb"}
+2015-04-14|14:31:52|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type","issue":"Value is invalid (must be visa, mastercard, amex, discover, or maestro)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"7cf250a67309a"}
+2015-04-14|14:44:54|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"42f6bec233757"}
+2015-04-14|14:45:16|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"9ac6c9c34d390"}
+2015-04-14|14:47:45|INFO |||Regist Paypal token: CARD-64346307P1663541MKUWSREI
+2015-04-14|14:51:18|INFO |||Regist Paypal token: CARD-8EF61706MH753501HKUWSSZQ
+2015-04-14|14:52:23|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|14:52:23|INFO |CallpatientController|indexAction|session  is: b13a5693a5f7a66e1ecbb541164c7a82
+2015-04-14|14:52:47|INFO |CallspecialistController|indexAction|session  is: 37ba9bc0ac11fe4d91ad2031b78655b6
+2015-04-14|14:53:23|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|14:53:24|INFO |||Regist Paypal token: CARD-2EC75749A1071205MKUWSTZA
+2015-04-14|14:53:55|ERROR|||Failed to charge Paypal with token: CARD-2EC75749A1071205MKUWSTZA Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"f5235594b4013"}
+2015-04-14|14:53:55|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-14|14:54:08|INFO |CallspecialistController|hangupAction|mail has send to admins

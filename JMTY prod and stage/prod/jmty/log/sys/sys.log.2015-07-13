@@ -1,0 +1,8 @@
+2015-07-13|10:37:52|INFO |||Regist Paypal token: CARD-9GL72862SW013983UKWRZKAA
+2015-07-13|10:37:52|INFO |Application_Model_Call|createCall|create call record
+2015-07-13|19:39:33|INFO |CallpatientController|indexAction|session  is: f753a2b7a8fddf44f3b16df885eef78a
+2015-07-13|19:39:54|INFO |CallspecialistController|indexAction|session  is: a2f3cb4a1b2b88b615c753f705679ef4
+2015-07-13|19:40:15|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-13|19:40:15|INFO |CallspecialistController|bAction|session  is: e52dc0f231cf43b878fd9341ecb88969
+2015-07-13|19:40:36|INFO |TropoService|specialistnoanswer|Sent signal to : [https://tropo-gw01.unisrv.jp/sessions/f753a2b7a8fddf44f3b16df885eef78a/signals?action=signal&value=specialistnoanswer&token=4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675] > content: <signal><status>QUEUED</status></signal>
+2015-07-13|19:40:36|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail

@@ -1,0 +1,30 @@
+2015-06-02|04:11:45|INFO |||Regist Paypal token: CARD-6GT206255T655470EKVWS2AI
+2015-06-02|04:11:45|INFO |Application_Model_Call|createCall|create call record
+2015-06-02|13:11:51|INFO |CallpatientController|indexAction|session  is: 20de4e3987e274ab0b232a991c5ba5b6
+2015-06-02|13:12:13|INFO |CallspecialistController|indexAction|session  is: 332261b29bcd1d4604f06cff51333f8d
+2015-06-02|13:12:39|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-02|13:12:39|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-6GT206255T655470EKVWS2AI
+2015-06-02|13:12:39|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-06-02|04:13:10|ERROR|||Failed to charge Paypal with token: CARD-6GT206255T655470EKVWS2AI Message: {"name":"INTERNAL_SERVICE_ERROR","information_link":"https://api.sandbox.paypal.com/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"424a1efa3ff3c"}
+2015-06-02|04:13:10|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-06-02|04:13:21|INFO |CallpatientController|hangupAction|mail has send to admins
+2015-06-02|04:16:30|INFO |||Regist Paypal token: CARD-34E995966R2609419KVWS4HQ
+2015-06-02|04:16:30|INFO |Application_Model_Call|createCall|create call record
+2015-06-02|13:16:37|INFO |CallpatientController|indexAction|session  is: f1b90c4130a7bad36d01a699ccad5a28
+2015-06-02|13:16:57|INFO |CallspecialistController|indexAction|session  is: 8d308f2f4f5a103c6e758f18793df206
+2015-06-02|13:17:43|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-02|13:17:43|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-34E995966R2609419KVWS4HQ
+2015-06-02|13:17:43|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-06-02|04:18:14|ERROR|||Failed to charge Paypal with token: CARD-34E995966R2609419KVWS4HQ Message: {"name":"INTERNAL_SERVICE_ERROR","information_link":"https://api.sandbox.paypal.com/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"2af28f096251d"}
+2015-06-02|04:18:14|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-06-02|04:18:24|INFO |CallpatientController|hangupAction|mail has send to admins
+2015-06-02|04:18:25|INFO |||Regist Paypal token: CARD-17A17700UM997591NKVWS5EI
+2015-06-02|04:18:25|INFO |Application_Model_Call|createCall|create call record
+2015-06-02|13:18:31|INFO |CallpatientController|indexAction|session  is: 91291a1abd1c6c0c802a661d82af2789
+2015-06-02|13:18:51|INFO |CallspecialistController|indexAction|session  is: 5db2a60ca855998459f82f831640e792
+2015-06-02|13:19:57|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-02|13:19:57|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-17A17700UM997591NKVWS5EI
+2015-06-02|13:19:57|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-06-02|04:20:28|ERROR|||Failed to charge Paypal with token: CARD-17A17700UM997591NKVWS5EI Message: {"name":"INTERNAL_SERVICE_ERROR","information_link":"https://api.sandbox.paypal.com/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"376389c94306f"}
+2015-06-02|04:20:28|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-06-02|04:20:38|INFO |CallpatientController|hangupAction|mail has send to admins

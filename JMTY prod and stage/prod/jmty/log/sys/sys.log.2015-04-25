@@ -1,0 +1,13 @@
+2015-04-25|05:29:04|INFO |||Regist Paypal token: CARD-6DL983770X523894JKU5SMHY
+2015-04-25|05:29:04|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|14:29:09|INFO |CallpatientController|indexAction|session  is: 2584327a7c69e489f5f2c6f87f4b7f08
+2015-04-25|14:29:33|INFO |CallspecialistController|indexAction|session  is: 7734e7f03fc8b3cbe4e344305b1f75b5
+2015-04-25|14:29:57|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-25|14:29:57|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-6DL983770X523894JKU5SMHY
+2015-04-25|14:29:57|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-25|05:30:24|INFO |||Charged 100 JPY with token: CARD-6DL983770X523894JKU5SMHY
+2015-04-25|05:30:24|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-25|05:30:26|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-25|05:30:29|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-25|05:44:07|INFO |||Regist Paypal token: CARD-15255793BP0261516KU5STJY
+2015-04-25|05:44:07|INFO |Application_Model_Call|createCall|create call record

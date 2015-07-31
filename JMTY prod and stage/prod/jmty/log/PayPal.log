@@ -1,0 +1,361 @@
+[25-07-2015 08:37:01] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:37:01] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:01] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:37:01] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:37:01] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015TUG-ItDRBmW3IdDssTwc2mHAtg.EU5fF.aGmnJxT5JU","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015TUG-ItDRBmW3IdDssTwc2mHAtg.EU5fF.aGmnJxT5JU
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247413412414378566219120
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:37:02] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-1XH93966K5784554RKWZ7G3Q","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:37:02Z","update_time":"2015-07-25T20:37:02Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1XH93966K5784554RKWZ7G3Q","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1XH93966K5784554RKWZ7G3Q","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1XH93966K5784554RKWZ7G3Q","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:37:23] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:37:23] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:23] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:37:23] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:37:23] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015dr9YqAA7.nvRSLtdwp.3TDrOfhAamzi1xfkstPqju1A","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015dr9YqAA7.nvRSLtdwp.3TDrOfhAamzi1xfkstPqju1A
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474159032143785664312917
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:37:24] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-63D59675YF1864109KWZ7HBA","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:37:24Z","update_time":"2015-07-25T20:37:24Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-63D59675YF1864109KWZ7HBA","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-63D59675YF1864109KWZ7HBA","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-63D59675YF1864109KWZ7HBA","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015khEH4PD9hEpVMq4fpn6jZ9uCbq9H3aWzT0By9ww1Jok","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015khEH4PD9hEpVMq4fpn6jZ9uCbq9H3aWzT0By9ww1Jok
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474128374143785666562588
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:37:45] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-5TA49811C2984823KKWZ7HGI","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:37:45Z","update_time":"2015-07-25T20:37:45Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5TA49811C2984823KKWZ7HGI","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5TA49811C2984823KKWZ7HGI","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5TA49811C2984823KKWZ7HGI","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015.8AkXXLtyon3bptmLzjIH1TJSn6VrN0gB.FlwcIe1Rw","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015.8AkXXLtyon3bptmLzjIH1TJSn6VrN0gB.FlwcIe1Rw
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247412837414378569745210
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:42:54] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-5GW29376RU454411VKWZ7JTQ","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:42:54Z","update_time":"2015-07-25T20:42:54Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5GW29376RU454411VKWZ7JTQ","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5GW29376RU454411VKWZ7JTQ","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-5GW29376RU454411VKWZ7JTQ","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015VLnGcjBoFy0DFJ6ONLiuIfnmxldpU.6AgGW-xRECrgA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015VLnGcjBoFy0DFJ6ONLiuIfnmxldpU.6AgGW-xRECrgA
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474134124143785698061437
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:43:00] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-73417084ED404525VKWZ7JVA","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:43:00Z","update_time":"2015-07-25T20:43:00Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-73417084ED404525VKWZ7JVA","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-73417084ED404525VKWZ7JVA","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-73417084ED404525VKWZ7JVA","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:43:08] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:43:08] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:43:08] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:43:08] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:43:08] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015AcGICxS1i4st9zRvHhy8Os.6W8GR.c7PHUnxElF.qOs","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015AcGICxS1i4st9zRvHhy8Os.6W8GR.c7PHUnxElF.qOs
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474136224143785698821836
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:43:09] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-42X60605L9057564JKWZ7JXI","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:43:09Z","update_time":"2015-07-25T20:43:09Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-42X60605L9057564JKWZ7JXI","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-42X60605L9057564JKWZ7JXI","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-42X60605L9057564JKWZ7JXI","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015fgP5IMEYXFq8rq9cq8Gdh7cF-lVv4VS8M5MHRPrzrek","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015fgP5IMEYXFq8rq9cq8Gdh7cF-lVv4VS8M5MHRPrzrek
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474157964143785711136941
+[25-07-2015 08:45:11] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:45:12] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-1WG61192DM691841KKWZ7KWA","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:45:12Z","update_time":"2015-07-25T20:45:12Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1WG61192DM691841KKWZ7KWA","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1WG61192DM691841KKWZ7KWA","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-1WG61192DM691841KKWZ7KWA","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A0152pupeww5skOH5auwoebDSOaK1J3FF.k9pksM6aiwh8U","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A0152pupeww5skOH5auwoebDSOaK1J3FF.k9pksM6aiwh8U
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474134139143785712122316
+[25-07-2015 08:45:21] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:45:22] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-2TK06919AA4686846KWZ7KYQ","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:45:22Z","update_time":"2015-07-25T20:45:22Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-2TK06919AA4686846KWZ7KYQ","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-2TK06919AA4686846KWZ7KYQ","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-2TK06919AA4686846KWZ7KYQ","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:47:02] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:47:02] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:47:02] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QVdLWjRxdV9ZS2lDSTZoSXNiOXBHUmxPUTVkME5mS2ZXVkI5NG1BVXE5Nlo3U1JCeEpGQ3d4dlltUEtoc2tvSngydXlYcUFKTjJNQTFua3o6RU9NTVdaM21XZXdzYlRTNFNHYUUtWGh2Y0lodWttRnkxX25OaE1fTmtTNDl6OTdBdkxYQXM3cUN6a0YyaXoxNnk4dUdrbEdmQXlxX1o0YlY=
+[25-07-2015 08:47:02] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:47:02] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A0150Z7QkdGj7ricZjFtUIoEZA47nO0NJ0vt6-MPB8fjOE0","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A0150Z7QkdGj7ricZjFtUIoEZA47nO0NJ0vt6-MPB8fjOE0
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247415903214378572225097
+[25-07-2015 08:47:03] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:47:04] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-9NL75720VD531884BKWZ7LSA","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:47:04Z","update_time":"2015-07-25T20:47:04Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9NL75720VD531884BKWZ7LSA","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9NL75720VD531884BKWZ7LSA","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9NL75720VD531884BKWZ7LSA","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QVdLWjRxdV9ZS2lDSTZoSXNiOXBHUmxPUTVkME5mS2ZXVkI5NG1BVXE5Nlo3U1JCeEpGQ3d4dlltUEtoc2tvSngydXlYcUFKTjJNQTFua3o6RU9NTVdaM21XZXdzYlRTNFNHYUUtWGh2Y0lodWttRnkxX25OaE1fTmtTNDl6OTdBdkxYQXM3cUN6a0YyaXoxNnk4dUdrbEdmQXlxX1o0YlY=
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015rmgUdXW8z-S1qddE9nu7SophXQBjVdQVJ7vxZw00syw","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015rmgUdXW8z-S1qddE9nu7SophXQBjVdQVJ7vxZw00syw
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474134138143785745358231
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 08:50:53] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-3A927533RW4678310KWZ7NLI","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T20:50:53Z","update_time":"2015-07-25T20:50:53Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-3A927533RW4678310KWZ7NLI","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-3A927533RW4678310KWZ7NLI","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-3A927533RW4678310KWZ7NLI","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QVdLWjRxdV9ZS2lDSTZoSXNiOXBHUmxPUTVkME5mS2ZXVkI5NG1BVXE5Nlo3U1JCeEpGQ3d4dlltUEtoc2tvSngydXlYcUFKTjJNQTFua3o6RU9NTVdaM21XZXdzYlRTNFNHYUUtWGh2Y0lodWttRnkxX25OaE1fTmtTNDl6OTdBdkxYQXM3cUN6a0YyaXoxNnk4dUdrbEdmQXlxX1o0YlY=
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015wc5KWSA-IQ2LMNVb9KnZt3duHD50SLmvoDqC2ntBPrs","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015wc5KWSA-IQ2LMNVb9KnZt3duHD50SLmvoDqC2ntBPrs
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474128374143785802629044
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 09:00:26] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-44787567PY105912MKWZ7R2Q","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T21:00:26Z","update_time":"2015-07-25T21:00:26Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-44787567PY105912MKWZ7R2Q","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-44787567PY105912MKWZ7R2Q","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-44787567PY105912MKWZ7R2Q","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QVdLWjRxdV9ZS2lDSTZoSXNiOXBHUmxPUTVkME5mS2ZXVkI5NG1BVXE5Nlo3U1JCeEpGQ3d4dlltUEtoc2tvSngydXlYcUFKTjJNQTFua3o6RU9NTVdaM21XZXdzYlRTNFNHYUUtWGh2Y0lodWttRnkxX25OaE1fTmtTNDl6OTdBdkxYQXM3cUN6a0YyaXoxNnk4dUdrbEdmQXlxX1o0YlY=
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015FXb5RcGAcBtfejEDvmn4t10Bb2r7hSDrXuhm5ICDkhM","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015FXb5RcGAcBtfejEDvmn4t10Bb2r7hSDrXuhm5ICDkhM
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247415206114378582628246
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 09:04:22] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-9WW29654GF4141237KWZ7TVQ","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T21:04:22Z","update_time":"2015-07-25T21:04:22Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9WW29654GF4141237KWZ7TVQ","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9WW29654GF4141237KWZ7TVQ","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-9WW29654GF4141237KWZ7TVQ","rel":"patch","method":"PATCH"}]}
+
+
+[25-07-2015 11:19:30] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[25-07-2015 11:19:30] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 11:19:30] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[25-07-2015 11:19:30] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[25-07-2015 11:19:30] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015f-ZBoAxwDxAQlAzyYKlMiUyUQ5qji4QX3GD4e.Q1HsA","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015f-ZBoAxwDxAQlAzyYKlMiUyUQ5qji4QX3GD4e.Q1HsA
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247416650143786637037795
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[25-07-2015 11:19:31] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-8XU81795S1756553SKW2BTAY","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-24T00:00:00Z","create_time":"2015-07-25T23:19:31Z","update_time":"2015-07-25T23:19:31Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-8XU81795S1756553SKW2BTAY","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-8XU81795S1756553SKW2BTAY","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-8XU81795S1756553SKW2BTAY","rel":"patch","method":"PATCH"}]}
+
+
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A0158ruyIq350cAzXv7JteDfvoFiowwcRJt0WqCuMJJRcn0","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A0158ruyIq350cAzXv7JteDfvoFiowwcRJt0WqCuMJJRcn0
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247413413814378689069537
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[26-07-2015 12:01:46] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-4BX33011F5477915VKW2CG2Q","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-25T00:00:00Z","create_time":"2015-07-26T00:01:46Z","update_time":"2015-07-26T00:01:46Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-4BX33011F5477915VKW2CG2Q","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-4BX33011F5477915VKW2CG2Q","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-4BX33011F5477915VKW2CG2Q","rel":"patch","method":"PATCH"}]}
+
+
+[26-07-2015 01:57:51] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 01:57:51] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 01:57:51] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 01:57:51] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 01:57:51] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A0150ZDeiT-ovAhsZyu.uRYZ.5uAfePc.-zNzNwYwZWw7KQ","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A0150ZDeiT-ovAhsZyu.uRYZ.5uAfePc.-zNzNwYwZWw7KQ
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247415934114378758717198
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[26-07-2015 01:57:53] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-6TH08579F81097711KW2D5II","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-25T00:00:00Z","create_time":"2015-07-26T01:57:53Z","update_time":"2015-07-26T01:57:53Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6TH08579F81097711KW2D5II","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6TH08579F81097711KW2D5II","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6TH08579F81097711KW2D5II","rel":"patch","method":"PATCH"}]}
+
+
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015MLfOkeWE83gMmAciHGTFeJ3rRS0daMhafChoqSv0DVk","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015MLfOkeWE83gMmAciHGTFeJ3rRS0daMhafChoqSv0DVk
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 27830247418092414378759763813
+[26-07-2015 01:59:36] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"fname","last_name":"lname","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[26-07-2015 01:59:37] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-6L111973E60485439KW2D6CA","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"fname","last_name":"lname","valid_until":"2018-07-25T00:00:00Z","create_time":"2015-07-26T01:59:36Z","update_time":"2015-07-26T01:59:36Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6L111973E60485439KW2D6CA","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6L111973E60485439KW2D6CA","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-6L111973E60485439KW2D6CA","rel":"patch","method":"PATCH"}]}
+
+
+[26-07-2015 02:00:19] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 02:00:19] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:00:19] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 02:00:19] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 02:00:19] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A0151Uc2NDcYrsATH6wEyHwOikZjZWnlRrJmCd.-1MtzWD8","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A0151Uc2NDcYrsATH6wEyHwOikZjZWnlRrJmCd.-1MtzWD8
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474181322143787601919759
+[26-07-2015 02:00:20] PayPal\Core\PPHttpConnection: FINE: Payload : {"intent":"sale","payer":{"payment_method":"credit_card","funding_instruments":[{"credit_card_token":{"credit_card_id":"CARD-6L111973E60485439KW2D6CA"}}]},"transactions":[{"amount":{"currency":"JPY","total":100},"description":"Paypal transaction"}]}
+
+[26-07-2015 02:00:30] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"PAY-2FT05275LA2175705KW2D6NA","create_time":"2015-07-26T02:00:20Z","update_time":"2015-07-26T02:00:30Z","state":"approved","intent":"sale","payer":{"payment_method":"credit_card","funding_instruments":[{"credit_card_token":{"credit_card_id":"CARD-6L111973E60485439KW2D6CA","last4":"1118","type":"mastercard","expire_month":"1","expire_year":"2020"}}]},"transactions":[{"amount":{"total":"100","currency":"JPY","details":{"subtotal":"100"}},"description":"Paypal transaction","related_resources":[{"sale":{"id":"4SK5314165567351H","create_time":"2015-07-26T02:00:20Z","update_time":"2015-07-26T02:00:30Z","amount":{"total":"100","currency":"JPY"},"state":"pending","parent_payment":"PAY-2FT05275LA2175705KW2D6NA","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/sale/4SK5314165567351H","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/payments/sale/4SK5314165567351H/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-2FT05275LA2175705KW2D6NA","rel":"parent_payment","method":"GET"}]}}]}],"links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-2FT05275LA2175705KW2D6NA","rel":"self","method":"GET"}]}
+
+
+[26-07-2015 02:04:21] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 02:04:21] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:04:21] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 02:04:21] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 02:04:21] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015PTJep3xsOfeKwDlCzmYqs7evpZmn8zjUABFQKIla954","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/vault/credit-card
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015PTJep3xsOfeKwDlCzmYqs7evpZmn8zjUABFQKIla954
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 2783024741641251437876261753
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: Payload : {"first_name":"direct","last_name":"test","type":"mastercard","number":"5111111111111118","cvv2":"123","expire_month":"01","expire_year":"2020"}
+
+[26-07-2015 02:04:22] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"CARD-62G48355CH965604EKW2EAJQ","state":"ok","type":"mastercard","number":"xxxxxxxxxxxx1118","expire_month":"1","expire_year":"2020","first_name":"direct","last_name":"test","valid_until":"2018-07-25T00:00:00Z","create_time":"2015-07-26T02:04:22Z","update_time":"2015-07-26T02:04:22Z","links":[{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-62G48355CH965604EKW2EAJQ","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-62G48355CH965604EKW2EAJQ","rel":"delete","method":"DELETE"},{"href":"https://api.sandbox.paypal.com/v1/vault/credit-card/CARD-62G48355CH965604EKW2EAJQ","rel":"patch","method":"PATCH"}]}
+
+
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/oauth2/token
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Authorization: Basic QWZ4bVlWQU81RjFTdHhrOE9WcTV3TXR5emZZQUxGZlhHTmxtS0ZvQnprWHNEQnpFc3REdy16V3NTQmJseW1hcE12SkpVejItbExEOVRIcWo6RUtud2dNa2tjUlpKbGhtVEJVTDduQTFjd0ZYTTEwZ0hxeGFYRlUtSUlGSklXa3lYM2h2b3c1ZzVJTk82OUlQU05qZElHeUhQRVhHek14QlE=
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Accept: */*
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Payload : grant_type=client_credentials
+
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Response : {"scope":"https://uri.paypal.com/services/subscriptions https://api.paypal.com/v1/payments/.* https://api.paypal.com/v1/vault/credit-card https://uri.paypal.com/services/applications/webhooks openid https://uri.paypal.com/payments/payouts https://api.paypal.com/v1/vault/credit-card/.*","access_token":"A015lAr9Y73ou6gF7YqhSHdXahBOl7TB3EBgguO5.ey8T08","token_type":"Bearer","app_id":"APP-80W284485P519543T","expires_in":28800}
+
+
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: INFO: POST https://api.sandbox.paypal.com/v1/payments/payment
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Content-Type: application/json
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: User-Agent: PayPalSDK/rest-sdk-php 0.13.2 (lang=PHP;v=5.5.4;bit=64;os=SunOS_5.11;machine=i86pc;openssl=1.0.1e;curl=7.32.0)
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Authorization: Bearer A015lAr9Y73ou6gF7YqhSHdXahBOl7TB3EBgguO5.ey8T08
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: PayPal-Request-Id: 278302474181322143787630364861
+[26-07-2015 02:05:03] PayPal\Core\PPHttpConnection: FINE: Payload : {"intent":"sale","payer":{"payment_method":"credit_card","funding_instruments":[{"credit_card_token":{"credit_card_id":"CARD-62G48355CH965604EKW2EAJQ"}}]},"transactions":[{"amount":{"currency":"JPY","total":100},"description":"Paypal transaction"}]}
+
+[26-07-2015 02:05:09] PayPal\Core\PPHttpConnection: FINE: Response : {"id":"PAY-7PR494155F159680WKW2EAUA","create_time":"2015-07-26T02:05:04Z","update_time":"2015-07-26T02:05:08Z","state":"approved","intent":"sale","payer":{"payment_method":"credit_card","funding_instruments":[{"credit_card_token":{"credit_card_id":"CARD-62G48355CH965604EKW2EAJQ","last4":"1118","type":"mastercard","expire_month":"1","expire_year":"2020"}}]},"transactions":[{"amount":{"total":"100","currency":"JPY","details":{"subtotal":"100"}},"description":"Paypal transaction","related_resources":[{"sale":{"id":"5N803999L7016053A","create_time":"2015-07-26T02:05:04Z","update_time":"2015-07-26T02:05:08Z","amount":{"total":"100","currency":"JPY"},"state":"pending","parent_payment":"PAY-7PR494155F159680WKW2EAUA","links":[{"href":"https://api.sandbox.paypal.com/v1/payments/sale/5N803999L7016053A","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v1/payments/sale/5N803999L7016053A/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-7PR494155F159680WKW2EAUA","rel":"parent_payment","method":"GET"}]}}]}],"links":[{"href":"https://api.sandbox.paypal.com/v1/payments/payment/PAY-7PR494155F159680WKW2EAUA","rel":"self","method":"GET"}]}
+
+

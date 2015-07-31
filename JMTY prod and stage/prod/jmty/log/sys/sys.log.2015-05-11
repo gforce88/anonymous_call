@@ -1,0 +1,10 @@
+2015-05-11|06:30:18|INFO |||Regist Paypal token: CARD-1R611641XV688513RKVIEY6Q
+2015-05-11|06:30:19|INFO |Application_Model_Call|createCall|create call record
+2015-05-11|15:31:00|INFO |CallpatientController|indexAction|session  is: fc77cab4912d56c1c1458c7ee2dcdb8d
+2015-05-11|15:31:22|INFO |CallspecialistController|indexAction|session  is: fd9c22be678ee21d360dd0a8c6d6df0b
+2015-05-11|15:32:19|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-05-11|15:32:19|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-1R611641XV688513RKVIEY6Q
+2015-05-11|15:32:19|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-05-11|06:32:50|ERROR|||Failed to charge Paypal with token: CARD-1R611641XV688513RKVIEY6Q Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"6a9dc38d71043"}
+2015-05-11|06:32:50|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-05-11|06:33:01|INFO |CallpatientController|hangupAction|mail has send to admins

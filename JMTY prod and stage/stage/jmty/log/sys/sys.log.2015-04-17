@@ -1,0 +1,15 @@
+2015-04-16|19:17:37|INFO |Application_Model_Call|createCall|create call record
+2015-04-16|19:17:38|INFO |CallpatientController|indexAction|session  is: 90b41d83f09673f56a242b185aaf75bb
+2015-04-16|19:17:38|INFO |CallspecialistController|indexAction|session  is: 0b75d9a65de48f975c97135f2f17ef6a
+2015-04-16|19:17:59|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-16|19:17:59|INFO |CallspecialistController|bAction|session  is: c34ae07b2ad8f595e39450521fb8a2a4
+2015-04-16|19:18:20|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/90b41d83f09673f56a242b185aaf75bb/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>NOTFOUND</status></signal>
+2015-04-16|19:18:20|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-17|01:27:53|INFO |Application_Model_Call|createCall|create call record
+2015-04-17|01:27:53|INFO |CallpatientController|indexAction|session  is: a4f84e4dff66e5de5198ee28960eea03
+2015-04-17|01:27:54|INFO |CallspecialistController|indexAction|session  is: 8758c4fc537e267bde20a73a457f0011
+2015-04-17|01:28:48|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-17|01:28:49|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"first_name","issue":"Must not be blank"},{"field":"number","issue":"Must not be blank"},{"field":"expire_year","issue":"Must not be blank"},{"field":"last_name","issue":"Must not be blank"},{"field":"type","issue":"Required field missing"},{"field":"cvv2","issue":"Must not be blank"},{"field":"expire_month","issue":"Must not be blank"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"48d25f62f16b0"}
+2015-04-17|01:28:50|ERROR|||Failed to charge Paypal with token:  Message: {"name":"VALIDATION_ERROR","details":[{"field":"payer.funding_instruments[0].credit_card_token.credit_card_id","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#VALIDATION_ERROR","debug_id":"95050833f3ab9"}
+2015-04-17|01:28:50|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-17|01:29:00|INFO |CallspecialistController|hangupAction|mail has send to admins

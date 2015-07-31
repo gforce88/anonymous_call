@@ -1,0 +1,7 @@
+2015-05-09|17:13:14|INFO |||Regist Paypal token: CARD-2CE355186K2661253KVHEAKQ
+2015-05-09|17:13:14|INFO |Application_Model_Call|createCall|create call record
+2015-05-09|17:13:53|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"b966ec80228da"}
+2015-05-09|17:16:19|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"98d3f15446cad"}
+2015-05-09|17:16:25|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"f7ab777e50f18"}
+2015-05-09|17:16:39|INFO |||Regist Paypal token: CARD-4WD83120EX127654XKVHEB5Q
+2015-05-09|17:16:39|INFO |Application_Model_Call|createCall|create call record

@@ -1,0 +1,22 @@
+2015-05-17|00:25:36|INFO |||Regist Paypal token: CARD-6GM08578EF391952GKVL6AAA
+2015-05-17|00:25:36|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|09:25:47|INFO |CallpatientController|indexAction|session  is: 16b1adfefcfc478ee04bafcdec421305
+2015-05-17|09:25:48|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:25:48|INFO |CallpatientController|indexAction|session  is: 2277e4fe1177a392390602d6d588a995
+2015-05-17|09:25:48|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:25:48|INFO |CallpatientController|indexAction|session  is: 386eb165465c871c743473c3eaea6fd1
+2015-05-17|09:25:49|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:25:49|INFO |CallpatientController|indexAction|session  is: 13dc71de6309fa267ad3ce43ecb74b68
+2015-05-17|09:25:49|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-05-17|09:25:52|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  ge.szeto@gmail.com
+2015-05-17|00:27:44|INFO |||Regist Paypal token: CARD-12K19339WU720582SKVL6BAA
+2015-05-17|00:27:44|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|09:27:52|INFO |CallpatientController|indexAction|session  is: 6348db41f880e05391ce7e7e385dbe5c
+2015-05-17|09:27:53|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:27:53|INFO |CallpatientController|indexAction|session  is: e3af6b9660c8de8d8961f0a18ab693cf
+2015-05-17|09:27:53|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:27:53|INFO |CallpatientController|indexAction|session  is: 53b7fc99b4d98cf8ed6835da627c3dfd
+2015-05-17|09:27:54|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:27:54|INFO |CallpatientController|indexAction|session  is: 179516fb3baf9390263cc0d601056064
+2015-05-17|09:27:54|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-05-17|09:27:57|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  ge.szeto@gmail.com

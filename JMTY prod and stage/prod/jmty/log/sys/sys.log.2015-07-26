@@ -1,0 +1,55 @@
+2015-07-25|20:37:02|INFO |||Regist Paypal token: CARD-1XH93966K5784554RKWZ7G3Q
+2015-07-25|20:37:02|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:37:24|INFO |||Regist Paypal token: CARD-63D59675YF1864109KWZ7HBA
+2015-07-25|20:37:24|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:37:45|INFO |||Regist Paypal token: CARD-5TA49811C2984823KKWZ7HGI
+2015-07-25|20:37:45|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:42:54|INFO |||Regist Paypal token: CARD-5GW29376RU454411VKWZ7JTQ
+2015-07-25|20:42:54|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:43:00|INFO |||Regist Paypal token: CARD-73417084ED404525VKWZ7JVA
+2015-07-25|20:43:00|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:43:09|INFO |||Regist Paypal token: CARD-42X60605L9057564JKWZ7JXI
+2015-07-25|20:43:09|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:45:12|INFO |||Regist Paypal token: CARD-1WG61192DM691841KKWZ7KWA
+2015-07-25|20:45:12|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:45:22|INFO |||Regist Paypal token: CARD-2TK06919AA4686846KWZ7KYQ
+2015-07-25|20:45:22|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:47:04|INFO |||Regist Paypal token: CARD-9NL75720VD531884BKWZ7LSA
+2015-07-25|20:47:04|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|20:50:53|INFO |||Regist Paypal token: CARD-3A927533RW4678310KWZ7NLI
+2015-07-25|20:50:53|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|21:00:26|INFO |||Regist Paypal token: CARD-44787567PY105912MKWZ7R2Q
+2015-07-25|21:00:26|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|21:04:22|INFO |||Regist Paypal token: CARD-9WW29654GF4141237KWZ7TVQ
+2015-07-25|21:04:22|INFO |Application_Model_Call|createCall|create call record
+2015-07-25|23:19:31|INFO |||Regist Paypal token: CARD-8XU81795S1756553SKW2BTAY
+2015-07-25|23:19:31|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|00:01:46|INFO |||Regist Paypal token: CARD-4BX33011F5477915VKW2CG2Q
+2015-07-26|00:01:46|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|01:57:53|INFO |||Regist Paypal token: CARD-6TH08579F81097711KW2D5II
+2015-07-26|01:57:53|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|10:58:00|INFO |CallpatientController|indexAction|session  is: 09e86ddc872819ac84c631ca3582f543
+2015-07-26|10:58:20|INFO |CallspecialistController|indexAction|session  is: 8a5ad5262020c3a5a07c53ef8096d11a
+2015-07-26|10:58:41|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-26|01:59:37|INFO |||Regist Paypal token: CARD-6L111973E60485439KW2D6CA
+2015-07-26|01:59:37|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|10:59:40|INFO |CallpatientController|indexAction|session  is: ccd263c10a2abbceccfe9d613af0e095
+2015-07-26|11:00:00|INFO |CallspecialistController|indexAction|session  is: 7df54ee33654b90741a7b289918fbaac
+2015-07-26|11:00:19|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|11:00:19|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-6L111973E60485439KW2D6CA
+2015-07-26|11:00:19|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-26|02:00:30|INFO |||Charged 100 JPY with token: CARD-6L111973E60485439KW2D6CA
+2015-07-26|02:00:30|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|02:00:33|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|02:00:34|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-26|02:04:22|INFO |||Regist Paypal token: CARD-62G48355CH965604EKW2EAJQ
+2015-07-26|02:04:22|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|11:04:26|INFO |CallpatientController|indexAction|session  is: 5f6700032e787ba87b193e101047f824
+2015-07-26|11:04:44|INFO |CallspecialistController|indexAction|session  is: be83150bd98c57a86d09071eef83b557
+2015-07-26|11:05:03|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|11:05:03|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-62G48355CH965604EKW2EAJQ
+2015-07-26|11:05:03|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-26|02:05:09|INFO |||Charged 100 JPY with token: CARD-62G48355CH965604EKW2EAJQ
+2015-07-26|02:05:09|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|02:05:10|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|02:05:12|INFO |CallpatientController|hangupAction|mail has send to admin

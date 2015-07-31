@@ -1,0 +1,44 @@
+2015-04-19|05:31:40|INFO |||Regist Paypal token: CARD-2C001261T6901105HKUZT3PA
+2015-04-19|05:31:40|INFO |Application_Model_Call|createCall|create call record
+2015-04-19|14:31:45|INFO |CallpatientController|indexAction|session  is: 8fe2f628b5c97ec5302dcd81a0fd3b9e
+2015-04-19|14:32:03|INFO |CallspecialistController|indexAction|session  is: 4ce0e2ea12a4c675544261f180986817
+2015-04-19|14:32:27|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-19|14:32:27|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-2C001261T6901105HKUZT3PA
+2015-04-19|14:32:27|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-19|05:32:58|INFO |||Charged 100 JPY with token: CARD-2C001261T6901105HKUZT3PA
+2015-04-19|05:32:58|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-19|05:33:01|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-19|05:33:04|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-19|05:39:09|INFO |||Regist Paypal token: CARD-8L9444887X374602JKUZT67I
+2015-04-19|05:39:09|INFO |Application_Model_Call|createCall|create call record
+2015-04-19|05:39:33|INFO |||Regist Paypal token: CARD-8EN4835572998225SKUZT7FI
+2015-04-19|05:39:33|INFO |Application_Model_Call|createCall|create call record
+2015-04-19|14:39:38|INFO |CallpatientController|indexAction|session  is: 23eab3dc4cbe26146552d0a6e807ed92
+2015-04-19|14:39:57|INFO |CallspecialistController|indexAction|session  is: d1ea419e0e37680bd5db6c28bf8063b5
+2015-04-19|14:41:34|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-19|14:41:34|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-8EN4835572998225SKUZT7FI
+2015-04-19|14:41:34|INFO |CallpatientController|doPayPalPayment|roundAmount:200
+2015-04-19|05:41:35|ERROR|||Failed to charge Paypal with token: CARD-8EN4835572998225SKUZT7FI Message: {"name":"UNAUTHORIZED_PAYMENT","message":"Unauthorized payment","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#UNAUTHORIZED_PAYMENT","debug_id":"69d7072866cf1"}
+2015-04-19|05:41:35|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-19|05:41:45|INFO |CallpatientController|hangupAction|mail has send to admins
+2015-04-19|05:46:44|INFO |||Regist Paypal token: CARD-26H91380SC5577402KUZUCRA
+2015-04-19|05:46:44|INFO |Application_Model_Call|createCall|create call record
+2015-04-19|14:46:59|INFO |CallpatientController|indexAction|session  is: 61ffa95b178c8f097c75633c710f3082
+2015-04-19|14:47:19|INFO |CallspecialistController|indexAction|session  is: 6fefc41019c52a047c2cabaea3fd9d76
+2015-04-19|14:47:52|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-19|14:47:52|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-26H91380SC5577402KUZUCRA
+2015-04-19|14:47:52|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-19|05:47:54|ERROR|||Failed to charge Paypal with token: CARD-26H91380SC5577402KUZUCRA Message: {"name":"UNAUTHORIZED_PAYMENT","message":"Unauthorized payment","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#UNAUTHORIZED_PAYMENT","debug_id":"d1bbe5bc6e81e"}
+2015-04-19|05:47:54|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-19|05:48:04|INFO |CallpatientController|hangupAction|mail has send to admins
+2015-04-19|06:23:45|INFO |||Regist Paypal token: CARD-6C599268V77557021KUZUT4A
+2015-04-19|06:23:45|INFO |Application_Model_Call|createCall|create call record
+2015-04-19|15:23:52|INFO |CallpatientController|indexAction|session  is: 206eb30783e13ad3a989ccba37ab76d3
+2015-04-19|15:24:12|INFO |CallspecialistController|indexAction|session  is: 946795d3e5a9373c7bc8e7821a9616ce
+2015-04-19|15:24:44|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-19|15:24:44|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-6C599268V77557021KUZUT4A
+2015-04-19|15:24:44|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-19|06:25:11|INFO |||Charged 100 JPY with token: CARD-6C599268V77557021KUZUT4A
+2015-04-19|06:25:11|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-19|06:25:14|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-19|06:25:17|INFO |CallpatientController|hangupAction|mail has send to admin

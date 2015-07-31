@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-style-Type" content="text/html; charset=UTF-8">
+    <title>ジモティー電話相談サービス</title>
+    <link href="<?php echo APP_CTX ?>/pc/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo APP_CTX ?>/components/library/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/messages_ja.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        $().ready(function () {
+            $('#next').click(function () {
+                if ($('#agreementCheck').is(":checked")) {
+                    $('#steptwoForm').submit();
+                } else {
+                    alert("本サービスをご利用いただくには、利用規約に同意する必要があります。");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class="container_inner" style="width:1000px; background-image:none !important;">
+        <div class="clearfix c_both" id="logo">
+            <div class="header_logo"><img alt="ジモティー" height="33" src="<?php echo APP_CTX ?>/pc/images/jmty_thin.png" style="float:left"
+                                          width="120"> <br class="c_both">
+            </div>
+            <br class="c_both">
+        </div>
+        <div class="clearfix" id="breadcrumbs"> <span>
+         <span>必要項目入力</span> 
+          </span> <span> &nbsp;&gt;&nbsp; </span>
+
+            <div> 入力内容確認</div>
+            <span> &nbsp;&gt;&nbsp; </span> <span> 登録完了 </span> <br class="c-both">
+        </div>
+        <div class="page_content">
+            <p>
+            </p>
+
+            <div class="section">
+                <div class="section_title">
+                    <div class="section_title_inner">
+                        <h2><span class="p">入力内容確認</span></h2>
+                    </div>
+                </div>
+                <div class="section_content">
+                    <table class="tabular table_two_line table_two_piece" summary="credit_1" id="credit">
+                        <tbody>
+                        <tr>
+                            <th>電話番号</th>
+                            <td><?php echo $this->formValue->phone; ?></td>
+                        </tr>
+                       
+                        </tbody>
+                    </table>
+                    <form action="<?php echo APP_CTX ?>/pc/stepthree" method="post" id="steptwoForm">
+                        <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
+                        <input type="hidden" name="token" value="<?php echo $this->formValue->token ?>">
+                        <div class="section_content">
+                            <div>必ず本利用規約をご一読の上、内容をご確認いただいた上でご登録ください。<br>
+                                <input id="agreementCheck" type="checkbox" name="#" value="#"><a href="<?php echo APP_CTX ?>/toc/JMTY AVC TOS final2.html" target="new">利用規約</a>に同意する
+                            </div>
+                            <div class="btn">
+                                <a id="next" href="#" style="cursor:hand">
+                                    <div>入力内容を登録</div>
+                                </a></div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br class="clear">
+        </div>
+    </div>
+    <div id="footer">
+        <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED.</div>
+    </div>
+    ・
+</div>
+</body>
+</html>

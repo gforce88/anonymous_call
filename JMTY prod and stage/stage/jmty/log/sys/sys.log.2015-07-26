@@ -1,0 +1,87 @@
+2015-07-26|05:51:02|INFO |CallpatientController|indexAction|session  is: 75dce7990f3e5c2770e4fed3f9dab8fe
+2015-07-26|05:51:24|INFO |CallspecialistController|indexAction|session  is: 06546737df9b2d30d3c90f69ae077021
+2015-07-26|06:00:35|INFO |CallpatientController|indexAction|session  is: 6053f9623090501b5ac5ecc3d7da4cfd
+2015-07-26|06:00:49|INFO |CallspecialistController|indexAction|session  is: c1e5beab22eda5dbe90e5ecc25c6a3e3
+2015-07-26|06:04:29|INFO |CallpatientController|indexAction|session  is: be166e274b3e8fc2ff2ea45e6dddadc1
+2015-07-26|06:04:44|INFO |CallspecialistController|indexAction|session  is: e3fe02d1d0e3e291391ba5fbefe831f0
+2015-07-25|21:42:26|INFO |||Regist Paypal token: CARD-5GB33875WX827720MKW2AFQQ
+2015-07-25|21:42:26|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|06:42:42|INFO |CallpatientController|indexAction|session  is: 1b1fe26e166fb43407761337476308d8
+2015-07-26|06:43:02|INFO |CallspecialistController|indexAction|session  is: fbc6c18e54041229a5c4961ccb7fb9b2
+2015-07-26|06:43:31|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|06:43:31|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-5GB33875WX827720MKW2AFQQ
+2015-07-26|06:43:31|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-25|21:43:42|INFO |||Charged 100 JPY with token: CARD-5GB33875WX827720MKW2AFQQ
+2015-07-25|21:43:42|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-25|21:43:45|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-25|21:43:47|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-25|21:52:03|INFO |||Regist Paypal token: CARD-2FK669336L7573933KW2AKAY
+2015-07-25|21:52:03|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|06:52:10|INFO |CallpatientController|indexAction|session  is: df7f319f1d4dc173c834b55068e8dc2b
+2015-07-26|06:52:30|INFO |CallspecialistController|indexAction|session  is: 507ede5e3becac50619437639c5ac2cf
+2015-07-26|06:53:07|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|06:53:07|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-2FK669336L7573933KW2AKAY
+2015-07-26|06:53:07|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-25|21:53:12|INFO |||Charged 100 JPY with token: CARD-2FK669336L7573933KW2AKAY
+2015-07-25|21:53:12|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-25|21:53:15|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-25|21:53:16|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-25|21:56:38|INFO |||Regist Paypal token: CARD-260111858F927761UKW2AMFQ
+2015-07-25|21:56:38|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|06:56:44|INFO |CallpatientController|indexAction|session  is: ef644f54d4a979b831cb7380cd3b0c29
+2015-07-26|06:57:06|INFO |CallspecialistController|indexAction|session  is: 3dc00f64d4c6d651e3009c887ee00619
+2015-07-25|22:03:20|INFO |||Regist Paypal token: CARD-5J4313494C428514MKW2APKA
+2015-07-25|22:03:20|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|07:03:26|INFO |CallpatientController|indexAction|session  is: 172cd266c1ee50cadcc4c711fb86316c
+2015-07-26|07:03:40|INFO |CallspecialistController|indexAction|session  is: e9f017b70e962589ed60775209b49079
+2015-07-26|07:03:43|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|07:03:43|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-260111858F927761UKW2AMFQ
+2015-07-26|07:03:43|INFO |CallpatientController|doPayPalPayment|roundAmount:700
+2015-07-25|22:03:48|INFO |||Charged 700 JPY with token: CARD-260111858F927761UKW2AMFQ
+2015-07-25|22:03:48|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-25|22:03:50|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-25|22:03:52|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-25|22:04:15|INFO |||Regist Paypal token: CARD-2LR87228M37305933KW2APXY
+2015-07-25|22:04:15|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|07:04:21|INFO |CallpatientController|indexAction|session  is: 73ea22e899f88f02e014e856dd2ce61d
+2015-07-26|07:04:39|INFO |CallspecialistController|indexAction|session  is: 9ea0a2b0d55cbae341fa5de9443683e6
+2015-07-26|07:05:05|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|07:05:05|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-2LR87228M37305933KW2APXY
+2015-07-26|07:05:05|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-25|22:05:11|INFO |||Charged 100 JPY with token: CARD-2LR87228M37305933KW2APXY
+2015-07-25|22:05:11|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-25|22:05:12|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-25|22:05:14|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-26|08:20:26|INFO |CallpatientController|indexAction|session  is: 43420f9b4764a6a20e20ec82ed1092ca
+2015-07-26|08:20:45|INFO |CallspecialistController|indexAction|session  is: 467191ba68adf60324da22040c831c3a
+2015-07-26|09:01:53|INFO |CallpatientController|indexAction|session  is: 2f9b498f24ad6ac1013066f3d817fe30
+2015-07-26|09:02:14|INFO |CallspecialistController|indexAction|session  is: 6abcb7f3ec9edcc38c242e8cbb67b45e
+2015-07-26|10:58:41|INFO |CallspecialistController|bAction|session  is: b7539a8cc415f934794026d5a4e35176
+2015-07-26|02:08:33|INFO |||Regist Paypal token: CARD-833299082R837402XKW2ECIA
+2015-07-26|02:08:33|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|11:08:40|INFO |CallpatientController|indexAction|session  is: 395bb3533985cc120ad83a2c797c0cad
+2015-07-26|11:08:58|INFO |CallspecialistController|indexAction|session  is: 5a26f5ea9550675ec570d7d99d02be52
+2015-07-26|11:09:19|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|11:09:19|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-833299082R837402XKW2ECIA
+2015-07-26|11:09:19|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-26|02:09:24|INFO |||Charged 100 JPY with token: CARD-833299082R837402XKW2ECIA
+2015-07-26|02:09:24|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|02:09:26|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|02:09:28|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-26|02:51:38|INFO |||Regist Paypal token: CARD-75L49306RC5494210KW2EWOQ
+2015-07-26|02:51:38|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|02:52:19|INFO |||Regist Paypal token: CARD-2YY77575DW592263LKW2EWYY
+2015-07-26|02:52:19|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|02:52:26|INFO |||Regist Paypal token: CARD-21U46703KJ5797219KW2EW2Q
+2015-07-26|02:52:26|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|13:50:12|INFO |||Regist Paypal token: CARD-9CP30856BB619824XKW2OLFA
+2015-07-26|13:50:12|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|22:50:19|INFO |CallpatientController|indexAction|session  is: a417987f39551d289744c03934e09060
+2015-07-26|22:50:39|INFO |CallspecialistController|indexAction|session  is: 7da83f2d6472219613dc5b012a4a9175
+2015-07-26|22:51:12|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-26|22:51:12|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-9CP30856BB619824XKW2OLFA
+2015-07-26|22:51:12|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-26|13:51:24|INFO |||Charged 100 JPY with token: CARD-9CP30856BB619824XKW2OLFA
+2015-07-26|13:51:24|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|13:51:26|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|13:51:29|INFO |CallpatientController|hangupAction|mail has send to admin

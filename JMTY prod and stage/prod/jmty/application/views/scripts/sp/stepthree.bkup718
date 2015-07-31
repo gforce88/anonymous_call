@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta content="index,follow" name="robots">
+  <title>ジモティー 中古・フリマ・フリーマーケット、バイト、スクール、募集の無料広告の掲示板</title>
+  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+        name="viewport">
+  <meta content="telephone=no" name="format-detection">
+    <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.form.min.js"></script>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        /*
+        Object.defineProperty(window.navigator, 'userAgent', {
+            get: function () {
+                return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
+            }
+        });
+        Object.defineProperty(window.navigator, 'vendor', {
+            get: function () {
+                return 'Apple, Inc.';
+            }
+        });
+        Object.defineProperty(window.navigator, 'platform', {
+            get: function () {
+                return 'iPhone';
+            }
+        });
+        */
+
+        $().ready(function(){
+
+            var options = {
+                beforeSubmit:  showRequest,  //提交前处理
+                success:       showResponse,  //处理完成
+                resetForm: true,
+                dataType:  'json'
+            };
+
+            $('#callAction').click(function() {
+                $('#stepthree').ajaxSubmit(options);
+            })
+        });
+
+        function showRequest(responseText, statusText)  {
+            $('#callAction').unbind("click");
+            $('#post_submit').removeClass("form_submit_btn").addClass("form_submit_btn_disable");
+        }
+        function showResponse(responseText, statusText)  {
+            if(responseText==0){
+                //alert("starting call");
+            };
+            $('#callAction').click(function() {
+                alert("call has started!");
+            });
+            window.location.href="<?php echo APP_CTX; ?>/sp/thanks";
+        }
+    </script>
+</head>
+
+<body>
+<div id="container">
+  <div id="main">
+    <div id="header">
+      <div class="hdbox">
+        <h1 id="page_head_text"><span class="font_size13"> ジモティー電話相談サービス - 登録完了</span></h1>
+      </div>
+      <div id="header_action">
+        <div class="header_logo"><a href="https://jmty.jp/s">
+          <img alt="" height="40" src="images/header_logo.png" width="80"> </a></div>
+        <br class="c-both">
+      </div>
+    </div>
+    <div id="page_flat_title">
+      <h2>登録完了</h2>
+    </div>
+    <div class="margin_top_5" id="breadcrumb_list">必要項目の入力&nbsp;&gt;&nbsp;入力内容確認&nbsp;&gt;&nbsp;<span>登録完了</span></div>
+
+    <div class="post_form">
+
+      <div class="line text_aline_center">
+        <div class="line fontbold">登録が完了しました。</div>
+      </div>
+
+      <div class="line text_aline_left">
+        下記のボタンをタップすると、ご登録の番号にこちらより着信が入ります。<br>そのまま相談員へお電話が繋がりますので、そのままお話しください。
+      </div>
+
+      <br>
+
+      <div class="form_submit_btn" id="post_submit">
+        <div class="input_box">
+            <input id="callAction" class="prevent_double_submit submit_button" type="button" value="すぐに通話を開始">
+            <form action="<?php echo APP_CTX ?>/sp/call" method="post" id="stepthree">
+                <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
+                <input type="hidden" name="token" value="<?php echo $this->formValue->token; ?>">
+            </form>
+        </div>
+      </div>
+
+    </div>
+    <div id="footer">
+      <div id="footer_padding">
+        <br class="c-both">
+      </div>
+      <div style="text-align:center;font-size:9px;">
+
+        COPYRIGHT(C)2011-2015 Jimoty, Inc. ALL RIGHTS RESERVED.
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

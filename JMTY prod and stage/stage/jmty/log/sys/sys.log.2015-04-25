@@ -1,0 +1,53 @@
+2015-04-25|02:17:21|INFO |||Regist Paypal token: CARD-6DL40471K5713230NKU5PSMI
+2015-04-25|02:17:21|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|02:30:03|INFO |||Regist Paypal token: CARD-1FV31892JY715681NKU5PYKY
+2015-04-25|02:30:03|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|02:32:20|INFO |||Regist Paypal token: CARD-22443842YN905843MKU5PZNA
+2015-04-25|02:32:20|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|11:33:58|INFO |CallpatientController|indexAction|session  is: 6bf73ba0087e7718698f090281394ca2
+2015-04-25|11:34:10|INFO |CallspecialistController|indexAction|session  is: baf0a38b25b3b5ea954553dc17893593
+2015-04-25|11:34:30|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-25|11:34:31|INFO |CallspecialistController|bAction|session  is: 02615a92b96159adb10646524e613d8a
+2015-04-25|02:35:54|INFO |||Regist Paypal token: CARD-0AH357876V843705MKU5P3CQ
+2015-04-25|02:35:54|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|11:36:00|INFO |CallpatientController|indexAction|session  is: 354d07c3b18d8ecc8ec6ccb46a2e88f2
+2015-04-25|11:36:20|INFO |CallspecialistController|indexAction|session  is: a2ae7919c511ca4f6db9f6ecc92d4fa5
+2015-04-25|11:36:40|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-25|11:36:40|INFO |CallspecialistController|bAction|session  is: 4f3abc35a7729b30e24e626b67088f22
+2015-04-25|11:38:31|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-25|11:38:31|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-0AH357876V843705MKU5P3CQ
+2015-04-25|11:38:31|INFO |CallpatientController|doPayPalPayment|roundAmount:200
+2015-04-25|02:38:57|INFO |||Charged 200 JPY with token: CARD-0AH357876V843705MKU5P3CQ
+2015-04-25|02:38:57|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-25|02:39:00|INFO |CallpatientController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-25|02:39:03|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-25|11:44:02|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-25|11:44:02|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-22443842YN905843MKU5PZNA
+2015-04-25|11:44:02|INFO |CallpatientController|doPayPalPayment|roundAmount:1000
+2015-04-25|02:44:29|INFO |||Charged 1000 JPY with token: CARD-22443842YN905843MKU5PZNA
+2015-04-25|02:44:29|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-25|02:44:32|INFO |CallpatientController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-25|02:44:35|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-25|03:11:05|INFO |||Regist Paypal token: CARD-0WA04219MG021391HKU5QLSI
+2015-04-25|03:11:05|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|12:11:15|INFO |CallpatientController|indexAction|session  is: 7c8c87099ff0a09de97a62287867d286
+2015-04-25|12:11:36|INFO |CallspecialistController|indexAction|session  is: 4ce24274bf1cca9ff9f8cd57f8f31da7
+2015-04-25|12:11:56|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-25|12:11:56|INFO |CallspecialistController|bAction|session  is: 969d4101fe4317ac62d813c099b91599
+2015-04-25|12:12:24|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-25|12:12:24|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-0WA04219MG021391HKU5QLSI
+2015-04-25|12:12:24|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-25|03:12:49|INFO |||Charged 100 JPY with token: CARD-0WA04219MG021391HKU5QLSI
+2015-04-25|03:12:49|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-25|03:12:52|INFO |CallpatientController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-25|03:12:55|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-25|05:27:27|INFO |||Regist Paypal token: CARD-4WP03692U9110660BKU5SLPY
+2015-04-25|05:27:27|INFO |Application_Model_Call|createCall|create call record
+2015-04-25|14:27:57|INFO |CallpatientController|indexAction|session  is: ef6855086e241dd88b4a0d6a51f6affd
+2015-04-25|14:28:18|INFO |CallspecialistController|indexAction|session  is: fd31c505dc9f23792ba8a31287114d2d
+2015-04-25|14:28:30|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-25|14:28:30|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-4WP03692U9110660BKU5SLPY
+2015-04-25|14:28:30|INFO |CallpatientController|doPayPalPayment|roundAmount:0
+2015-04-25|05:28:31|ERROR|||Failed to charge Paypal with token: CARD-4WP03692U9110660BKU5SLPY Message: {"name":"VALIDATION_ERROR","details":[{"field":"transactions[0].amount","issue":"Amount cannot be zero"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#VALIDATION_ERROR","debug_id":"792227befa094"}
+2015-04-25|05:28:31|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-25|05:28:41|INFO |CallpatientController|hangupAction|mail has send to admins

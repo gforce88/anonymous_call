@@ -1,0 +1,48 @@
+2015-07-26|16:10:20|INFO |||Regist Paypal token: CARD-7RH9410924764474KKW2QM3A
+2015-07-26|16:10:20|INFO |Application_Model_Call|createCall|create call record
+2015-07-26|16:14:19|INFO |||Regist Paypal token: CARD-0S1070613C382241RKW2QOWY
+2015-07-26|16:14:19|INFO |Application_Model_Call|createCall|create call record
+2015-07-27|01:14:30|INFO |CallpatientController|indexAction|session  is: 4f25497989363774cc153bb6f1760636
+2015-07-27|01:14:52|INFO |CallspecialistController|indexAction|session  is: c2f5e2183490127afc63b5d9e333a89c
+2015-07-27|01:15:06|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-27|01:15:07|INFO |CallspecialistController|bAction|session  is: 9c89d66c6a6f4dfdfce0defffd4a293f
+2015-07-26|16:15:10|INFO |||Regist Paypal token: CARD-1XL52884S9050131UKW2QPDQ
+2015-07-26|16:15:10|INFO |Application_Model_Call|createCall|create call record
+2015-07-27|01:15:15|INFO |CallpatientController|indexAction|session  is: 349eb7d08564d261bbfc20dfb0dfa18d
+2015-07-27|01:15:35|INFO |CallspecialistController|indexAction|session  is: 47e4381e4afcba95071ec7369a2552f3
+2015-07-27|01:15:58|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-27|01:15:58|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-1XL52884S9050131UKW2QPDQ
+2015-07-27|01:15:58|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-26|16:16:07|INFO |||Charged 100 JPY with token: CARD-1XL52884S9050131UKW2QPDQ
+2015-07-26|16:16:07|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|16:16:10|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|16:16:11|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-27|01:17:55|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-27|01:17:55|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-0S1070613C382241RKW2QOWY
+2015-07-27|01:17:55|INFO |CallpatientController|doPayPalPayment|roundAmount:300
+2015-07-26|16:18:00|INFO |||Charged 300 JPY with token: CARD-0S1070613C382241RKW2QOWY
+2015-07-26|16:18:00|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-26|16:18:01|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-26|16:18:03|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-27|03:10:48|INFO |||Regist Paypal token: CARD-7W50895660094474TKW22COA
+2015-07-27|03:10:48|INFO |Application_Model_Call|createCall|create call record
+2015-07-27|12:10:59|INFO |CallpatientController|indexAction|session  is: e053bcaa440eb752ae5b4e9549d944a9
+2015-07-27|12:11:19|INFO |CallspecialistController|indexAction|session  is: 6821c125d00c16dcb22b9244511de1e2
+2015-07-27|12:11:54|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-27|12:11:54|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-7W50895660094474TKW22COA
+2015-07-27|12:11:54|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-27|03:12:08|INFO |||Charged 100 JPY with token: CARD-7W50895660094474TKW22COA
+2015-07-27|03:12:08|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-27|03:12:11|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-27|03:12:13|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-27|03:15:55|INFO |||Regist Paypal token: CARD-3D417746V1004912JKW22E2Y
+2015-07-27|03:15:55|INFO |Application_Model_Call|createCall|create call record
+2015-07-27|12:16:02|INFO |CallpatientController|indexAction|session  is: a0d2d940475e9550ed8a09aaf16de041
+2015-07-27|12:16:19|INFO |CallspecialistController|indexAction|session  is: 3108fb743a86b16401880fabfb84a4dc
+2015-07-27|12:17:27|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-27|12:17:27|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-3D417746V1004912JKW22E2Y
+2015-07-27|12:17:27|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-07-27|03:17:32|INFO |||Charged 100 JPY with token: CARD-3D417746V1004912JKW22E2Y
+2015-07-27|03:17:32|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-27|03:17:35|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-07-27|03:17:36|INFO |CallpatientController|hangupAction|mail has send to admin

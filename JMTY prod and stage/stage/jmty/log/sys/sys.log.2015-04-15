@@ -1,0 +1,168 @@
+2015-04-14|15:20:39|INFO |||Regist Paypal token: CARD-10X670113N130242WKUWTARY
+2015-04-14|15:20:48|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:20:49|INFO |CallpatientController|indexAction|session  is: 3a5b7c597e73e0b24e2ed951e75d1007
+2015-04-14|15:21:09|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-14|15:21:09|INFO |CallpatientController|indexAction|session  is: 82f0da29ebc13c666337a3f58d5160a3
+2015-04-14|15:21:30|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-14|15:21:30|INFO |CallpatientController|indexAction|session  is: c06b997ad811a54c127c795aea629ad7
+2015-04-14|15:21:51|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-14|15:21:51|INFO |CallpatientController|indexAction|session  is: 1c36bc6e08f404c41ec4fd116d6b2784
+2015-04-14|15:21:51|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-14|15:24:24|INFO |||Regist Paypal token: CARD-71V485948C442364JKUWTCKA
+2015-04-14|15:24:30|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:24:31|INFO |CallpatientController|indexAction|session  is: 9142ac422adbf774b19f1e5a56347062
+2015-04-14|15:24:54|INFO |CallspecialistController|indexAction|session  is: 01fd7ea09b1d368690e60d9d89c5ea0b
+2015-04-14|15:25:15|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:25:15|INFO |CallspecialistController|bAction|session  is: dc1d25b0ac6e76127a75161f7de610ce
+2015-04-14|15:26:03|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|15:26:04|INFO |||Regist Paypal token: CARD-63X83099WC011644UKUWTDDA
+2015-04-14|15:26:30|INFO |||Charged 1 JPY with token: CARD-63X83099WC011644UKUWTDDA
+2015-04-14|15:26:30|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-14|15:26:33|INFO |CallspecialistController|hangupAction|mail has send toliuliang1982920@qq.com
+2015-04-14|15:26:36|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-14|15:32:42|INFO |||Regist Paypal token: CARD-6JD10396TV041431TKUWTGGQ
+2015-04-14|15:32:51|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:32:52|INFO |CallpatientController|indexAction|session  is: 761e92dcedaaa84991b27f28d4358786
+2015-04-14|15:33:13|INFO |CallspecialistController|indexAction|session  is: 616a6394b5a3a0ecdecf86c560956bd7
+2015-04-14|15:33:34|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:33:34|INFO |CallspecialistController|bAction|session  is: 62ddc14a5691f92c3e4a7ddb480471df
+2015-04-14|15:34:07|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|15:34:07|INFO |||Regist Paypal token: CARD-83H263406D0262520KUWTG3Y
+2015-04-14|15:34:14|INFO |||Charged 1 JPY with token: CARD-83H263406D0262520KUWTG3Y
+2015-04-14|15:34:14|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-14|15:34:17|INFO |CallspecialistController|hangupAction|mail has send toliuliang1982920@qq.com
+2015-04-14|15:34:20|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-14|15:36:58|INFO |||Regist Paypal token: CARD-81U22030GX730272DKUWTIGQ
+2015-04-14|15:37:04|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:37:04|INFO |CallpatientController|indexAction|session  is: b054b7024502befaff504c94f90f1946
+2015-04-14|15:37:24|INFO |CallspecialistController|indexAction|session  is: 67dadfa5d9296aefb4f5f0f0ef66edae
+2015-04-14|15:37:44|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:37:45|INFO |CallspecialistController|bAction|session  is: 8eff67acebc138726f381a645accf58d
+2015-04-14|15:38:12|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|15:38:13|INFO |||Regist Paypal token: CARD-95J07270131002840KUWTIZI
+2015-04-14|15:38:44|ERROR|||Failed to charge Paypal with token: CARD-95J07270131002840KUWTIZI Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"fb6fe8e55ac8e"}
+2015-04-14|15:38:44|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-14|15:38:54|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-14|15:43:47|INFO |||Regist Paypal token: CARD-3X526998JV786392FKUWTLMY
+2015-04-14|15:43:52|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:43:52|INFO |CallpatientController|indexAction|session  is: 3bb4ed1c57e7e72566554f8511ab3a81
+2015-04-14|15:44:11|INFO |CallspecialistController|indexAction|session  is: fa5e922cfe111e680e49c9287ec76794
+2015-04-14|15:44:32|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:44:32|INFO |CallspecialistController|bAction|session  is: 1f59d60d8a4408c49f1b9b758cfc74c3
+2015-04-14|15:44:53|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/3bb4ed1c57e7e72566554f8511ab3a81/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-14|15:44:53|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-14|15:47:24|INFO |||Regist Paypal token: CARD-83060281EN2319348KUWTNDA
+2015-04-14|15:47:43|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:47:43|INFO |CallpatientController|indexAction|session  is: 895d0002f107f589725cb0369883cea6
+2015-04-14|15:48:08|INFO |CallspecialistController|indexAction|session  is: 9ab5b49330c31c98a070ed676bffe162
+2015-04-14|15:48:28|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:48:29|INFO |CallspecialistController|bAction|session  is: 4bebe9c22b34d0396ad97c40e31370de
+2015-04-14|15:48:49|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/895d0002f107f589725cb0369883cea6/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-14|15:48:49|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-14|15:51:50|INFO |||Regist Paypal token: CARD-10L339157G750604XKUWTPFQ
+2015-04-14|15:51:56|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:51:56|INFO |CallpatientController|indexAction|session  is: f8ccccecd144f732238e7eb360d4f2e3
+2015-04-14|15:52:15|INFO |CallspecialistController|indexAction|session  is: 14b23f75302215112e966fde011ae810
+2015-04-14|15:52:35|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:52:36|INFO |CallspecialistController|bAction|session  is: 8df3f7ebf5e9f59b721c471d8dc63ae3
+2015-04-14|15:53:02|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|15:53:03|INFO |||Regist Paypal token: CARD-74G86314HU054281HKUWTPXY
+2015-04-14|15:53:34|ERROR|||Failed to charge Paypal with token: CARD-74G86314HU054281HKUWTPXY Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"a65b63b534ec3"}
+2015-04-14|15:53:34|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-14|15:53:44|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-14|15:54:20|INFO |||Regist Paypal token: CARD-71A32414U1027431AKUWTQLA
+2015-04-14|15:54:25|INFO |Application_Model_Call|createCall|create call record
+2015-04-14|15:54:25|INFO |CallpatientController|indexAction|session  is: c28bd1cf75860545bd0b91e72a389090
+2015-04-14|15:54:48|INFO |CallspecialistController|indexAction|session  is: 322798c8a20b00839a2addf0eff660df
+2015-04-14|15:55:08|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-14|15:55:09|INFO |CallspecialistController|bAction|session  is: bd397ab87e23ad5bc91c9258198f86ba
+2015-04-14|15:55:38|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-14|15:55:39|INFO |||Regist Paypal token: CARD-7JL56789FF1476322KUWTQ6Y
+2015-04-14|15:56:09|ERROR|||Failed to charge Paypal with token: CARD-7JL56789FF1476322KUWTQ6Y Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"a78979885ad61"}
+2015-04-14|15:56:09|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-14|15:56:19|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-15|04:13:27|INFO |||Regist Paypal token: CARD-8JN44183Y2011990BKUW6KZY
+2015-04-15|04:13:33|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|04:13:33|INFO |CallpatientController|indexAction|session  is: d03e7f26b0b438e36a8c02ab553b2681
+2015-04-15|04:13:52|INFO |CallspecialistController|indexAction|session  is: 746f40bef8abf34c86c2f64fc621ba30
+2015-04-15|04:14:23|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|04:14:24|INFO |||Regist Paypal token: CARD-5MX17508B0230234BKUW6LIA
+2015-04-15|04:14:54|ERROR|||Failed to charge Paypal with token: CARD-5MX17508B0230234BKUW6LIA Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"bc29a4bca52b3"}
+2015-04-15|04:14:54|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-15|04:15:06|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-15|04:16:43|INFO |||Regist Paypal token: CARD-8N6894143D4459416KUW6MKY
+2015-04-15|04:16:57|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|04:16:57|INFO |CallpatientController|indexAction|session  is: 04fa72c07125ed8c7fd9daf1e0976ee1
+2015-04-15|04:17:18|INFO |CallspecialistController|indexAction|session  is: 637d108240d3f12629a8a4c91edc8ca1
+2015-04-15|04:17:38|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-15|04:17:38|INFO |CallspecialistController|bAction|session  is: 062d29db1440878a186beb3fec53463b
+2015-04-15|04:18:13|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|04:18:14|INFO |||Regist Paypal token: CARD-3TA76896M34626236KUW6NBQ
+2015-04-15|04:18:44|ERROR|||Failed to charge Paypal with token: CARD-3TA76896M34626236KUW6NBQ Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"027618bfea0cc"}
+2015-04-15|04:18:44|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-15|04:18:55|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-15|04:24:17|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"5ee79a280a905"}
+2015-04-15|04:24:34|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"f75bce250e65b"}
+2015-04-15|04:24:53|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"42dd26d5024ea"}
+2015-04-15|04:25:27|INFO |||Regist Paypal token: CARD-1CS189038D834040DKUW6QNY
+2015-04-15|04:25:35|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|04:25:36|INFO |CallpatientController|indexAction|session  is: 553cd41b393320fb6609b18e23a5add5
+2015-04-15|04:25:55|INFO |CallspecialistController|indexAction|session  is: 2731fbb5e8166e21c521d0284b588c5c
+2015-04-15|04:26:13|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|04:26:13|INFO |CallpatientController|indexAction|session  is: 1187da3273dd990d685c06820038aea2
+2015-04-15|04:26:15|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-15|04:26:15|INFO |CallspecialistController|bAction|session  is: 9b0c20a1585f0f5bc9556a4164ffb7a0
+2015-04-15|04:26:27|INFO |CallspecialistController|indexAction|session  is: bb8ba6080d1a1981bc97fae584b36a17
+2015-04-15|04:26:47|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|04:26:48|INFO |||Regist Paypal token: CARD-0DN7888215624554UKUW6RCA
+2015-04-15|04:26:59|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|04:27:00|INFO |||Regist Paypal token: CARD-2KM614365G568654WKUW6RFA
+2015-04-15|04:27:18|ERROR|||Failed to charge Paypal with token: CARD-0DN7888215624554UKUW6RCA Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"e5f60e026e75e"}
+2015-04-15|04:27:18|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-15|04:27:29|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-15|04:27:31|ERROR|||Failed to charge Paypal with token: CARD-2KM614365G568654WKUW6RFA Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"1279fc226679f"}
+2015-04-15|04:27:31|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-15|04:27:41|INFO |CallspecialistController|hangupAction|mail has send to admins
+2015-04-15|05:43:37|INFO |||Regist Paypal token: CARD-25J51135MN963740PKUW7VCI
+2015-04-15|06:06:54|INFO |||Regist Paypal token: CARD-96F396251L424572UKUW777Q
+2015-04-15|06:07:27|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|06:07:27|INFO |CallpatientController|indexAction|session  is: 4a2790510ae7360a4ac6e3365be001a9
+2015-04-15|06:07:47|INFO |CallspecialistController|indexAction|session  is: 5dc015cbeea7dd17b9618d67c887ff53
+2015-04-15|06:08:50|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|06:08:51|INFO |||Regist Paypal token: CARD-4NL88759S7639184WKUXAA4Y
+2015-04-15|06:09:17|INFO |||Charged 1 JPY with token: CARD-4NL88759S7639184WKUXAA4Y
+2015-04-15|06:09:17|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-15|06:09:21|INFO |CallspecialistController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-15|06:09:23|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-15|06:14:11|INFO |||Regist Paypal token: CARD-35V685670K6600320KUXADMY
+2015-04-15|06:14:26|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|06:14:26|INFO |CallpatientController|indexAction|session  is: b6ba84c3e324ce4c5f980f341bf1295d
+2015-04-15|06:14:52|INFO |CallspecialistController|indexAction|session  is: 4a95ce1b6ba6f8132b3573b2c18e8b96
+2015-04-15|06:15:12|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-15|06:15:13|INFO |CallspecialistController|bAction|session  is: d2faf2f346ff78f99e03cfb6b4a6dba9
+2015-04-15|06:16:30|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|06:16:31|INFO |||Regist Paypal token: CARD-5CU43156WP596501SKUXAEPY
+2015-04-15|06:16:56|INFO |||Charged 1 JPY with token: CARD-5CU43156WP596501SKUXAEPY
+2015-04-15|06:16:56|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-15|06:16:59|INFO |CallspecialistController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-15|06:17:01|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-15|06:20:32|INFO |||Regist Paypal token: CARD-5M629689P3314703XKUXAGMA
+2015-04-15|06:20:38|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|06:20:39|INFO |CallpatientController|indexAction|session  is: bc3f1b148f16fc6e392fa2c10fc37f35
+2015-04-15|06:20:58|INFO |CallspecialistController|indexAction|session  is: de5f1bb792978b5146ced55b8292125d
+2015-04-15|06:22:22|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|06:22:23|INFO |||Regist Paypal token: CARD-3S631397901414418KUXAHHY
+2015-04-15|06:22:31|INFO |||Charged 1 JPY with token: CARD-3S631397901414418KUXAHHY
+2015-04-15|06:22:31|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-15|06:22:33|INFO |CallspecialistController|hangupAction|mail has send tobabetest89@yahoo.com
+2015-04-15|06:22:36|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-15|09:32:52|INFO |||Regist Paypal token: CARD-9X356676533818913KUXDARA
+2015-04-15|09:37:58|INFO |Application_Model_Call|createCall|create call record
+2015-04-15|09:37:58|INFO |CallpatientController|indexAction|session  is: c3e2b03733e86263fa0c97e8a41139d1
+2015-04-15|09:38:13|INFO |CallspecialistController|indexAction|session  is: d5941e7c4b8dc86c941f93ac27bb1b43
+2015-04-15|09:39:19|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-15|09:39:20|INFO |||Regist Paypal token: CARD-54P34396X6564283BKUXDDSA
+2015-04-15|09:39:47|INFO |||Charged 1 JPY with token: CARD-54P34396X6564283BKUXDDSA
+2015-04-15|09:39:47|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-15|09:39:50|INFO |CallspecialistController|hangupAction|mail has send toysago@unisrv.jp
+2015-04-15|09:39:53|INFO |CallspecialistController|hangupAction|mail has send to admin

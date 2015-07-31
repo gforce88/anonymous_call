@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta content="index,follow" name="robots">
+    <title>ジモティー 中古・フリマ・フリーマーケット、バイト、スクール、募集の無料広告の掲示板</title>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+          name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo APP_CTX ?>/components/library/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/messages_ja.js"></script>
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        /*
+         Object.defineProperty(window.navigator, 'userAgent', {
+         get: function () {
+         return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
+         }
+         });
+         Object.defineProperty(window.navigator, 'vendor', {
+         get: function () {
+         return 'Apple, Inc.';
+         }
+         });
+         Object.defineProperty(window.navigator, 'platform', {
+         get: function () {
+         return 'iPhone';
+         }
+         });
+         */
+
+        $.validator.addMethod("jpphone", function (value, element) {
+            /* commentted by Huan for Feathre #118
+             return this.optional(element) || /^\+(0){0,4}(81){1}[0-9]{9,11}$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(1){1}[0-9]{10}[ ]*$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(65){1}[0-9]{8}[ ]*$/.test(value);
+             */
+
+            return this.optional(element) || /^\+\d{3,18}$/.test(value) || /^\d{3,18}$/.test(value);
+
+            //return true;
+        }, "有効な電話番号を入力してください。");
+
+        $().ready(function () {
+            var validator = $('#steponeForm').validate();
+
+            $('#submitLink').click(function () {
+                if (validator.form()) {
+                    $('#steponeForm').submit();
+                } else {
+                    return 0;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+    <div id="main">
+        <div id="header">
+            <div class="hdbox">
+                <h1 id="page_head_text"><span class="font_size13"> ジモティー電話相談サービス </span></h1>
+            </div>
+            <div id="header_action">
+                <div class="header_logo"><a href="https://jmty.jp/s">
+                        <img alt="" height="40" src="<?php echo APP_CTX ?>/sp/images/header_logo.png" width="80"> </a>
+                </div>
+                <br class="c-both">
+            </div>
+        </div>
+        <div id="page_flat_title">
+            <h2>必要項目入力</h2>
+        </div>
+        <div class="margin_top_5" id="breadcrumb_list"><span>必要項目の入力</span>&nbsp;&gt;&nbsp;入力内容確認&nbsp;&gt;&nbsp;登録完了
+        </div>
+
+        <div class="post_form">
+            <form action="<?php echo APP_CTX ?>/sp/validatecreditcard" method="post" id="steponeForm">
+                <div class="line">電話相談サービスご利用には、ご連絡先やお支払い情報の入力が必要です。<br>
+                    登録完了しましたら通話を開始できます。
+                </div>
+                <?php
+                if (!$this->formValue->validate) {
+                    echo "<div class='line'>クレジットカード情報が正しくありません。確認と再入力をお願いします。</div>";
+                }
+                ?>
+                <div>
+                    <div class="post_form title"><label for="email">メールアドレス</label></div>
+                    <div class="line">
+                        <input class="input_text required form_text_field width96" id="email" maxlength="255"
+                               name="email" size="45" type="email" value="<?php echo $this->formValue->email ?>">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="post_form title"><label for="phone">電話番号</label></div>
+                    <div class="line">
+                        <input class="input_text jpphone required form_text_field width96" id="phone" maxlength="16"
+                               name="phone" size="45" type="tel" value="<?php echo $this->formValue->phone ?>">
+
+                        <div>※こちらの番号宛に着信されます</div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <div class="line title_no_border">■クレジットカード決済情報入力</div>
+                    <div>
+                        <div class="post_form title_no_border"><label for="card_type">カード会社</label></div>
+                        <div class="line">
+                            <div class="form_select width96">
+                                <div class="arrow">▼</div>
+                                <select class="required" id="card_type" name="card_type">
+                                    <option value="01" <?php if ($this->formValue->CardType == "01") {
+                                        echo "selected='selected'";
+                                    } ?>>master
+                                    </option>
+                                    <option value="02" <?php if ($this->formValue->CardType == "02") {
+                                        echo "selected='selected'";
+                                    } ?>>visa
+                                    </option>
+                                    <option value="03" <?php if ($this->formValue->CardType == "03") {
+                                        echo "selected='selected'";
+                                    } ?>>amex
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="post_form title">カード名義人（半角ローマ字）</div>
+                        <div class="line">
+                            <span><label for="fname">名</label></span><input
+                                class="input_text required form_text_field width40"
+                                id="fname"
+                                maxlength="16"
+                                name="fname" size="45" type="text"
+                                value="<?php echo $this->formValue->fname ?>">
+                            <span><label for="lname">姓</label></span><input
+                                class="input_text required form_text_field width40"
+                                id="lname"
+                                maxlength="16"
+                                name="lname" size="45" type="text"
+                                value="<?php echo $this->formValue->lname ?>">
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="post_form title"><label for="card_number">カード番号</label></div>
+                        <div class="line">
+                            <input class="input_text required form_text_field width96" id="card_number" maxlength="16"
+                                   name="card_number" size="45" type="number"
+                                   value="<?php echo $this->formValue->CardNo ?>">
+
+                            <div>※ハイフン無</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="post_form title">カード有効期限</div>
+                        <div class="line">
+                            <div class="form_select width20">
+                                <div class="arrow">▼</div>
+                                <select id="ExpireMonth" name="ExpireMonth" class="required">
+                                    <option value="01" <?php if ($this->formValue->ExpireMonth == "01") {
+                                        echo "selected='selected'";
+                                    } ?>>01
+                                    </option>
+                                    <option value="02" <?php if ($this->formValue->ExpireMonth == "02") {
+                                        echo "selected='selected'";
+                                    } ?>>02
+                                    </option>
+                                    <option value="03" <?php if ($this->formValue->ExpireMonth == "03") {
+                                        echo "selected='selected'";
+                                    } ?>>03
+                                    </option>
+                                    <option value="04" <?php if ($this->formValue->ExpireMonth == "04") {
+                                        echo "selected='selected'";
+                                    } ?>>04
+                                    </option>
+                                    <option value="05" <?php if ($this->formValue->ExpireMonth == "05") {
+                                        echo "selected='selected'";
+                                    } ?>>05
+                                    </option>
+                                    <option value="06" <?php if ($this->formValue->ExpireMonth == "06") {
+                                        echo "selected='selected'";
+                                    } ?>>06
+                                    </option>
+                                    <option value="07" <?php if ($this->formValue->ExpireMonth == "07") {
+                                        echo "selected='selected'";
+                                    } ?>>07
+                                    </option>
+                                    <option value="08" <?php if ($this->formValue->ExpireMonth == "08") {
+                                        echo "selected='selected'";
+                                    } ?>>08
+                                    </option>
+                                    <option value="09" <?php if ($this->formValue->ExpireMonth == "09") {
+                                        echo "selected='selected'";
+                                    } ?>>09
+                                    </option>
+                                    <option value="10" <?php if ($this->formValue->ExpireMonth == "10") {
+                                        echo "selected='selected'";
+                                    } ?>>10
+                                    </option>
+                                    <option value="11" <?php if ($this->formValue->ExpireMonth == "11") {
+                                        echo "selected='selected'";
+                                    } ?>>11
+                                    </option>
+                                    <option value="12" <?php if ($this->formValue->ExpireMonth == "12") {
+                                        echo "selected='selected'";
+                                    } ?>>12
+                                    </option>
+                                </select>
+                            </div>
+                            <span><label for="ExpireMonth">月</label></span>
+
+                            <div class="form_select width20">
+                                <div class="arrow">▼</div>
+                                <select id="ExpireYear" name="ExpireYear" class="required">
+                                    <option value="2015" <?php if ($this->formValue->ExpireYear == "2015") {
+                                        echo "selected='selected'";
+                                    } ?>>2015
+                                    </option>
+                                    <option value="2016" <?php if ($this->formValue->ExpireYear == "2016") {
+                                        echo "selected='selected'";
+                                    } ?>>2016
+                                    </option>
+                                    <option value="2017" <?php if ($this->formValue->ExpireYear == "2017") {
+                                        echo "selected='selected'";
+                                    } ?>>2017
+                                    </option>
+                                    <option value="2018" <?php if ($this->formValue->ExpireYear == "2018") {
+                                        echo "selected='selected'";
+                                    } ?>>2018
+                                    </option>
+                                    <option value="2019" <?php if ($this->formValue->ExpireYear == "2019") {
+                                        echo "selected='selected'";
+                                    } ?>>2019
+                                    </option>
+                                    <option value="2020" <?php if ($this->formValue->ExpireYear == "2020") {
+                                        echo "selected='selected'";
+                                    } ?>>2020
+                                    </option>
+                                    <option value="2021" <?php if ($this->formValue->ExpireYear == "2021") {
+                                        echo "selected='selected'";
+                                    } ?>>2021
+                                    </option>
+                                    <option value="2022" <?php if ($this->formValue->ExpireYear == "2022") {
+                                        echo "selected='selected'";
+                                    } ?>>2022
+                                    </option>
+                                    <option value="2023" <?php if ($this->formValue->ExpireYear == "2023") {
+                                        echo "selected='selected'";
+                                    } ?>>2023
+                                    </option>
+                                    <option value="2024" <?php if ($this->formValue->ExpireYear == "2024") {
+                                        echo "selected='selected'";
+                                    } ?>>2024
+                                    </option>
+                                    <option value="2025" <?php if ($this->formValue->ExpireYear == "2025") {
+                                        echo "selected='selected'";
+                                    } ?>>2025
+                                    </option>
+                                    <option value="2026" <?php if ($this->formValue->ExpireYear == "2026") {
+                                        echo "selected='selected'";
+                                    } ?>>2026
+                                    </option>
+                                    <option value="2027" <?php if ($this->formValue->ExpireYear == "2027") {
+                                        echo "selected='selected'";
+                                    } ?>>2027
+                                    </option>
+                                    <option value="2028" <?php if ($this->formValue->ExpireYear == "2028") {
+                                        echo "selected='selected'";
+                                    } ?>>2028
+                                    </option>
+                                    <option value="2029" <?php if ($this->formValue->ExpireYear == "2029") {
+                                        echo "selected='selected'";
+                                    } ?>>2029
+                                    </option>
+                                    <option value="2030" <?php if ($this->formValue->ExpireYear == "2030") {
+                                        echo "selected='selected'";
+                                    } ?>>2030
+                                    </option>
+                                    <option value="2031" <?php if ($this->formValue->ExpireYear == "2031") {
+                                        echo "selected='selected'";
+                                    } ?>>2031
+                                    </option>
+                                    <option value="2032" <?php if ($this->formValue->ExpireYear == "2032") {
+                                        echo "selected='selected'";
+                                    } ?>>2032
+                                    </option>
+                                    <option value="2033" <?php if ($this->formValue->ExpireYear == "2033") {
+                                        echo "selected='selected'";
+                                    } ?>>2033
+                                    </option>
+                                    <option value="2034" <?php if ($this->formValue->ExpireYear == "2034") {
+                                        echo "selected='selected'";
+                                    } ?>>2034
+                                    </option>
+                                </select>
+                            </div>
+
+                            <span><label for="ExpireYear">年</label></span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="post_form title"><label for="card_cvv">セキュリティコード</label></div>
+                        <div class="line">
+                            <input class="input_text required form_text_field width40" id="card_cvv" minlength="3"
+                                   maxlength="4"
+                                   name="card_cvv" size="45" type="number" value="<?php echo $this->formValue->cvv ?>">
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class=" line border_top_dot">
+                            <div class="line text_aline_center">
+                                <br>
+
+                                <div class="form_submit_btn" id="post_submit">
+                                    <div class="input_box">
+                                        <input class="prevent_double_submit submit_button" id="submitLink" type="button"
+                                               value="入力内容を確認">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div id="footer">
+            <div id="footer_padding">
+                <br class="c-both">
+            </div>
+            <div style="text-align:center;font-size:9px;">
+
+                COPYRIGHT(C)2011-2015 Jimoty, Inc. ALL RIGHTS RESERVED.
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+2015-06-10|07:04:04|INFO |||Regist Paypal token: CARD-7AA6664249994873SKV36CZA
+2015-06-10|07:04:04|INFO |Application_Model_Call|createCall|create call record
+2015-06-10|16:04:32|INFO |CallpatientController|indexAction|session  is: f9b87f5b0951df835cf6b0d377d4c702
+2015-06-10|16:04:52|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-06-10|16:04:53|INFO |CallpatientController|indexAction|session  is: c8b057489f70bac4fbdffd87174feb3b
+2015-06-10|16:05:15|INFO |CallspecialistController|indexAction|session  is: 5e50781015bf84dbe7f0ecc0cc22fa32
+2015-06-10|16:07:14|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-10|16:07:14|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-7AA6664249994873SKV36CZA
+2015-06-10|16:07:14|INFO |CallpatientController|doPayPalPayment|roundAmount:216
+2015-06-10|07:07:17|INFO |||Charged 216 JPY with token: CARD-7AA6664249994873SKV36CZA
+2015-06-10|07:07:17|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-10|07:07:20|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-06-10|07:07:22|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-06-10|07:11:04|INFO |||Regist Paypal token: CARD-5ER999359J0939728KV36GCA
+2015-06-10|07:11:04|INFO |Application_Model_Call|createCall|create call record
+2015-06-10|16:11:45|INFO |CallpatientController|indexAction|session  is: ef675867f46d2ceeb7156482750b7505
+2015-06-10|16:12:06|INFO |CallspecialistController|indexAction|session  is: ce75c40931ed7eb55387aab79a31dd0d
+2015-06-10|16:13:46|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-10|16:13:46|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-5ER999359J0939728KV36GCA
+2015-06-10|16:13:46|INFO |CallpatientController|doPayPalPayment|roundAmount:216
+2015-06-10|07:13:49|INFO |||Charged 216 JPY with token: CARD-5ER999359J0939728KV36GCA
+2015-06-10|07:13:49|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-10|07:13:51|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-06-10|07:13:53|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-06-10|07:21:41|INFO |||Regist Paypal token: CARD-3R4247965H818940WKV36LBI
+2015-06-10|07:21:41|INFO |Application_Model_Call|createCall|create call record
+2015-06-10|16:21:51|INFO |CallpatientController|indexAction|session  is: 6d62ebac1d92310fdcefcaa8433c7f06
+2015-06-10|16:22:08|INFO |CallspecialistController|indexAction|session  is: 853c74234a488cc3636be8ebee9adca8
+2015-06-10|16:29:16|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-10|16:29:16|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-3R4247965H818940WKV36LBI
+2015-06-10|16:29:16|INFO |CallpatientController|doPayPalPayment|roundAmount:864
+2015-06-10|07:29:18|INFO |||Charged 864 JPY with token: CARD-3R4247965H818940WKV36LBI
+2015-06-10|07:29:18|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-10|07:29:20|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-06-10|07:29:21|INFO |CallpatientController|hangupAction|mail has send to admin

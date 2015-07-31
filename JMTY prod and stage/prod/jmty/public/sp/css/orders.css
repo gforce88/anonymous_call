@@ -1,0 +1,26 @@
+#confirmation_top_ad {
+    padding: 5px;
+    line-height: 1.5
+}
+
+#confirmation_top_ad dl {
+    padding: 0;
+    margin: 5px 0;
+    font-size: 12px
+}
+
+#confirmation_top_ad dl dt {
+    padding: 0;
+    display: block;
+    font-weight: bold
+}
+
+#confirmation_top_ad dl dd {
+    padding: 0 0 0 10px;
+    margin: 0 !important;
+    display: block
+}
+
+#confirmation_top_ad p {
+    margin: 10px 0
+}

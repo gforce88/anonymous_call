@@ -1,0 +1,46 @@
+2015-04-21|01:44:30|INFO |||Regist Paypal token: CARD-2YW659183D492701CKU22W7Q
+2015-04-21|01:44:30|INFO |Application_Model_Call|createCall|create call record
+2015-04-21|10:58:39|INFO |CallpatientController|indexAction|session  is: 7334f8bd35107aea4c22c7ea477279ab
+2015-04-21|10:58:40|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|10:58:40|INFO |CallpatientController|indexAction|session  is: 6a47fb273f9ca82c5fdd16b730001ae9
+2015-04-21|10:58:40|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|10:58:40|INFO |CallpatientController|indexAction|session  is: 0f9fd785b27ded9bb7e47fa42da227fc
+2015-04-21|10:58:41|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|10:58:41|INFO |CallpatientController|indexAction|session  is: 56d3e73e99660d8dc5b3af0829539598
+2015-04-21|10:58:41|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-21|10:58:45|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  incognito_student@unisrv.jp
+2015-04-21|10:59:43|INFO |CallpatientController|indexAction|session  is: 45795af383e044cecc9f5b81651089af
+2015-04-21|10:59:43|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-21|10:59:45|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  incognito_student@unisrv.jp
+2015-04-21|02:01:08|INFO |||Regist Paypal token: CARD-1NB5988572101381AKU226ZA
+2015-04-21|02:01:08|INFO |Application_Model_Call|createCall|create call record
+2015-04-21|11:01:37|INFO |CallpatientController|indexAction|session  is: 4d8129ad5497019313106d829c16769d
+2015-04-21|11:01:37|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|11:01:37|INFO |CallpatientController|indexAction|session  is: 7de1a7bb245c978f53bb758f4f12b1cf
+2015-04-21|11:01:37|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|11:01:38|INFO |CallpatientController|indexAction|session  is: 8965290456c89709d5abfbb1ad220b4c
+2015-04-21|11:01:38|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-21|11:01:38|INFO |CallpatientController|indexAction|session  is: 766e70ee5cc881c220a0b49766c6a2c0
+2015-04-21|11:01:38|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-21|11:01:41|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  incognito_student@unisrv.jp
+2015-04-21|02:11:59|INFO |||Regist Paypal token: CARD-65268933UL126134LKU23D3Y
+2015-04-21|02:11:59|INFO |Application_Model_Call|createCall|create call record
+2015-04-21|11:14:32|INFO |CallpatientController|indexAction|session  is: f01ec2522d30479bd728c0a7378c548f
+2015-04-21|11:14:57|INFO |CallspecialistController|indexAction|session  is: e996683aa18d9149421dbc1f210813ce
+2015-04-21|11:15:17|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-21|11:15:17|INFO |CallspecialistController|bAction|session  is: 12f581a818db91f1002855e351686a71
+2015-04-21|11:15:38|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/f01ec2522d30479bd728c0a7378c548f/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>NOTFOUND</status></signal>
+2015-04-21|11:15:38|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-21|04:18:04|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"3e908bb0955b5"}
+2015-04-21|04:21:43|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"4c71f65794767"}
+2015-04-21|05:09:28|INFO |||Regist Paypal token: CARD-70B49550CN401591KKU25XCA
+2015-04-21|05:09:28|INFO |Application_Model_Call|createCall|create call record
+2015-04-21|14:09:36|INFO |CallpatientController|indexAction|session  is: 4e64ad39b3bcb12ef7de59ac3e3e7e47
+2015-04-21|14:09:55|INFO |CallspecialistController|indexAction|session  is: 49255a3c626183f321429c7315060bf1
+2015-04-21|14:11:42|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-21|14:11:42|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-70B49550CN401591KKU25XCA
+2015-04-21|14:11:42|INFO |CallpatientController|doPayPalPayment|roundAmount:200
+2015-04-21|05:11:46|INFO |||Charged 200 JPY with token: CARD-70B49550CN401591KKU25XCA
+2015-04-21|05:11:46|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-21|05:11:50|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-04-21|05:11:52|INFO |CallpatientController|hangupAction|mail has send to admin

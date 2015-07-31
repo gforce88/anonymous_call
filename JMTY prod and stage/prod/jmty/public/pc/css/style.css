@@ -1,0 +1,491 @@
+@charset "UTF-8";
+/* CSS Document */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing=&quot;0&quot;' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+	color:#333;
+	font-size:14px;
+}
+* html div.container{
+    height:100%;
+	min-width:1000px;
+}
+
+div.container{
+    position:relative;
+    min-height: 100%;
+	min-width:1000px;
+}
+body > .container {
+        height: auto;
+}
+div.content{
+    padding-bottom:30px;
+}
+#footer{
+    position:absolute;
+    bottom:0px;
+    height:60px;
+    width:100%;
+	background-color:#EEEEEF 
+}
+a {
+color: #15C;
+}
+a:hover {
+color: #0B318F;
+}
+a:visited {
+color: #15C;
+}
+.c_both{
+	clear:both;
+}
+body{
+	width:auto;
+	font-family:'Hiragino Maru Gothic Pro',verdana,"ヒラギノ丸ゴ Pro W4",ヒラギノ丸ゴ Pro W4,Hiragino Maru Gothic Pro,"メイリオ",Meiryo,"ＭＳ Ｐゴシック",Osaka,sans-serif;
+}
+.container {
+	background-image:none ;
+	background:none ;
+	background-image:none ;
+	line-height:1.7;
+}
+.container_inner{
+	background:none ;
+	width:1000px ;
+	margin:0 auto;
+}
+.page_content{
+	width:1000px ;
+	margin:0 auto;
+}
+.section{
+	width:1000px ;
+}
+.section_content{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:20px;
+}
+#header {
+	height:22px ;
+	background-color:#3BB300 ;
+	border-top: #94B47F 1px solid ;
+	border-bottom: #658550 1px solid ;
+	color: white ;
+}
+#logo {
+	height: 35px;
+	padding: 5px 0 8px;
+	width: 1000px;
+}
+.header_logo a{
+	float:left;
+}
+#shoulder_upper{
+	display:block;
+	margin-top:1px;
+	margin-left:10px;
+	float:left;
+	font-size:21px;
+	color:#2A6900;
+}
+#shoulder_upper span{
+	float:left;
+	display:block;
+}
+#shoulder_catch{
+	margin-right:3px;
+	margin-top:8px;
+}
+#breadcrumbs {
+	line-height:18px;
+	width:990px;
+	border-top:#e5e5e5 1px solid;
+	border-bottom:#e5e5e5 1px solid;
+	padding:3px 5px;
+	font-size:12px;
+	margin-bottom:30px;
+	height:18px;
+}
+#breadcrumbs a {
+	text-decoration:underline;
+}
+#breadcrumbs span {
+	color:#999;
+	height:17px;
+	padding-top:1px;
+	display:block;
+	float:left;
+}
+#breadcrumbs div {
+	font-weight:bold;
+	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	color:#333;
+	height:17px;
+	padding-top:1px;
+	display:block;
+	float:left;
+}
+#breadcrumbs img {
+	display:block;
+	float:left;
+}
+.section_title{
+	background:none ;
+}
+.section_title_inner{
+	padding:5px 0 2px;
+	margin-bottom:10px;
+	font-size:20px;
+	border-bottom: #E5E5E5 1px solid;
+	font-weight: bold;
+	font-family: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+.section_title_inner span.p{
+	line-height:1.5;
+}
+.section_content{
+	padding:20px;
+}
+.tabular{
+	border:#EFEFEF 1px solid;
+	line-height:1.5;
+	margin:0 auto;
+	border-collapse:collapse ;
+}
+.tabular tbody{
+	margin:0;
+	padding:0;
+}
+.tabular tbody tr{
+	margin:0;
+	padding:0;
+	vertical-align:middle ;
+}
+.tabular tbody tr th{
+	min-width:100px;
+	font-size:14px;
+	border-bottom:#DCDDDD 1px dotted;
+	border-right:#DCDDDD 1px dotted;
+	margin:0;
+	padding:5px 10px;
+	background-color: #F9F9F9;
+	font-weight:normal;
+	vertical-align:middle ;
+	font-weight:bold;
+}
+.tabular tbody tr th span{
+	display:inline-block;
+	line-height:140% ;
+	font-size:10px;
+	color: #777777;
+}
+.tabular tbody tr td{
+	border-bottom:#E5E5E5 1px dotted ;
+	min-width:150px;
+	margin:0;
+	padding:5px 10px;
+	text-align:left;
+	background:none;
+	font-weight:normal;
+	vertical-align:middle ;
+}
+.tabular tbody tr td span{
+	font-size:12px;
+	color:#888;
+}
+.tabular tbody tr td input {
+	font-size:14px;
+	line-height:1.4;
+}
+.tabular tbody tr td select {
+	font-size:18px;
+	line-height:1.4;
+}
+.tabular tbody tr:last-child th{
+	border-bottom:none ;
+}
+.tabular tbody tr:last-child td{
+	border-bottom:none ;
+}
+.table_one_line tr th{
+	text-align:left ;
+}
+.table_two_line tr{
+	height:42px ;
+}
+.table_two_line tr th{
+	text-align:left;
+	height:42px ;
+}
+.table_two_line tr td{
+	height:42px ;
+}
+.table_two_piece{
+	width:700px;
+	margin:0 auto;
+}
+.table_two_piece tr th{
+	text-align:left;
+	width:148px ;
+}
+.table_two_piece tr td{
+}
+.table_two_piece_lite tr th{
+	text-align:left;
+	width:118px ;
+	border-bottom:none ;
+}
+.table_two_piece_lite tr td{
+	border-bottom:none ;
+}
+.table_two_piece_middle tr th{
+	text-align:left;
+}
+.table_two_piece_middle tr td{
+}
+.table_three_piece tr{
+	height:45px ;
+}
+.table_three_piece tr th{
+	text-align:left;
+	font-size:13px ;
+}
+.table_three_piece tr td{
+}
+#table_three_th1{
+	vertical-align:middle;
+	text-align:left;
+}
+#table_three_th2{
+	vertical-align:middle;
+	text-align:left;
+}
+#table_three_th3{
+	vertical-align:middle;
+	text-align:left;
+}
+.action_control{
+	margin:0;
+	text-align:center;
+    width:140px;
+	margin:30px auto 20px;
+}
+.control{
+	margin:10px auto;
+}
+.submit{
+	background:none ;
+    width:140px;
+	height:32px;
+	display:block;
+	padding:0;
+	margin:0 auto;
+}
+.submit input{
+    background-image:url("https://s3-ap-northeast-1.amazonaws.com/jmty/credit/btn_basic.png") ;
+	cursor:pointer;
+    border:0;
+    background-position:0 0;
+    background-repeat:no-repeat;
+    width:140px;
+	height:32px;
+	font-size:13px;
+	line-height:32px;
+	color:#FFF;
+	padding:0;
+}
+.submit input:hover{
+    background-position:0 -32px;
+	color:#FFF;
+}
+.submit input:active{
+    background-position:0 0;
+	color:#FFF;
+}
+.explanation{
+	line-height:1.8;
+	font-size:13px;
+	margin:20px 0;
+}
+.explanation_add_action{
+	line-height:1.8;
+	font-size:13px;
+	margin:40px 0 0;
+	text-align:center;
+}
+.explanation_add_action span{
+	color:#FF0000;
+	font-size:14px;
+}
+
+.done{
+	font-size:16px;
+	margin:0px 0 30px 0;
+}
+.text01{
+	margin:20px 20px 10px 20px;
+	font-size:14px;
+	line-height:1.7;
+	
+}
+
+
+
+.btn a {
+  border: #F27306 1px solid;
+  width: 300px;
+  height: 60px;
+  margin:20px 0 40px 0;
+  display: inline-block;
+  background-color: #F27306;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: #CCC 2px 2px 1px;
+}
+.btn a div {
+  height: 58px;
+  line-height: 2.5;
+  font-size: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  border: #FFA559 1px solid;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+  background: -webkit-linear-gradient(top, #FFA14F, #F88A2A);
+  background: -moz-linear-gradient(top, #FFA14F, #F88A2A);
+  background: -ms-linear-gradient(top, #FFA14F, #F88A2A);
+  background: -o-linear-gradient(top, #FFA14F, #F88A2A);
+  background: linear-gradient(top, #FFA14F, #F88A2A);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+}
+
+.btn a div:hover{
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB779), color-stop(100%, #F88A2A));
+background: -webkit-linear-gradient(top, #FFB779, #F88A2A);
+background: -moz-linear-gradient(top, #FFB779, #F88A2A);
+background: -ms-linear-gradient(top, #FFB779, #F88A2A);
+background: -o-linear-gradient(top, #FFB779, #F88A2A);
+background: linear-gradient(top, #FFB779, #F88A2A);
+	transition: all .3s;
+}
+
+
+.gray a div{
+  height: 58px;
+  line-height: 2.5;
+  font-size: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  text-align: center;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  border: gray 1px solid;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+  background: -webkit-linear-gradient(top, gray, gray);
+  background: -moz-linear-gradient(top, gray, gray);
+  background: -ms-linear-gradient(top, gray, gray);
+  background: -o-linear-gradient(top, gray, gray);
+  background: linear-gradient(top, gray, gray);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+}
+
+.gray a {
+  border: #F27306 1px solid;
+  width: 300px;
+  height: 60px;
+  margin:20px 0 40px 0;
+  display: inline-block;
+  background-color: #F27306;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
+  text-decoration: none;
+  box-shadow: #CCC 2px 2px 1px;
+}
+
+.gray a div:hover{
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFB779), color-stop(100%, #F88A2A));
+background: -webkit-linear-gradient(top, gray, gray);
+background: -moz-linear-gradient(top, gray, gray);
+background: -ms-linear-gradient(top, gray, gray);
+background: -o-linear-gradient(top, gray, gray);
+background: linear-gradient(top, gray, gray);
+	transition: all .3s;
+}
+
+.copyright{
+	padding:20px 0;
+	text-align:center;
+	font-size:11px;
+	color:#666;
+}
+
+label.normal { background-position: 4px -197px; color: #999999;}
+label.error { background-position: 4px -253px;color: red;display: block;clear: both; }
+label.valid { background-position: 4px 3px;color: #2666AF; }
+label.focus { background-position: 4px -365px; color: #999999; }

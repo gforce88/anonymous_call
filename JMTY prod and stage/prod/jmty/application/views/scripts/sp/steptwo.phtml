@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta content="index,follow" name="robots">
+  <title>ジモティー 中古・フリマ・フリーマーケット、バイト、スクール、募集の無料広告の掲示板</title>
+  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+        name="viewport">
+  <meta content="telephone=no" name="format-detection">
+    <link href="<?php echo APP_CTX; ?>/sp/css/style.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        /*
+        Object.defineProperty(window.navigator, 'userAgent', {
+            get: function () {
+                return 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5';
+            }
+        });
+        Object.defineProperty(window.navigator, 'vendor', {
+            get: function () {
+                return 'Apple, Inc.';
+            }
+        });
+        Object.defineProperty(window.navigator, 'platform', {
+            get: function () {
+                return 'iPhone';
+            }
+        });
+        */
+
+        $().ready(function () {
+            $('#next').click(function () {
+                if ($('#TermsAgree').is(":checked")) {
+                    $('#steptwoForm').submit();
+                } else {
+                    alert("本サービスをご利用いただくには、利用規約に同意する必要があります。");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container">
+  <div id="main">
+    <div id="header">
+      <div class="hdbox">
+        <h1 id="page_head_text"><span class="font_size13"> ジモティー電話相談サービス - 入力内容の確認</span></h1>
+      </div>
+      <div id="header_action">
+        <div class="header_logo"><a href="https://jmty.jp/s">
+          <img alt="" height="40" src="<?php echo APP_CTX?>/sp/images/header_logo.png" width="80"> </a></div>
+        <br class="c-both">
+      </div>
+    </div>
+    <div id="page_flat_title">
+      <h2>入力内容の確認</h2>
+    </div>
+    <div class="margin_top_5" id="breadcrumb_list">必要項目の入力&nbsp;&gt;&nbsp;<span>入力内容確認</span>&nbsp;&gt;&nbsp;登録完了</div>
+
+    <div class="post_form">
+
+      <div>
+        <div class="line title">メールアドレス</div>
+        <div class="line">
+            <?php echo $this->formValue->email; ?>
+        </div>
+      </div>
+
+      <div>
+        <div class="line title">電話番号</div>
+        <div class="line">
+            <?php echo $this->formValue->phone; ?>
+        </div>
+      </div>
+
+      <hr>
+
+      <div>
+        <div class="line title_no_border">■クレジットカード決済情報入力</div>
+        <div>
+          <div class="line title_no_border">カード会社</div>
+          <div class="line">
+              <?php echo $this->formValue->CardTypeName; ?>
+          </div>
+        </div>
+
+        <div>
+          <div class="line title">カード名義人（半角ローマ字）</div>
+          <div class="line">
+              <?php echo $this->formValue->Name; ?>
+          </div>
+        </div>
+
+        <div>
+          <div class="line title">カード番号</div>
+          <div class="line">
+              <?php echo $this->formValue->CardNoMask; ?>
+          </div>
+        </div>
+
+        <div>
+          <div class="line title">カード有効期限</div>
+          <div class="line">
+            (<?php echo $this->formValue->ExpireMonth; ?>)月&nbsp;(<?php echo $this->formValue->ExpireYear; ?>)年
+          </div>
+        </div>
+
+        <div>
+          <div class="line title">セキュリティコード</div>
+          <div class="line">
+            ***
+          </div>
+        </div>
+      </div>
+
+      <div class="line border_top_dot text_aline_center">
+        <form action="credit_3.html">
+          <div class="padding15">
+            必ず本利用規約をご一読の上、<br>内容をご確認いただいた上でご登録下さい。
+          </div>
+          <input id="TermsAgree" type="checkbox" value="" name="TermsAgree"
+                 style="margin-right: 15px; vertical-align: middle;">
+          <a href="<?php echo APP_CTX ?>/toc/JMTY AVC TOS final2.html" rel="nofollow" target="new">利用規約</a><label for="TermsAgree">に同意する</label>
+          <br>
+          <br>
+
+          <div class="form_submit_btn" id="post_submit">
+            <div class="input_box">
+              <input id="next" class="prevent_double_submit submit_button" type="button" value="入力内容を登録">
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div id="footer">
+      <div id="footer_padding">
+        <br class="c-both">
+      </div>
+      <div style="text-align:center;font-size:9px;">
+
+        COPYRIGHT(C)2011-2015 Jimoty, Inc. ALL RIGHTS RESERVED.
+
+      </div>
+    </div>
+  </div>
+</div>
+<form action="<?php echo APP_CTX ?>/sp/stepthree" method="post" id="steptwoForm">
+    <input type="hidden" name="phone" value="<?php echo $this->formValue->phone; ?>">
+    <input type="hidden" name="token" value="<?php echo $this->formValue->token; ?>">
+</form>
+</body>
+</html>

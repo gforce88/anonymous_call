@@ -1,0 +1,1 @@
+2015-05-26|01:12:54|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"expire_month, expire_year","issue":"Invalid expiration (cannot be in the past)"},{"field":"number","issue":"Value is invalid"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"e56010297c166"}

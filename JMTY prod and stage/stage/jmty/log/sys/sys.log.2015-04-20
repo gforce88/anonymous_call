@@ -1,0 +1,12 @@
+2015-04-19|16:31:57|INFO |||Regist Paypal token: CARD-9D5791111L118542DKUZ5Q7I
+2015-04-19|16:31:57|INFO |Application_Model_Call|createCall|create call record
+2015-04-20|01:34:14|INFO |CallpatientController|indexAction|session  is: 37067bb06963ad4a54639397f40f127d
+2015-04-20|01:34:31|INFO |CallspecialistController|indexAction|session  is: 079bd8adc982566fc41fcbacc09912eb
+2015-04-20|01:34:51|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-20|01:34:52|INFO |CallspecialistController|bAction|session  is: d26fc5fa5080ffb088e97f245abb49ee
+2015-04-20|01:35:22|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-20|01:35:22|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-9D5791111L118542DKUZ5Q7I
+2015-04-20|01:35:22|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-19|16:35:53|ERROR|||Failed to charge Paypal with token: CARD-9D5791111L118542DKUZ5Q7I Message: {"name":"INTERNAL_SERVICE_ERROR","message":"An internal service error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#INTERNAL_SERVICE_ERROR","debug_id":"4cf170e1ed12b"}
+2015-04-19|16:35:53|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-19|16:36:04|INFO |CallpatientController|hangupAction|mail has send to admins

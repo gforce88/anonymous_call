@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-style-Type" content="text/html; charset=UTF-8">
+    <title>ジモティー電話相談サービス</title>
+    <link href="<?php echo APP_CTX ?>/pc/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo APP_CTX ?>/components/library/jquery/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="<?php echo APP_CTX ?>/components/library/jquery/messages_ja.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-61531837-1', 'auto');
+        ga('send', 'pageview');
+
+        $.validator.addMethod("jpphone", function (value, element) {
+            /* commentted by Huan for Feathre #118
+             return this.optional(element) || /^\+(0){0,4}(81){1}[0-9]{9,11}$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(1){1}[0-9]{10}[ ]*$/.test(value) || /^[ ]*[\+]{0,1}(0){0,4}(65){1}[0-9]{8}[ ]*$/.test(value);
+             */
+
+            return this.optional(element) || /^\+\d{3,18}$/.test(value) || /^\d{3,18}$/.test(value);
+
+            //return true;
+        }, "有効な電話番号を入力してください。");
+
+        $().ready(function () {
+            var validator = $('#pcsteponeForm').validate();
+
+            $('#submitLink').click(function () {
+                if (validator.form()) {
+                    $('#pcsteponeForm').submit();
+                } else {
+                    return 0;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class="container_inner" style="width:1000px; background-image:none !important;">
+        <div class="clearfix c_both" id="logo">
+            <div class="header_logo"><img alt="ジモティー" height="33" src="<?php echo APP_CTX ?>/pc/images/jmty_thin.png" style="float:left"
+                                          width="120"> <br class="c_both">
+            </div>
+            <br class="c_both">
+        </div>
+        <div class="clearfix" id="breadcrumbs"> <span>
+          <div> 必要項目入力</div>
+          </span> <span> &nbsp;&gt;&nbsp; </span> <span> 入力内容確認 </span> <span> &nbsp;&gt;&nbsp; </span>
+            <span> 登録完了 </span> <br class="c-both">
+        </div>
+        <div class="page_content">
+            <form id="pcsteponeForm" action="<?php echo APP_CTX ?>/pc/validatecreditcard" method="post">
+                <div class="text01">電話相談サービスご利用には、ご連絡先やお支払い情報の入力が必要です。<br>
+                    登録完了しましたら通話を開始できます。
+                </div>
+                    <?php
+                    if (!$this->formValue->validate) {
+                        echo "<div class='text01'>クレジットカード情報が正しくありません。確認と再入力をお願いします。</div>";
+                    }
+                    ?>
+                <div class="section">
+                    <div class="section_title">
+                        <div class="section_title_inner">
+                            <h2><span class="p"> 必要項目入力 </span></h2>
+                        </div>
+                    </div>
+                    <div class="section_content">
+                        <table class="tabular table_two_line table_two_piece" summary="credit_1" id="credit">
+                            <tbody>
+                            
+                            <?php // $this->formValue->phone = "14153789949"; ?>
+                            
+                            <tr>
+                                <th>電話番号</th>
+                                <td><input name="phone" type="text" id="phone" value="<?php echo $this->formValue->phone ?>" class="code required jpphone"
+                                           maxlength="16" style="width:200px;"/><br><span>※こちらの番号宛に着信されます</span></td>
+                            </tr>
+                            
+                            <?php //$this->formValue->email="ge.szeto@gmail.com"; ?>
+                            
+                            <input name="email" type="hidden" id="email" value="ge.szeto@gmail.com" class="code required email"
+                                          style="width:1px;"/>
+                                           
+                            
+                            <?php //$this->formValue->CardType="01"; ?>
+                            
+                            <input name="CardType" type="hidden" id="CardType" value="01" class="required"
+                                           maxlength="255" style="width:300px;"/>
+                            
+                             <?php //$this->formValue->fname="Direct"; ?>
+                              <?php //$this->formValue->lname="Test"; ?>
+                              
+                               <input name="fname" type="hidden" id="fname" value="Direct" class="code required"
+                                           maxlength="16" style="width:140px;"/>
+                                    
+                               <input name="lname" type="hidden" id="lname" value="Test" class="code required"
+                                           maxlength="16" style="width:140px;"/>
+                              
+                              <?php $this->formValue->CardNo="5111111111111118"; ?>
+                              
+                              <input name="CardNo" type="hidden" id="Name" value="5111111111111118" class="code required number"
+                                           maxlength="16" style="width:300px;"/>
+                              
+                            
+                            
+                            <?php //$this->formValue->ExpireMonth="01"; ?>
+                            <?php //$this->formValue->ExpireYear="2019"; ?>
+                            
+                             <input name="ExpireMonth" type="hidden" id="ExpireMonth" value="01" class="required"
+                                           maxlength="255" style="width:300px;"/>
+                                           
+                            <input name="ExpireYear" type="hidden" id="ExpireYear" value="2020" class="required"
+                                           maxlength="255" style="width:300px;"/>
+                           
+                            
+                            <?php //$this->formValue->cvv="123"; ?>
+                            
+                            <input name="cvv" type="hidden" id="cvv" value="123" class="code required number"
+                                           minlength="3" maxlength="4" size="6">
+                            
+                            </tbody>
+                        </table>
+
+                        <!-- MemberCardArray -->
+
+                        <div class="btn"><a href="#" id="submitLink" style="cursor:hand">
+                                <div>入力内容を確認</div>
+                            </a></div>
+
+                    </div>
+                </div>
+            </form>
+            <br class="clear">
+        </div>
+    </div>
+    <div id="footer">
+        <div class="copyright"> COPYRIGHT (C) 2011 - 2015 Jimoty, Inc. ALL RIGHTS RESERVED.</div>
+    </div>
+    ・
+</div>
+</body>
+</html>

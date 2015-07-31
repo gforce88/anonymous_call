@@ -1,0 +1,25 @@
+2015-04-12|14:33:43|INFO |||Regist Paypal token: CARD-98D45558NH946632SKUVIERY
+2015-04-12|14:33:52|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|14:33:53|INFO |CallpatientController|indexAction|session  is: d89ac95bb6824de3641ec1d69dbf23df
+2015-04-12|14:34:13|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-12|14:34:13|INFO |CallpatientController|indexAction|session  is: f209fe0d07b46cf3ffbbd79065d3f90d
+2015-04-12|14:34:34|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-12|14:34:34|INFO |CallpatientController|indexAction|session  is: 239428936b3d345a42af59a7b3ac27bd
+2015-04-12|14:34:52|INFO |CallspecialistController|indexAction|session  is: 08e465c6ea3bcd9fe8d9ede3dc23498a
+2015-04-12|14:38:44|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|14:38:45|INFO |||Regist Paypal token: CARD-15V36202U8555393PKUVIG5I
+2015-04-12|14:39:10|INFO |||Charged 2 JPY with token: CARD-15V36202U8555393PKUVIG5I
+2015-04-12|14:39:10|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-12|14:49:24|INFO |||Regist Paypal token: CARD-6E468114UM0560837KUVIL5A
+2015-04-12|14:49:34|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|14:49:35|INFO |CallpatientController|indexAction|session  is: 25db993d7e8983af51545fff2af8ca04
+2015-04-12|14:49:54|INFO |CallspecialistController|indexAction|session  is: 75bc40fc26d2888d59688dcc7d2bd41f
+2015-04-12|14:50:37|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|14:50:37|INFO |||Regist Paypal token: CARD-0A610073EY1985906KUVIMPI
+2015-04-12|14:51:02|INFO |||Charged 1 JPY with token: CARD-0A610073EY1985906KUVIMPI
+2015-04-12|14:51:02|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-12|14:51:05|INFO |CallspecialistController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-12|14:51:07|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-12|14:59:50|INFO |||Regist Paypal token: CARD-9F047693507985006KUVIQZI
+2015-04-12|14:59:57|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|14:59:58|INFO |CallpatientController|indexAction|session  is: 5c1472fb96142622c00611b5db39846c

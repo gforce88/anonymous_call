@@ -1,0 +1,60 @@
+2015-05-17|00:04:32|INFO |||Regist Paypal token: CARD-9J647678PN097753MKVL5WEA
+2015-05-17|00:04:32|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|00:07:03|INFO |||Regist Paypal token: CARD-0UP19605RW7036535KVL5XJY
+2015-05-17|00:07:03|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|00:09:48|INFO |||Regist Paypal token: CARD-2C778435640085823KVL5YTA
+2015-05-17|00:09:48|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|00:22:15|INFO |||Regist Paypal token: CARD-31N99769WD6205932KVL56NY
+2015-05-17|00:22:15|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|00:35:34|INFO |||Regist Paypal token: CARD-7Y3210522G258562DKVL6EVQ
+2015-05-17|00:35:34|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|09:35:48|INFO |CallpatientController|indexAction|session  is: 3a022334f8d4fb846ec9c8bb9c8bea3d
+2015-05-17|09:36:10|INFO |CallspecialistController|indexAction|session  is: 04097bfefab6495652a022a3885f52a3
+2015-05-17|09:37:24|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-05-17|09:37:24|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-7Y3210522G258562DKVL6EVQ
+2015-05-17|09:37:24|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-05-17|00:37:27|INFO |||Charged 108 JPY with token: CARD-7Y3210522G258562DKVL6EVQ
+2015-05-17|00:37:27|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-05-17|00:37:30|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-05-17|00:37:32|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-05-17|00:47:25|INFO |||Regist Paypal token: CARD-5KG594666G173940NKVL6KHI
+2015-05-17|00:47:25|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|09:47:34|INFO |CallpatientController|indexAction|session  is: d41ddbee002744dc78258f39e39e23dd
+2015-05-17|09:47:36|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:47:36|INFO |CallpatientController|indexAction|session  is: 68512e50a549e6226107d87986a10a47
+2015-05-17|09:47:38|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:47:38|INFO |CallpatientController|indexAction|session  is: 0d7beb3f560dd3f5f76928c1d3d3a579
+2015-05-17|09:47:41|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-05-17|09:47:41|INFO |CallpatientController|indexAction|session  is: 5a567c7bd2893b5e24c0572ea9bd5d5f
+2015-05-17|09:47:41|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-05-17|09:47:44|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  ge.szeto@gmail.com
+2015-05-17|00:49:48|INFO |||Regist Paypal token: CARD-9D266377P2366622XKVL6LLA
+2015-05-17|00:49:48|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|09:49:56|INFO |CallpatientController|indexAction|session  is: d06d53600474a7cd7806e4a663a79fb0
+2015-05-17|09:50:21|INFO |CallspecialistController|indexAction|session  is: 44a6cb2de1cf0f6a0976d44cc950f5a9
+2015-05-17|09:51:51|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-05-17|09:51:51|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-9D266377P2366622XKVL6LLA
+2015-05-17|09:51:51|INFO |CallpatientController|doPayPalPayment|roundAmount:216
+2015-05-17|00:51:54|INFO |||Charged 216 JPY with token: CARD-9D266377P2366622XKVL6LLA
+2015-05-17|00:51:54|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-05-17|00:51:57|INFO |CallpatientController|hangupAction|mail has send toge.szeto@gmail.com
+2015-05-17|00:52:00|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-05-17|01:24:51|INFO |||Regist Paypal token: CARD-4D277847CP290964YKVL63YY
+2015-05-17|01:24:51|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|10:25:21|INFO |CallpatientController|indexAction|session  is: 19b87612b25e750107f913180c9e24ef
+2015-05-17|10:25:42|INFO |CallspecialistController|indexAction|session  is: ead8eb4c87f7c8b0c13033f7c3ff3b03
+2015-05-17|10:26:02|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-05-17|10:26:03|INFO |CallspecialistController|bAction|session  is: 6179b0e23ef47a49f392daa02e376d49
+2015-05-17|10:26:24|INFO |TropoService|specialistnoanswer|Sent signal to : [https://tropo-gw01.unisrv.jp/sessions/19b87612b25e750107f913180c9e24ef/signals?action=signal&value=specialistnoanswer&token=4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675] > content: <signal><status>QUEUED</status></signal>
+2015-05-17|10:26:24|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-05-17|04:24:23|INFO |||Regist Paypal token: CARD-5T333560B4663980HKVMBP5Y
+2015-05-17|04:24:23|INFO |Application_Model_Call|createCall|create call record
+2015-05-17|13:24:38|INFO |CallpatientController|indexAction|session  is: ee46d32214c828935691ebbaa8b2e3a1
+2015-05-17|13:24:55|INFO |CallspecialistController|indexAction|session  is: 268f556d2b2d2fa2a1bd6ac416ae6114
+2015-05-17|13:25:47|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-05-17|13:25:47|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-5T333560B4663980HKVMBP5Y
+2015-05-17|13:25:47|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-05-17|04:25:52|INFO |||Charged 108 JPY with token: CARD-5T333560B4663980HKVMBP5Y
+2015-05-17|04:25:52|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-05-17|04:25:56|INFO |CallpatientController|hangupAction|mail has send towk@wolfcommstudio.com
+2015-05-17|04:25:59|INFO |CallpatientController|hangupAction|mail has send to admin

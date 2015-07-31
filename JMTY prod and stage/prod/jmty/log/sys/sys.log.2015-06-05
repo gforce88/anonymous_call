@@ -1,0 +1,36 @@
+2015-06-05|00:48:05|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"type, number","issue":"The credit card number is not valid for the specified credit card type"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"6dc8c0443a052"}
+2015-06-05|00:48:10|INFO |||Regist Paypal token: CARD-0NP5614973570130XKVYPDSQ
+2015-06-05|00:48:10|INFO |Application_Model_Call|createCall|create call record
+2015-06-05|09:48:35|INFO |CallpatientController|indexAction|session  is: 937cf11a6fe73d165084dc07ad3ef876
+2015-06-05|09:48:46|INFO |CallspecialistController|indexAction|session  is: 390c74efcc6f1973597c7d977bc98c18
+2015-06-05|09:49:10|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-05|09:49:10|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-0NP5614973570130XKVYPDSQ
+2015-06-05|09:49:10|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-06-05|00:49:14|INFO |||Charged 108 JPY with token: CARD-0NP5614973570130XKVYPDSQ
+2015-06-05|00:49:14|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-05|00:49:18|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-06-05|00:49:21|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-06-05|00:51:09|INFO |||Regist Paypal token: CARD-16N02897E17882737KVYPE7I
+2015-06-05|00:51:09|INFO |Application_Model_Call|createCall|create call record
+2015-06-05|09:52:35|INFO |CallpatientController|indexAction|session  is: 2dd71501df9c95175e54901d31e6a6f6
+2015-06-05|09:52:46|INFO |CallspecialistController|indexAction|session  is: dc6e6dcfa71ddaccd76ca708e9dedd26
+2015-06-05|10:00:04|INFO |CallpatientController|indexAction|session  is: a65573d999a3321893e951ca4780e272
+2015-06-05|10:00:20|INFO |CallspecialistController|indexAction|session  is: 3c25ac9c3318155fa322a9c8c6f72f72
+2015-06-05|10:02:33|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-05|10:02:33|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-16N02897E17882737KVYPE7I
+2015-06-05|10:02:33|INFO |CallpatientController|doPayPalPayment|roundAmount:216
+2015-06-05|01:02:36|INFO |||Charged 216 JPY with token: CARD-16N02897E17882737KVYPE7I
+2015-06-05|01:02:36|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-05|01:02:39|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-06-05|01:02:41|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-06-05|02:22:14|INFO |||Regist Paypal token: CARD-6FM933930F4020508KVYQPVQ
+2015-06-05|02:22:14|INFO |Application_Model_Call|createCall|create call record
+2015-06-05|11:24:40|INFO |CallpatientController|indexAction|session  is: a6e61d5cf27b65ccf882689b19f169d1
+2015-06-05|11:24:57|INFO |CallspecialistController|indexAction|session  is: 4c48aed7f1733c73112482af2a0af640
+2015-06-05|11:25:25|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-06-05|11:25:25|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-6FM933930F4020508KVYQPVQ
+2015-06-05|11:25:25|INFO |CallpatientController|doPayPalPayment|roundAmount:108
+2015-06-05|02:25:28|INFO |||Charged 108 JPY with token: CARD-6FM933930F4020508KVYQPVQ
+2015-06-05|02:25:28|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-06-05|02:25:32|INFO |CallpatientController|hangupAction|mail has send tosasaki@jmty.jp
+2015-06-05|02:25:35|INFO |CallpatientController|hangupAction|mail has send to admin

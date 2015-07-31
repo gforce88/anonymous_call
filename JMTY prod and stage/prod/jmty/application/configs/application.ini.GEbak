@@ -1,0 +1,69 @@
+[production]
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+
+autoloaderNamespaces[] = "visitingcontrol_"
+resources.frontController.plugins.acl ="visitingcontrol_Controller_Plugin_Acl"
+
+app.ctx = "/jmty/public"
+app.hostip = "http://165.225.150.101"
+system.timezone = Asia/Tokyo
+system.onlinetime = 1
+system.offlinetime = 17
+
+log.sys_log_path = APPLICATION_PATH "/../log/sys/sys.log"
+log.tropo_log_path = APPLICATION_PATH "/../log/tropo/tropo.log"
+
+tropo.url = https://tropo-gw01.unisrv.jp/sessions
+
+tropo.patient.token = 4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675
+
+tropo.specialist.token = 73726b4a517945546f7a5a744f71594665434f6c444951456276626677677a514265697a6f534b707a4b6a57
+
+tropo.specialistb.token = 424158696d6d44596d644971715072564f68574b4544417648554d48714a4a69714b594b594d56774f644456
+
+specialist.a.phone = "+815055342197"
+specialist.b.phone = "+815031364068"
+specialist.cost = 100
+
+mail.port = 465
+mail.host = smtp.gmail.com
+mail.username = "jmty-notifications@incognitosys.com"
+mail.password = "jjmmyy*913"
+
+
+resources.db.adapter = "PDO_MYSQL"
+resources.db.params.host = "localhost"
+resources.db.params.username = "root"
+resources.db.params.password = ")orl0Thaynmy"
+resources.db.params.dbname = "jmty"
+resources.db.params.charset = "utf8"
+resources.db.isDefaultTableAdapter = TRUE
+resources.db.params.driver_options.1002 = "SET NAMES UTF8;"
+
+paypal.client_id = AWKZ4qu_YKiCI6hIsb9pGRlOQ5d0NfKfWVB94mAUq96Z7SRBxJFCwxvYmPKhskoJx2uyXqAJN2MA1nkz
+paypal.secret = EOMMWZ3mWewsbTS4SGaE-XhvcIhukmFy1_nNhM_NkS49z97AvLXAs7qCzkF2iz16y8uGklGfAyq_Z4bV
+paypal.mode=sandbox ;can be set to sandbox / live
+paypal.connectionTimeOut = 30
+paypal.retry = 1
+paypal.logEnabled = false
+paypal.logFileName=../log/PayPal.log
+paypal.logLevel=FINE
+
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
+

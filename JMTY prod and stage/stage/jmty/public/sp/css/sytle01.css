@@ -1,0 +1,339 @@
+@charset "UTF-8";
+
+/* リセット */
+
+body {
+    line-height:1;
+    margin:0;
+    -webkit-text-size-adjust: none;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+
+::-webkit-input-placeholder {
+    color:    #999999;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color:    #999999;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color:    #999999;
+}
+
+:-ms-input-placeholder {
+    color:    #999999;
+}
+
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+
+ul {
+	list-style:none;
+	padding:0;
+}
+li {
+	padding:0;
+}
+
+input, select {
+	vertical-align:baseline;
+}
+textarea {
+	width:94%;
+}
+a {
+    -webkit-tap-highlight-color:transparent;
+}
+h2.list_index {
+	background:url("/assets/smartphone/icon/list_index.png") left center no-repeat;
+	background-size: 19px 14px;
+	margin-left: 5px;
+	padding:12px 30px;
+	font-size:14px;
+	color:#262626;
+}
+/* フッター位置の固定 */
+html{
+    height:100%;
+}
+body{
+    height:100%;
+}
+* html div#container{
+    height:100%;
+}
+div#container{
+    margin:0px auto;
+    position:relative;
+    min-height: 100%;
+}
+body > #container {
+        height: auto;
+}
+div#main{
+    padding-bottom:255px;
+}
+div#footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 185px;
+}
+
+
+/* ここから */
+
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,Osaka,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+    width: 100%;
+	font-size:12px;
+	margin:0;
+	padding:0;
+}
+
+p{
+	line-height:150%;
+}
+
+a{
+	color:#0B318F;
+}
+
+
+
+
+
+#header {
+  text-align: center;
+}
+.hdbox {
+  background-color: #3BB300;
+  padding: 5px;
+  position: relative;
+  min-height: 17px;
+}
+.hdbox #page_head_text {
+  position: absolute;
+  text-align: left !important;
+  left: 3px;
+  top: 5px;
+  width: 73%;
+  line-height: 1.5;
+  float: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20px;
+  overflow: hidden;
+}
+#page_flat_title {
+  border-top: 3px solid #3BB300;
+  border-bottom: 1px solid #c9c9c9;
+  padding: 5px 5px;
+  clear: both;
+}
+
+
+#breadcrumb_list {
+  margin: 0 0 5px;
+  padding: 0 5px;
+  line-height: 2;
+  clear: both;
+  overflow: hidden;
+  border-bottom: #CCC 1px solid;
+  border-top: #CCC 1px solid;
+  text-align: left;
+}
+
+#breadcrumb_list span{
+	color:#AAA;
+}
+.margin_top_5 {
+  margin-top: 5px !important;
+}
+
+
+.post_form {
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+.post_form div.line {
+  padding: 5px 6%;
+}
+
+.post_form .title_no_border {
+  padding-left: 3% !important;
+  padding-right: 3% !important;
+  margin-top: 5px;
+  padding-top: 10px !important;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 14px;
+}
+
+
+
+.post_form div.line div.form_select {
+  padding-left: 0px;
+  padding-right: 0px;
+  vertical-align: bottom;
+}
+.width96 {
+  width: 96% !important;
+  display: inline-block;
+}
+
+.form_select div.arrow {
+  position: absolute;
+  font-size: 0.6em;
+  top: 0;
+  right: 8px;
+  height: 36px;
+  line-height: 36px;
+  display: block;
+  color: #aaaaaa;
+  font-size: 10px;
+}
+
+
+.post_form div.line div.form_select select {
+  width: 100%;
+}
+
+
+
+.form_select select {
+  border: 0;
+  border: solid 1px #ccc;
+  background: -moz-linear-gradient(top, #fff 0%, #fff 50%, #dcdddd);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), color-stop(0.5, #fff), to(#dcdddd));
+  overflow: hidden;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 15px 0 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
+
+
+
+
+
+
+
+.form_submit_btn {
+  text-align: center;
+}
+.form_submit_btn div.input_box {
+  border: 1px solid #F27306;
+  width: 200px;
+  height: 44px;
+  display: inline-block;
+  background-color: #F27306;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  text-decoration: none;
+  padding: 0;
+  margin: 5px 0 0;
+}
+.form_submit_btn div.input_box input {
+  margin: 0;
+  display: inline-block;
+  border: 1px solid #FFA559;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+  background-image: -webkit-linear-gradient(top, #FFA14F, #F88A2A);
+  background-image: -moz-linear-gradient(center top, #FFA14F, #F88A2A);
+  background-image: -ms-linear-gradient(top, #FFA14F, #F88A2A);
+  background-image: -o-linear-gradient(top, #FFA14F, #F88A2A);
+  background-image: linear-gradient(top, #FFA14F, #F88A2A);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+  width: 200px;
+  height: 44px;
+  line-height: 33px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #FFF;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,Osaka,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+
+.gray div.input_box {
+    border: 1px solid #F27306;
+    width: 200px;
+    height: 44px;
+    display: inline-block;
+    background-color: #F27306;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    text-decoration: none;
+    padding: 0;
+    margin: 5px 0 0;
+}
+.gray div.input_box input {
+    margin: 0;
+    display: inline-block;
+    border: 1px solid #FFA559;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FFA14F), color-stop(100%, #F88A2A));
+    background: -webkit-linear-gradient(top, gray, gray);
+    background: -moz-linear-gradient(top, gray, gray);
+    background: -ms-linear-gradient(top, gray, gray);
+    background: -o-linear-gradient(top, gray, gray);
+    background: linear-gradient(top, gray, gray);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FFA14F, endColorstr=#F88A2A);
+    width: 200px;
+    height: 44px;
+    line-height: 33px;
+    font-weight: bold;
+    font-size: 17px;
+    color: #FFF;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,Osaka,'ＭＳ Ｐゴシック','MS PGothic',sans-serif;
+}
+
+
+
+
+
+div#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}
+#footer_padding {
+  padding: 10px;
+}

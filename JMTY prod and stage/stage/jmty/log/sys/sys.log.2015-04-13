@@ -1,0 +1,64 @@
+2015-04-12|15:00:17|INFO |CallspecialistController|indexAction|session  is: f731b4aa048bd5d0f9bc24c66e60c4e6
+2015-04-12|15:00:37|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-12|15:00:38|INFO |CallspecialistController|bAction|session  is: ce3e37471e72bbcfda4ac93500497fb2
+2015-04-12|15:01:16|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|15:01:16|INFO |||Regist Paypal token: CARD-6SM90967WU769703MKUVIRPA
+2015-04-12|15:01:42|INFO |||Charged 1 JPY with token: CARD-6SM90967WU769703MKUVIRPA
+2015-04-12|15:01:42|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-12|15:01:45|INFO |CallspecialistController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-12|15:01:48|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-12|15:04:03|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:04:04|INFO |CallpatientController|indexAction|session  is: b7286222150fc702a821e04cf27ef2ba
+2015-04-12|15:04:23|INFO |CallspecialistController|indexAction|session  is: ac36dab9cae673826cd6ec804345a530
+2015-04-12|15:04:43|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-12|15:04:43|INFO |CallspecialistController|bAction|session  is: aba01e45d263d29773c5896f86cabc4d
+2015-04-12|15:05:04|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/b7286222150fc702a821e04cf27ef2ba/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-12|15:05:04|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-04-12|15:08:46|INFO |||Regist Paypal token: CARD-62066500VB428580UKUVIU7Q
+2015-04-12|15:08:50|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Required field missing"},{"field":"expire_year","issue":"Required field missing"},{"field":"expire_month","issue":"Required field missing"},{"field":"type","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"0643a7da54979"}
+2015-04-12|15:08:58|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:08:59|INFO |CallpatientController|indexAction|session  is: d42876fb8d0e2f6c53201cf927bd1976
+2015-04-12|15:09:21|INFO |CallspecialistController|indexAction|session  is: 1801666721a3747933a45770daaf00fd
+2015-04-12|15:09:40|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|15:09:42|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Required field missing"},{"field":"expire_year","issue":"Required field missing"},{"field":"expire_month","issue":"Required field missing"},{"field":"type","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"5d58d25555233"}
+2015-04-12|15:09:42|ERROR|||Failed to charge Paypal with token:  Message: {"name":"VALIDATION_ERROR","details":[{"field":"transactions[0].amount","issue":"Amount cannot be zero"},{"field":"payer.funding_instruments[0].credit_card_token.credit_card_id","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#VALIDATION_ERROR","debug_id":"4d58e6b5552da"}
+2015-04-12|15:09:42|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to user
+2015-04-12|15:09:42|INFO |CallspecialistController|hangupAction|mail has send to 
+2015-04-12|15:27:15|INFO |||Regist Paypal token: CARD-7TP7562222446834NKUVI5UY
+2015-04-12|15:27:34|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:27:34|INFO |CallpatientController|indexAction|session  is: 1c8a4e269630d5cd80bcde87c6795fcf
+2015-04-12|15:27:54|INFO |CallspecialistController|indexAction|session  is: 09ee802261b9c155625104ca5e1d96eb
+2015-04-12|15:28:37|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|15:28:38|ERROR|||Failed to regist Paypal token: {"name":"VALIDATION_ERROR","details":[{"field":"number","issue":"Required field missing"},{"field":"expire_year","issue":"Required field missing"},{"field":"expire_month","issue":"Required field missing"},{"field":"type","issue":"Required field missing"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/docs/api/#VALIDATION_ERROR","debug_id":"c3acf50e762a8"}
+2015-04-12|15:28:38|ERROR|||Failed to charge Paypal with token:  Message: {"name":"VALIDATION_ERROR","details":[{"field":"payer.funding_instruments[0].credit_card_token.credit_card_id","issue":"Required field missing"},{"field":"transactions[0].amount","issue":"Amount cannot be zero"}],"message":"Invalid request - see details","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#VALIDATION_ERROR","debug_id":"4218761176194"}
+2015-04-12|15:28:38|INFO |CallspecialistController|hangupAction|paypal pay fail ,and send carderr info to user
+2015-04-12|15:28:38|INFO |CallspecialistController|hangupAction|mail has send to 
+2015-04-12|15:42:37|INFO |||Regist Paypal token: CARD-4R7639142V132763JKUVJE3I
+2015-04-12|15:43:01|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:43:02|INFO |CallpatientController|indexAction|session  is: 117b7ed1a975dcedb208e780e0d5e74f
+2015-04-12|15:43:20|INFO |CallspecialistController|indexAction|session  is: 4be7596cc733c5f686d2d926b57dce8f
+2015-04-12|15:43:40|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-12|15:43:40|INFO |CallspecialistController|bAction|session  is: 5ac880da2096d23a7058178e798d882b
+2015-04-12|15:44:18|INFO |CallspecialistController|hangupAction|conference over , go paypal for pay 
+2015-04-12|15:44:19|INFO |||Regist Paypal token: CARD-5XL44490P0535063FKUVJFUY
+2015-04-12|15:44:43|INFO |||Charged 1 JPY with token: CARD-5XL44490P0535063FKUVJFUY
+2015-04-12|15:44:43|INFO |CallspecialistController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-12|15:44:46|INFO |CallspecialistController|hangupAction|mail has send todaihuan@topmoon.com.cn
+2015-04-12|15:44:48|INFO |CallspecialistController|hangupAction|mail has send to admin
+2015-04-12|15:46:26|INFO |||Regist Paypal token: CARD-22072565FT697440HKUVJGUQ
+2015-04-12|15:46:33|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:46:33|INFO |CallpatientController|indexAction|session  is: de6812cb88f0a1585c9ef6fd3fd0b5e4
+2015-04-12|15:46:54|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-12|15:46:54|INFO |CallpatientController|indexAction|session  is: 7315bfb3468ea3233f9d592bff07e3f0
+2015-04-12|15:47:15|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-12|15:47:15|INFO |CallpatientController|indexAction|session  is: 0ae7fc1e550cf88155ed41254b517607
+2015-04-12|15:47:35|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-12|15:47:35|INFO |CallpatientController|indexAction|session  is: 1550eee56cefb6ab73b91d23fbd51c22
+2015-04-12|15:47:35|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-12|15:48:30|INFO |Application_Model_Call|createCall|create call record
+2015-04-12|15:48:30|INFO |CallpatientController|indexAction|session  is: b57118bd69e66b9ed691369fd7c7787b
+2015-04-12|15:48:50|INFO |CallspecialistController|indexAction|session  is: d1776ad67397407fa8e66fc46518dd9e
+2015-04-12|15:49:10|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-04-12|15:49:11|INFO |CallspecialistController|bAction|session  is: 2c66384b0b7965e52d191813cb74c745
+2015-04-12|15:49:31|INFO |TropoService|specialistnoanswer|Sent signal to : [http://api.tropo.com/1.0/sessions/b57118bd69e66b9ed691369fd7c7787b/signals?action=signal&value=specialistnoanswer&token=07be506b2e1dcd41af18e85cd7831a197d6988f93e205c1b59899945ff6e94f3a10d9e0dd84c0b1f7d6157a6] > content: <signal><status>QUEUED</status></signal>
+2015-04-12|15:49:31|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail

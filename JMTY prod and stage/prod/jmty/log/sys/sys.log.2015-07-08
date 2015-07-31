@@ -1,0 +1,42 @@
+2015-07-08|07:47:27|INFO |||Regist Paypal token: CARD-8TS60952WG858553DKWONLDY
+2015-07-08|07:47:27|INFO |Application_Model_Call|createCall|create call record
+2015-07-08|16:50:18|INFO |CallpatientController|indexAction|session  is: e66b3da05688b9fd1cfc9456ca1b9273
+2015-07-08|16:50:34|INFO |CallspecialistController|indexAction|session  is: ccf753b2ebc231708b2a72c9dfa11e16
+2015-07-08|16:57:16|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-08|16:57:16|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-8TS60952WG858553DKWONLDY
+2015-07-08|16:57:16|INFO |CallpatientController|doPayPalPayment|roundAmount:756
+2015-07-08|07:57:20|INFO |||Charged 756 JPY with token: CARD-8TS60952WG858553DKWONLDY
+2015-07-08|07:57:20|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-08|07:57:22|INFO |CallpatientController|hangupAction|mail has send tobizdev@unisrv.jp
+2015-07-08|07:57:24|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-08|07:58:31|INFO |||Regist Paypal token: CARD-3R344919AR498871XKWONQJY
+2015-07-08|07:58:31|INFO |Application_Model_Call|createCall|create call record
+2015-07-08|16:58:51|INFO |CallpatientController|indexAction|session  is: c8d2cf5be4f03d4e803de21e77cea8fb
+2015-07-08|16:59:07|INFO |CallspecialistController|indexAction|session  is: 1dbbfbfa3b9827498a3cccb87f627a9f
+2015-07-08|16:59:27|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-08|16:59:28|INFO |CallspecialistController|bAction|session  is: c9b12478fab840fb9f167488fb069fd5
+2015-07-08|17:02:53|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-07-08|17:02:53|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-3R344919AR498871XKWONQJY
+2015-07-08|17:02:53|INFO |CallpatientController|doPayPalPayment|roundAmount:432
+2015-07-08|08:02:57|INFO |||Charged 432 JPY with token: CARD-3R344919AR498871XKWONQJY
+2015-07-08|08:02:57|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-07-08|08:02:58|INFO |CallpatientController|hangupAction|mail has send tobizdev@unisrv.jp
+2015-07-08|08:03:00|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-07-08|08:04:28|INFO |||Regist Paypal token: CARD-42381978J5694962LKWONTDA
+2015-07-08|08:04:28|INFO |Application_Model_Call|createCall|create call record
+2015-07-08|17:04:40|INFO |CallpatientController|indexAction|session  is: f93e5d93642e8db1310fc0298a585ee8
+2015-07-08|17:04:57|INFO |CallspecialistController|indexAction|session  is: 34da99d38dc4876215010eba1ca5051a
+2015-07-08|17:05:17|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-08|17:05:18|INFO |CallspecialistController|bAction|session  is: ccb0b42d88de3346e87197600a8fee6e
+2015-07-08|17:05:39|INFO |TropoService|specialistnoanswer|Sent signal to : [https://tropo-gw01.unisrv.jp/sessions/f93e5d93642e8db1310fc0298a585ee8/signals?action=signal&value=specialistnoanswer&token=4e7673516d7250644c56587266704969617342664e68454a487269696e79424a5454727844754b464f594675] > content: <signal><status>QUEUED</status></signal>
+2015-07-08|17:05:39|INFO |CallspecialistController|sendEmailWhenSpecialistNotOnline|TherapistNotAvail
+2015-07-08|08:06:41|INFO |||Regist Paypal token: CARD-2XM80019TL7489820KWONUEI
+2015-07-08|08:06:41|INFO |Application_Model_Call|createCall|create call record
+2015-07-08|17:07:09|INFO |CallpatientController|indexAction|session  is: fc79b1129ace87efcaa826f63d48219b
+2015-07-08|17:07:23|INFO |CallspecialistController|indexAction|session  is: be776472dfdba8b4cdb3dccd84e372b0
+2015-07-08|08:09:25|INFO |||Regist Paypal token: CARD-7H585913B7868613CKWONVNI
+2015-07-08|08:09:25|INFO |Application_Model_Call|createCall|create call record
+2015-07-08|17:09:37|INFO |CallpatientController|indexAction|session  is: 175ab93af0bf9c0c4bfa353d72a6c636
+2015-07-08|17:09:51|INFO |CallspecialistController|indexAction|session  is: b5d771a9efd8ca4af610abe8eeaba7b6
+2015-07-08|17:10:12|INFO |CallspecialistController|callbAction|specialist A  is not pick the call ,will call specialist B
+2015-07-08|17:10:12|INFO |CallspecialistController|bAction|session  is: e9f0efca01d67978443986b9e5ce807f

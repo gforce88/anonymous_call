@@ -1,0 +1,45 @@
+2015-04-20|00:18:49|INFO |||Regist Paypal token: CARD-3UF55158DL637154KKU2EL2I
+2015-04-20|00:18:49|INFO |Application_Model_Call|createCall|create call record
+2015-04-20|09:18:59|INFO |CallpatientController|indexAction|session  is: d2692184a3e23237dd9403b864506d1b
+2015-04-20|09:19:20|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-20|09:19:20|INFO |CallpatientController|indexAction|session  is: 8175341d80644cc4ad0e68d2712989ee
+2015-04-20|00:19:35|INFO |||Regist Paypal token: CARD-74B06236RE174682JKU2EMFQ
+2015-04-20|00:19:35|INFO |Application_Model_Call|createCall|create call record
+2015-04-20|09:19:39|INFO |CallpatientController|indexAction|session  is: b3e57cc26edcf22971269ee038c95824
+2015-04-20|09:19:41|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-20|09:19:41|INFO |CallpatientController|indexAction|session  is: 97b4f76d28938cf813386b9e59d7a071
+2015-04-20|09:19:59|INFO |CallspecialistController|indexAction|session  is: c6d1765ec04b607aaa85062f538d0db7
+2015-04-20|09:20:02|INFO |CallpatientController|incompleteAction|start try again call patient
+2015-04-20|09:20:03|INFO |CallpatientController|indexAction|session  is: e588ee93d6c9c95a9f5e37c2491ae2c4
+2015-04-20|09:20:03|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times, sending email to patient
+2015-04-20|09:20:06|INFO |CallpatientController|sendNotification|patient did not pick the call for 3 times,  email has send to  ge.szeto@gmail.com
+2015-04-20|09:20:20|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-20|09:20:20|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-74B06236RE174682JKU2EMFQ
+2015-04-20|09:20:20|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-20|00:20:32|ERROR|||Failed to charge Paypal with token: CARD-74B06236RE174682JKU2EMFQ Message: {"name":"UNKNOWN_ERROR","message":"An unknown error has occurred","information_link":"https://developer.paypal.com/webapps/developer/docs/api/#UNKNOWN_ERROR","debug_id":"1b0b244349d41"}
+2015-04-20|00:20:32|INFO |CallpatientController|hangupAction|paypal pay fail ,and send carderr info to admins
+2015-04-20|00:20:42|INFO |CallpatientController|hangupAction|mail has send to admins
+2015-04-20|04:14:40|INFO |||Regist Paypal token: CARD-4NM65489CE790032GKU2H2MA
+2015-04-20|04:14:40|INFO |Application_Model_Call|createCall|create call record
+2015-04-20|13:16:18|INFO |CallpatientController|indexAction|session  is: a582fd479c538f7c95ce62304059614a
+2015-04-20|13:16:31|INFO |CallspecialistController|indexAction|session  is: 89598ee17b2ad25b5e6c4cb1f3415d27
+2015-04-20|13:17:24|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-20|13:17:24|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-4NM65489CE790032GKU2H2MA
+2015-04-20|13:17:24|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-20|04:17:51|INFO |||Charged 100 JPY with token: CARD-4NM65489CE790032GKU2H2MA
+2015-04-20|04:17:51|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-20|04:17:54|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-04-20|04:17:55|INFO |||Regist Paypal token: CARD-3DR03927HU311292VKU2H34Y
+2015-04-20|04:17:55|INFO |Application_Model_Call|createCall|create call record
+2015-04-20|04:17:57|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-20|13:18:03|INFO |CallpatientController|indexAction|session  is: 300d601e961faf1a0a0ddf0f259d1c32
+2015-04-20|13:18:15|INFO |CallspecialistController|indexAction|session  is: e400a7b79773a254df6c15e800373d37
+2015-04-20|13:18:47|INFO |CallpatientController|hangupAction|conference over , go paypal for pay 
+2015-04-20|13:18:47|INFO |CallpatientController|doPayPalPayment|start pay with token:CARD-3DR03927HU311292VKU2H34Y
+2015-04-20|13:18:47|INFO |CallpatientController|doPayPalPayment|roundAmount:100
+2015-04-20|04:19:13|INFO |||Charged 100 JPY with token: CARD-3DR03927HU311292VKU2H34Y
+2015-04-20|04:19:13|INFO |CallpatientController|hangupAction|paypal pay ok ,and send billing info to user
+2015-04-20|04:19:16|INFO |CallpatientController|hangupAction|mail has send toincognito_student@unisrv.jp
+2015-04-20|04:19:19|INFO |CallpatientController|hangupAction|mail has send to admin
+2015-04-20|07:47:31|INFO |||Regist Paypal token: CARD-3YX146486U7407220KU2K6EY
+2015-04-20|07:47:31|INFO |Application_Model_Call|createCall|create call record
