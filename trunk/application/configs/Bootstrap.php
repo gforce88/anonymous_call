@@ -34,7 +34,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 			"controller" => "landing",
 			"action" => "index" 
 		));
-		$router->addRoute("lainding", $route);
+		$router->addRoute("landing", $route);
 		
 		$route = new Zend_Controller_Router_Route_Regex("continue", array (
 			"module" => "widget",
